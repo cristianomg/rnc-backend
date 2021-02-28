@@ -1,6 +1,5 @@
-﻿using Domain.Entities.Helps;
+﻿using Domain.Models.Helps;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services
 {

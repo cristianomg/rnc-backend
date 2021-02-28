@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Helps;
-using Domain.Interfaces.Services;
+﻿using Domain.Interfaces.Services;
+using Domain.Models.Helps;
 using System.Net;
 
 namespace Service.Services
