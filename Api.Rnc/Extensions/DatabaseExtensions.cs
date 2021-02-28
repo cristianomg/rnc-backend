@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Api.Rnc.Extensions
 {
@@ -18,8 +19,9 @@ namespace Api.Rnc.Extensions
         /// <returns></returns>
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
+            var connection = Environment.GetEnvironmentVariable("ConnectionStrings") ?? configuration.GetConnectionString("RncContext");
             services.AddDbContextPool<RncContext>(options => 
-                options.UseNpgsql(configuration.GetConnectionString("RncContext")));
+                options.UseNpgsql(connection));
             return services;
         }
     }

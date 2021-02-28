@@ -1,0 +1,39 @@
+version: '3.4'
+
+networks:
+  rnc-backend-dev:
+    driver: bridge
+
+
+services:
+  rncbackend:
+    image: rnc-backend:latest
+    depends_on:
+      - "postgres_image"
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - "8000:80"
+    restart: always
+    environment:
+      ConnectionStrings: "host=postgres_image;port=5432;database=RncDev;username=rncDev;password=docker"
+    networks: 
+      - rnc-backend-dev
+  
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+    environment: 
+      POSTGRES_USER: "rncDev"
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_DB: "RncDev"
+    networks:
+      - rnc-backend-dev
+volumes:
+  db_volume:
