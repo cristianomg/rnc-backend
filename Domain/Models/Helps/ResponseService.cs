@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Domain.Entities.Helps
+namespace Domain.Models.Helps
 {
     public class ResponseService
     {
