@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mapping\" />
+    <Compile Remove="Migrations\20210306064403_createUserTable.cs" />
+    <Compile Remove="Migrations\20210306064403_createUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210306064954_createUserTable.cs" />
+    <Compile Remove="Migrations\20210306064954_createUserTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

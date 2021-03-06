@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Interfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Service.Services;
 
 namespace Api.Rnc.Extensions
 {
@@ -15,6 +17,7 @@ namespace Api.Rnc.Extensions
         /// <returns></returns>
         public static IServiceCollection AddServicesInjections(this IServiceCollection services)
         {
+            services.AddScoped<ICreateUserService, CreateUserService>();
             return services;
         }
     }

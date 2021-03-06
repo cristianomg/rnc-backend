@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Requests;
+using Domain.Entities;
 
 namespace Api.Rnc.Extensions.AutoMapper
 {
@@ -12,7 +14,6 @@ namespace Api.Rnc.Extensions.AutoMapper
         /// </summary>
         public ViewModelToEntityProfile()
         {
-
         }
     }
 }

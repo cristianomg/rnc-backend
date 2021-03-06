@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System;
+
+namespace Domain.Entities
 {
     /// <summary>
     /// base entity
@@ -7,5 +9,8 @@
     public abstract class Entity<T>
     {
         public T Id { get; set; }
+        public bool Active { get; set; } = true;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = null;
     }
 }
