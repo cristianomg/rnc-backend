@@ -18,6 +18,7 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddServicesInjections(this IServiceCollection services)
         {
             services.AddScoped<ICreateUserService, CreateUserService>();
+            services.AddScoped<ICreateAuthService, CreateAuthService>();
             return services;
         }
     }

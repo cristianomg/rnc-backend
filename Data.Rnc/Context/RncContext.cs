@@ -9,7 +9,14 @@ namespace Data.Rnc.Context
 {
     public sealed class RncContext: DbContext
     {
-        public RncContext(DbContextOptions<RncContext> options) : base(options) { }
+        public RncContext(DbContextOptions<RncContext> options) : base(options) 
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

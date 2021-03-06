@@ -26,6 +26,11 @@ namespace Api.Rnc
                     .AddCustomJsonOptions()
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddDbContexts(Configuration)
                     .AddCustomSwaggerGen()
                     .AddCustomConfiguration(Configuration)
