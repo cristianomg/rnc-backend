@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Entities
+namespace Domain.Dtos.Inputs
 {
-    public class TipoNaoConformidade
+    public class DtoTipoNaoConformidade
     {
         public int Id { get; set; }
         public string NomeTipoNaoConformidade { get; set; }
-        public virtual IEnumerable<NaoConformidade> NaoConformidades { get; set; }
+        public IEnumerable<DtoNaoConformidade> NaoConformidades { get; set; }
     }
 }

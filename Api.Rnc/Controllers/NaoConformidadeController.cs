@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Inputs;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,17 @@ namespace Api.Rnc.Controllers
     public class NaoConformidadeController : ControllerBase
     {
         private readonly INaoConformidadeRepository _naoConformidadeRepository;
-        public NaoConformidadeController(INaoConformidadeRepository naoConformidadeRepository)
+        private readonly IMapper _mapper;
+        public NaoConformidadeController(INaoConformidadeRepository naoConformidadeRepository,
+                                            IMapper mapper)
         {
             _naoConformidadeRepository = naoConformidadeRepository;
+            _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IEnumerable<ActionResult>> ObterNaoConformidades(int id)
+        public virtual async Task<IEnumerable<DtoNaoConformidade>> ObterNaoConformidades(int id)
         {
-            return (IEnumerable<ActionResult>)await _naoConformidadeRepository.GetByTipoNaoConformidade(id);
+            return _mapper.Map<IEnumerable<DtoNaoConformidade>>(await _naoConformidadeRepository.GetByTipoNaoConformidade(id));
         }
     }
 }
