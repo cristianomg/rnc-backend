@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface INaoConformidadeRepository : IBaseRepository<NaoConformidade>
     {
-        Task<NaoConformidade> GetByTipoNaoConformidade(int id);
+        Task<IEnumerable<NaoConformidade>> GetByTipoNaoConformidade(int tipoNaoConformidadeId);
     }
 }

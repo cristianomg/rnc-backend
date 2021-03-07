@@ -4,6 +4,7 @@ using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
@@ -15,10 +16,10 @@ namespace Data.Rnc.Repositories
         {
             _dbSet = context.Set<NaoConformidade>();
         }
-        public async Task<NaoConformidade> GetByTipoNaoConformidade(int id)
+        public async Task<IEnumerable<NaoConformidade>> GetByTipoNaoConformidade(int tipoNaoConformidadeId)
         {
             return await _dbSet.AsNoTracking().Include(n => n.TipoNaoConformidade)
-                .FirstOrDefaultAsync(x => x.TipoNaoConformidadeId == id);
+                .OrderBy(t => t.Descricao).ToListAsync();
         }
     }
 }
