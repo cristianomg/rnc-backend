@@ -29,9 +29,9 @@ namespace Api.Rnc.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IQueryable<DtoNaoConformidade>> ObterNaoConformidades(int id)
+        public async Task<IEnumerable<DtoNaoConformidade>> ObterNaoConformidades(int id)
         {
-            return _mapper.Map<IQueryable<DtoNaoConformidade>>(await _naoConformidadeRepository.GetByTipoNaoConformidade(id));
+            return _mapper.Map<IEnumerable<DtoNaoConformidade>>(await _naoConformidadeRepository.GetByTipoNaoConformidade(id));
         }
     }
 }

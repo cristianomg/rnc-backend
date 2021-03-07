@@ -12,7 +12,6 @@ namespace Api.Rnc.Extensions.AutoMapper
     {
         public AutomapperConfig()
         {
-            CreateMap<TipoNaoConformidade, DtoNaoConformidade>().ReverseMap();
             CreateMap<NaoConformidade, DtoNaoConformidade>()
                 .ForMember(dest => dest.NomeTipoNaoConformidade, opt => opt.MapFrom(src => src.TipoNaoConformidade.NomeTipoNaoConformidade));
         }

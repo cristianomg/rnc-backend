@@ -27,7 +27,7 @@ namespace Data.Rnc.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 19, 16, 12, 938, DateTimeKind.Local).AddTicks(8426)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 67, DateTimeKind.Local).AddTicks(1960)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -78,7 +78,7 @@ namespace Data.Rnc.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 19, 16, 12, 946, DateTimeKind.Local).AddTicks(4171)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 74, DateTimeKind.Local).AddTicks(3680)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     UserAuthId = table.Column<Guid>(nullable: false),
@@ -105,17 +105,17 @@ namespace Data.Rnc.Migrations
             migrationBuilder.InsertData(
                 table: "UserPermission",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, true, new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(3631), "Employee", null });
+                values: new object[] { 1, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(1662), "Employee", null });
 
             migrationBuilder.InsertData(
                 table: "UserPermission",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 2, true, new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(6122), "Supervisor", null });
+                values: new object[] { 2, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3557), "Supervisor", null });
 
             migrationBuilder.InsertData(
                 table: "UserPermission",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 3, true, new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(6444), "QualityBiomedical", null });
+                values: new object[] { 3, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3674), "QualityBiomedical", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_NaoConformidade_TipoNaoConformidadeId",

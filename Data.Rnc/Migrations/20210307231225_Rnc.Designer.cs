@@ -3,14 +3,16 @@ using System;
 using Data.Rnc.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    partial class RncContextModelSnapshot : ModelSnapshot
+    [Migration("20210307231225_Rnc")]
+    partial class Rnc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +71,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2021, 3, 7, 19, 16, 12, 946, DateTimeKind.Local).AddTicks(4171));
+                        .HasDefaultValue(new DateTime(2021, 3, 7, 20, 12, 25, 74, DateTimeKind.Local).AddTicks(3680));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
@@ -115,7 +117,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2021, 3, 7, 19, 16, 12, 938, DateTimeKind.Local).AddTicks(8426));
+                        .HasDefaultValue(new DateTime(2021, 3, 7, 20, 12, 25, 67, DateTimeKind.Local).AddTicks(1960));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -162,21 +164,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(3631),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(1662),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(6122),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3557),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 7, 19, 16, 12, 953, DateTimeKind.Local).AddTicks(6444),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3674),
                             Name = "QualityBiomedical"
                         });
                 });
