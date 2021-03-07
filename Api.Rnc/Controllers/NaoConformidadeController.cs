@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
-using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class NaoConformidadeController : ControllerBase
     {
