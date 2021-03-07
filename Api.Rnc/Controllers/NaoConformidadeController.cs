@@ -19,6 +19,11 @@ namespace Api.Rnc.Controllers
             _naoConformidadeRepository = naoConformidadeRepository;
             _mapper = mapper;
         }
+        /// <summary>
+        /// Endpoint reponsavel por trazer as não conformidades
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public virtual async Task<IEnumerable<DtoNaoConformidade>> ObterNaoConformidades(int id)
         {
