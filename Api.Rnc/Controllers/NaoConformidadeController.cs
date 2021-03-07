@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace Api.Rnc.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public virtual async Task<IEnumerable<DtoNaoConformidade>> ObterNaoConformidades(int id)
         {
             return _mapper.Map<IEnumerable<DtoNaoConformidade>>(await _naoConformidadeRepository.GetByTipoNaoConformidade(id));
