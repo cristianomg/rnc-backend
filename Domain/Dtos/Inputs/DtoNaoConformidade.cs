@@ -9,6 +9,6 @@ namespace Domain.Dtos.Inputs
         public int Id { get; set; }
         public int TipoNaoConformidadeId { get; set; }
         public string Descricao { get; set; }
-        public DtoTipoNaoConformidade TipoNaoConformidade { get; set; }
+        public string NomeTipoNaoConformidade { get; set; }
     }
 }
