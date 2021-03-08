@@ -1,5 +1,6 @@
 ﻿using Data.Rnc.Repositories;
 using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Rnc.Extensions
@@ -19,6 +20,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAuthRepository, UserAuthRepository>();
             services.AddScoped<INaoConformidadeRepository, NaoConformidadeRepository>();
+            services.AddScoped<IEsqueciSenha, EsqueciSenha>();
             return services;
         }
     }
