@@ -16,10 +16,10 @@ namespace Data.Rnc.Repositories
         {
             _dbSet = context.Set<NaoConformidade>();
         }
-        public IQueryable<NaoConformidade> GetByTipoNaoConformidade(int tipoNaoConformidadeId)
+        public async Task<IEnumerable<NaoConformidade>> GetByTipoNaoConformidade(int tipoNaoConformidadeId)
         {
-            return _dbSet.AsNoTracking().Include(n => n.TipoNaoConformidade)
-                .OrderBy(t => t.Descricao).AsQueryable();
+            return await _dbSet.AsNoTracking().Include(n => n.TipoNaoConformidade)
+                .OrderBy(t => t.Descricao).ToListAsync();
         }
     }
 }
