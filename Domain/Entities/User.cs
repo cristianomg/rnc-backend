@@ -3,7 +3,7 @@ using System;
 
 namespace Domain.Entities
 {
-    public class User : Entity<Guid>
+    public class User : Entity<int>
     {
         /// <summary>
         /// Nome completo
@@ -12,7 +12,7 @@ namespace Domain.Entities
         /// <summary>
         /// Id autenticação do usuário
         /// </summary>
-        public Guid UserAuthId { get; set; }
+        public int UserAuthId { get; set; }
         /// <summary>
         /// Matricula
         /// </summary>

@@ -1,14 +1,15 @@
 ﻿using Domain.Dtos.Requests;
 using Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service.Services;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly ICreateUserService _createUserService;
@@ -21,6 +22,7 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <param name="dtoCreateUser"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]

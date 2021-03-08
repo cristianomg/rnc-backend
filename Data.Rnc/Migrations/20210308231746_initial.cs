@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class Rnc : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,11 @@ namespace Data.Rnc.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NomeTipoNaoConformidade = table.Column<string>(maxLength: 25, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    NomeTipoNaoConformidade = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,9 +28,10 @@ namespace Data.Rnc.Migrations
                 name: "UserAuth",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 67, DateTimeKind.Local).AddTicks(1960)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 8, 20, 17, 46, 453, DateTimeKind.Local).AddTicks(8405)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -57,7 +61,10 @@ namespace Data.Rnc.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
                     TipoNaoConformidadeId = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(maxLength: 25, nullable: false)
                 },
@@ -76,12 +83,13 @@ namespace Data.Rnc.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 74, DateTimeKind.Local).AddTicks(3680)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 8, 20, 17, 46, 460, DateTimeKind.Local).AddTicks(1342)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    UserAuthId = table.Column<Guid>(nullable: false),
+                    UserAuthId = table.Column<int>(nullable: false),
                     Enrollment = table.Column<string>(maxLength: 50, nullable: false),
                     UserPermissionId = table.Column<int>(nullable: false)
                 },
@@ -105,28 +113,17 @@ namespace Data.Rnc.Migrations
             migrationBuilder.InsertData(
                 table: "UserPermission",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(1662), "Employee", null });
-
-            migrationBuilder.InsertData(
-                table: "UserPermission",
-                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 2, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3557), "Supervisor", null });
-
-            migrationBuilder.InsertData(
-                table: "UserPermission",
-                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 3, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3674), "QualityBiomedical", null });
+                values: new object[,]
+                {
+                    { 1, true, new DateTime(2021, 3, 8, 20, 17, 46, 469, DateTimeKind.Local).AddTicks(5939), "Employee", null },
+                    { 2, true, new DateTime(2021, 3, 8, 20, 17, 46, 469, DateTimeKind.Local).AddTicks(7644), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 3, 8, 20, 17, 46, 469, DateTimeKind.Local).AddTicks(7765), "QualityBiomedical", null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_NaoConformidade_TipoNaoConformidadeId",
                 table: "NaoConformidade",
                 column: "TipoNaoConformidadeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TipoNaoConformidade_NomeTipoNaoConformidade",
-                table: "TipoNaoConformidade",
-                column: "NomeTipoNaoConformidade",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Enrollment",
