@@ -5,54 +5,92 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    [Migration("20210306070634_createUserTable")]
-    partial class createUserTable
+    [Migration("20210307231225_Rnc")]
+    partial class Rnc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.12")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Domain.Entities.NaoConformidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("varchar(25) CHARACTER SET utf8mb4")
+                        .HasMaxLength(25);
+
+                    b.Property<int>("TipoNaoConformidadeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoNaoConformidadeId");
+
+                    b.ToTable("NaoConformidade");
+                });
+
+            modelBuilder.Entity("Domain.Entities.TipoNaoConformidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomeTipoNaoConformidade")
+                        .IsRequired()
+                        .HasColumnType("varchar(25) CHARACTER SET utf8mb4")
+                        .HasMaxLength(25);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NomeTipoNaoConformidade")
+                        .IsUnique();
+
+                    b.ToTable("TipoNaoConformidade");
+                });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 6, 4, 6, 34, 100, DateTimeKind.Local).AddTicks(5325));
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2021, 3, 7, 20, 12, 25, 74, DateTimeKind.Local).AddTicks(3680));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("UserAuthId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("UserPermissionId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -71,26 +109,26 @@ namespace Data.Rnc.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 6, 4, 6, 34, 95, DateTimeKind.Local).AddTicks(1153));
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2021, 3, 7, 20, 12, 25, 67, DateTimeKind.Local).AddTicks(1960));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -103,19 +141,19 @@ namespace Data.Rnc.Migrations
             modelBuilder.Entity("Domain.Entities.UserPermission", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -126,23 +164,32 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(426),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(1662),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(1874),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3557),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(1950),
+                            CreatedAt = new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3674),
                             Name = "QualityBiomedical"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Entities.NaoConformidade", b =>
+                {
+                    b.HasOne("Domain.Entities.TipoNaoConformidade", "TipoNaoConformidade")
+                        .WithMany("NaoConformidades")
+                        .HasForeignKey("TipoNaoConformidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

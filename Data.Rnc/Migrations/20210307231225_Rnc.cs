@@ -1,19 +1,33 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class createUserTable : Migration
+    public partial class Rnc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "TipoNaoConformidade",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NomeTipoNaoConformidade = table.Column<string>(maxLength: 25, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoNaoConformidade", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "UserAuth",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 6, 4, 6, 34, 95, DateTimeKind.Local).AddTicks(1153)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 67, DateTimeKind.Local).AddTicks(1960)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -39,12 +53,32 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NaoConformidade",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TipoNaoConformidadeId = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(maxLength: 25, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NaoConformidade", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NaoConformidade_TipoNaoConformidade_TipoNaoConformidadeId",
+                        column: x => x.TipoNaoConformidadeId,
+                        principalTable: "TipoNaoConformidade",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 6, 4, 6, 34, 100, DateTimeKind.Local).AddTicks(5325)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 7, 20, 12, 25, 74, DateTimeKind.Local).AddTicks(3680)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     UserAuthId = table.Column<Guid>(nullable: false),
@@ -71,12 +105,28 @@ namespace Data.Rnc.Migrations
             migrationBuilder.InsertData(
                 table: "UserPermission",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1, true, new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(426), "Employee", null },
-                    { 2, true, new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(1874), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 3, 6, 4, 6, 34, 114, DateTimeKind.Local).AddTicks(1950), "QualityBiomedical", null }
-                });
+                values: new object[] { 1, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(1662), "Employee", null });
+
+            migrationBuilder.InsertData(
+                table: "UserPermission",
+                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
+                values: new object[] { 2, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3557), "Supervisor", null });
+
+            migrationBuilder.InsertData(
+                table: "UserPermission",
+                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
+                values: new object[] { 3, true, new DateTime(2021, 3, 7, 20, 12, 25, 82, DateTimeKind.Local).AddTicks(3674), "QualityBiomedical", null });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NaoConformidade_TipoNaoConformidadeId",
+                table: "NaoConformidade",
+                column: "TipoNaoConformidadeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TipoNaoConformidade_NomeTipoNaoConformidade",
+                table: "TipoNaoConformidade",
+                column: "NomeTipoNaoConformidade",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Enrollment",
@@ -105,7 +155,13 @@ namespace Data.Rnc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "NaoConformidade");
+
+            migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "TipoNaoConformidade");
 
             migrationBuilder.DropTable(
                 name: "UserAuth");

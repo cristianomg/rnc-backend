@@ -18,6 +18,7 @@ namespace Api.Rnc.Extensions
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAuthRepository, UserAuthRepository>();
+            services.AddScoped<INaoConformidadeRepository, NaoConformidadeRepository>();
             return services;
         }
     }
