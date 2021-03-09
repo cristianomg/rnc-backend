@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 
 namespace Domain.Entities
 {
-    public class TipoNaoConformidade
+    public class TipoNaoConformidade : Entity<int>
     {
-        public int Id { get; set; }
         public string NomeTipoNaoConformidade { get; set; }
         public virtual IEnumerable<NaoConformidade> NaoConformidades { get; set; }
     }

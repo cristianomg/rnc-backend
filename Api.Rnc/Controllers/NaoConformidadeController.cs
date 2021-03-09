@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class NaoConformidadeController : ControllerBase
     {
         private readonly INaoConformidadeRepository _naoConformidadeRepository;

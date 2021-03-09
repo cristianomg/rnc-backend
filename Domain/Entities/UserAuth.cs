@@ -1,9 +1,6 @@
-﻿using Domain.ValueObjects;
-using System;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    public class UserAuth : Entity<Guid>
+    public class UserAuth : Entity<int>
     {
         /// <summary>
         /// Email
