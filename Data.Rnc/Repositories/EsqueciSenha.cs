@@ -10,7 +10,7 @@ namespace Data.Rnc.Repositories
 {
     public class EsqueciSenha : IEsqueciSenha
     {
-        public async Task SendEmail(string email, string name)
+        public async Task SendEmail(string email)
         {
             var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
             {
@@ -22,9 +22,7 @@ namespace Data.Rnc.Repositories
             });
 
             StringBuilder template = new StringBuilder();
-            template.AppendLine("Olá caro " + name);
-            template.AppendLine("");
-            template.AppendLine("No momento ainda estamos testando os códigos.");
+            template.AppendLine("Alá, no momento ainda estamos testando os códigos.");
             template.AppendLine("");
             template.AppendLine("- Time do RNC");
 

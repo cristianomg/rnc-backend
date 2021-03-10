@@ -23,7 +23,7 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> EsqueciSenha(string email)
         {
-            await _esqueciSenha.SendEmail(email, "Usuario");
+            await _esqueciSenha.SendEmail(email);
             return Ok();
         }
     }

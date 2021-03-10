@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Services
 {
     public interface IEsqueciSenha
     {
-        Task SendEmail(string name, string email);
+        Task SendEmail(string name);
     }
 }
