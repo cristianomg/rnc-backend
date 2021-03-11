@@ -21,7 +21,7 @@ namespace Data.Rnc.Mapping
 
             builder.Property(x => x.Descricao)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(150);
 
             builder.HasOne(x => x.TipoNaoConformidade)
                 .WithMany(x => x.NaoConformidades)
