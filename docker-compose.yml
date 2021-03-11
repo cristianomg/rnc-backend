@@ -1,39 +1,48 @@
-version: '3.4'
-
-networks:
-  rnc-backend-dev:
-    driver: bridge
-
-
+version: '2'
+ 
 services:
-  rncbackend:
-    image: rnc-backend:latest
-    depends_on:
-      - "postgres_image"
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-    - "8000:80"
-    restart: always
-    environment:
-      ConnectionStrings: "host=postgres_image;port=5432;database=RncDev;username=rncDev;password=docker"
-    networks: 
-      - rnc-backend-dev
-  
-  postgres_image:
+  postgresserver:
     image: postgres:latest
-    ports:
-      - "5432"
+    container_name: 
+      db
     restart: always
-    volumes:
-      - db_volume:/var/lib/postgresql/data
-      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+    ports:
+      - 5432:5432
     environment: 
-      POSTGRES_USER: "rncDev"
+      POSTGRES_USER: "RncDev"
       POSTGRES_PASSWORD: "docker"
       POSTGRES_DB: "RncDev"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
-      - rnc-backend-dev
+      - mynetwork
+  api:
+    image: rnc-api
+    container_name: 
+      api-rnc
+    ports:
+      - 5000:80
+    environment: 
+      CONNECTION: "User ID=RncDev;Password=docker;Host=postgresserver;Port=5432;Database=RncDev;Pooling=true;"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - postgresserver
+    depends_on:
+      postgresserver:
+         condition: service_healthy
+    command: ["./wait-for-it.sh", "postgresserver:5432", "--", "python", "app.py"]  
+    networks:
+      - mynetwork
+
 volumes:
-  db_volume:
+  pgdata:
+networks:
+  mynetwork:
+     driver: bridge

@@ -8,6 +8,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IEmail
     {
-        IQueryable<NaoConformidade> GetByIdEmail(int IdEmail);
+        IQueryable<NaoConformidade> GetIdNameByEmail(int IdEmail);
     }
 }

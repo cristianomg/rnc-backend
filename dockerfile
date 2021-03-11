@@ -8,7 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Api.Rnc/Api.Rnc.csproj", "Api.Rnc/"]
-COPY ["Data.RncCore/Data.Rnc.csproj", "Data.RncCore/"]
+COPY ["Data.Rnc/Data.Rnc.csproj", "Data.Rnc/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 RUN dotnet restore "Api.Rnc/Api.Rnc.csproj"
 COPY . .
