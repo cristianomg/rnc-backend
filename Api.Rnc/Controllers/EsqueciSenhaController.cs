@@ -3,6 +3,7 @@ using Domain.Dtos.Inputs;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service.Services;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -11,19 +12,18 @@ namespace Api.Rnc.Controllers
     [ApiController]
     public class EsqueciSenhaController : ControllerBase
     {
-        private readonly IEsqueciSenha _esqueciSenha;
-        private readonly IMapper _mapper;
-        public EsqueciSenhaController(IEsqueciSenha esqueciSenha, IMapper mapper)
+        private readonly IRecoveryPasswordService _recoveryPasswordService;
+
+        public EsqueciSenhaController(IRecoveryPasswordService recoveryPasswordService)
         {
-            _esqueciSenha = esqueciSenha;
-            _mapper = mapper;
+            _recoveryPasswordService = recoveryPasswordService;
         }
         [HttpGet]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> EsqueciSenha(string email)
         {
-            await _esqueciSenha.SendEmail(email, "Usuario");
+            await _recoveryPasswordService.Execute(email);
             return Ok();
         }
     }
