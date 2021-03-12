@@ -20,6 +20,14 @@ namespace Domain.Dtos.Requests
         /// </summary>
         public string Enrollment { get; set; }
         /// <summary>
+        /// Matricula
+        /// </summary>
+        public string Setor { get; set; }
+        /// <summary>
+        /// Matricula
+        /// </summary>
+        public string Crbm { get; set; }
+        /// <summary>
         /// Senha
         /// </summary>
         public string Password { get; set; }

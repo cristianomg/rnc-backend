@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    [Migration("20210310222754_Initial")]
+    [Migration("20210311224535_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(7317),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(9085),
                             Descricao = "Erros de cadastro do paciente ou médico.",
                             TipoNaoConformidadeId = 1
                         },
@@ -64,7 +64,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8696),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(149),
                             Descricao = "Requisições ilegíveis.",
                             TipoNaoConformidadeId = 1
                         },
@@ -72,7 +72,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8751),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(195),
                             Descricao = "Paciente com preparo inadequado.",
                             TipoNaoConformidadeId = 1
                         },
@@ -80,7 +80,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 4,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8773),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(215),
                             Descricao = "Incidente com cliente.",
                             TipoNaoConformidadeId = 1
                         },
@@ -88,7 +88,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 5,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8794),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(233),
                             Descricao = "Amostra insuficiente.",
                             TipoNaoConformidadeId = 1
                         },
@@ -96,7 +96,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 6,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8820),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(255),
                             Descricao = "Tubo inadequado.",
                             TipoNaoConformidadeId = 1
                         },
@@ -104,7 +104,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 7,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8841),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(274),
                             Descricao = "Amostra com identificação errada ou incompleta.",
                             TipoNaoConformidadeId = 1
                         },
@@ -112,7 +112,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 8,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8862),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(292),
                             Descricao = "Material não tirado da pendência.",
                             TipoNaoConformidadeId = 2
                         },
@@ -120,7 +120,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 9,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8884),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(310),
                             Descricao = "Equipamento em manutenção.",
                             TipoNaoConformidadeId = 2
                         },
@@ -128,7 +128,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 10,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8906),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(330),
                             Descricao = "Perda de amostra.",
                             TipoNaoConformidadeId = 2
                         },
@@ -136,7 +136,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 11,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(8927),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(348),
                             Descricao = "Material fora da validade.",
                             TipoNaoConformidadeId = 2
                         },
@@ -144,7 +144,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 12,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9076),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(366),
                             Descricao = "Centrifugação incorreta.",
                             TipoNaoConformidadeId = 2
                         },
@@ -152,7 +152,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 13,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9100),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(384),
                             Descricao = "Queda de energia.",
                             TipoNaoConformidadeId = 2
                         },
@@ -160,7 +160,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 14,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9121),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(403),
                             Descricao = "Armazenamento errado da amostra.",
                             TipoNaoConformidadeId = 2
                         },
@@ -168,7 +168,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 15,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9142),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(421),
                             Descricao = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
                             TipoNaoConformidadeId = 3
                         },
@@ -176,7 +176,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 16,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9163),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(439),
                             Descricao = "Laudos entregues trocados.",
                             TipoNaoConformidadeId = 3
                         },
@@ -184,7 +184,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 17,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9183),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(457),
                             Descricao = "Atraso na liberação do laudo.",
                             TipoNaoConformidadeId = 3
                         },
@@ -192,7 +192,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 18,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9206),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(477),
                             Descricao = "Falta da assinatura do Biomédico no laudo.",
                             TipoNaoConformidadeId = 3
                         },
@@ -200,7 +200,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 19,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9227),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(495),
                             Descricao = "Erro de transcrição de resultado na ficha de bancada.",
                             TipoNaoConformidadeId = 3
                         },
@@ -208,7 +208,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 20,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9248),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(540),
                             Descricao = "Questionamento do resultado feito pelo médico ou cliente.",
                             TipoNaoConformidadeId = 3
                         },
@@ -216,7 +216,7 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 21,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(9268),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 289, DateTimeKind.Local).AddTicks(559),
                             Descricao = "Perda do laudo.",
                             TipoNaoConformidadeId = 3
                         });
@@ -250,21 +250,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(4199),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(6418),
                             NomeTipoNaoConformidade = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(6555),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(8377),
                             NomeTipoNaoConformidade = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(6626),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(8431),
                             NomeTipoNaoConformidade = "Pos-Analitica"
                         });
                 });
@@ -279,10 +279,15 @@ namespace Data.Rnc.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Crbm")
+                        .IsRequired()
+                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(15);
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 10, 19, 27, 53, 567, DateTimeKind.Local).AddTicks(8962));
+                        .HasDefaultValue(new DateTime(2021, 3, 11, 19, 45, 35, 273, DateTimeKind.Local).AddTicks(9920));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
@@ -290,6 +295,11 @@ namespace Data.Rnc.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Setor")
                         .IsRequired()
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
@@ -329,7 +339,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 3, 10, 19, 27, 53, 559, DateTimeKind.Local).AddTicks(3381));
+                        .HasDefaultValue(new DateTime(2021, 3, 11, 19, 45, 35, 265, DateTimeKind.Local).AddTicks(5188));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -376,21 +386,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 580, DateTimeKind.Local).AddTicks(8508),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(1950),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(990),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(3788),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 3, 10, 19, 27, 53, 581, DateTimeKind.Local).AddTicks(1151),
+                            CreatedAt = new DateTime(2021, 3, 11, 19, 45, 35, 288, DateTimeKind.Local).AddTicks(3956),
                             Name = "QualityBiomedical"
                         });
                 });

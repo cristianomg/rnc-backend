@@ -18,8 +18,8 @@ namespace Data.Rnc.Repositories
         }
         public IQueryable<NaoConformidade> GetByTipoNaoConformidade(int tipoNaoConformidadeId)
         {
-            return _dbSet.AsNoTracking().Include(n => n.TipoNaoConformidade)
-                .OrderBy(t => t.Descricao).AsQueryable();
+            return _dbSet.AsNoTracking().Include(n => n.TipoNaoConformidade).Where(t=>t.TipoNaoConformidadeId == tipoNaoConformidadeId)
+                .OrderBy(t => t.Id).AsQueryable();
         }
     }
 }
