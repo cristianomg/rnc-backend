@@ -1,8 +1,4 @@
-﻿using Clinia.FluentMailer.Core;
-using Clinia.FluentMailer.Smtp;
-using Domain.Interfaces.Services;
-using System.Net;
-using System.Net.Mail;
+﻿using Domain.Interfaces.Services;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,32 +6,25 @@ namespace Data.Rnc.Repositories
 {
     public class EsqueciSenha : IEsqueciSenha
     {
-        public async Task SendEmail(string email, string name, string senha)
+        public readonly IEnviarEmail _enviarEmail; 
+        public EsqueciSenha(IEnviarEmail enviarEmail)
         {
-            var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
-            {
-                EnableSsl = true,
-                Timeout = 10000,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("paulobitt2000@gmail.com", "phmb0201")
-            });
-
+            _enviarEmail = enviarEmail;
+        }
+        public async Task EnviarEmailParaEsqueciSenha(string email, string name, string senha)
+        {
             StringBuilder template = new StringBuilder();
-            template.AppendLine("Olá caro " + name);
+            template.AppendLine($"Olá caro {name}");
+            template.AppendLine("Você está recebendo este email porque esqueceu sua senha e por isso nós da equipe criamos uma nova senha provisória para você");
             template.AppendLine("");
-            template.AppendLine("No momento ainda estamos testando os códigos  " + senha);
+            template.AppendLine($"Aqui está sua nova senha: {senha}");
+            template.AppendLine("Orientamos que você a troque pois a mesma é apenas provisória");
             template.AppendLine("");
-            template.AppendLine("- Time do RNC");
+            template.AppendLine("Atenciosamente, time do RNC");
 
-            Email.DefaultSender = sender;
+            var subjectEmail = "Envio de senha provisória";
 
-            var sedEmail = await Email
-                .From(emailAddress: "paulobitt2000@gmail.com")
-                .To(emailAddress: email.ToString())
-                .Subject(subject: "Troca de senha")
-                .Body(template.ToString())
-                .SendAsync();
+            await _enviarEmail.SendEmail(email, template, subjectEmail);
         }
     }
 }

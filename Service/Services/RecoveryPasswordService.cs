@@ -5,9 +5,7 @@ using Domain.Interfaces.Util;
 using Domain.Models.Helps;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.Services
@@ -19,7 +17,7 @@ namespace Service.Services
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly ICryptograph _cryptograph;
         private readonly string _jwtSecretKey;
-        public RecoveryPasswordService(IUserAuthRepository userAuthRepostory,ICryptograph cryptograph,
+        public RecoveryPasswordService(IUserAuthRepository userAuthRepostory, ICryptograph cryptograph,
                                  IOptions<CryptographConfig> cryptographConfig, IEsqueciSenha esqueciSenha)
         {
             _userAuthRepository = userAuthRepostory;
@@ -28,15 +26,15 @@ namespace Service.Services
             _esqueciSenha = esqueciSenha;
         }
 
-        private string RandomPassword() 
+        private string RandomPassword()
         {
             int tamanhoPass = 6;
             int tam = ArrayAlph.Length;
             string password = string.Empty;
-            for (int i = 0; i < tamanhoPass; i++) 
+            for (int i = 0; i < tamanhoPass; i++)
             {
                 Random random = new Random();
-                int codigo = Convert.ToInt32(random.Next(0, tam-1).ToString());
+                int codigo = Convert.ToInt32(random.Next(0, tam - 1).ToString());
 
                 password += ArrayAlph[codigo];
             }
@@ -56,11 +54,7 @@ namespace Service.Services
             if (user == null)
                 return GenerateErroServiceResponse("O email não foi encontrado.");
 
-            var teste = hasUserWithEmail.ToList();
-
             var newPassword = RandomPassword();
-
-           
 
             user.Password = _cryptograph.EncryptPassword(newPassword);
 
@@ -68,7 +62,7 @@ namespace Service.Services
 
             await _userAuthRepository.SaveChanges();
 
-            await _esqueciSenha.SendEmail(email, user.User.Name, newPassword);
+            await _esqueciSenha.EnviarEmailParaEsqueciSenha(email, user.User.Name, newPassword);
 
             return GenerateSuccessServiceResponse();
         }
