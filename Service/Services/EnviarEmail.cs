@@ -1,8 +1,10 @@
 ﻿using Clinia.FluentMailer.Core;
 using Clinia.FluentMailer.Smtp;
+using Domain.Configs;
 using Domain.Interfaces.Services;
 using Domain.Models.Helps;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,9 +17,9 @@ namespace Service.Services
     public class EnviarEmail : AbstractService, IEnviarEmail
     {
         private readonly string _fromEmail;
-        public EnviarEmail(IConfiguration configuration)
+        public EnviarEmail(IOptions<EnviarEmailConfig> emailDeEnvio)
         {
-            _fromEmail = configuration.GetValue<string>("SendEmail:Email");
+            _fromEmail = emailDeEnvio.Value.Email;
         }
         public async Task<ResponseService> SendEmail(string email,StringBuilder template, string subjectEmail)
         {
