@@ -52,12 +52,14 @@ namespace Service.Services
                 UserAuth = new UserAuth
                 {
                     Email = createUserInput.Email,
-                    Password = _cryptograph.EncryptPassword(createUserInput.Password)
+                    Password = _cryptograph.EncryptPassword(createUserInput.Password),
+                    Active = false
                 },
                 Enrollment = createUserInput.Enrollment,
                 Setor = createUserInput.Setor,
                 Crbm = createUserInput.Crbm,
                 UserPermissionId = createUserInput.UserPermission,
+                Active = false
             });
 
             await _userRepository.SaveChanges();
