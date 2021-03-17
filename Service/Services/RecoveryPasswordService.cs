@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Service.Services
 {
@@ -45,26 +46,35 @@ namespace Service.Services
 
         public async Task<ResponseService> Execute(string email)
         {
+            using TransactionScope scope = new TransactionScope();
+            try
+            {
+                var hasUserWithEmail = await _userAuthRepository.GetAll();
 
-            var hasUserWithEmail = await _userAuthRepository
-               .GetAll();
+                var user = hasUserWithEmail.FirstOrDefault();
 
-            var user = hasUserWithEmail.FirstOrDefault();
+                if (user == null)
+                    return GenerateErroServiceResponse("O email não foi encontrado.");
 
-            if (user == null)
-                return GenerateErroServiceResponse("O email não foi encontrado.");
+                var newPassword = RandomPassword();
 
-            var newPassword = RandomPassword();
+                user.Password = _cryptograph.EncryptPassword(newPassword);
 
-            user.Password = _cryptograph.EncryptPassword(newPassword);
+                await _userAuthRepository.Update(user);
 
-            await _userAuthRepository.Update(user);
+                await _userAuthRepository.SaveChanges();
 
-            await _userAuthRepository.SaveChanges();
+                scope.Complete();
 
-            await _esqueciSenha.EnviarEmailParaEsqueciSenha(email, user.User.Name, newPassword);
+                await _esqueciSenha.EnviarEmailParaEsqueciSenha(email, user.User.Name, newPassword);
 
-            return GenerateSuccessServiceResponse();
+                return GenerateSuccessServiceResponse();
+            }
+            catch
+            {
+                scope.Dispose();
+                return GenerateErroServiceResponse("Erro ao geerar senha temporária.");
+            }
         }
     }
 }
