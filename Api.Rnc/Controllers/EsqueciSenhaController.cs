@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using Domain.Dtos.Inputs;
-using Domain.Interfaces.Services;
+﻿using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service.Services;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -18,13 +15,16 @@ namespace Api.Rnc.Controllers
         {
             _recoveryPasswordService = recoveryPasswordService;
         }
-        [HttpGet]
+        [HttpPost("{email}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> EsqueciSenha(string email)
         {
-            await _recoveryPasswordService.Execute(email);
-            return Ok();
+            var responseService = await _recoveryPasswordService.Execute(email);
+            if (responseService.Success)
+                return Ok();
+
+            return BadRequest(responseService.Message);
         }
     }
 }
