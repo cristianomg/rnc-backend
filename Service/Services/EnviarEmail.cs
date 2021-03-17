@@ -17,9 +17,11 @@ namespace Service.Services
     public class EnviarEmail : AbstractService, IEnviarEmail
     {
         private readonly string _fromEmail;
+        private readonly string _passwordEmail;
         public EnviarEmail(IOptions<EnviarEmailConfig> emailDeEnvio)
         {
             _fromEmail = emailDeEnvio.Value.Email;
+            _passwordEmail = emailDeEnvio.Value.Password;
         }
         public async Task<ResponseService> SendEmail(string email,StringBuilder template, string subjectEmail)
         {
@@ -28,9 +30,10 @@ namespace Service.Services
                 EnableSsl = true,
                 Timeout = 10000,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(_fromEmail, "phmb0201")
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(_fromEmail, _passwordEmail)
             });
+
 
             Email.DefaultSender = sender;
 
