@@ -63,7 +63,9 @@ namespace Service.Services
                     {
                         CompleteName = existingAuth.User.Name,
                         Email = existingAuth.Email,
-                        Enrollment = existingAuth.User.Enrollment
+                        Enrollment = existingAuth.User.Enrollment,
+                        Setor = existingAuth.User.Setor,
+                        Crbm = existingAuth.User.Crbm
                     };
 
                     var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermission.Name };

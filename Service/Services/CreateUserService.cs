@@ -55,6 +55,8 @@ namespace Service.Services
                     Password = _cryptograph.EncryptPassword(createUserInput.Password)
                 },
                 Enrollment = createUserInput.Enrollment,
+                Setor = createUserInput.Setor,
+                Crbm = createUserInput.Crbm,
                 UserPermissionId = createUserInput.UserPermission,
             });
 

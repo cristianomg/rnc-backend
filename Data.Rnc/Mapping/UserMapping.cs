@@ -29,6 +29,14 @@ namespace Data.Rnc.Mapping
             builder.HasIndex(x => x.Enrollment)
                 .IsUnique();
 
+            builder.Property(x => x.Setor)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(x => x.Crbm)
+                .IsRequired()
+                .HasMaxLength(15);
+
             builder.Property(x => x.Active)
                 .IsRequired();
 
@@ -41,14 +49,14 @@ namespace Data.Rnc.Mapping
 
             builder.HasOne(x => x.UserAuth)
                 .WithOne(x => x.User)
-                .HasForeignKey<User>(x=>x.UserAuthId);
+                .HasForeignKey<User>(x => x.UserAuthId);
 
             builder.HasOne(x => x.UserPermission)
                 .WithMany(x => x.Users)
                 .HasForeignKey(x => x.UserPermissionId);
-                
-                
-            
+
+
+
         }
     }
 }

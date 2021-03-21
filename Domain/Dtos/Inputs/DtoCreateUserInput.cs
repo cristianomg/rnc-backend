@@ -20,6 +20,14 @@ namespace Domain.Dtos.Requests
         /// </summary>
         public string Enrollment { get; set; }
         /// <summary>
+        /// Setor
+        /// </summary>
+        public string Setor { get; set; }
+        /// <summary>
+        /// Registro do Consolho Regional de BioMedicina 
+        /// </summary>
+        public string Crbm { get; set; }
+        /// <summary>
         /// Senha
         /// </summary>
         public string Password { get; set; }

@@ -18,6 +18,14 @@ namespace Domain.Entities
         /// </summary>
         public string Enrollment { get; set; }
         /// <summary>
+        /// Matricula
+        /// </summary>
+        public string Setor { get; set; }
+        /// <summary>
+        /// Matricula
+        /// </summary>
+        public string Crbm { get; set; }
+        /// <summary>
         /// Dados de autenticação do usuário
         /// </summary>
         public virtual UserAuth UserAuth { get; set; }
