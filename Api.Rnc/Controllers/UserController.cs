@@ -43,7 +43,6 @@ namespace Api.Rnc.Controllers
             else
                 return BadRequest(createUserServiceResponse.Message);
         }
-        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -51,7 +50,6 @@ namespace Api.Rnc.Controllers
         {
             return _mapper.ProjectTo<DtoUserAtivo>(_userRepository.ObterTodos());
         }
-        [AllowAnonymous]
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
