@@ -15,5 +15,6 @@ namespace Domain.Entities
 
         public virtual User User { get; set; }
         public virtual NaoConformidade NonCompliance { get; set; }
+        public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
     }
 }

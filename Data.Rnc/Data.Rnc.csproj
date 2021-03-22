@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Mapping\TipoNaoConformidadeMapping.cs" />
+    <Compile Remove="Migrations\20210322225727_createAnalyzeRootCause.cs" />
+    <Compile Remove="Migrations\20210322225727_createAnalyzeRootCause.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

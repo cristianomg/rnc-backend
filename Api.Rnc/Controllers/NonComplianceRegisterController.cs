@@ -1,15 +1,15 @@
-﻿using System;
+﻿using AutoMapper;
 using Domain.Dtos.Inputs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using Domain.Dtos.Responses;
-using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
 {
@@ -47,6 +47,7 @@ namespace Api.Rnc.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAll()
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAll();
@@ -55,6 +56,7 @@ namespace Api.Rnc.Controllers
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status200OK)]
+        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetById(int id)
         {
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetById(id);

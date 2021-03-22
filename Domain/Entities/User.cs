@@ -40,6 +40,7 @@ namespace Domain.Entities
         public virtual UserPermission UserPermission { get; set; }
 
         public virtual IEnumerable<NonComplianceRegister> NonComplianceRegisters { get; set; }
+        public virtual IEnumerable<RootCauseAnalysis> AnalyzeRootCauses { get; set; }
 
     }
 }

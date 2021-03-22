@@ -32,5 +32,6 @@ namespace Domain.Dtos.Inputs
         /// Ação imediata
         /// </summary>
         public string ImmediateAction { get; set; }
+
     }
 }

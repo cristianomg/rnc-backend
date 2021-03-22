@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
 using Domain.Entities;
 
@@ -14,15 +15,23 @@ namespace Api.Rnc.Extensions.AutoMapper
         /// </summary>
         public EntityToViewModelProfile()
         {
+            CreateMap<NaoConformidade, DtoNaoConformidade>()
+                .ForMember(dest => dest.NomeTipoNaoConformidade, opt => opt.MapFrom(src => src.TipoNaoConformidade.NomeTipoNaoConformidade));
+
             CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
-                .ForMember(x => x.Id, src => src.MapFrom(x => x.Id))
-                .ForMember(x => x.UserName, src => src.MapFrom(x => x.User.Name))
-                .ForMember(x => x.Date, src => src.MapFrom(x => x.RegisterDate.ToString("dd/MM/yyyy")))
-                .ForMember(x => x.Hour, src => src.MapFrom(x => x.RegisterHour))
-                .ForMember(x => x.PeopleInvolved, src => src.MapFrom(x => x.PeopleInvolved))
-                .ForMember(x => x.NonComplianceType,
-                    src => src.MapFrom(x => x.NonCompliance.TipoNaoConformidade.NomeTipoNaoConformidade))
-                .ForMember(x => x.NonCompliance, src => src.MapFrom(x => x.NonCompliance.Descricao));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>src.Id))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.RegisterDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))
+                .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
+                .ForMember(dest => dest.NonComplianceType,
+opt => opt.MapFrom(src => src.NonCompliance.TipoNaoConformidade.NomeTipoNaoConformidade))
+                .ForMember(dest => dest.NonCompliance, opt => opt.MapFrom(src => src.NonCompliance.Descricao))
+                .ForMember(dest=>dest.HasRootCauseAnalysis, opt=>opt.MapFrom(src=>src.RootCauseAnalysis != null));
+
+            CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()
+                .ForMember(dest => dest.NonComplianceRegisterId, opt => opt.MapFrom(src => src.NonComplianceRegisterId))
+                .ForMember(dest => dest.Analyze, opt => opt.MapFrom(src => src.Analyze));
         }
     }
 }
