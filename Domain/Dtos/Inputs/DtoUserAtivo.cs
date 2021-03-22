@@ -2,6 +2,7 @@
 {
     public class DtoUserAtivo
     {
+        public int Id { get; set; }
         public string CompleteName { get; set; }
         public string Email { get; set; }
         public string Enrollment { get; set; }

@@ -17,10 +17,15 @@ namespace Data.Rnc.Repositories
 
         public async Task<User> GetByEnrollment(string enrollment) =>
             await _dbSet.FirstOrDefaultAsync(x => x.Enrollment == enrollment);
-        public IQueryable<User> ObterTodos() => _dbSet.AsQueryable().Where(a => a.UserAuth.Active == false).OrderBy(t => t.Name);
-        public async Task<User> AtivarCadastro(User userAut)
+        public async Task<IQueryable<User>> GetAllDontActive()
         {
-            var user = _dbSet.AsNoTracking().Include(n => n.UserAuth).Where(a => a.Enrollment == userAut.Enrollment).FirstOrDefault();
+            var usersDontActive = _dbSet.AsQueryable().Where(a => a.UserAuth.Active == false).OrderBy(t => t.Name);
+            return await Task.FromResult(usersDontActive);
+        }
+
+        public async Task<User> ActiveUser(int id)
+        {
+            var user = _dbSet.AsNoTracking().Include(n => n.UserAuth).Where(a => a.Id == id).FirstOrDefault();
             user.Active = true;
             user.UserAuth.Active = true;
             await Update(user);

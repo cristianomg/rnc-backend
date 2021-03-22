@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Repositories
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User> GetByEnrollment(string enrollment);
-        IQueryable<User> ObterTodos();
-        Task<User> AtivarCadastro(User userAut);
+        Task<IQueryable<User>> GetAllDontActive();
+        Task<User> ActiveUser(int id);
     }
 }

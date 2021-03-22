@@ -43,20 +43,30 @@ namespace Api.Rnc.Controllers
             else
                 return BadRequest(createUserServiceResponse.Message);
         }
+        /// <summary>
+        /// Endpoint responsável por retornar os usuários com cadastro não aprovado ainda
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoUserAtivo>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public IQueryable<DtoUserAtivo> ObterTodos()
+        public async Task<IActionResult> GetAllDontActive()
         {
-            return _mapper.ProjectTo<DtoUserAtivo>(_userRepository.ObterTodos());
+            var users =  await _userRepository.GetAllDontActive();
+            return Ok(_mapper.ProjectTo<DtoUserAtivo>(users));
         }
-        [HttpPut]
+        /// <summary>
+        /// Endpoint responsável por aprovar cadastros
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AtivarCadastro(DtoUserAtivo userAut)
+        public async Task<ActionResult> ActiveUser(int id)
         {
-            await _userRepository.AtivarCadastro(_mapper.Map<User>(userAut));
-            return Ok(); ;
+            await _userRepository.ActiveUser(id);
+            return Ok();
         }
     }
 }
