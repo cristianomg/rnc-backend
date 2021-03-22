@@ -34,46 +34,50 @@ namespace Service.Services
         {
             var existingAuth = await _userAuthRepository.GetByEmail(dtoCreateAuth.Email);
 
-            if (existingAuth != null && existingAuth.Active)
+            if (existingAuth != null)
             {
-                var correctPassword = _cryptograph.VerifyPassword(dtoCreateAuth.Password, existingAuth.Password);
-
-                if (correctPassword)
+                if (existingAuth.Active)
                 {
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var key = Encoding.ASCII.GetBytes(_jwtSecretKey);
+                    var correctPassword = _cryptograph.VerifyPassword(dtoCreateAuth.Password, existingAuth.Password);
 
-                    var tokenDescriptor = new SecurityTokenDescriptor
+                    if (correctPassword)
                     {
-                        Subject = new ClaimsIdentity(new Claim[]
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var key = Encoding.ASCII.GetBytes(_jwtSecretKey);
+
+                        var tokenDescriptor = new SecurityTokenDescriptor
                         {
+                            Subject = new ClaimsIdentity(new Claim[]
+                            {
 
                             new Claim(ClaimTypes.Name, existingAuth.User.Name),
                             new Claim(ClaimTypes.Role, existingAuth.User.UserPermission.Name),
                             new Claim("UserId", existingAuth.User.Id.ToString()),
 
-                        }),
-                        Expires = DateTime.UtcNow.AddHours(3),
+                            }),
+                            Expires = DateTime.UtcNow.AddHours(3),
 
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                    };
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                        };
 
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                        var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                    var user = new DtoUser
-                    {
-                        CompleteName = existingAuth.User.Name,
-                        Email = existingAuth.Email,
-                        Enrollment = existingAuth.User.Enrollment,
-                        Setor = existingAuth.User.Setor,
-                        Crbm = existingAuth.User.Crbm
-                    };
+                        var user = new DtoUser
+                        {
+                            CompleteName = existingAuth.User.Name,
+                            Email = existingAuth.Email,
+                            Enrollment = existingAuth.User.Enrollment,
+                            Setor = existingAuth.User.Setor,
+                            Crbm = existingAuth.User.Crbm
+                        };
 
-                    var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermission.Name };
+                        var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermission.Name };
 
 
-                    return GenerateSuccessServiceResponse(authResult);
+                        return GenerateSuccessServiceResponse(authResult);
+                    }
                 }
+                return GenerateErroServiceResponse<DtoCreateAuthResponse>("Cadastro ainda não foi aprovado.");
             }
             return GenerateErroServiceResponse<DtoCreateAuthResponse>("Email ou senha invalidos.");
         }

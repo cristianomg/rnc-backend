@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Helps;
 using Domain.Dtos.Requests;
 using Domain.Entities;
 
@@ -14,6 +15,7 @@ namespace Api.Rnc.Extensions.AutoMapper
         /// </summary>
         public ViewModelToEntityProfile()
         {
+            CreateMap<DtoUserAtivo, User>();
         }
     }
 }
