@@ -18,7 +18,7 @@ namespace Api.Rnc.Controllers
         [HttpPost("{email}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> EsqueciSenha(string email)
+        public async Task<IActionResult> EsqueciSenha(string email)
         {
             var responseService = await _recoveryPasswordService.Execute(email);
             if (responseService.Success)

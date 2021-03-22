@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
+using Domain.Dtos.Helps;
 
 namespace Api.Rnc.Controllers
 {
@@ -24,14 +26,15 @@ namespace Api.Rnc.Controllers
         /// <summary>
         /// Endpoint reponsavel por trazer as não conformidades
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="nonComplianceTypeId"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{nonComplianceTypeId}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public IQueryable<DtoNaoConformidade> ObterNaoConformidades(int id)
+        public async Task<IActionResult> ObterNaoConformidades(DtoNonComplianceType nonComplianceTypeId)
         {
-            return _mapper.ProjectTo<DtoNaoConformidade>(_naoConformidadeRepository.GetByTipoNaoConformidade(id));
+            var naoConformidades = _naoConformidadeRepository.GetByTipoNaoConformidade((int)nonComplianceTypeId);
+            return await Task.FromResult(Ok(_mapper.ProjectTo<DtoNaoConformidade>(naoConformidades)));
         }
     }
 }

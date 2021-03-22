@@ -1,5 +1,6 @@
 ﻿using Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -37,6 +38,8 @@ namespace Domain.Entities
         /// Dados da permissão do usuário
         /// </summary>
         public virtual UserPermission UserPermission { get; set; }
+
+        public virtual IEnumerable<NonComplianceRegister> NonComplianceRegisters { get; set; }
 
     }
 }
