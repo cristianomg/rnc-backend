@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
+using Domain.Dtos.Helps;
 
 namespace Data.Rnc.Context
 {
@@ -17,6 +18,13 @@ namespace Data.Rnc.Context
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
+
+        public DbSet<NonComplianceRegister> NonComplianceRegisters { get; set; }
+        public DbSet<NaoConformidade> NaoConformidades { get; set; }
+        public DbSet<TipoNaoConformidade> TipoNaoConformidades { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserAuth> UserAuths { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,17 +46,17 @@ namespace Data.Rnc.Context
 
             modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
             {
-                Id = 1,
+                Id = (int)DtoNonComplianceType.PreAnalitica,
                 NomeTipoNaoConformidade = "Pre-Analitica",
             });
             modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
             {
-                Id = 2,
+                Id = (int)DtoNonComplianceType.Analitica,
                 NomeTipoNaoConformidade = "Analitica",
             });
             modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
             {
-                Id = 3,
+                Id = (int)DtoNonComplianceType.PosAnalitica,
                 NomeTipoNaoConformidade = "Pos-Analitica",
             });
 
