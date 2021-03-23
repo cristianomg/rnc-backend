@@ -59,6 +59,12 @@ namespace Api.Rnc
                  };
              });
 
+            services.AddCors(x =>
+                x.AddPolicy("Cors", builder => builder
+                                                        .AllowAnyHeader()
+                                                        .AllowAnyMethod()
+                                                        .AllowAnyOrigin()));
+
             services.AddDbContexts(Configuration)
                     .AddCustomSwaggerGen()
                     .AddCustomConfiguration(Configuration)
@@ -98,6 +104,8 @@ namespace Api.Rnc
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Cors");
 
             app.UseAuthentication();
             app.UseAuthorization();
