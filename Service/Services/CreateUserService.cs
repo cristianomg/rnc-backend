@@ -56,7 +56,7 @@ namespace Service.Services
                     Active = false
                 },
                 Enrollment = createUserInput.Enrollment,
-                Setor = createUserInput.Setor,
+                SetorId = createUserInput.Setor,
                 Crbm = createUserInput.Crbm,
                 UserPermissionId = createUserInput.UserPermission,
                 Active = false

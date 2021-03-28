@@ -21,7 +21,7 @@ namespace Domain.Entities
         /// <summary>
         /// Matricula
         /// </summary>
-        public string Setor { get; set; }
+        public SetorType SetorId { get; set; }
         /// <summary>
         /// Matricula
         /// </summary>
@@ -38,7 +38,7 @@ namespace Domain.Entities
         /// Dados da permissão do usuário
         /// </summary>
         public virtual UserPermission UserPermission { get; set; }
-
+        public virtual Setor Setor { get; set; }
         public virtual IEnumerable<NonComplianceRegister> NonComplianceRegisters { get; set; }
         public virtual IEnumerable<RootCauseAnalysis> AnalyzeRootCauses { get; set; }
 
