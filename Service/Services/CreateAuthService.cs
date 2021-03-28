@@ -67,7 +67,7 @@ namespace Service.Services
                             CompleteName = existingAuth.User.Name,
                             Email = existingAuth.Email,
                             Enrollment = existingAuth.User.Enrollment,
-                            Setor = existingAuth.User.Setor,
+                            Setor = existingAuth.User.SetorId,
                             Crbm = existingAuth.User.Crbm
                         };
 
