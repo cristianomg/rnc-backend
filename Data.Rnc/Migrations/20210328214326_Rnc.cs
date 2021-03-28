@@ -46,7 +46,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 18, 38, 54, 89, DateTimeKind.Local).AddTicks(3862)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 18, 43, 26, 226, DateTimeKind.Local).AddTicks(2372)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -101,7 +101,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 18, 38, 54, 95, DateTimeKind.Local).AddTicks(486)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 18, 43, 26, 232, DateTimeKind.Local).AddTicks(4215)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     UserAuthId = table.Column<int>(nullable: false),
@@ -203,12 +203,12 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(3206), "Coleta", null },
-                    { 2, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(5095), "Microbiologia", null },
-                    { 3, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(5189), "Parasitologia", null },
-                    { 4, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(5193), "Imunologia", null },
-                    { 5, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(5195), "Hematologia", null },
-                    { 6, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(5201), "Triagem", null }
+                    { 1, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(4437), "Coleta", null },
+                    { 2, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(6182), "Microbiologia", null },
+                    { 3, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(6259), "Parasitologia", null },
+                    { 4, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(6263), "Imunologia", null },
+                    { 5, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(6265), "Hematologia", null },
+                    { 6, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(6270), "Triagem", null }
                 });
 
             migrationBuilder.InsertData(
@@ -216,9 +216,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "NomeTipoNaoConformidade", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(6906), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(8846), "Analitica", null },
-                    { 3, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(8894), "Pos-Analitica", null }
+                    { 1, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(7900), "Pre-Analitica", null },
+                    { 2, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(9790), "Analitica", null },
+                    { 3, true, new DateTime(2021, 3, 28, 18, 43, 26, 238, DateTimeKind.Local).AddTicks(9833), "Pos-Analitica", null }
                 });
 
             migrationBuilder.InsertData(
@@ -226,9 +226,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 18, 38, 54, 99, DateTimeKind.Local).AddTicks(7985), "Employee", null },
-                    { 2, true, new DateTime(2021, 3, 28, 18, 38, 54, 100, DateTimeKind.Local).AddTicks(17), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 3, 28, 18, 38, 54, 100, DateTimeKind.Local).AddTicks(118), "QualityBiomedical", null }
+                    { 1, true, new DateTime(2021, 3, 28, 18, 43, 26, 236, DateTimeKind.Local).AddTicks(9406), "Employee", null },
+                    { 2, true, new DateTime(2021, 3, 28, 18, 43, 26, 237, DateTimeKind.Local).AddTicks(1370), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 3, 28, 18, 43, 26, 237, DateTimeKind.Local).AddTicks(1496), "QualityBiomedical", null }
                 });
 
             migrationBuilder.InsertData(
@@ -236,27 +236,27 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Descricao", "TipoNaoConformidadeId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 18, 38, 54, 101, DateTimeKind.Local).AddTicks(9466), "Erros de cadastro do paciente ou médico.", 1, null },
-                    { 19, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(957), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
-                    { 18, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(939), "Falta da assinatura do Biomédico no laudo.", 3, null },
-                    { 17, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(919), "Atraso na liberação do laudo.", 3, null },
-                    { 16, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(901), "Laudos entregues trocados.", 3, null },
-                    { 15, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(882), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
-                    { 14, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(863), "Armazenamento errado da amostra.", 2, null },
-                    { 13, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(823), "Queda de energia.", 2, null },
-                    { 12, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(804), "Centrifugação incorreta.", 2, null },
-                    { 20, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(976), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
-                    { 11, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(784), "Material fora da validade.", 2, null },
-                    { 9, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(695), "Equipamento em manutenção.", 2, null },
-                    { 8, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(675), "Material não tirado da pendência.", 2, null },
-                    { 7, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(656), "Amostra com identificação errada ou incompleta.", 1, null },
-                    { 6, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(636), "Tubo inadequado.", 1, null },
-                    { 5, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(612), "Amostra insuficiente.", 1, null },
-                    { 4, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(592), "Incidente com cliente.", 1, null },
-                    { 3, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(570), "Paciente com preparo inadequado.", 1, null },
-                    { 2, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(511), "Requisições ilegíveis.", 1, null },
-                    { 10, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(716), "Perda de amostra.", 2, null },
-                    { 21, true, new DateTime(2021, 3, 28, 18, 38, 54, 102, DateTimeKind.Local).AddTicks(994), "Perda do laudo.", 3, null }
+                    { 1, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(493), "Erros de cadastro do paciente ou médico.", 1, null },
+                    { 19, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1922), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
+                    { 18, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1905), "Falta da assinatura do Biomédico no laudo.", 3, null },
+                    { 17, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1886), "Atraso na liberação do laudo.", 3, null },
+                    { 16, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1869), "Laudos entregues trocados.", 3, null },
+                    { 15, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1852), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
+                    { 14, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1833), "Armazenamento errado da amostra.", 2, null },
+                    { 13, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1783), "Queda de energia.", 2, null },
+                    { 12, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1766), "Centrifugação incorreta.", 2, null },
+                    { 20, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1939), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
+                    { 11, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1748), "Material fora da validade.", 2, null },
+                    { 9, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1711), "Equipamento em manutenção.", 2, null },
+                    { 8, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1694), "Material não tirado da pendência.", 2, null },
+                    { 7, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1676), "Amostra com identificação errada ou incompleta.", 1, null },
+                    { 6, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1658), "Tubo inadequado.", 1, null },
+                    { 5, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1638), "Amostra insuficiente.", 1, null },
+                    { 4, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1619), "Incidente com cliente.", 1, null },
+                    { 3, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1599), "Paciente com preparo inadequado.", 1, null },
+                    { 2, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1542), "Requisições ilegíveis.", 1, null },
+                    { 10, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1730), "Perda de amostra.", 2, null },
+                    { 21, true, new DateTime(2021, 3, 28, 18, 43, 26, 239, DateTimeKind.Local).AddTicks(1956), "Perda do laudo.", 3, null }
                 });
 
             migrationBuilder.CreateIndex(

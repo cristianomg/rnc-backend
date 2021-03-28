@@ -26,6 +26,8 @@
     <Compile Remove="Migrations\20210328203319_Rnc.Designer.cs" />
     <Compile Remove="Migrations\20210328204119_Rnc.cs" />
     <Compile Remove="Migrations\20210328204119_Rnc.Designer.cs" />
+    <Compile Remove="Migrations\20210328213854_Rnc.cs" />
+    <Compile Remove="Migrations\20210328213854_Rnc.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
