@@ -22,7 +22,7 @@ namespace Domain.Dtos.Requests
         /// <summary>
         /// Setor
         /// </summary>
-        public string Setor { get; set; }
+        public SetorType Setor { get; set; }
         /// <summary>
         /// Registro do Consolho Regional de BioMedicina 
         /// </summary>
@@ -39,6 +39,7 @@ namespace Domain.Dtos.Requests
         /// Cargo do usuário
         /// </summary>
         public UserPermissionType UserPermission { get; set; }
+        
 
     }
 }

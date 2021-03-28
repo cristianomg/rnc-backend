@@ -8,9 +8,9 @@ using Domain.Dtos.Helps;
 
 namespace Data.Rnc.Context
 {
-    public sealed class RncContext: DbContext
+    public sealed class RncContext : DbContext
     {
-        public RncContext(DbContextOptions<RncContext> options) : base(options) 
+        public RncContext(DbContextOptions<RncContext> options) : base(options)
         {
         }
 
@@ -25,6 +25,7 @@ namespace Data.Rnc.Context
         public DbSet<User> Users { get; set; }
         public DbSet<UserAuth> UserAuths { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<Setor> Setors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +44,15 @@ namespace Data.Rnc.Context
                         Name = x.ToString(),
                         Active = true,
                     }));
+            modelBuilder.Entity<Setor>().HasData(
+               Enum.GetValues(typeof(SetorType))
+                   .Cast<SetorType>()
+                   .Select(x => new Setor()
+                   {
+                       Id = x,
+                       Name = x.ToString(),
+                       Active = true,
+                   }));
 
             modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
             {
