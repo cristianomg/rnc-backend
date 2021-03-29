@@ -23,6 +23,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IEsqueciSenha, EsqueciSenha>();
             services.AddScoped<INonComplianceRegisterRepository, NonComplianceRegisterRepository>();
             services.AddScoped<IRootCauseAnalysisRepository, RootCauseAnalysisRepository>();
+            services.AddScoped<ISetorRepository, SetorRepository>();
             return services;
         }
     }
