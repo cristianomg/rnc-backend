@@ -20,7 +20,8 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.NomeTipoNaoConformidade, opt => opt.MapFrom(src => src.TipoNaoConformidade.NomeTipoNaoConformidade));
 
             CreateMap<Setor, DtoSetor >();
-
+            CreateMap<User, DtoUserAtivo>()
+                .ForMember(dest=>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name));
             CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))

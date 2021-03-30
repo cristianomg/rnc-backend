@@ -1,4 +1,6 @@
-﻿namespace Domain.Dtos.Helps
+﻿using Domain.ValueObjects;
+
+namespace Domain.Dtos.Helps
 {
     public class DtoUserAtivo
     {
