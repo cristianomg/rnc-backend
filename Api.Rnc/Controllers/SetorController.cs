@@ -28,7 +28,7 @@ namespace Api.Rnc.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IQueryable<DtoSetor>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllDontActive()
+        public async Task<IActionResult> GetAllSetors()
         {
             var users = await _setorRepository.GetAllSetor();
             return Ok(_mapper.ProjectTo<DtoSetor>(users));
