@@ -4,6 +4,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Models.Helps;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,16 +27,18 @@ namespace Data.Rnc.Repositories
                 .Include(x=>x.RootCauseAnalysis)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor)
+        public async Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate)
         {
             return await Task.FromResult(_context.NonComplianceRegisters
                 .AsNoTracking()
                 .Include(x => x.Setor)
-                .Where(x => x.SetorId == setor));
+                .Where(x => x.SetorId == setor && x.RegisterDate >= initialDate && x.RegisterDate <= finalDate ));
         }
-        public async Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor)
+        public async Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor, int month)
         {
-            var nonCompliances = await GetBySetor(setor);
+            var initialDate = new DateTime(DateTime.Now.Year, month, 1);
+            var finalDate = new DateTime(DateTime.Now.Year, month, DateTime.DaysInMonth(DateTime.Now.Year, month));
+            var nonCompliances = await GetBySetor(setor, initialDate, finalDate);
 
             return nonCompliances.GroupBy(x => x.NonCompliance.Descricao).Select(x => new NonComplianceRegisterGroup
             {

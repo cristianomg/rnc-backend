@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Services
 {
     public interface ICreatePieChartWithNonComplianceRegisterService : IService
     {
-        Task<ResponseService<byte[]>> Execute(SetorType setor);
+        Task<ResponseService<byte[]>> Execute(SetorType setor, int month);
     }
 }
