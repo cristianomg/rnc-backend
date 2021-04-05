@@ -1,14 +1,16 @@
-﻿namespace Domain.Dtos.Responses
+﻿using Domain.Dtos.Helps;
+using Domain.Entities;
+using System.Collections.Generic;
+
+namespace Domain.Dtos.Responses
 {
     public class DtoCreateRootCauseAnalysisResponse
     {
-        /// <summary>
-        /// Id do registro de não conformidade a ser analisado
-        /// </summary>
         public int NonComplianceRegisterId { get; set; }
-        /// <summary>
-        /// Descrição da analise
-        /// </summary>
         public string Analyze { get; set; }
+        public int UserId { get; set; }
+        public int ActionPlainId { get; set; }
+        public virtual IEnumerable<DtoActionPlainResponse> ActionPlainResponses { get; set; }
+
     }
 }

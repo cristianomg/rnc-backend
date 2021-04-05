@@ -84,6 +84,8 @@ namespace Api.Rnc
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<RncContext>();
                 context.Database.Migrate();
+
+                new SeedInitial(context).Init();
             }
 
             if (env.IsProduction())

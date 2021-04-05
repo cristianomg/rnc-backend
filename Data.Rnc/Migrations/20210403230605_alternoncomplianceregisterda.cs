@@ -4,10 +4,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class Rnc : Migration
+    public partial class alternoncomplianceregisterda : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ActionPlain",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActionPlain", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Setor",
                 columns: table => new
@@ -46,7 +62,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 17, 41, 18, 289, DateTimeKind.Local).AddTicks(7797)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 3, 20, 6, 5, 397, DateTimeKind.Local).AddTicks(8128)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -69,6 +85,29 @@ namespace Data.Rnc.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserPermission", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActionPlainQuestion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Value = table.Column<string>(maxLength: 255, nullable: false),
+                    ActionPlainId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActionPlainQuestion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActionPlainQuestion_ActionPlain_ActionPlainId",
+                        column: x => x.ActionPlainId,
+                        principalTable: "ActionPlain",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +140,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 28, 17, 41, 18, 298, DateTimeKind.Local).AddTicks(5371)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 3, 20, 6, 5, 402, DateTimeKind.Local).AddTicks(3862)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     UserAuthId = table.Column<int>(nullable: false),
@@ -146,7 +185,7 @@ namespace Data.Rnc.Migrations
                     NonComplianceId = table.Column<int>(nullable: false),
                     RegisterDate = table.Column<DateTime>(nullable: false),
                     RegisterHour = table.Column<string>(nullable: false),
-                    Setor = table.Column<string>(maxLength: 50, nullable: false),
+                    SetorId = table.Column<int>(nullable: false),
                     PeopleInvolved = table.Column<string>(maxLength: 255, nullable: false),
                     MoreInformation = table.Column<string>(maxLength: 255, nullable: true),
                     ImmediateAction = table.Column<string>(maxLength: 255, nullable: false)
@@ -158,6 +197,12 @@ namespace Data.Rnc.Migrations
                         name: "FK_NonComplianceRegister_NaoConformidade_NonComplianceId",
                         column: x => x.NonComplianceId,
                         principalTable: "NaoConformidade",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NonComplianceRegister_Setor_SetorId",
+                        column: x => x.SetorId,
+                        principalTable: "Setor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -179,11 +224,18 @@ namespace Data.Rnc.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     NonComplianceRegisterId = table.Column<int>(nullable: false),
                     Analyze = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    ActionPlainId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RootCauseAnalysis", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RootCauseAnalysis_ActionPlain_ActionPlainId",
+                        column: x => x.ActionPlainId,
+                        principalTable: "ActionPlain",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RootCauseAnalysis_NonComplianceRegister_NonComplianceRegist~",
                         column: x => x.NonComplianceRegisterId,
@@ -198,14 +250,54 @@ namespace Data.Rnc.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ActionPlainResponse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Value = table.Column<string>(maxLength: 255, nullable: false),
+                    ActionPlainQuestionId = table.Column<int>(nullable: false),
+                    RootCauseAnalysisId = table.Column<int>(nullable: false),
+                    ActionPlainId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActionPlainResponse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActionPlainResponse_ActionPlain_ActionPlainId",
+                        column: x => x.ActionPlainId,
+                        principalTable: "ActionPlain",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ActionPlainResponse_ActionPlainQuestion_ActionPlainQuestion~",
+                        column: x => x.ActionPlainQuestionId,
+                        principalTable: "ActionPlainQuestion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ActionPlainResponse_RootCauseAnalysis_RootCauseAnalysisId",
+                        column: x => x.RootCauseAnalysisId,
+                        principalTable: "RootCauseAnalysis",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Setor",
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 17, 41, 18, 314, DateTimeKind.Local).AddTicks(1983), "Coleta", null },
-                    { 2, true, new DateTime(2021, 3, 28, 17, 41, 18, 314, DateTimeKind.Local).AddTicks(4833), "Teste1", null },
-                    { 3, true, new DateTime(2021, 3, 28, 17, 41, 18, 314, DateTimeKind.Local).AddTicks(5110), "Teste2", null }
+                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(3260), "Coleta", null },
+                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4797), "Microbiologia", null },
+                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4848), "Parasitologia", null },
+                    { 4, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4852), "Imunologia", null },
+                    { 5, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4854), "Hematologia", null },
+                    { 6, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4858), "Triagem", null }
                 });
 
             migrationBuilder.InsertData(
@@ -213,9 +305,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "NomeTipoNaoConformidade", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 17, 41, 18, 314, DateTimeKind.Local).AddTicks(8053), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 3, 28, 17, 41, 18, 315, DateTimeKind.Local).AddTicks(2589), "Analitica", null },
-                    { 3, true, new DateTime(2021, 3, 28, 17, 41, 18, 315, DateTimeKind.Local).AddTicks(2727), "Pos-Analitica", null }
+                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(8435), "Pre-Analitica", null },
+                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 408, DateTimeKind.Local).AddTicks(34), "Analitica", null },
+                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 408, DateTimeKind.Local).AddTicks(74), "Pos-Analitica", null }
                 });
 
             migrationBuilder.InsertData(
@@ -223,9 +315,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 17, 41, 18, 311, DateTimeKind.Local).AddTicks(4731), "Employee", null },
-                    { 2, true, new DateTime(2021, 3, 28, 17, 41, 18, 311, DateTimeKind.Local).AddTicks(6945), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 3, 28, 17, 41, 18, 311, DateTimeKind.Local).AddTicks(7168), "QualityBiomedical", null }
+                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 405, DateTimeKind.Local).AddTicks(9064), "Employee", null },
+                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 406, DateTimeKind.Local).AddTicks(619), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 406, DateTimeKind.Local).AddTicks(686), "QualityBiomedical", null }
                 });
 
             migrationBuilder.InsertData(
@@ -233,28 +325,54 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Descricao", "TipoNaoConformidadeId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 3, 28, 17, 41, 18, 315, DateTimeKind.Local).AddTicks(5881), "Erros de cadastro do paciente ou médico.", 1, null },
-                    { 19, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2734), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
-                    { 18, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2710), "Falta da assinatura do Biomédico no laudo.", 3, null },
-                    { 17, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2681), "Atraso na liberação do laudo.", 3, null },
-                    { 16, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2654), "Laudos entregues trocados.", 3, null },
-                    { 15, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2627), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
-                    { 14, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2596), "Armazenamento errado da amostra.", 2, null },
-                    { 13, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1912), "Queda de energia.", 2, null },
-                    { 12, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1882), "Centrifugação incorreta.", 2, null },
-                    { 20, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2759), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
-                    { 11, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1845), "Material fora da validade.", 2, null },
-                    { 9, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1783), "Equipamento em manutenção.", 2, null },
-                    { 8, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1742), "Material não tirado da pendência.", 2, null },
-                    { 7, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1715), "Amostra com identificação errada ou incompleta.", 1, null },
-                    { 6, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1688), "Tubo inadequado.", 1, null },
-                    { 5, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1629), "Amostra insuficiente.", 1, null },
-                    { 4, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1582), "Incidente com cliente.", 1, null },
-                    { 3, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1533), "Paciente com preparo inadequado.", 1, null },
-                    { 2, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1158), "Requisições ilegíveis.", 1, null },
-                    { 10, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(1812), "Perda de amostra.", 2, null },
-                    { 21, true, new DateTime(2021, 3, 28, 17, 41, 18, 316, DateTimeKind.Local).AddTicks(2785), "Perda do laudo.", 3, null }
+                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(2349), "Erros de cadastro do paciente ou médico.", 1, null },
+                    { 19, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3908), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
+                    { 18, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3894), "Falta da assinatura do Biomédico no laudo.", 3, null },
+                    { 17, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3878), "Atraso na liberação do laudo.", 3, null },
+                    { 16, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3864), "Laudos entregues trocados.", 3, null },
+                    { 15, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3782), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
+                    { 14, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3768), "Armazenamento errado da amostra.", 2, null },
+                    { 13, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3755), "Queda de energia.", 2, null },
+                    { 12, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3741), "Centrifugação incorreta.", 2, null },
+                    { 20, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3922), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
+                    { 11, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3726), "Material fora da validade.", 2, null },
+                    { 9, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3696), "Equipamento em manutenção.", 2, null },
+                    { 8, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3682), "Material não tirado da pendência.", 2, null },
+                    { 7, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3668), "Amostra com identificação errada ou incompleta.", 1, null },
+                    { 6, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3652), "Tubo inadequado.", 1, null },
+                    { 5, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3634), "Amostra insuficiente.", 1, null },
+                    { 4, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3620), "Incidente com cliente.", 1, null },
+                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3603), "Paciente com preparo inadequado.", 1, null },
+                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3547), "Requisições ilegíveis.", 1, null },
+                    { 10, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3711), "Perda de amostra.", 2, null },
+                    { 21, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3974), "Perda do laudo.", 3, null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActionPlain_Name",
+                table: "ActionPlain",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActionPlainQuestion_ActionPlainId",
+                table: "ActionPlainQuestion",
+                column: "ActionPlainId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActionPlainResponse_ActionPlainId",
+                table: "ActionPlainResponse",
+                column: "ActionPlainId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActionPlainResponse_ActionPlainQuestionId",
+                table: "ActionPlainResponse",
+                column: "ActionPlainQuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActionPlainResponse_RootCauseAnalysisId",
+                table: "ActionPlainResponse",
+                column: "RootCauseAnalysisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NaoConformidade_TipoNaoConformidadeId",
@@ -267,9 +385,19 @@ namespace Data.Rnc.Migrations
                 column: "NonComplianceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NonComplianceRegister_SetorId",
+                table: "NonComplianceRegister",
+                column: "SetorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NonComplianceRegister_UserId",
                 table: "NonComplianceRegister",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RootCauseAnalysis_ActionPlainId",
+                table: "RootCauseAnalysis",
+                column: "ActionPlainId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RootCauseAnalysis_NonComplianceRegisterId",
@@ -314,7 +442,16 @@ namespace Data.Rnc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActionPlainResponse");
+
+            migrationBuilder.DropTable(
+                name: "ActionPlainQuestion");
+
+            migrationBuilder.DropTable(
                 name: "RootCauseAnalysis");
+
+            migrationBuilder.DropTable(
+                name: "ActionPlain");
 
             migrationBuilder.DropTable(
                 name: "NonComplianceRegister");

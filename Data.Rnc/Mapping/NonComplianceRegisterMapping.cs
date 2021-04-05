@@ -39,10 +39,6 @@ namespace Data.Rnc.Mapping
             builder.Property(x => x.RegisterHour)
                 .IsRequired();
 
-            builder.Property(x => x.Setor)
-                .IsRequired()
-                .HasMaxLength(50);
-
             builder.HasOne(x => x.User)
                 .WithMany(x => x.NonComplianceRegisters)
                 .HasForeignKey(x => x.UserId);

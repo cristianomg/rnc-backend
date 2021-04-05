@@ -1,4 +1,5 @@
 ﻿using Domain.Configs;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
@@ -51,7 +52,7 @@ namespace Service.Services
                 try
                 {
                     var hasUserWithEmail = await _userAuthRepository
-                        .GetAll();
+                        .GetAllWithIncludes(nameof(UserAuth.User));
 
                     var user = hasUserWithEmail.FirstOrDefault();
 

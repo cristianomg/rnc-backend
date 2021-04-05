@@ -10,5 +10,10 @@
         /// Descrição da analise
         /// </summary>
         public string Analyze { get; set; }
+        /// <summary>
+        /// Plano de ação
+        /// </summary>
+        public DtoActionPlainInput ActionPlain { get; set; }
+
     }
 }

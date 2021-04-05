@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using System;
 
 namespace Domain.Dtos.Inputs
 {
@@ -19,7 +20,7 @@ namespace Domain.Dtos.Inputs
         /// <summary>
         /// Setor
         /// </summary>
-        public string Setor { get; set; }
+        public SetorType Setor { get; set; }
         /// <summary>
         /// Pessoas envolvidas
         /// </summary>

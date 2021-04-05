@@ -3,13 +3,10 @@ using Clinia.FluentMailer.Smtp;
 using Domain.Configs;
 using Domain.Interfaces.Services;
 using Domain.Models.Helps;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.Services
@@ -23,7 +20,27 @@ namespace Service.Services
             _fromEmail = emailDeEnvio.Value.Email;
             _passwordEmail = emailDeEnvio.Value.Password;
         }
-        public async Task<ResponseService> SendEmail(string email,StringBuilder template, string subjectEmail)
+
+        public void SendEmailWithHtml(string email, string template, string subjectEmail)
+        {
+            MailAddress addressFrom = new MailAddress(_fromEmail, "RNC");
+            MailAddress addressTo = new MailAddress(email);
+            MailMessage message = new MailMessage(addressFrom, addressTo);
+            message.Body = template;
+            message.IsBodyHtml = true;
+
+            var client = new SmtpClient(host: "smtp.gmail.com", 587)
+            {
+                EnableSsl = true,
+                Timeout = 10000,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(_fromEmail, _passwordEmail),
+            };
+
+            client.Send(message);
+        }
+        public async Task<ResponseService> SendEmail(string email,string template, string subjectEmail, bool isHtml = false)
         {
             var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
             {
@@ -36,14 +53,12 @@ namespace Service.Services
 
 
             Email.DefaultSender = sender;
-
-            var sedEmail = await Email
-                .From(emailAddress: _fromEmail)
-                .To(emailAddress: email)
-                .Subject(subject: subjectEmail)
-                .Body(template.ToString())
-                .SendAsync();
-
+            await Email
+            .From(emailAddress: _fromEmail)
+            .To(emailAddress: email)
+            .Subject(subject: subjectEmail)
+            .Body(template, isHtml)
+            .SendAsync();
             return GenerateSuccessServiceResponse();
         }
     }

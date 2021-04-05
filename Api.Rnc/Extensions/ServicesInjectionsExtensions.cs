@@ -23,6 +23,9 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IEnviarEmail, EnviarEmail>();
             services.AddScoped<ICreateNonComplianceRegisterService, CreateNonComplianceRegisterService>();
             services.AddScoped<ICreateRootCauseAnalysisService, CreateRootCauseAnalysisService>();
+            services.AddScoped<ISendChartToEmailService, SeendChartToEmailService>();
+            services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+
             return services;
         }
     }

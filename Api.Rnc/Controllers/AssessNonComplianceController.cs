@@ -8,6 +8,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Interfaces.Services;
+using Api.Rnc.Extensions;
+using Domain.Dtos.Responses;
 
 namespace Api.Rnc.Controllers
 {
@@ -30,11 +32,11 @@ namespace Api.Rnc.Controllers
         [HttpPost("AnalyzeRootCause")]
         public async Task<IActionResult> AnalyzeRootCause([FromBody] DtoRootCauseAnalysisInput analyze)
         {
-            var userId = Convert.ToInt32(User.Claims.First(x => x.Type == "UserId").Value);
+            var userId = User.GetUserId();
 
             var responseService = await _createAnalyzeRootCauseService.Execute(userId, analyze);
             if (responseService.Success)
-                return await Task.FromResult(Ok(responseService.Value));
+                return Ok(_mapper.Map<DtoCreateRootCauseAnalysisResponse>(responseService.Value));
 
             return BadRequest(responseService.Message);
         }

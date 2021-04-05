@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using System;
 
 namespace Domain.Entities
 {
@@ -8,7 +9,7 @@ namespace Domain.Entities
         public int NonComplianceId { get; set; }
         public DateTime RegisterDate { get; set; }
         public string RegisterHour { get; set; }
-        public string Setor { get; set; }
+        public SetorType SetorId { get; set; }
         public string PeopleInvolved { get; set; }
         public string MoreInformation { get; set; }
         public string ImmediateAction { get; set; }
@@ -16,5 +17,6 @@ namespace Domain.Entities
         public virtual User User { get; set; }
         public virtual NaoConformidade NonCompliance { get; set; }
         public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
+        public virtual Setor Setor { get; set; }
     }
 }
