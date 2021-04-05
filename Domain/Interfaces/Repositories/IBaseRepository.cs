@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Domain.Interfaces.Repositories
         Task<IQueryable<TEntity>> GetAllWithIncludes(Expression<Func<TEntity, bool>> query, params string[] includes);
         Task<TEntity> GetById(int id);
         Task<TEntity> Insert(TEntity obj);
+        Task InsertMany(IEnumerable<TEntity> objs);
         Task<TEntity> Update(TEntity obj);
         Task<int> SaveChanges();
     }

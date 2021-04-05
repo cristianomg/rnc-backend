@@ -15,6 +15,10 @@ namespace Data.Rnc.Repositories
         }
 
         public async Task<UserAuth> GetByEmail(string email) =>
-            await _dbSet.FirstOrDefaultAsync(x => x.Email == email);
+            await _dbSet
+            .AsNoTracking()
+            .Include(x=>x.User)
+            .Include(x=>x.User.UserPermission)
+            .FirstOrDefaultAsync(x => x.Email == email);
     }
 }

@@ -9,5 +9,6 @@ namespace Domain.Interfaces.Repositories
         Task<User> GetByEnrollment(string enrollment);
         Task<IQueryable<User>> GetAllDontActive();
         Task<User> ActiveUser(int id);
+        Task<User> GetByIdWithInclude(int id, params string[] includes);
     }
 }

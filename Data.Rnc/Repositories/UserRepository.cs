@@ -32,5 +32,11 @@ namespace Data.Rnc.Repositories
             await SaveChanges();
             return user;
         }
+        public async Task<User> GetByIdWithInclude(int id, params string[] includes)
+        {
+            var users = await this.GetAllWithIncludes(includes);
+
+            return users.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

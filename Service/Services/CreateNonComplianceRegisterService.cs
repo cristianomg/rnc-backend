@@ -28,7 +28,7 @@ namespace Service.Services
                 PeopleInvolved = nonCompliance.PeopleInvolved,
                 RegisterDate = nonCompliance.RegisterDate,
                 RegisterHour = nonCompliance.RegisterHour,
-                Setor = nonCompliance.Setor,
+                SetorId = nonCompliance.Setor,
                 CreatedAt = DateTime.Now
             });
             await _nonComplianceRegisterRepository.SaveChanges();

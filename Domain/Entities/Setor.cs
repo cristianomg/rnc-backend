@@ -9,5 +9,6 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
         public virtual IEnumerable<User> Users { get; set; }
+        public virtual IEnumerable<NonComplianceRegister> NonComplianceRegisters { get; set; }
     }
 }

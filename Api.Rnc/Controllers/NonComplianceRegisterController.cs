@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using Api.Rnc.Extensions;
+using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.ValueObjects;
@@ -38,8 +40,7 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput dto)
         {
-            var userId = Convert.ToInt32(User.Claims.First(x=>x.Type == "UserId").Value);
-            var responseService = await _createNonComplianceRegisterService.Execute(userId, dto);
+            var responseService = await _createNonComplianceRegisterService.Execute(User.GetUserId(), dto);
             if (responseService.Success)
                 return Created("{id}", _mapper.Map<DtoNonComplianceRegisterResponse>(responseService.Value));
             return BadRequest(responseService.Message);
@@ -50,7 +51,7 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAll()
         {
-            var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAll();
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
         }
@@ -59,7 +60,7 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetById(int id)
         {
-            var nonComplianceRegister = await _nonComplianceRegisterRepository.GetById(id);
+            var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
 
             return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
         }

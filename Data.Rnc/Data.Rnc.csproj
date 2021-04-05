@@ -6,28 +6,6 @@
 
   <ItemGroup>
     <Compile Remove="Mapping\TipoNaoConformidadeMapping.cs" />
-    <Compile Remove="Migrations\20210311224535_Initial.cs" />
-    <Compile Remove="Migrations\20210311224535_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20210322132948_criateNonComplianceRegister.cs" />
-    <Compile Remove="Migrations\20210322132948_criateNonComplianceRegister.Designer.cs" />
-    <Compile Remove="Migrations\20210322225727_createAnalyzeRootCause.cs" />
-    <Compile Remove="Migrations\20210322225727_createAnalyzeRootCause.Designer.cs" />
-    <Compile Remove="Migrations\20210322232322_createRootCauseAnalyi.cs" />
-    <Compile Remove="Migrations\20210322232322_createRootCauseAnalyi.Designer.cs" />
-    <Compile Remove="Migrations\20210328200553_Rnc.cs" />
-    <Compile Remove="Migrations\20210328200553_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328200721_Rnc.cs" />
-    <Compile Remove="Migrations\20210328200721_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328202819_Rnc.cs" />
-    <Compile Remove="Migrations\20210328202819_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328202857_Rnc.cs" />
-    <Compile Remove="Migrations\20210328202857_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328203319_Rnc.cs" />
-    <Compile Remove="Migrations\20210328203319_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328204119_Rnc.cs" />
-    <Compile Remove="Migrations\20210328204119_Rnc.Designer.cs" />
-    <Compile Remove="Migrations\20210328213854_Rnc.cs" />
-    <Compile Remove="Migrations\20210328213854_Rnc.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +14,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

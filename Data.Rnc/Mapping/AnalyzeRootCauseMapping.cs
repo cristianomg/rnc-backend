@@ -31,6 +31,10 @@ namespace Data.Rnc.Mapping
             builder.HasOne(x => x.NonComplianceRegister)
                 .WithOne(x => x.RootCauseAnalysis)
                 .HasForeignKey<RootCauseAnalysis>(x => x.NonComplianceRegisterId);
+
+            builder.HasOne(x => x.ActionPlain)
+                .WithMany(x => x.RootCauseAnalysis)
+                .HasForeignKey(x => x.ActionPlainId);
         }
     }
 }

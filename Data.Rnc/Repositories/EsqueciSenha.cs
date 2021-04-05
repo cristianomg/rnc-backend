@@ -24,7 +24,7 @@ namespace Data.Rnc.Repositories
 
             var subjectEmail = "Envio de senha provisória";
 
-            await _enviarEmail.SendEmail(email, template, subjectEmail);
+            await _enviarEmail.SendEmail(email, template.ToString(), subjectEmail);
         }
     }
 }

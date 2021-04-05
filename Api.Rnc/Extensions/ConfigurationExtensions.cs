@@ -22,7 +22,6 @@ namespace Api.Rnc.Extensions
             services.Configure<CryptographConfig>(configuration.GetSection("CryptographConfig"));
             services.Configure<EnviarEmailConfig>(configuration.GetSection("SendEmail"));
 
-
             services.AddHttpClient();
 
             return services;
