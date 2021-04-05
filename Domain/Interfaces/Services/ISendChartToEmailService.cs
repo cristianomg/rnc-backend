@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Services
 {
     public interface ISendChartToEmailService : IService
     {
-        Task<ResponseService> Execute(int userId, SetorType setor);
+        Task<ResponseService> Execute(int userId, SetorType setor, int month);
     }
 }

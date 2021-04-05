@@ -19,9 +19,9 @@ namespace Service.Services
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
         }
-        public async Task<ResponseService<byte[]>> Execute(SetorType setor)
+        public async Task<ResponseService<byte[]>> Execute(SetorType setor, int month)
         {
-            var nonComplianceGroup = await _nonComplianceRegisterRepository.GetGroupBySetor(setor);
+            var nonComplianceGroup = await _nonComplianceRegisterRepository.GetGroupBySetor(setor, month);
 
             var chartData = new Dictionary<string, double>();
 

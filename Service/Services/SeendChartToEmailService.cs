@@ -22,14 +22,14 @@ namespace Service.Services
             _createPieChartWithNonComplianceRegisterService = createPieChartWithNonComplianceRegisterService;
         }
 
-        public async Task<ResponseService> Execute(int userId, SetorType setor)
+        public async Task<ResponseService> Execute(int userId, SetorType setor, int month)
         {
             var user = await _userRepository.GetByIdWithInclude(userId, nameof(User.UserAuth));
 
             if (user == null)
                 return GenerateErroServiceResponse("Usuário não encontrado.");
 
-            var chart = await _createPieChartWithNonComplianceRegisterService.Execute(setor);
+            var chart = await _createPieChartWithNonComplianceRegisterService.Execute(setor, month);
 
             var template = "<p>O grafico está anexado.</p>";
 
