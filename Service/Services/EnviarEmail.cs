@@ -5,6 +5,7 @@ using Domain.Interfaces.Services;
 using Domain.Models.Helps;
 using Microsoft.Extensions.Options;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace Service.Services
 
             client.Send(message);
         }
-        public async Task<ResponseService> SendEmail(string email,string template, string subjectEmail, bool isHtml = false)
+        public async Task<ResponseService> SendEmail(string email,string template, string subjectEmail, byte[] anexo = null, bool isHtml = false)
         {
             var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
             {
@@ -51,14 +52,28 @@ namespace Service.Services
                 Credentials = new NetworkCredential(_fromEmail, _passwordEmail)
             });
 
-
             Email.DefaultSender = sender;
-            await Email
+
+
+            var emailToSend = Email
             .From(emailAddress: _fromEmail)
             .To(emailAddress: email)
             .Subject(subject: subjectEmail)
-            .Body(template, isHtml)
-            .SendAsync();
+            .Body(template, isHtml);
+
+            if (anexo != null)
+            {
+                emailToSend.Attach(new Clinia.FluentMailer.Core.Models.Attachment()
+                {
+                    ContentType = "application/pdf",
+                    Data = new MemoryStream(anexo),
+                    Filename = "Grafico",
+                    IsInline = false
+                });
+
+            }
+
+            await emailToSend.SendAsync();
             return GenerateSuccessServiceResponse();
         }
     }

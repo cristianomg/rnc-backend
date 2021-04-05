@@ -1,4 +1,5 @@
-﻿using Domain.Dtos.Responses;
+﻿using Api.Rnc.Extensions;
+using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.ValueObjects;
@@ -16,22 +17,33 @@ namespace Api.Rnc.Controllers
     {
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly ISendChartToEmailService _sendChartToEmailService;
+        private readonly ICreatePieChartWithNonComplianceRegisterService _createPieChartWithNonComplianceRegisterService;
         public ChartController(INonComplianceRegisterRepository nonComplianceRegisterRepository,
-                               ISendChartToEmailService sendChartToEmailService)
+                               ISendChartToEmailService sendChartToEmailService,
+                               ICreatePieChartWithNonComplianceRegisterService createPieChartWithNonComplianceRegisterService)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _sendChartToEmailService = sendChartToEmailService;
+            _createPieChartWithNonComplianceRegisterService = createPieChartWithNonComplianceRegisterService;
         }
         [HttpGet("{setor:required}")]
         public async Task<IActionResult> GetChartBySetor(SetorType setor)
         {
-            return Ok(await _nonComplianceRegisterRepository.GetBySetor(setor));
+            var createPieChartResponse = await _createPieChartWithNonComplianceRegisterService.Execute(setor);
+            if (createPieChartResponse.Success)
+                return Ok(Convert.ToBase64String(createPieChartResponse.Value));
+            else
+                return BadRequest(createPieChartResponse.Message);
         }
         [HttpGet("email/{setor:required}")]
         public async Task<IActionResult> SendEmail(SetorType setor)
         {
-            var teste = await _sendChartToEmailService.Execute(setor);
-            return Ok(teste);
+            var userId = User.GetUserId();
+            var sendChartToEmailResponse = await _sendChartToEmailService.Execute(userId, setor);
+            if (sendChartToEmailResponse.Success)
+                return Ok();
+            else
+                return BadRequest(sendChartToEmailResponse.Message);
         }
     }
 }

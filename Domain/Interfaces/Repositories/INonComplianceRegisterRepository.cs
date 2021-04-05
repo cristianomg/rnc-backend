@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Models.Helps;
 using Domain.ValueObjects;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,5 +10,6 @@ namespace Domain.Interfaces.Repositories
     {
         Task<NonComplianceRegister> GetByIdWithInclude(int id);
         Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor);
+        Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor);
     }
 }

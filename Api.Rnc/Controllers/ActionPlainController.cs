@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Responses;
-using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
