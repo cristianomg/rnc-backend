@@ -23,7 +23,7 @@ namespace Api.Rnc.Controllers
         [HttpPut("{email}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ForgetPassword(string email)
+        public async Task<IActionResult> ForgotPassword(string email)
         {
             var responseService = await _recoveryPasswordService.Execute(email);
             if (responseService.Success)

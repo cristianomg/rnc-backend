@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class EsqueciSenha : IEsqueciSenha
+    public class EsqueciSenha : IForgotPassword
     {
         public readonly ISenderEmail _senderEmail; 
         public EsqueciSenha(ISenderEmail senderEmail)
         {
             _senderEmail = senderEmail;
         }
-        public async Task SendEmailToForgetpassword(string email, string name, string password)
+        public async Task SendEmailToForgotpassword(string email, string name, string password)
         {
             StringBuilder template = new StringBuilder();
             template.AppendLine($"Olá caro {name}");

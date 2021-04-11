@@ -20,7 +20,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAuthRepository, UserAuthRepository>();
             services.AddScoped<INonComplianceRepository, NonComplianceRepository>();
-            services.AddScoped<IEsqueciSenha, EsqueciSenha>();
+            services.AddScoped<IForgotPassword, EsqueciSenha>();
             services.AddScoped<INonComplianceRegisterRepository, NonComplianceRegisterRepository>();
             services.AddScoped<IRootCauseAnalysisRepository, RootCauseAnalysisRepository>();
             services.AddScoped<ISetorRepository, SetorRepository>();

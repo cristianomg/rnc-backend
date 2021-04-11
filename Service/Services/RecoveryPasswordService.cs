@@ -14,13 +14,13 @@ namespace Service.Services
 {
     public class RecoveryPasswordService : AbstractService, IRecoveryPasswordService
     {
-        private readonly IEsqueciSenha _esqueciSenha;
+        private readonly IForgotPassword _esqueciSenha;
         private readonly char[] ArrayAlph = "abcdefghijklm".ToCharArray();
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly ICryptograph _cryptograph;
         private readonly string _jwtSecretKey;
         public RecoveryPasswordService(IUserAuthRepository userAuthRepostory, ICryptograph cryptograph,
-                                 IOptions<CryptographConfig> cryptographConfig, IEsqueciSenha esqueciSenha)
+                                 IOptions<CryptographConfig> cryptographConfig, IForgotPassword esqueciSenha)
         {
             _userAuthRepository = userAuthRepostory;
             _cryptograph = cryptograph;
@@ -67,7 +67,7 @@ namespace Service.Services
 
                     await _userAuthRepository.SaveChanges();
 
-                    await _esqueciSenha.SendEmailToForgetpassword(email, user.User.Name, newPassword);
+                    await _esqueciSenha.SendEmailToForgotpassword(email, user.User.Name, newPassword);
                     
                     scope.Complete();
 
