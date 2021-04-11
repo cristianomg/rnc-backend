@@ -20,7 +20,7 @@ namespace Api.Rnc.Extensions
         {
             services.Configure<OpenApiInfo>(configuration.GetSection("ApiInfo"));
             services.Configure<CryptographConfig>(configuration.GetSection("CryptographConfig"));
-            services.Configure<EnviarEmailConfig>(configuration.GetSection("SendEmail"));
+            services.Configure<SendEmailConfig>(configuration.GetSection("SendEmail"));
 
             services.AddHttpClient();
 

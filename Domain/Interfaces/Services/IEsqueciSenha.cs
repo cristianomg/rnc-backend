@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Services
 {
     public interface IEsqueciSenha
     {
-        Task EnviarEmailParaEsqueciSenha(string email, string name, string senha);
+        Task SendEmailToForgetpassword(string email, string name, string senha);
     }
 }

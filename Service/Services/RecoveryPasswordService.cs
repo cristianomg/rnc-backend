@@ -67,7 +67,7 @@ namespace Service.Services
 
                     await _userAuthRepository.SaveChanges();
 
-                    await _esqueciSenha.EnviarEmailParaEsqueciSenha(email, user.User.Name, newPassword);
+                    await _esqueciSenha.SendEmailToForgetpassword(email, user.User.Name, newPassword);
                     
                     scope.Complete();
 

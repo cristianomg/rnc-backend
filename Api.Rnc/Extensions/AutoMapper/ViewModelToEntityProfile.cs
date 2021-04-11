@@ -16,7 +16,7 @@ namespace Api.Rnc.Extensions.AutoMapper
         /// </summary>
         public ViewModelToEntityProfile()
         {
-            CreateMap<DtoUserAtivo, User>();
+            CreateMap<DtoUserActive, User>();
         }
     }
 }

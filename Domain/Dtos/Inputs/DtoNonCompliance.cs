@@ -4,23 +4,23 @@ using System.Text;
 
 namespace Domain.Dtos.Inputs
 {
-    public class DtoNaoConformidade
+    public class DtoNonCompliance
     {
         /// <summary>
         /// Id da não conformidade
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Id do tipo de nao conformidade
+        /// Id do tipo de não conformidade
         /// </summary>
-        public int TipoNaoConformidadeId { get; set; }
+        public int TypeNonComplianceId { get; set; }
         /// <summary>
         /// Descrição
         /// </summary>
-        public string Descricao { get; set; }
+        public string Description { get; set; }
         /// <summary>
-        /// Nome do tipo nao conformidade
+        /// Nome do tipo da não conformidade
         /// </summary>
-        public string NomeTipoNaoConformidade { get; set; }
+        public string NameNonCompliance { get; set; }
     }
 }

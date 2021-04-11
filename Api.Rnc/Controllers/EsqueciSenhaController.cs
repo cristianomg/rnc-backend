@@ -7,18 +7,23 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EsqueciSenhaController : ControllerBase
+    public class ForgetPasswordController : ControllerBase
     {
         private readonly IRecoveryPasswordService _recoveryPasswordService;
 
-        public EsqueciSenhaController(IRecoveryPasswordService recoveryPasswordService)
+        public ForgetPasswordController(IRecoveryPasswordService recoveryPasswordService)
         {
             _recoveryPasswordService = recoveryPasswordService;
         }
-        [HttpPost("{email}")]
+        /// <summary>
+        /// Endpoint responsável pelo esqueci a senha
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPut("{email}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> EsqueciSenha(string email)
+        public async Task<IActionResult> ForgetPassword(string email)
         {
             var responseService = await _recoveryPasswordService.Execute(email);
             if (responseService.Success)

@@ -48,12 +48,12 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IQueryable<DtoUserAtivo>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoUserActive>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllDontActive()
         {
             var users =  await _userRepository.GetAllDontActive();
-            return Ok(_mapper.ProjectTo<DtoUserAtivo>(users));
+            return Ok(_mapper.ProjectTo<DtoUserActive>(users));
         }
         /// <summary>
         /// Endpoint responsável por aprovar cadastros
@@ -63,7 +63,7 @@ namespace Api.Rnc.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ActiveUser(int id)
+        public async Task<ActionResult> ApproveUser(int id)
         {
             await _userRepository.ActiveUser(id);
             return Ok();

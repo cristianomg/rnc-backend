@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class EnviarEmail : AbstractService, IEnviarEmail
+    public class SenderEmail : AbstractService, ISenderEmail
     {
         private readonly string _fromEmail;
         private readonly string _passwordEmail;
-        public EnviarEmail(IOptions<EnviarEmailConfig> emailDeEnvio)
+        public SenderEmail(IOptions<SendEmailConfig> emailDeEnvio)
         {
             _fromEmail = emailDeEnvio.Value.Email;
             _passwordEmail = emailDeEnvio.Value.Password;

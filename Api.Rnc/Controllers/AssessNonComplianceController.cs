@@ -29,6 +29,11 @@ namespace Api.Rnc.Controllers
             _mapper = mapper;
             _createAnalyzeRootCauseService = createAnalyzeRootCauseService;
         }
+        /// <summary>
+        /// Endpoint responsável por criar a análise de causa raiz
+        /// </summary>
+        /// <param name="analyze"></param>
+        /// <returns></returns>
         [HttpPost("AnalyzeRootCause")]
         public async Task<IActionResult> AnalyzeRootCause([FromBody] DtoRootCauseAnalysisInput analyze)
         {

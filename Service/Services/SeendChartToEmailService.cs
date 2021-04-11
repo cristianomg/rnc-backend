@@ -11,14 +11,14 @@ namespace Service.Services
     public class SeendChartToEmailService : AbstractService, ISendChartToEmailService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IEnviarEmail _enviarEmail;
+        private readonly ISenderEmail _senderEmail;
         private readonly ICreatePieChartWithNonComplianceRegisterService _createPieChartWithNonComplianceRegisterService;
-        public SeendChartToEmailService(IEnviarEmail enviarEmail,
+        public SeendChartToEmailService(ISenderEmail senderEmail,
                                         ICreatePieChartWithNonComplianceRegisterService createPieChartWithNonComplianceRegisterService,
                                         IUserRepository  userRepository)
         {
             _userRepository = userRepository;
-            _enviarEmail = enviarEmail;
+            _senderEmail = senderEmail;
             _createPieChartWithNonComplianceRegisterService = createPieChartWithNonComplianceRegisterService;
         }
 
@@ -33,7 +33,7 @@ namespace Service.Services
 
             var template = "<p>O grafico está anexado.</p>";
 
-            await _enviarEmail.SendEmail(user.UserAuth.Email, template, "Grafico", chart.Value, true);
+            await _senderEmail.SendEmail(user.UserAuth.Email, template, "Grafico", chart.Value, true);
 
             return GenerateSuccessServiceResponse();
 
