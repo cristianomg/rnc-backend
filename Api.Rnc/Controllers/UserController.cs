@@ -58,9 +58,9 @@ namespace Api.Rnc.Controllers
         /// <summary>
         /// Endpoint responsável por aprovar cadastros
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{email}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ApproveUser(string email)
