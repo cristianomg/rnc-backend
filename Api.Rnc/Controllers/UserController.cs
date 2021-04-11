@@ -63,9 +63,9 @@ namespace Api.Rnc.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ApproveUser(int id)
+        public async Task<ActionResult> ApproveUser(string email)
         {
-            await _userRepository.ActiveUser(id);
+            await _userRepository.ActiveUser(email);
             return Ok();
         }
     }
