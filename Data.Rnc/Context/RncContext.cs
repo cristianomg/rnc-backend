@@ -20,15 +20,15 @@ namespace Data.Rnc.Context
         }
 
         public DbSet<NonComplianceRegister> NonComplianceRegisters { get; set; }
-        public DbSet<NaoConformidade> NaoConformidades { get; set; }
-        public DbSet<TipoNaoConformidade> TipoNaoConformidades { get; set; }
+        public DbSet<NonCompliance> NonCompliance { get; set; }
+        public DbSet<TypeNonCompliance> TypeNonCompliance { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserAuth> UserAuths { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<Setor> Setors { get; set; }
-        public DbSet<ActionPlain> ActionPlains{ get; set; }
+        public DbSet<ActionPlain> ActionPlains { get; set; }
         public DbSet<ActionPlainQuestion> ActionPlainQuestions { get; set; }
-        public DbSet<ActionPlainResponse> ActionPlainResponses{ get; set; }
+        public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,150 +48,150 @@ namespace Data.Rnc.Context
         }
         private void SeedNaoConformidade(ModelBuilder modelBuilder)
         {
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 1,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Erros de cadastro do paciente ou médico.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 2,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Requisições ilegíveis.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 3,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Paciente com preparo inadequado.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 4,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Incidente com cliente.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 5,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Amostra insuficiente.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 6,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Tubo inadequado.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 7,
-                    TipoNaoConformidadeId = 1,
-                    Descricao = "Amostra com identificação errada ou incompleta.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 8,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Material não tirado da pendência.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 9,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Equipamento em manutenção.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 10,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Perda de amostra.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 11,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Material fora da validade.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 12,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Centrifugação incorreta.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 13,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Queda de energia.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 14,
-                    TipoNaoConformidadeId = 2,
-                    Descricao = "Armazenamento errado da amostra.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 15,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 16,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Laudos entregues trocados.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 17,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Atraso na liberação do laudo.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 18,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Falta da assinatura do Biomédico no laudo.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 19,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Erro de transcrição de resultado na ficha de bancada.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 20,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Questionamento do resultado feito pelo médico ou cliente.",
-                });
-                modelBuilder.Entity<NaoConformidade>().HasData(new NaoConformidade
-                {
-                    Id = 21,
-                    TipoNaoConformidadeId = 3,
-                    Descricao = "Perda do laudo.",
-                });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 1,
+                TypeNonComplianceId = 1,
+                Description = "Erros de cadastro do paciente ou médico.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 2,
+                TypeNonComplianceId = 1,
+                Description = "Requisições ilegíveis.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 3,
+                TypeNonComplianceId = 1,
+                Description = "Paciente com preparo inadequado.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 4,
+                TypeNonComplianceId = 1,
+                Description = "Incidente com cliente.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 5,
+                TypeNonComplianceId = 1,
+                Description = "Amostra insuficiente.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 6,
+                TypeNonComplianceId = 1,
+                Description = "Tubo inadequado.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 7,
+                TypeNonComplianceId = 1,
+                Description = "Amostra com identificação errada ou incompleta.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 8,
+                TypeNonComplianceId = 2,
+                Description = "Material não tirado da pendência.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 9,
+                TypeNonComplianceId = 2,
+                Description = "Equipamento em manutenção.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 10,
+                TypeNonComplianceId = 2,
+                Description = "Perda de amostra.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 11,
+                TypeNonComplianceId = 2,
+                Description = "Material fora da validade.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 12,
+                TypeNonComplianceId = 2,
+                Description = "Centrifugação incorreta.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 13,
+                TypeNonComplianceId = 2,
+                Description = "Queda de energia.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 14,
+                TypeNonComplianceId = 2,
+                Description = "Armazenamento errado da amostra.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 15,
+                TypeNonComplianceId = 3,
+                Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 16,
+                TypeNonComplianceId = 3,
+                Description = "Laudos entregues trocados.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 17,
+                TypeNonComplianceId = 3,
+                Description = "Atraso na liberação do laudo.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 18,
+                TypeNonComplianceId = 3,
+                Description = "Falta da assinatura do Biomédico no laudo.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 19,
+                TypeNonComplianceId = 3,
+                Description = "Erro de transcrição de resultado na ficha de bancada.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 20,
+                TypeNonComplianceId = 3,
+                Description = "Questionamento do resultado feito pelo médico ou cliente.",
+            });
+            modelBuilder.Entity<NonCompliance>().HasData(new NonCompliance
+            {
+                Id = 21,
+                TypeNonComplianceId = 3,
+                Description = "Perda do laudo.",
+            });
         }
 
         private void SeedTipoNaoConformidade(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
+            modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
                 Id = (int)DtoNonComplianceType.PreAnalitica,
-                NomeTipoNaoConformidade = "Pre-Analitica",
+                NameNonCompliance = "Pre-Analitica",
             });
-            modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
+            modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
                 Id = (int)DtoNonComplianceType.Analitica,
-                NomeTipoNaoConformidade = "Analitica",
+                NameNonCompliance = "Analitica",
             });
-            modelBuilder.Entity<TipoNaoConformidade>().HasData(new TipoNaoConformidade
+            modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
                 Id = (int)DtoNonComplianceType.PosAnalitica,
-                NomeTipoNaoConformidade = "Pos-Analitica",
+                NameNonCompliance = "Pos-Analitica",
             });
         }
 
@@ -210,15 +210,15 @@ namespace Data.Rnc.Context
 
         private void SeedUserPermission(ModelBuilder modelBuilder)
         {
-                modelBuilder.Entity<UserPermission>().HasData(
-                    Enum.GetValues(typeof(UserPermissionType))
-                        .Cast<UserPermissionType>()
-                        .Select(x => new UserPermission()
-                        {
-                            Id = x,
-                            Name = x.ToString(),
-                            Active = true,
-                        }));
+            modelBuilder.Entity<UserPermission>().HasData(
+                Enum.GetValues(typeof(UserPermissionType))
+                    .Cast<UserPermissionType>()
+                    .Select(x => new UserPermission()
+                    {
+                        Id = x,
+                        Name = x.ToString(),
+                        Active = true,
+                    }));
         }
     }
 }

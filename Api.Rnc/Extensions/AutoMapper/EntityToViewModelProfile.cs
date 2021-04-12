@@ -16,12 +16,14 @@ namespace Api.Rnc.Extensions.AutoMapper
         /// </summary>
         public EntityToViewModelProfile()
         {
-            CreateMap<NaoConformidade, DtoNaoConformidade>()
-                .ForMember(dest => dest.NomeTipoNaoConformidade, opt => opt.MapFrom(src => src.TipoNaoConformidade.NomeTipoNaoConformidade));
+            CreateMap<NonCompliance, DtoNonCompliance>()
+                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
 
             CreateMap<Setor, DtoSetor >();
-            CreateMap<User, DtoUserAtivo>()
-                .ForMember(dest=>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name));
+            CreateMap<User, DtoUserActive>()
+                .ForMember(dest=>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name))
+                .ForMember(dest=>dest.CompleteName,opt=>opt.MapFrom(src=>src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
             CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
@@ -30,8 +32,8 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest =>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
                 .ForMember(dest => dest.NonComplianceType,
-opt => opt.MapFrom(src => src.NonCompliance.TipoNaoConformidade.NomeTipoNaoConformidade))
-                .ForMember(dest => dest.NonCompliance, opt => opt.MapFrom(src => src.NonCompliance.Descricao))
+                            opt => opt.MapFrom(src => src.NonCompliance.TypeNonCompliance.NameNonCompliance))
+                .ForMember(dest => dest.NonCompliance, opt => opt.MapFrom(src => src.NonCompliance.Description))
                 .ForMember(dest=>dest.HasRootCauseAnalysis, opt=>opt.MapFrom(src=>src.RootCauseAnalysis != null));
 
             CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()

@@ -20,7 +20,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ICreateUserService, CreateUserService>();
             services.AddScoped<ICreateAuthService, CreateAuthService>();
             services.AddScoped<IRecoveryPasswordService, RecoveryPasswordService>();
-            services.AddScoped<IEnviarEmail, EnviarEmail>();
+            services.AddScoped<ISenderEmail, SenderEmail>();
             services.AddScoped<ICreateNonComplianceRegisterService, CreateNonComplianceRegisterService>();
             services.AddScoped<ICreateRootCauseAnalysisService, CreateRootCauseAnalysisService>();
             services.AddScoped<ISendChartToEmailService, SeendChartToEmailService>();

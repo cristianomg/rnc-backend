@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Data.Rnc.Mapping
 {
-    public class NaoConformidadeMapping : IEntityTypeConfiguration<NaoConformidade>
+    public class NaoConformidadeMapping : IEntityTypeConfiguration<NonCompliance>
     {
-        public void Configure(EntityTypeBuilder<NaoConformidade> builder)
+        public void Configure(EntityTypeBuilder<NonCompliance> builder)
         {
-            builder.ToTable(nameof(NaoConformidade));
+            builder.ToTable(nameof(NonCompliance));
 
             builder.HasKey(x => x.Id);
 
@@ -19,13 +19,13 @@ namespace Data.Rnc.Mapping
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Descricao)
+            builder.Property(x => x.Description)
                 .IsRequired()
                 .HasMaxLength(150);
 
-            builder.HasOne(x => x.TipoNaoConformidade)
-                .WithMany(x => x.NaoConformidades)
-                .HasForeignKey(x => x.TipoNaoConformidadeId);
+            builder.HasOne(x => x.TypeNonCompliance)
+                .WithMany(x => x.NonCompliances)
+                .HasForeignKey(x => x.TypeNonComplianceId);
         }
     }
 }

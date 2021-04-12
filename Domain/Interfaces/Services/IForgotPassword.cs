@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services
 {
-    public interface IEsqueciSenha
+    public interface IForgotPassword
     {
-        Task EnviarEmailParaEsqueciSenha(string email, string name, string senha);
+        Task SendEmailToForgotpassword(string email, string name, string senha);
     }
 }

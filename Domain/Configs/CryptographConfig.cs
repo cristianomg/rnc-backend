@@ -2,6 +2,9 @@
 {
     public class CryptographConfig
     {
+        /// <summary>
+        /// Token
+        /// </summary>
         public string JwtSecretKey { get; set; }
     }
 }

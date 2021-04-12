@@ -23,9 +23,9 @@ namespace Data.Rnc.Repositories
             return await Task.FromResult(usersDontActive);
         }
 
-        public async Task<User> ActiveUser(int id)
+        public async Task<User> ActiveUser(string email)
         {
-            var user = _dbSet.AsNoTracking().Include(n => n.UserAuth).Where(a => a.Id == id).FirstOrDefault();
+            var user = _dbSet.Include(n => n.UserAuth).Where(a => a.UserAuth.Email == email).FirstOrDefault();
             user.Active = true;
             user.UserAuth.Active = true;
             await Update(user);

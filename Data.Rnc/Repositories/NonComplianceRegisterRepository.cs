@@ -40,7 +40,7 @@ namespace Data.Rnc.Repositories
             var finalDate = new DateTime(DateTime.Now.Year, month, DateTime.DaysInMonth(DateTime.Now.Year, month));
             var nonCompliances = await GetBySetor(setor, initialDate, finalDate);
 
-            return nonCompliances.GroupBy(x => x.NonCompliance.Descricao).Select(x => new NonComplianceRegisterGroup
+            return nonCompliances.GroupBy(x => x.NonCompliance.Description).Select(x => new NonComplianceRegisterGroup
             {
                 NonCompliance = x.Key,
                 Quantity = x.Count()

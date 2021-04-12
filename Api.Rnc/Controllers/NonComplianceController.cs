@@ -13,14 +13,14 @@ namespace Api.Rnc.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class NaoConformidadeController : ControllerBase
+    public class NonComplianceController : ControllerBase
     {
-        private readonly INaoConformidadeRepository _naoConformidadeRepository;
+        private readonly INonComplianceRepository _nonComplianceRepository;
         private readonly IMapper _mapper;
-        public NaoConformidadeController(INaoConformidadeRepository naoConformidadeRepository,
+        public NonComplianceController(INonComplianceRepository nonComplianceRepository,
                                             IMapper mapper)
         {
-            _naoConformidadeRepository = naoConformidadeRepository;
+            _nonComplianceRepository = nonComplianceRepository;
             _mapper = mapper;
         }
         /// <summary>
@@ -31,10 +31,10 @@ namespace Api.Rnc.Controllers
         [HttpGet("{nonComplianceTypeId}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ObterNaoConformidades(DtoNonComplianceType nonComplianceTypeId)
+        public async Task<IActionResult> GetNonCompliances(DtoNonComplianceType nonComplianceTypeId)
         {
-            var naoConformidades = _naoConformidadeRepository.GetByTipoNaoConformidade((int)nonComplianceTypeId);
-            return await Task.FromResult(Ok(_mapper.ProjectTo<DtoNaoConformidade>(naoConformidades)));
+            var nonCompliances = _nonComplianceRepository.GetByTypeNonCompliance((int)nonComplianceTypeId);
+            return await Task.FromResult(Ok(_mapper.ProjectTo<DtoNonCompliance>(nonCompliances)));
         }
     }
 }

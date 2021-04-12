@@ -45,7 +45,10 @@ namespace Api.Rnc.Controllers
                 return Created("{id}", _mapper.Map<DtoNonComplianceRegisterResponse>(responseService.Value));
             return BadRequest(responseService.Message);
         }
-
+        /// <summary>
+        /// Endpoint responsável por trazer as não conformidades registradas
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
@@ -55,6 +58,11 @@ namespace Api.Rnc.Controllers
 
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
         }
+        /// <summary>
+        /// Endpoint responsável por trazer as não conformidades registradas por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]

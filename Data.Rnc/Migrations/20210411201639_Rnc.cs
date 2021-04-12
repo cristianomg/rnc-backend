@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class alternoncomplianceregisterda : Migration
+    public partial class Rnc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoNaoConformidades",
+                name: "TypeNonCompliance",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -48,11 +48,11 @@ namespace Data.Rnc.Migrations
                     Active = table.Column<bool>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
-                    NomeTipoNaoConformidade = table.Column<string>(nullable: true)
+                    NameNonCompliance = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoNaoConformidades", x => x.Id);
+                    table.PrimaryKey("PK_TypeNonCompliance", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,7 +62,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 3, 20, 6, 5, 397, DateTimeKind.Local).AddTicks(8128)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 11, 17, 16, 39, 150, DateTimeKind.Local).AddTicks(6154)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
@@ -111,7 +111,7 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NaoConformidade",
+                name: "NonCompliance",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -119,16 +119,16 @@ namespace Data.Rnc.Migrations
                     Active = table.Column<bool>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
-                    TipoNaoConformidadeId = table.Column<int>(nullable: false),
-                    Descricao = table.Column<string>(maxLength: 150, nullable: false)
+                    TypeNonComplianceId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NaoConformidade", x => x.Id);
+                    table.PrimaryKey("PK_NonCompliance", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NaoConformidade_TipoNaoConformidades_TipoNaoConformidadeId",
-                        column: x => x.TipoNaoConformidadeId,
-                        principalTable: "TipoNaoConformidades",
+                        name: "FK_NonCompliance_TypeNonCompliance_TypeNonComplianceId",
+                        column: x => x.TypeNonComplianceId,
+                        principalTable: "TypeNonCompliance",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -140,7 +140,7 @@ namespace Data.Rnc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 3, 20, 6, 5, 402, DateTimeKind.Local).AddTicks(3862)),
+                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 11, 17, 16, 39, 156, DateTimeKind.Local).AddTicks(2089)),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     UserAuthId = table.Column<int>(nullable: false),
@@ -194,9 +194,9 @@ namespace Data.Rnc.Migrations
                 {
                     table.PrimaryKey("PK_NonComplianceRegister", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NonComplianceRegister_NaoConformidade_NonComplianceId",
+                        name: "FK_NonComplianceRegister_NonCompliance_NonComplianceId",
                         column: x => x.NonComplianceId,
-                        principalTable: "NaoConformidade",
+                        principalTable: "NonCompliance",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -292,22 +292,22 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(3260), "Coleta", null },
-                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4797), "Microbiologia", null },
-                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4848), "Parasitologia", null },
-                    { 4, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4852), "Imunologia", null },
-                    { 5, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4854), "Hematologia", null },
-                    { 6, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(4858), "Triagem", null }
+                    { 1, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(845), "Coleta", null },
+                    { 2, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(2573), "Microbiologia", null },
+                    { 3, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(2701), "Parasitologia", null },
+                    { 4, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(2705), "Imunologia", null },
+                    { 5, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(2707), "Hematologia", null },
+                    { 6, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(2713), "Triagem", null }
                 });
 
             migrationBuilder.InsertData(
-                table: "TipoNaoConformidades",
-                columns: new[] { "Id", "Active", "CreatedAt", "NomeTipoNaoConformidade", "UpdatedAt" },
+                table: "TypeNonCompliance",
+                columns: new[] { "Id", "Active", "CreatedAt", "NameNonCompliance", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 407, DateTimeKind.Local).AddTicks(8435), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 408, DateTimeKind.Local).AddTicks(34), "Analitica", null },
-                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 408, DateTimeKind.Local).AddTicks(74), "Pos-Analitica", null }
+                    { 1, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(6720), "Pre-Analitica", null },
+                    { 2, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(8788), "Analitica", null },
+                    { 3, true, new DateTime(2021, 4, 11, 17, 16, 39, 163, DateTimeKind.Local).AddTicks(8844), "Pos-Analitica", null }
                 });
 
             migrationBuilder.InsertData(
@@ -315,37 +315,37 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 405, DateTimeKind.Local).AddTicks(9064), "Employee", null },
-                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 406, DateTimeKind.Local).AddTicks(619), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 406, DateTimeKind.Local).AddTicks(686), "QualityBiomedical", null }
+                    { 1, true, new DateTime(2021, 4, 11, 17, 16, 39, 161, DateTimeKind.Local).AddTicks(3558), "Employee", null },
+                    { 2, true, new DateTime(2021, 4, 11, 17, 16, 39, 161, DateTimeKind.Local).AddTicks(5493), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 4, 11, 17, 16, 39, 161, DateTimeKind.Local).AddTicks(5733), "QualityBiomedical", null }
                 });
 
             migrationBuilder.InsertData(
-                table: "NaoConformidade",
-                columns: new[] { "Id", "Active", "CreatedAt", "Descricao", "TipoNaoConformidadeId", "UpdatedAt" },
+                table: "NonCompliance",
+                columns: new[] { "Id", "Active", "CreatedAt", "Description", "TypeNonComplianceId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(2349), "Erros de cadastro do paciente ou médico.", 1, null },
-                    { 19, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3908), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
-                    { 18, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3894), "Falta da assinatura do Biomédico no laudo.", 3, null },
-                    { 17, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3878), "Atraso na liberação do laudo.", 3, null },
-                    { 16, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3864), "Laudos entregues trocados.", 3, null },
-                    { 15, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3782), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
-                    { 14, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3768), "Armazenamento errado da amostra.", 2, null },
-                    { 13, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3755), "Queda de energia.", 2, null },
-                    { 12, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3741), "Centrifugação incorreta.", 2, null },
-                    { 20, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3922), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
-                    { 11, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3726), "Material fora da validade.", 2, null },
-                    { 9, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3696), "Equipamento em manutenção.", 2, null },
-                    { 8, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3682), "Material não tirado da pendência.", 2, null },
-                    { 7, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3668), "Amostra com identificação errada ou incompleta.", 1, null },
-                    { 6, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3652), "Tubo inadequado.", 1, null },
-                    { 5, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3634), "Amostra insuficiente.", 1, null },
-                    { 4, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3620), "Incidente com cliente.", 1, null },
-                    { 3, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3603), "Paciente com preparo inadequado.", 1, null },
-                    { 2, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3547), "Requisições ilegíveis.", 1, null },
-                    { 10, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3711), "Perda de amostra.", 2, null },
-                    { 21, true, new DateTime(2021, 4, 3, 20, 6, 5, 409, DateTimeKind.Local).AddTicks(3974), "Perda do laudo.", 3, null }
+                    { 1, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(1814), "Erros de cadastro do paciente ou médico.", 1, null },
+                    { 19, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3700), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
+                    { 18, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3618), "Falta da assinatura do Biomédico no laudo.", 3, null },
+                    { 17, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3598), "Atraso na liberação do laudo.", 3, null },
+                    { 16, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3580), "Laudos entregues trocados.", 3, null },
+                    { 15, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3471), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
+                    { 14, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3453), "Armazenamento errado da amostra.", 2, null },
+                    { 13, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3435), "Queda de energia.", 2, null },
+                    { 12, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3418), "Centrifugação incorreta.", 2, null },
+                    { 20, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3720), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
+                    { 11, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3400), "Material fora da validade.", 2, null },
+                    { 9, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3362), "Equipamento em manutenção.", 2, null },
+                    { 8, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3344), "Material não tirado da pendência.", 2, null },
+                    { 7, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3325), "Amostra com identificação errada ou incompleta.", 1, null },
+                    { 6, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3307), "Tubo inadequado.", 1, null },
+                    { 5, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3283), "Amostra insuficiente.", 1, null },
+                    { 4, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3264), "Incidente com cliente.", 1, null },
+                    { 3, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3242), "Paciente com preparo inadequado.", 1, null },
+                    { 2, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3169), "Requisições ilegíveis.", 1, null },
+                    { 10, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3382), "Perda de amostra.", 2, null },
+                    { 21, true, new DateTime(2021, 4, 11, 17, 16, 39, 165, DateTimeKind.Local).AddTicks(3738), "Perda do laudo.", 3, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -375,9 +375,9 @@ namespace Data.Rnc.Migrations
                 column: "RootCauseAnalysisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NaoConformidade_TipoNaoConformidadeId",
-                table: "NaoConformidade",
-                column: "TipoNaoConformidadeId");
+                name: "IX_NonCompliance_TypeNonComplianceId",
+                table: "NonCompliance",
+                column: "TypeNonComplianceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NonComplianceRegister_NonComplianceId",
@@ -457,13 +457,13 @@ namespace Data.Rnc.Migrations
                 name: "NonComplianceRegister");
 
             migrationBuilder.DropTable(
-                name: "NaoConformidade");
+                name: "NonCompliance");
 
             migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "TipoNaoConformidades");
+                name: "TypeNonCompliance");
 
             migrationBuilder.DropTable(
                 name: "Setor");

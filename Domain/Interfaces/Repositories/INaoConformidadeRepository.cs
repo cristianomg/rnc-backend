@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface INaoConformidadeRepository : IBaseRepository<NaoConformidade>
+    public interface INonComplianceRepository : IBaseRepository<NonCompliance>
     {
-        IQueryable<NaoConformidade> GetByTipoNaoConformidade(int tipoNaoConformidadeId);
+        IQueryable<NonCompliance> GetByTypeNonCompliance(int typeNonComplianceId);
     }
 }
