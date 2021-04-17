@@ -10,9 +10,11 @@ namespace Data.Rnc.Repositories
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly DbSet<User> _dbSet;
+        private readonly DbSet<UserAuth> _dbSetAuth;
         public UserRepository(RncContext context) : base(context)
         {
             _dbSet = context.Set<User>();
+            _dbSetAuth = context.Set<UserAuth>();
         }
 
         public async Task<User> GetByEnrollment(string enrollment) =>
@@ -31,6 +33,23 @@ namespace Data.Rnc.Repositories
             await Update(user);
             await SaveChanges();
             return user;
+        }
+        public async Task DeleteUserByEmail(string email)
+        {
+            var user = _dbSet.Include(n => n.UserAuth).Where(a => a.UserAuth.Email == email).FirstOrDefault();
+            _dbSet.Remove(user);
+            _dbSetAuth.Remove(user.UserAuth);
+            await SaveChanges();
+        }
+        public async Task<User> GetByEmail(string email)
+        {
+            var user = _dbSet
+                .AsNoTracking()
+                .Include(n => n.UserAuth)
+                .Include(n=>n.Setor)
+                .Where(n => n.UserAuth.Email == email)
+                .FirstOrDefaultAsync();
+            return await user;
         }
         public async Task<User> GetByIdWithInclude(int id, params string[] includes)
         {

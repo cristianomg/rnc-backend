@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class EsqueciSenha : IForgotPassword
+    public class ForgetPassword : IForgotPassword
     {
         public readonly ISenderEmail _senderEmail; 
-        public EsqueciSenha(ISenderEmail senderEmail)
+        public ForgetPassword(ISenderEmail senderEmail)
         {
             _senderEmail = senderEmail;
         }

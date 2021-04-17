@@ -18,7 +18,10 @@ namespace Api.Rnc.Extensions.AutoMapper
         {
             CreateMap<NonCompliance, DtoNonCompliance>()
                 .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
-
+            CreateMap<User, DtoUserResponse>()
+                .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
+                .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
             CreateMap<Setor, DtoSetor >();
             CreateMap<User, DtoUserActive>()
                 .ForMember(dest=>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name))

@@ -26,7 +26,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ISendChartToEmailService, SeendChartToEmailService>();
             services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
             services.AddScoped<ICreatePieChartWithNonComplianceRegisterService, CreatePieChartWithNonComplianceRegisterService>();
-
+            services.AddScoped<IChangePasswordService, ChangePasswordService>();
             return services;
         }
     }
