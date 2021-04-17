@@ -63,7 +63,6 @@ namespace Api.Rnc.Controllers
         /// Endpoint responsável por retornar o usuário via email
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpGet("{email}")]
         [ProducesResponseType(typeof(DtoUser), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -86,7 +85,7 @@ namespace Api.Rnc.Controllers
             return Ok();
         }
         /// <summary>
-        /// Endpoint responsável por aprovar cadastros
+        /// Endpoint responsável por reprovar cadastros
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
