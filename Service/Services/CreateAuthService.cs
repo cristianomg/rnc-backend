@@ -34,7 +34,7 @@ namespace Service.Services
         {
             var existingAuth = await _userAuthRepository.GetByEmail(dtoCreateAuth.Email);
 
-            if (existingAuth != null)
+            if (existingAuth != null && (_cryptograph.VerifyPassword(dtoCreateAuth.Password,existingAuth.Password)))
             {
                 if (existingAuth.Active)
                 {
