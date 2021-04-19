@@ -21,6 +21,7 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
             var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("RncContext");
+            Console.WriteLine(connection);
             services.AddDbContext<RncContext>(options =>
                 options.UseNpgsql(connection));
             return services;
