@@ -10,5 +10,7 @@ namespace Domain.Interfaces.Repositories
         Task<IQueryable<User>> GetAllDontActive();
         Task<User> ActiveUser(string email);
         Task<User> GetByIdWithInclude(int id, params string[] includes);
+        Task<User> GetByEmail(string email);
+        Task DeleteUserByEmail(string email);
     }
 }
