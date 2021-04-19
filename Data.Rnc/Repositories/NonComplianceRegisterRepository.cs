@@ -22,6 +22,7 @@ namespace Data.Rnc.Repositories
         public async Task<NonComplianceRegister> GetByIdWithInclude(int id)
         {
            return await  _context.NonComplianceRegisters.AsNoTracking()
+                .Include(x=>x.NonCompliance)
                 .Include(x => x.Setor)
                 .Include(x => x.User)
                 .Include(x=>x.RootCauseAnalysis)
