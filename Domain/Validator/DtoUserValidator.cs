@@ -19,10 +19,7 @@ namespace Domain.Validator
                 .MinimumLength(150)
                 .WithMessage("O Nome não pode ser vazio ou nulo.");
             RuleFor(x => x.Email)
-                .NotNull()
-                .NotEmpty()
-                .Matches("^[a-zA-Z ]*$")
-                .WithMessage("O email não pode ser vazio ou nulo.");
+                .EmailAddress();
             RuleFor(x => x.Crbm)
                 .NotNull()
                 .NotEmpty()
