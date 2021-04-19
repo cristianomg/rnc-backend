@@ -28,6 +28,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ICreatePieChartWithNonComplianceRegisterService, CreatePieChartWithNonComplianceRegisterService>();
             services.AddScoped<IChangePasswordService, ChangePasswordService>();
             services.AddScoped<ICreateActionPlainService, CreateActionPlainService>();
+            services.AddScoped<IChangeNameService, ChangeNameSerivce>();
             return services;
         }
     }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Rnc.Extensions;
+using AutoMapper;
 using Domain.Dtos.Helps;
 using Domain.Dtos.Inputs;
 using Domain.Dtos.Requests;
@@ -23,12 +24,18 @@ namespace Api.Rnc.Controllers
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly IChangePasswordService _changePasswordService;
-        public UserController(ICreateUserService createUserService, IMapper mapper, IUserRepository userRepository,IChangePasswordService changePasswordService)
+        private readonly IChangeNameService _changeNameService;
+        public UserController(ICreateUserService createUserService,
+                              IMapper mapper,
+                              IUserRepository userRepository,
+                              IChangePasswordService changePasswordService,
+                              IChangeNameService changeNameService)
         {
             _createUserService = createUserService;
             _mapper = mapper;
             _userRepository = userRepository;
             _changePasswordService = changePasswordService;
+            _changeNameService = changeNameService;
         }
         /// <summary>
         /// Endpoint responsável pela criação do usuário
@@ -51,7 +58,7 @@ namespace Api.Rnc.Controllers
         /// Endpoint responsável por retornar os usuários com cadastro não aprovado ainda
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("ToApprove")]
         [ProducesResponseType(typeof(IQueryable<DtoUserActive>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllDontActive()
@@ -106,6 +113,21 @@ namespace Api.Rnc.Controllers
         public async Task<ActionResult> ChangePassword([FromBody]DtoChangePassword dtoChangePassword)
         {
             var responseService = await _changePasswordService.Execute(dtoChangePassword);
+            if (responseService.Success)
+                return Ok();
+
+            return BadRequest(responseService.Message);
+        }
+        ///<summary>
+        ///Endpoint responsável por torcar nome do usuário
+        /// </summary>
+        [HttpPut("ChangeName")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ChangeName([FromBody] DtoChangeNameInput dtoChangeName)
+        {
+            var userId = User.GetUserId();
+            var responseService = await _changeNameService.Execute(userId, dtoChangeName);
             if (responseService.Success)
                 return Ok();
 
