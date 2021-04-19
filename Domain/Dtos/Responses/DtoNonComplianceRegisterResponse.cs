@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using System;
 
 namespace Domain.Dtos.Responses
 {
@@ -20,6 +21,10 @@ namespace Domain.Dtos.Responses
         /// Hora do registro
         /// </summary>
         public string Hour { get; set; }
+        /// <summary>
+        /// SetorId
+        /// </summary>
+        public SetorType SetorId { get; set; }
         /// <summary>
         /// Setor
         /// </summary>
