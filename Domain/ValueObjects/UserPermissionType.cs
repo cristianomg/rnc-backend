@@ -8,7 +8,7 @@ namespace Domain.ValueObjects
         Employee = 1,
         [Description("Supervisor")]
         Supervisor,
-        [Description("Bio Médico de Qualidade")]
+        [Description("Biomédico de Qualidade")]
         QualityBiomedical
     }
 }
