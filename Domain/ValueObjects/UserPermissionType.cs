@@ -1,8 +1,14 @@
-﻿namespace Domain.ValueObjects
+﻿using System.ComponentModel;
+
+namespace Domain.ValueObjects
 {
     public enum UserPermissionType : int 
-    {   Employee = 1,
+    {   
+        [Description("Funcionario")]
+        Employee = 1,
+        [Description("Supervisor")]
         Supervisor,
-        QualityBiomedical 
+        [Description("Bio Médico de Qualidade")]
+        QualityBiomedical
     }
 }
