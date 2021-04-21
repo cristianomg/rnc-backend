@@ -14,6 +14,7 @@ using Domain.Configs;
 using Microsoft.Extensions.Options;
 using Domain.Interfaces.Services;
 using Domain.Dtos.Helps;
+using Util.Extensions;
 
 namespace Service.Services
 {
@@ -71,7 +72,7 @@ namespace Service.Services
                             Crbm = existingAuth.User.Crbm
                         };
 
-                        var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermission.Name };
+                        var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermissionId.GetDescription() };
 
 
                         return GenerateSuccessServiceResponse(authResult);
