@@ -10,6 +10,5 @@ namespace Domain.Dtos.Responses
         public string Email { get; set; }
         public string Enrollment { get; set; }
         public string Setor { get; set; }
-        public string Crbm { get; set; }
     }
 }

@@ -29,10 +29,6 @@ namespace Data.Rnc.Mapping
             builder.HasIndex(x => x.Enrollment)
                 .IsUnique();
 
-            builder.Property(x => x.Crbm)
-                .IsRequired()
-                .HasMaxLength(15);
-
             builder.Property(x => x.Active)
                 .IsRequired();
 

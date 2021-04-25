@@ -25,10 +25,6 @@ namespace Domain.Dtos.Helps
         /// </summary>
         public string Setor { get; set; }
         /// <summary>
-        /// Crbm do usuário
-        /// </summary>
-        public string Crbm { get; set; }
-        /// <summary>
         /// Flag ativo ou inativo
         /// </summary>
         public bool Active { get; set; }
