@@ -9,7 +9,7 @@ namespace Domain.Dtos.Inputs
         /// <summary>
         /// Id da não conformidade
         /// </summary>
-        public int Id { get; set; }
+        public int? Id { get; set; }
         /// <summary>
         /// Id do tipo de não conformidade
         /// </summary>

@@ -30,13 +30,10 @@ namespace Api.Rnc.Extensions.AutoMapper
             CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
-                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.RegisterDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.RegisterDate))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))
                 .ForMember(dest =>dest.Setor, opt=>opt.MapFrom(src=>src.Setor.Name))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
-                .ForMember(dest => dest.NonComplianceType,
-                            opt => opt.MapFrom(src => src.NonCompliance.TypeNonCompliance.NameNonCompliance))
-                .ForMember(dest => dest.NonCompliance, opt => opt.MapFrom(src => src.NonCompliance.Description))
                 .ForMember(dest=>dest.HasRootCauseAnalysis, opt=>opt.MapFrom(src=>src.RootCauseAnalysis != null));
 
             CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()

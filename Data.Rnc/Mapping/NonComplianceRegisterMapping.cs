@@ -19,9 +19,6 @@ namespace Data.Rnc.Mapping
             builder.Property(x => x.UserId)
                 .IsRequired();
 
-            builder.Property(x => x.NonComplianceId)
-                .IsRequired();
-
             builder.Property(x => x.ImmediateAction)
                 .IsRequired()
                 .HasMaxLength(255);
@@ -43,9 +40,9 @@ namespace Data.Rnc.Mapping
                 .WithMany(x => x.NonComplianceRegisters)
                 .HasForeignKey(x => x.UserId);
 
-            builder.HasOne(x => x.NonCompliance)
-                .WithMany(x => x.NonCompliceRegisters)
-                .HasForeignKey(x => x.NonComplianceId);
+            builder.HasMany(x => x.NonCompliances)
+                .WithMany(x => x.NonComplianceRegisters)
+                .UsingEntity(x => x.ToTable(nameof(NonComplianceNonComplianceRegister)));
         }
     }
 }

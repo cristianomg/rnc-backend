@@ -1,14 +1,15 @@
 ﻿using Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Domain.Dtos.Inputs
 {
     public class DtoNonComplianceRegisterInput
     {
         /// <summary>
-        /// Código da não conformidade aplicada ao registro
+        /// Lista de não conformidades aplicadas ao registro
         /// </summary>
-        public int NonComplianceId { get; set; }
+        public IEnumerable<DtoNonCompliance> NonCompliances { get; set; }
         /// <summary>
         /// Data do registro
         /// </summary>

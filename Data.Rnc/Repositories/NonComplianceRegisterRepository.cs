@@ -21,12 +21,13 @@ namespace Data.Rnc.Repositories
 
         public async Task<NonComplianceRegister> GetByIdWithInclude(int id)
         {
-           return await  _context.NonComplianceRegisters.AsNoTracking()
-                .Include(x=>x.NonCompliance)
-                .Include(x => x.Setor)
-                .Include(x => x.User)
-                .Include(x=>x.RootCauseAnalysis)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.NonComplianceRegisters.AsNoTracking()
+                 .Include(x => x.Setor)
+                 .Include(x => x.User)
+                 .Include(x => x.RootCauseAnalysis)
+                 .Include(x => x.NonCompliances)
+                 .ThenInclude(x => x.TypeNonCompliance)
+                 .FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate)
         {
@@ -41,11 +42,14 @@ namespace Data.Rnc.Repositories
             var finalDate = new DateTime(DateTime.Now.Year, month, DateTime.DaysInMonth(DateTime.Now.Year, month));
             var nonCompliances = await GetBySetor(setor, initialDate, finalDate);
 
-            return nonCompliances.GroupBy(x => x.NonCompliance.Description).Select(x => new NonComplianceRegisterGroup
-            {
-                NonCompliance = x.Key,
-                Quantity = x.Count()
-            });
+            return nonCompliances
+                .SelectMany(x => x.NonCompliances)
+                .GroupBy(x => x.Description)
+                .Select(x => new NonComplianceRegisterGroup
+                {
+                    NonCompliance = x.Key,
+                    Quantity = x.Count()
+                });
         }
     }
 }
