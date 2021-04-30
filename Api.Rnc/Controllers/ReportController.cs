@@ -1,5 +1,7 @@
 ﻿using Api.Rnc.Extensions;
 using Domain.Interfaces.Services;
+using Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,6 +9,7 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = nameof(UserPermissionType.QualityBiomedical))]
     public class ReportController : ControllerBase
     {
         private readonly ICreateNonComplianceRegisterReportService _createNonConplianceRegisterReportService;
