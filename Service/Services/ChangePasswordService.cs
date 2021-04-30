@@ -12,7 +12,7 @@ namespace Service.Services
     {
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly ICryptograph _cryptograph;
-        public ChangePasswordService(IUserAuthRepository userAuthRepository,ICryptograph cryptograph)
+        public ChangePasswordService(IUserAuthRepository userAuthRepository, ICryptograph cryptograph)
         {
             _userAuthRepository = userAuthRepository;
             _cryptograph = cryptograph;

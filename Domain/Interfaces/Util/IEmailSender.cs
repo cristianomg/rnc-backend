@@ -1,5 +1,4 @@
-﻿using Domain.Interfaces.Services;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Util
 {

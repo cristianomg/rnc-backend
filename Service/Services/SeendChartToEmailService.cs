@@ -15,7 +15,7 @@ namespace Service.Services
         private readonly ICreatePieChartWithNonComplianceRegisterService _createPieChartWithNonComplianceRegisterService;
         public SeendChartToEmailService(IEmailSender senderEmail,
                                         ICreatePieChartWithNonComplianceRegisterService createPieChartWithNonComplianceRegisterService,
-                                        IUserRepository  userRepository)
+                                        IUserRepository userRepository)
         {
             _userRepository = userRepository;
             _senderEmail = senderEmail;

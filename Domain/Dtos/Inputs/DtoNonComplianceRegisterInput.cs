@@ -17,7 +17,7 @@ namespace Domain.Dtos.Inputs
         /// <summary>
         /// Hora do registro
         /// </summary>
-        public string RegisterHour  { get; set; }
+        public string RegisterHour { get; set; }
         /// <summary>
         /// Setor
         /// </summary>

@@ -1,11 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.Dtos.Helps;
+using Domain.Entities;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
-using Domain.Dtos.Helps;
-using System.Collections.Generic;
 
 namespace Data.Rnc.Context
 {

@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Requests;
 using Domain.Entities;
 
 namespace Api.Rnc.Extensions.AutoMapper

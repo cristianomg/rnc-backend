@@ -1,6 +1,4 @@
 ﻿using Domain.Dtos.Inputs;
-using Domain.Entities;
-using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 

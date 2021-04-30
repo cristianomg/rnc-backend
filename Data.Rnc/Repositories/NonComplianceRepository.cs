@@ -2,10 +2,7 @@
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
@@ -18,7 +15,7 @@ namespace Data.Rnc.Repositories
         }
         public IQueryable<NonCompliance> GetByTypeNonCompliance(int typeNonComplianceId)
         {
-            return _dbSet.AsNoTracking().Include(n => n.TypeNonCompliance).Where(t=>t.TypeNonComplianceId == typeNonComplianceId && t.Active)
+            return _dbSet.AsNoTracking().Include(n => n.TypeNonCompliance).Where(t => t.TypeNonComplianceId == typeNonComplianceId && t.Active)
                 .OrderBy(t => t.Id).AsQueryable();
         }
     }

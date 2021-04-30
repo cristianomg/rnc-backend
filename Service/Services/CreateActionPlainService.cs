@@ -20,7 +20,7 @@ namespace Service.Services
         {
             _actionPlainRepository = actionPlainRepository;
             _actionPlainQuestionRepository = actionPlainQuestionRepository;
-        }  
+        }
 
         public async Task<ResponseService> Execute(DtoCreateActionPlainInput dto)
         {
@@ -64,7 +64,7 @@ namespace Service.Services
                     scope.Dispose();
                     return GenerateErroServiceResponse(ex.Message);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     scope.Dispose();
                     return GenerateErroServiceResponse("Erro ao criar plano de ação.");

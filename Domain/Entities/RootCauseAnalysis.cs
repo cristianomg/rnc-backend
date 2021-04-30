@@ -11,7 +11,7 @@ namespace Domain.Entities
         public virtual NonComplianceRegister NonComplianceRegister { get; set; }
         public virtual User User { get; set; }
         public virtual ActionPlain ActionPlain { get; set; }
-        public virtual IEnumerable<ActionPlainResponse> ActionPlainResponses{ get; set; }
+        public virtual IEnumerable<ActionPlainResponse> ActionPlainResponses { get; set; }
 
     }
 }

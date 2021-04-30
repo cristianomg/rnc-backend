@@ -24,7 +24,7 @@ namespace Api.Rnc.Controllers
             var responseService = await _createNonConplianceRegisterReportService.Execute(nonComplianceRegisterId);
             if (responseService.Success)
                 return Ok(responseService.Value);
-            
+
             return BadRequest(responseService.Message);
         }
         [HttpGet("email/{nonComplianceRegisterId:int}")]

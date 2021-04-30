@@ -7,7 +7,7 @@ namespace Data.Rnc.Repositories
 {
     public class ForgetPassword : IForgotPassword
     {
-        public readonly IEmailSender _senderEmail; 
+        public readonly IEmailSender _senderEmail;
         public ForgetPassword(IEmailSender senderEmail)
         {
             _senderEmail = senderEmail;

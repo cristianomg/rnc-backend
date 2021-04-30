@@ -2,12 +2,12 @@
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.Models.Helps;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Domain.Models.Helps;
-using System.Linq;
-using System.Collections.Generic;
 using System.Transactions;
 
 namespace Service.Services
@@ -62,14 +62,14 @@ namespace Service.Services
 
                     return GenerateSuccessServiceResponse(HttpStatusCode.Created);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.Write(ex);
                     scope.Dispose();
                     return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
                 }
             }
-                
+
         }
         private async Task<List<NonCompliance>> CreateNewNonCompliance(IEnumerable<DtoNonCompliance> nonCompliances)
         {
@@ -78,7 +78,7 @@ namespace Service.Services
 
             var newNonCompliances = new List<NonCompliance>();
 
-            foreach(var nc in nonCompliances)
+            foreach (var nc in nonCompliances)
             {
                 var nonCompliance = await _nonComplianceRepository.Insert(new NonCompliance
                 {

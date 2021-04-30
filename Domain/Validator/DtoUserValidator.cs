@@ -1,9 +1,6 @@
 ﻿
 using Domain.Dtos.Requests;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Validator
 {
@@ -41,6 +38,6 @@ namespace Domain.Validator
             RuleFor(x => x.UserPermission)
                 .NotEmpty()
                 .WithMessage("A permissão do usuario não pode ser vazia.");
-        }  
+        }
     }
 }

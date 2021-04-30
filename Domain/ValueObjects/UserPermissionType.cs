@@ -2,8 +2,8 @@
 
 namespace Domain.ValueObjects
 {
-    public enum UserPermissionType : int 
-    {   
+    public enum UserPermissionType : int
+    {
         [Description("Funcionario")]
         Employee = 1,
         [Description("Supervisor")]

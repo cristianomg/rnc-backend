@@ -96,7 +96,8 @@ namespace Api.Rnc
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample Api V1");
                 c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
             });

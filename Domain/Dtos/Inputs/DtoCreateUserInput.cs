@@ -35,7 +35,7 @@ namespace Domain.Dtos.Requests
         /// Cargo do usuário
         /// </summary>
         public UserPermissionType UserPermission { get; set; }
-        
+
 
     }
 }

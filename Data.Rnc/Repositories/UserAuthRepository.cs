@@ -9,7 +9,7 @@ namespace Data.Rnc.Repositories
     public class UserAuthRepository : BaseRepository<UserAuth>, IUserAuthRepository
     {
         private readonly DbSet<UserAuth> _dbSet;
-        public UserAuthRepository(RncContext context) : base(context) 
+        public UserAuthRepository(RncContext context) : base(context)
         {
             _dbSet = context.Set<UserAuth>();
         }
@@ -17,8 +17,8 @@ namespace Data.Rnc.Repositories
         public async Task<UserAuth> GetByEmail(string email) =>
             await _dbSet
             .AsNoTracking()
-            .Include(x=>x.User)
-            .Include(x=>x.User.UserPermission)
+            .Include(x => x.User)
+            .Include(x => x.User.UserPermission)
             .FirstOrDefaultAsync(x => x.Email == email);
     }
 }

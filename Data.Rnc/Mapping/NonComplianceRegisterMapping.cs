@@ -22,10 +22,10 @@ namespace Data.Rnc.Mapping
             builder.Property(x => x.ImmediateAction)
                 .IsRequired()
                 .HasMaxLength(255);
-            
+
             builder.Property(x => x.MoreInformation)
                 .HasMaxLength(255);
-            
+
             builder.Property(x => x.PeopleInvolved)
                 .IsRequired()
                 .HasMaxLength(255);

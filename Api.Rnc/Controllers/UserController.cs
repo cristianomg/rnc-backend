@@ -4,7 +4,6 @@ using Domain.Dtos.Helps;
 using Domain.Dtos.Inputs;
 using Domain.Dtos.Requests;
 using Domain.Dtos.Responses;
-using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -110,7 +109,7 @@ namespace Api.Rnc.Controllers
         [HttpPut("ChancePassword")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ChangePassword([FromBody]DtoChangePassword dtoChangePassword)
+        public async Task<ActionResult> ChangePassword([FromBody] DtoChangePassword dtoChangePassword)
         {
             var responseService = await _changePasswordService.Execute(dtoChangePassword);
             if (responseService.Success)

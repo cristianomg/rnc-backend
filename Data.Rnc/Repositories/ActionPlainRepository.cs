@@ -19,7 +19,7 @@ namespace Data.Rnc.Repositories
             return _context.ActionPlains
                 .AsQueryable()
                 .Include(x => x.Questions)
-                .FirstOrDefaultAsync(x=>x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

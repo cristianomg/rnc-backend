@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Interfaces.Util
+﻿namespace Domain.Interfaces.Util
 {
     public interface ICryptograph
     {

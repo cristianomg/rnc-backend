@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Data.Rnc.Repositories
 {
     public class NonComplianceRegisterRepository : BaseRepository<NonComplianceRegister>,
-                                                   INonComplianceRegisterRepository 
+                                                   INonComplianceRegisterRepository
     {
         private readonly RncContext _context;
         public NonComplianceRegisterRepository(RncContext context) : base(context)
@@ -50,7 +50,7 @@ namespace Data.Rnc.Repositories
             return await Task.FromResult(_context.NonComplianceRegisters
                 .AsNoTracking()
                 .Include(x => x.Setor)
-                .Where(x => x.SetorId == setor && x.RegisterDate >= initialDate && x.RegisterDate <= finalDate ));
+                .Where(x => x.SetorId == setor && x.RegisterDate >= initialDate && x.RegisterDate <= finalDate));
         }
         public async Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor, int month)
         {
