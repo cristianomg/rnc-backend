@@ -57,7 +57,6 @@ namespace Service.Services
                 },
                 Enrollment = createUserInput.Enrollment,
                 SetorId = createUserInput.Setor,
-                Crbm = createUserInput.Crbm,
                 UserPermissionId = createUserInput.UserPermission,
                 Active = false
             });

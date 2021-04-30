@@ -24,10 +24,6 @@ namespace Domain.Dtos.Requests
         /// </summary>
         public SetorType Setor { get; set; }
         /// <summary>
-        /// Registro do Consolho Regional de BioMedicina 
-        /// </summary>
-        public string Crbm { get; set; }
-        /// <summary>
         /// Senha
         /// </summary>
         public string Password { get; set; }

@@ -23,10 +23,6 @@ namespace Domain.Entities
         /// </summary>
         public SetorType SetorId { get; set; }
         /// <summary>
-        /// Matricula
-        /// </summary>
-        public string Crbm { get; set; }
-        /// <summary>
         /// Dados de autenticação do usuário
         /// </summary>
         public virtual UserAuth UserAuth { get; set; }
