@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Mapping\TipoNaoConformidadeMapping.cs" />
-    <Compile Remove="Migrations\20210427010257_alterNonComplianceRegister.cs" />
-    <Compile Remove="Migrations\20210427010257_alterNonComplianceRegister.Designer.cs" />
+    <Compile Remove="Migrations\20210403230605_alternoncomplianceregisterda.cs" />
+    <Compile Remove="Migrations\20210403230605_alternoncomplianceregisterda.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,6 @@ namespace Domain.Dtos.Helps
         public string Email { get; set; }
         public string Enrollment { get; set; }
         public SetorType Setor { get; set; }
-        public string Crbm { get; set; }
 
     }
 }

@@ -56,6 +56,7 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
+            nonComplianceRegisters.OrderBy(x=>x.Id);
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
         }
         /// <summary>

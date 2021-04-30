@@ -21,7 +21,7 @@ namespace Data.Rnc.Repositories
             await _dbSet.FirstOrDefaultAsync(x => x.Enrollment == enrollment);
         public async Task<IQueryable<User>> GetAllDontActive()
         {
-            var usersDontActive = _dbSet.AsQueryable().Where(a => a.UserAuth.Active == false).OrderBy(t => t.Name);
+            var usersDontActive = _dbSet.AsQueryable().Where(a => a.UserAuth.Active == false).OrderBy(t => t.Id);
             return await Task.FromResult(usersDontActive);
         }
 
