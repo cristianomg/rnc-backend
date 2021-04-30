@@ -1,6 +1,8 @@
 ﻿using Domain.Interfaces.Services;
+using Domain.Interfaces.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Services;
+using Util.RenderRazorPage;
 
 namespace Api.Rnc.Extensions
 {
@@ -20,7 +22,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ICreateUserService, CreateUserService>();
             services.AddScoped<ICreateAuthService, CreateAuthService>();
             services.AddScoped<IRecoveryPasswordService, RecoveryPasswordService>();
-            services.AddScoped<ISenderEmail, SenderEmail>();
+            services.AddScoped<IEmailSender, SenderEmail>();
             services.AddScoped<ICreateNonComplianceRegisterService, CreateNonComplianceRegisterService>();
             services.AddScoped<ICreateRootCauseAnalysisService, CreateRootCauseAnalysisService>();
             services.AddScoped<ISendChartToEmailService, SeendChartToEmailService>();
@@ -29,6 +31,8 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IChangePasswordService, ChangePasswordService>();
             services.AddScoped<ICreateActionPlainService, CreateActionPlainService>();
             services.AddScoped<IChangeNameService, ChangeNameSerivce>();
+            services.AddScoped<ICreateNonComplianceRegisterReportService, CreateNonComplianceRegisterReportService>();
+            services.AddScoped<ISendNonComplianceRegisterReportToEmailService, SendNonComplianceRegisterReportToEmailService>();
             return services;
         }
     }

@@ -15,7 +15,6 @@ namespace Data.Rnc.Context
         {
             this.ChangeTracker.LazyLoadingEnabled = false;
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
@@ -39,6 +38,8 @@ namespace Data.Rnc.Context
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+
 
             SeedUserPermission(modelBuilder);
             SeedSetor(modelBuilder);

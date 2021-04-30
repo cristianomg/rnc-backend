@@ -1,9 +1,9 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.Interfaces.Util;
 using Domain.Models.Helps;
 using Domain.ValueObjects;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Service.Services
@@ -11,9 +11,9 @@ namespace Service.Services
     public class SeendChartToEmailService : AbstractService, ISendChartToEmailService
     {
         private readonly IUserRepository _userRepository;
-        private readonly ISenderEmail _senderEmail;
+        private readonly IEmailSender _senderEmail;
         private readonly ICreatePieChartWithNonComplianceRegisterService _createPieChartWithNonComplianceRegisterService;
-        public SeendChartToEmailService(ISenderEmail senderEmail,
+        public SeendChartToEmailService(IEmailSender senderEmail,
                                         ICreatePieChartWithNonComplianceRegisterService createPieChartWithNonComplianceRegisterService,
                                         IUserRepository  userRepository)
         {

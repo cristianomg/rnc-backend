@@ -1,0 +1,27 @@
+﻿@using System.Linq;
+
+@model Domain.Entities.NonComplianceRegister
+
+@{
+    var peopleInvolved = string.IsNullOrEmpty(Model.PeopleInvolved) ? "Nenhuma" : Model.PeopleInvolved.Trim();
+    var questionsAndResponses = string.Join(';', Model.RootCauseAnalysis.ActionPlain.Questions
+                                                .Zip(Model.RootCauseAnalysis.ActionPlainResponses, (first, second) => $"{first.Value} {second.Value}"))
+                                                .Replace(";", "; ");
+    var nonCompliances = string.Join(';', @Model.NonCompliances
+                                                .GroupBy(x => x.TypeNonCompliance.NameNonCompliance)
+                                                .Select(x => $"{string.Join(';', x.Select(y => y.Description))} sendo essa(s) não conformidade(s) caracterizada(s) como: {x.Key}"))
+                                                .Replace(";", ", ");
+
+}
+
+<article>
+    <p>
+        No dia @Model.RegisterDate.ToString("dd/MM/yyyy"), às @Model.RegisterHour, o funcionário(a) @Model.User.Name, do setor de @Model.User.Setor.Name, sendo a sua supervisora Ana Luiza Santos,
+        realizou/presenciou a(s) seguinte(s) não conformidade(s) : @nonCompliances,
+        ocorrida(s) no setor @Model.Setor.Name, supervisionado(s) por Ana Luiza Santos.
+        A(s) pessoa(s) envolvida(s) na ocorrência além da funcionária é/são: @peopleInvolved. A ação imediata tomada pela funcionária foi @Model.ImmediateAction. Após análise da(s) não conformidade(s) acometida(s), a supervisora do setor do ocorrido,
+        Ana Luiza Santos, descreveu como análise da causa raiz o seguinte: @Model.RootCauseAnalysis.Analyze.
+        Após essa análise elaborou um plano de ação para visualizar os detalhes de forma mais aprofundada, para solucionar o problema e evitar futuros erros,
+        sendo utilizada a ferramenta @Model.RootCauseAnalysis.ActionPlain.Name, onde foi descrita da seguinte forma: @questionsAndResponses.
+    </p>
+</article>

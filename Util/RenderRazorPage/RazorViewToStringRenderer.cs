@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Interfaces.Services;
+﻿using Domain.Interfaces.Util;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -12,8 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Service.Services
+namespace Util.RenderRazorPage
 {
     public class RazorViewToStringRenderer : IRazorViewToStringRenderer
     {

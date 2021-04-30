@@ -53,7 +53,8 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAll()
         {
-            var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository
+                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
         }

@@ -29,6 +29,22 @@ namespace Data.Rnc.Repositories
                  .ThenInclude(x => x.TypeNonCompliance)
                  .FirstOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<NonComplianceRegister> GetByIdForReport(int id)
+        {
+            return await _context.NonComplianceRegisters.AsNoTracking()
+                 .Include(x => x.Setor)
+                 .Include(x => x.User)
+                 .ThenInclude(x => x.Setor)
+                 .Include(x => x.RootCauseAnalysis)
+                 .ThenInclude(x => x.ActionPlainResponses)
+                 .Include(x => x.RootCauseAnalysis)
+                 .ThenInclude(x => x.ActionPlain)
+                 .ThenInclude(x => x.Questions)
+                 .Include(x => x.NonCompliances)
+                 .ThenInclude(x => x.TypeNonCompliance)
+                 .AsSplitQuery()
+                 .FirstOrDefaultAsync(x => x.Id == id);
+        }
         public async Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate)
         {
             return await Task.FromResult(_context.NonComplianceRegisters
