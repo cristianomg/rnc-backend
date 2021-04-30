@@ -61,19 +61,11 @@ namespace Data.Rnc.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-<<<<<<< HEAD:Data.Rnc/Migrations/20210429223958_initial.cs
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 29, 19, 39, 57, 489, DateTimeKind.Local).AddTicks(1062)),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 30, 0, 29, 35, 653, DateTimeKind.Local).AddTicks(1573)),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-=======
-                    Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 27, 21, 10, 54, 554, DateTimeKind.Local).AddTicks(8036)),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Email = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0:Data.Rnc/Migrations/20210428001055_Rnc.cs
                 },
                 constraints: table =>
                 {
@@ -147,26 +139,14 @@ namespace Data.Rnc.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-<<<<<<< HEAD:Data.Rnc/Migrations/20210429223958_initial.cs
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     UserAuthId = table.Column<int>(type: "integer", nullable: false),
                     Enrollment = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     SetorId = table.Column<int>(type: "integer", nullable: false),
-                    Crbm = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     UserPermissionId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 29, 19, 39, 57, 494, DateTimeKind.Local).AddTicks(9790)),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 30, 0, 29, 35, 660, DateTimeKind.Local).AddTicks(3689)),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-=======
-                    Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 4, 27, 21, 10, 54, 566, DateTimeKind.Local).AddTicks(1482)),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    UserAuthId = table.Column<int>(nullable: false),
-                    Enrollment = table.Column<string>(maxLength: 50, nullable: false),
-                    SetorId = table.Column<int>(nullable: false),
-                    UserPermissionId = table.Column<int>(nullable: false)
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0:Data.Rnc/Migrations/20210428001055_Rnc.cs
                 },
                 constraints: table =>
                 {
@@ -328,21 +308,12 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-<<<<<<< HEAD:Data.Rnc/Migrations/20210429223958_initial.cs
-                    { 1, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(5566), "Coleta", null },
-                    { 2, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6843), "Microbiologia", null },
-                    { 3, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6877), "Parasitologia", null },
-                    { 4, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6879), "Imunologia", null },
-                    { 5, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6881), "Hematologia", null },
-                    { 6, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6885), "Triagem", null }
-=======
-                    { 1, true, new DateTime(2021, 4, 27, 21, 10, 54, 575, DateTimeKind.Local).AddTicks(8484), "Coleta", null },
-                    { 2, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(533), "Microbiologia", null },
-                    { 3, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(658), "Parasitologia", null },
-                    { 4, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(662), "Imunologia", null },
-                    { 5, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(666), "Hematologia", null },
-                    { 6, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(673), "Triagem", null }
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0:Data.Rnc/Migrations/20210428001055_Rnc.cs
+                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 667, DateTimeKind.Local).AddTicks(6308), "Coleta", null },
+                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(275), "Microbiologia", null },
+                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(455), "Parasitologia", null },
+                    { 4, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(470), "Imunologia", null },
+                    { 5, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(478), "Hematologia", null },
+                    { 6, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(610), "Triagem", null }
                 });
 
             migrationBuilder.InsertData(
@@ -350,15 +321,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "NameNonCompliance", "UpdatedAt" },
                 values: new object[,]
                 {
-<<<<<<< HEAD:Data.Rnc/Migrations/20210429223958_initial.cs
-                    { 1, true, new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(9795), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 4, 29, 19, 39, 57, 500, DateTimeKind.Local).AddTicks(1362), "Analitica", null },
-                    { 3, true, new DateTime(2021, 4, 29, 19, 39, 57, 500, DateTimeKind.Local).AddTicks(1435), "Pos-Analitica", null }
-=======
-                    { 1, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(5613), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(7593), "Analitica", null },
-                    { 3, true, new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(7643), "Pos-Analitica", null }
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0:Data.Rnc/Migrations/20210428001055_Rnc.cs
+                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(9984), "Pre-Analitica", null },
+                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4598), "Analitica", null },
+                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4859), "Pos-Analitica", null }
                 });
 
             migrationBuilder.InsertData(
@@ -366,43 +331,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-<<<<<<< HEAD:Data.Rnc/Migrations/20210429223958_initial.cs
-                    { 1, true, new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(2603), "Employee", null },
-                    { 2, true, new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(3994), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(4028), "QualityBiomedical", null }
-=======
-                    { 1, true, new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(5583), "Employee", null },
-                    { 2, true, new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(7954), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(8322), "QualityBiomedical", null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "NonCompliance",
-                columns: new[] { "Id", "Active", "CreatedAt", "Description", "TypeNonComplianceId", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(6887), "Erros de cadastro do paciente ou médico.", 1, null },
-                    { 19, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9430), "Erro de transcrição de resultado na ficha de bancada.", 3, null },
-                    { 18, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9408), "Falta da assinatura do Biomédico no laudo.", 3, null },
-                    { 17, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9384), "Atraso na liberação do laudo.", 3, null },
-                    { 16, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9361), "Laudos entregues trocados.", 3, null },
-                    { 15, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9180), "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.", 3, null },
-                    { 14, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9158), "Armazenamento errado da amostra.", 2, null },
-                    { 13, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9136), "Queda de energia.", 2, null },
-                    { 12, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9114), "Centrifugação incorreta.", 2, null },
-                    { 20, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9452), "Questionamento do resultado feito pelo médico ou cliente.", 3, null },
-                    { 11, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9091), "Material fora da validade.", 2, null },
-                    { 9, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9043), "Equipamento em manutenção.", 2, null },
-                    { 8, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9021), "Material não tirado da pendência.", 2, null },
-                    { 7, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8998), "Amostra com identificação errada ou incompleta.", 1, null },
-                    { 6, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8975), "Tubo inadequado.", 1, null },
-                    { 5, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8946), "Amostra insuficiente.", 1, null },
-                    { 4, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8857), "Incidente com cliente.", 1, null },
-                    { 3, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8830), "Paciente com preparo inadequado.", 1, null },
-                    { 2, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8732), "Requisições ilegíveis.", 1, null },
-                    { 10, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9069), "Perda de amostra.", 2, null },
-                    { 21, true, new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9475), "Perda do laudo.", 3, null }
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0:Data.Rnc/Migrations/20210428001055_Rnc.cs
+                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(521), "Employee", null },
+                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2742), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2816), "QualityBiomedical", null }
                 });
 
             migrationBuilder.CreateIndex(

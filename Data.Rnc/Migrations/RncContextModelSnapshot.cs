@@ -149,179 +149,6 @@ namespace Data.Rnc.Migrations
                     b.HasIndex("TypeNonComplianceId");
 
                     b.ToTable("NonCompliance");
-<<<<<<< HEAD
-=======
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(6887),
-                            Description = "Erros de cadastro do paciente ou médico.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8732),
-                            Description = "Requisições ilegíveis.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8830),
-                            Description = "Paciente com preparo inadequado.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8857),
-                            Description = "Incidente com cliente.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8946),
-                            Description = "Amostra insuficiente.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8975),
-                            Description = "Tubo inadequado.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(8998),
-                            Description = "Amostra com identificação errada ou incompleta.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9021),
-                            Description = "Material não tirado da pendência.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9043),
-                            Description = "Equipamento em manutenção.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9069),
-                            Description = "Perda de amostra.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9091),
-                            Description = "Material fora da validade.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9114),
-                            Description = "Centrifugação incorreta.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9136),
-                            Description = "Queda de energia.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9158),
-                            Description = "Armazenamento errado da amostra.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9180),
-                            Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9361),
-                            Description = "Laudos entregues trocados.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9384),
-                            Description = "Atraso na liberação do laudo.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9408),
-                            Description = "Falta da assinatura do Biomédico no laudo.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9430),
-                            Description = "Erro de transcrição de resultado na ficha de bancada.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9452),
-                            Description = "Questionamento do resultado feito pelo médico ou cliente.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 578, DateTimeKind.Local).AddTicks(9475),
-                            Description = "Perda do laudo.",
-                            TypeNonComplianceId = 3
-                        });
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
                 });
 
             modelBuilder.Entity("Domain.Entities.NonComplianceRegister", b =>
@@ -443,66 +270,42 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(5566),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 575, DateTimeKind.Local).AddTicks(8484),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 667, DateTimeKind.Local).AddTicks(6308),
                             Name = "Coleta"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6843),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(533),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(275),
                             Name = "Microbiologia"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6877),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(658),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(455),
                             Name = "Parasitologia"
                         },
                         new
                         {
                             Id = 4,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6879),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(662),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(470),
                             Name = "Imunologia"
                         },
                         new
                         {
                             Id = 5,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6881),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(666),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(478),
                             Name = "Hematologia"
                         },
                         new
                         {
                             Id = 6,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(6885),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(673),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(610),
                             Name = "Triagem"
                         });
                 });
@@ -535,33 +338,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 499, DateTimeKind.Local).AddTicks(9795),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(5613),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(9984),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 500, DateTimeKind.Local).AddTicks(1362),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(7593),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4598),
                             NameNonCompliance = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 500, DateTimeKind.Local).AddTicks(1435),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 576, DateTimeKind.Local).AddTicks(7643),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4859),
                             NameNonCompliance = "Pos-Analitica"
                         });
                 });
@@ -576,22 +367,10 @@ namespace Data.Rnc.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-<<<<<<< HEAD
-                    b.Property<string>("Crbm")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 29, 19, 39, 57, 494, DateTimeKind.Local).AddTicks(9790));
-=======
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 27, 21, 10, 54, 566, DateTimeKind.Local).AddTicks(1482));
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                        .HasDefaultValue(new DateTime(2021, 4, 30, 0, 29, 35, 660, DateTimeKind.Local).AddTicks(3689));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
@@ -643,11 +422,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-<<<<<<< HEAD
-                        .HasDefaultValue(new DateTime(2021, 4, 29, 19, 39, 57, 489, DateTimeKind.Local).AddTicks(1062));
-=======
-                        .HasDefaultValue(new DateTime(2021, 4, 27, 21, 10, 54, 554, DateTimeKind.Local).AddTicks(8036));
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                        .HasDefaultValue(new DateTime(2021, 4, 30, 0, 29, 35, 653, DateTimeKind.Local).AddTicks(1573));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -694,33 +469,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(2603),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(5583),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(521),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(3994),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(7954),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2742),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-<<<<<<< HEAD
-                            CreatedAt = new DateTime(2021, 4, 29, 19, 39, 57, 498, DateTimeKind.Local).AddTicks(4028),
-=======
-                            CreatedAt = new DateTime(2021, 4, 27, 21, 10, 54, 573, DateTimeKind.Local).AddTicks(8322),
->>>>>>> c8147bc0636fa65d3e2b62125023f4127a9deee0
+                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2816),
                             Name = "QualityBiomedical"
                         });
                 });
