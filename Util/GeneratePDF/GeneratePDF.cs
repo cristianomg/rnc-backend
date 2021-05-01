@@ -9,9 +9,9 @@ namespace Util.GeneratePDF
         {
             var converter = new HtmlToPdf();
             converter.Options.PdfPageSize = PdfPageSize.A4;
-            converter.Options.MarginTop = 20;
-            converter.Options.MarginLeft = 20;
-            converter.Options.MarginRight = 20;
+            converter.Options.MarginTop = 40;
+            converter.Options.MarginLeft = 40;
+            converter.Options.MarginRight = 40;
 
             var pdfDocument = converter.ConvertHtmlString(html);
             var pdf = pdfDocument.Save();
