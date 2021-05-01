@@ -33,7 +33,7 @@ namespace Service.Services
 
             var template = "<p>O grafico está anexado.</p>";
 
-            await _senderEmail.SendEmail(user.UserAuth.Email, template, "Grafico", chart.Value, true);
+            await _senderEmail.SendEmail(user.UserAuth.Email, template, "Grafico", chart.Value, "Gráfico", true);
 
             return GenerateSuccessServiceResponse();
 

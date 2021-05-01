@@ -19,7 +19,7 @@ namespace Service.Services
             _fromEmail = emailDeEnvio.Value.Email;
             _passwordEmail = emailDeEnvio.Value.Password;
         }
-        public async Task SendEmail(string email, string template, string subjectEmail, byte[] anexo = null, bool isHtml = false)
+        public async Task SendEmail(string email, string template, string subjectEmail, byte[] anexo = null, string anexoName = null, bool isHtml = false)
         {
             var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
             {
@@ -44,7 +44,7 @@ namespace Service.Services
                 {
                     ContentType = "application/pdf",
                     Data = new MemoryStream(anexo),
-                    Filename = "Grafico",
+                    Filename = anexoName ?? "Anexo",
                     IsInline = false
                 });
 

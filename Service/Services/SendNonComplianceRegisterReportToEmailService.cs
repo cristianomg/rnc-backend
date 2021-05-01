@@ -11,16 +11,18 @@ namespace Service.Services
         private readonly ICreateNonComplianceRegisterReportService _createNonConplianceRegisterReportService;
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly IEmailSender _senderEmail;
-
+        private readonly IGeneratePDF _generatePDF;
 
         public SendNonComplianceRegisterReportToEmailService
             (ICreateNonComplianceRegisterReportService createNonConplianceRegisterReportService,
              IUserAuthRepository userAuthRepository,
-             IEmailSender senderEmail)
+             IEmailSender senderEmail,
+             IGeneratePDF generatePDF)
         {
             _createNonConplianceRegisterReportService = createNonConplianceRegisterReportService;
             _userAuthRepository = userAuthRepository;
             _senderEmail = senderEmail;
+            _generatePDF = generatePDF;
         }
         public async Task<ResponseService> Execute(int userAuthId, int nonComplianceRegisterId)
         {
@@ -33,7 +35,12 @@ namespace Service.Services
             if (!report.Success)
                 return GenerateErroServiceResponse(report.Message);
 
-            await _senderEmail.SendEmail(user.Email, report.Value, "Relatorio do registro de não conformidade", null, true);
+            await _senderEmail.SendEmail(user.Email,
+                                         "Relatório em anexo",
+                                         "Relatorio do registro de não conformidade",
+                                         _generatePDF.FromHtml(report.Value),
+                                         "Relátorio",
+                                         true);
 
             return GenerateSuccessServiceResponse();
 

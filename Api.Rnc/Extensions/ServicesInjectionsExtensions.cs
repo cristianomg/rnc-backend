@@ -2,6 +2,7 @@
 using Domain.Interfaces.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Services;
+using Util.GeneratePDF;
 using Util.RenderRazorPage;
 
 namespace Api.Rnc.Extensions
@@ -33,6 +34,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IChangeNameService, ChangeNameSerivce>();
             services.AddScoped<ICreateNonComplianceRegisterReportService, CreateNonComplianceRegisterReportService>();
             services.AddScoped<ISendNonComplianceRegisterReportToEmailService, SendNonComplianceRegisterReportToEmailService>();
+            services.AddScoped<IGeneratePDF, GeneratePDF>();
             return services;
         }
     }
