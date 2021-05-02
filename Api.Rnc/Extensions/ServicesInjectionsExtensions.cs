@@ -36,6 +36,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ISendNonComplianceRegisterReportToEmailService, SendNonComplianceRegisterReportToEmailService>();
             services.AddScoped<IGeneratePDF, GeneratePDF>();
             services.AddScoped<ISetSupervisorOnSetorService, SetSupervisorOnSetorService>();
+            services.AddScoped<IEvalUserSendEmail, EvalUserSendEmail>();
             return services;
         }
     }
