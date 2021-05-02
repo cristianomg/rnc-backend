@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User, int>, IUserRepository
     {
         private readonly DbSet<User> _dbSet;
         private readonly DbSet<UserAuth> _dbSetAuth;

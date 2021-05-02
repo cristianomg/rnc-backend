@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,15 @@ namespace Api.Rnc.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ISetorRepository _setorRepository;
-        public SetorController(IMapper mapper, ISetorRepository setorRepository)
+        private readonly ISetSupervisorOnSetorService _setSupervisorOnSetorService;
+        public SetorController(IMapper mapper,
+                               ISetorRepository setorRepository,
+                               ISetSupervisorOnSetorService setSupervisorOnSetorService)
         {
             _mapper = mapper;
             _setorRepository = setorRepository;
+            _setSupervisorOnSetorService = setSupervisorOnSetorService;
+
         }
         /// <summary>
         /// Endpoint responsável por retornar os setores
@@ -33,6 +39,18 @@ namespace Api.Rnc.Controllers
         {
             var users = await _setorRepository.GetAllSetor();
             return Ok(_mapper.ProjectTo<DtoSetor>(users));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SetSupervisorOnSetor(DtoSetSupervisor setSupervisor)
+        {
+            var responseService = await _setSupervisorOnSetorService.Execute(setSupervisor);
+            if (responseService.Success)
+                return Ok();
+
+            return BadRequest(responseService.Message);
         }
     }
 }

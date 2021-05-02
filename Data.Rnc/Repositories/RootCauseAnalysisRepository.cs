@@ -4,7 +4,7 @@ using Domain.Interfaces.Repositories;
 
 namespace Data.Rnc.Repositories
 {
-    public class RootCauseAnalysisRepository : BaseRepository<RootCauseAnalysis>, IRootCauseAnalysisRepository
+    public class RootCauseAnalysisRepository : BaseRepository<RootCauseAnalysis, int>, IRootCauseAnalysisRepository
     {
         public RootCauseAnalysisRepository(RncContext context) : base(context)
         {

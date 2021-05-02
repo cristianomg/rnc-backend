@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using System;
 
 namespace Data.Rnc.Migrations
 {
@@ -22,21 +22,6 @@ namespace Data.Rnc.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActionPlain", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Setor",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Setor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,7 +49,7 @@ namespace Data.Rnc.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 30, 0, 29, 35, 653, DateTimeKind.Local).AddTicks(1573)),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 5, 2, 19, 3, 17, 476, DateTimeKind.Local).AddTicks(8063)),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
@@ -134,139 +119,6 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    UserAuthId = table.Column<int>(type: "integer", nullable: false),
-                    Enrollment = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    SetorId = table.Column<int>(type: "integer", nullable: false),
-                    UserPermissionId = table.Column<int>(type: "integer", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 4, 30, 0, 29, 35, 660, DateTimeKind.Local).AddTicks(3689)),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_User_Setor_SetorId",
-                        column: x => x.SetorId,
-                        principalTable: "Setor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_User_UserAuth_UserAuthId",
-                        column: x => x.UserAuthId,
-                        principalTable: "UserAuth",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_User_UserPermission_UserPermissionId",
-                        column: x => x.UserPermissionId,
-                        principalTable: "UserPermission",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NonComplianceRegister",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    RegisterHour = table.Column<string>(type: "text", nullable: false),
-                    SetorId = table.Column<int>(type: "integer", nullable: false),
-                    PeopleInvolved = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    MoreInformation = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    ImmediateAction = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NonComplianceRegister", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NonComplianceRegister_Setor_SetorId",
-                        column: x => x.SetorId,
-                        principalTable: "Setor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_NonComplianceRegister_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NonComplianceNonComplianceRegister",
-                columns: table => new
-                {
-                    NonComplianceRegistersId = table.Column<int>(type: "integer", nullable: false),
-                    NonCompliancesId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NonComplianceNonComplianceRegister", x => new { x.NonComplianceRegistersId, x.NonCompliancesId });
-                    table.ForeignKey(
-                        name: "FK_NonComplianceNonComplianceRegister_NonCompliance_NonComplia~",
-                        column: x => x.NonCompliancesId,
-                        principalTable: "NonCompliance",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_NonComplianceNonComplianceRegister_NonComplianceRegister_No~",
-                        column: x => x.NonComplianceRegistersId,
-                        principalTable: "NonComplianceRegister",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RootCauseAnalysis",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NonComplianceRegisterId = table.Column<int>(type: "integer", nullable: false),
-                    Analyze = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    ActionPlainId = table.Column<int>(type: "integer", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RootCauseAnalysis", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RootCauseAnalysis_ActionPlain_ActionPlainId",
-                        column: x => x.ActionPlainId,
-                        principalTable: "ActionPlain",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RootCauseAnalysis_NonComplianceRegister_NonComplianceRegist~",
-                        column: x => x.NonComplianceRegisterId,
-                        principalTable: "NonComplianceRegister",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RootCauseAnalysis_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ActionPlainResponse",
                 columns: table => new
                 {
@@ -295,25 +147,138 @@ namespace Data.Rnc.Migrations
                         principalTable: "ActionPlainQuestion",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RootCauseAnalysis",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NonComplianceRegisterId = table.Column<int>(type: "integer", nullable: false),
+                    Analyze = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    ActionPlainId = table.Column<int>(type: "integer", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RootCauseAnalysis", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActionPlainResponse_RootCauseAnalysis_RootCauseAnalysisId",
-                        column: x => x.RootCauseAnalysisId,
-                        principalTable: "RootCauseAnalysis",
+                        name: "FK_RootCauseAnalysis_ActionPlain_ActionPlainId",
+                        column: x => x.ActionPlainId,
+                        principalTable: "ActionPlain",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NonComplianceNonComplianceRegister",
+                columns: table => new
+                {
+                    NonComplianceRegistersId = table.Column<int>(type: "integer", nullable: false),
+                    NonCompliancesId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NonComplianceNonComplianceRegister", x => new { x.NonComplianceRegistersId, x.NonCompliancesId });
+                    table.ForeignKey(
+                        name: "FK_NonComplianceNonComplianceRegister_NonCompliance_NonComplia~",
+                        column: x => x.NonCompliancesId,
+                        principalTable: "NonCompliance",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NonComplianceRegister",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    RegisterDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    RegisterHour = table.Column<string>(type: "text", nullable: false),
+                    SetorId = table.Column<int>(type: "integer", nullable: false),
+                    PeopleInvolved = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    MoreInformation = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    ImmediateAction = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NonComplianceRegister", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    UserAuthId = table.Column<int>(type: "integer", nullable: false),
+                    Enrollment = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    SetorId = table.Column<int>(type: "integer", nullable: false),
+                    UserPermissionId = table.Column<int>(type: "integer", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 5, 2, 19, 3, 17, 488, DateTimeKind.Local).AddTicks(1165)),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_UserAuth_UserAuthId",
+                        column: x => x.UserAuthId,
+                        principalTable: "UserAuth",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_User_UserPermission_UserPermissionId",
+                        column: x => x.UserPermissionId,
+                        principalTable: "UserPermission",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Setor",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    SupervisorId = table.Column<int>(type: "integer", nullable: true),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Setor", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Setor_User_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
             migrationBuilder.InsertData(
                 table: "Setor",
-                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
+                columns: new[] { "Id", "Active", "CreatedAt", "Name", "SupervisorId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 667, DateTimeKind.Local).AddTicks(6308), "Coleta", null },
-                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(275), "Microbiologia", null },
-                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(455), "Parasitologia", null },
-                    { 4, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(470), "Imunologia", null },
-                    { 5, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(478), "Hematologia", null },
-                    { 6, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(610), "Triagem", null }
+                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(1773), "Coleta", null, null },
+                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5417), "Microbiologia", null, null },
+                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5529), "Parasitologia", null, null },
+                    { 4, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5537), "Imunologia", null, null },
+                    { 5, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5541), "Hematologia", null, null },
+                    { 6, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5555), "Triagem", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -321,9 +286,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "NameNonCompliance", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(9984), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4598), "Analitica", null },
-                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4859), "Pos-Analitica", null }
+                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(1758), "Pre-Analitica", null },
+                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(4905), "Analitica", null },
+                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(5351), "Pos-Analitica", null }
                 });
 
             migrationBuilder.InsertData(
@@ -331,9 +296,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(521), "Employee", null },
-                    { 2, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2742), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2816), "QualityBiomedical", null }
+                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(2604), "Employee", null },
+                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6768), "Supervisor", null },
+                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6890), "QualityBiomedical", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -399,6 +364,11 @@ namespace Data.Rnc.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Setor_SupervisorId",
+                table: "Setor",
+                column: "SupervisorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_Enrollment",
                 table: "User",
                 column: "Enrollment",
@@ -425,10 +395,70 @@ namespace Data.Rnc.Migrations
                 table: "UserAuth",
                 column: "Email",
                 unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ActionPlainResponse_RootCauseAnalysis_RootCauseAnalysisId",
+                table: "ActionPlainResponse",
+                column: "RootCauseAnalysisId",
+                principalTable: "RootCauseAnalysis",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_RootCauseAnalysis_NonComplianceRegister_NonComplianceRegist~",
+                table: "RootCauseAnalysis",
+                column: "NonComplianceRegisterId",
+                principalTable: "NonComplianceRegister",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_RootCauseAnalysis_User_UserId",
+                table: "RootCauseAnalysis",
+                column: "UserId",
+                principalTable: "User",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_NonComplianceNonComplianceRegister_NonComplianceRegister_No~",
+                table: "NonComplianceNonComplianceRegister",
+                column: "NonComplianceRegistersId",
+                principalTable: "NonComplianceRegister",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_NonComplianceRegister_Setor_SetorId",
+                table: "NonComplianceRegister",
+                column: "SetorId",
+                principalTable: "Setor",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_NonComplianceRegister_User_UserId",
+                table: "NonComplianceRegister",
+                column: "UserId",
+                principalTable: "User",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_User_Setor_SetorId",
+                table: "User",
+                column: "SetorId",
+                principalTable: "Setor",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_User_Setor_SetorId",
+                table: "User");
+
             migrationBuilder.DropTable(
                 name: "ActionPlainResponse");
 
@@ -454,10 +484,10 @@ namespace Data.Rnc.Migrations
                 name: "TypeNonCompliance");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Setor");
 
             migrationBuilder.DropTable(
-                name: "Setor");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "UserAuth");

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
         where TEntity : class
     {
         private readonly RncContext _context;
@@ -44,7 +44,7 @@ namespace Data.Rnc.Repositories
             }
             return await Task.FromResult(result);
         }
-        public async Task<TEntity> GetById(int id) =>
+        public async Task<TEntity> GetById(TKey id) =>
             await _dbSet.FindAsync(id);
         public async Task<TEntity> Insert(TEntity obj)
         {

@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IRootCauseAnalysisRepository : IBaseRepository<RootCauseAnalysis>
+    public interface IRootCauseAnalysisRepository : IBaseRepository<RootCauseAnalysis, int>
     {
     }
 }

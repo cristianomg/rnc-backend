@@ -36,6 +36,7 @@ namespace Domain.Entities
         public virtual Setor Setor { get; set; }
         public virtual IEnumerable<NonComplianceRegister> NonComplianceRegisters { get; set; }
         public virtual IEnumerable<RootCauseAnalysis> AnalyzeRootCauses { get; set; }
+        public virtual IEnumerable<Setor> SetoresSupervisao { get; set; }
 
     }
 }
