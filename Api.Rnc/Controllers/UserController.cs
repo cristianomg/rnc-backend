@@ -25,17 +25,20 @@ namespace Api.Rnc.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IChangePasswordService _changePasswordService;
         private readonly IChangeNameService _changeNameService;
+        private readonly IEvalUserSendEmail _evalUserSendEmail;
         public UserController(ICreateUserService createUserService,
                               IMapper mapper,
                               IUserRepository userRepository,
                               IChangePasswordService changePasswordService,
-                              IChangeNameService changeNameService)
+                              IChangeNameService changeNameService,
+                              IEvalUserSendEmail evalUserSendEmail)
         {
             _createUserService = createUserService;
             _mapper = mapper;
             _userRepository = userRepository;
             _changePasswordService = changePasswordService;
             _changeNameService = changeNameService;
+            _evalUserSendEmail = evalUserSendEmail;
         }
         /// <summary>
         /// Endpoint responsável pela criação do usuário
@@ -89,7 +92,13 @@ namespace Api.Rnc.Controllers
         public async Task<ActionResult> ApproveUser(string email)
         {
             await _userRepository.ActiveUser(email);
-            return Ok();
+            var approved = await _evalUserSendEmail.Disapproved(email);
+            if (approved.Success)
+            {
+                return Ok();
+            }
+            else
+                return BadRequest(approved.Message);
         }
         /// <summary>
         /// Endpoint responsável por reprovar cadastros
@@ -102,7 +111,13 @@ namespace Api.Rnc.Controllers
         public async Task<ActionResult> Disapprove(string email)
         {
             await _userRepository.DeleteUserByEmail(email);
-            return Ok();
+            var disapproved = await _evalUserSendEmail.Disapproved(email);
+            if (disapproved.Success)
+            {
+                return Ok();
+            }
+            else
+                return BadRequest(disapproved.Message);
         }
         ///<summary>
         ///Endpoint responsável por torcar senha do usuário
