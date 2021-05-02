@@ -1,13 +1,14 @@
 ﻿using Data.Rnc.Context;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class SetorRepository : BaseRepository<Setor>, ISetorRepository
+    public class SetorRepository : BaseRepository<Setor, SetorType>, ISetorRepository
     {
         private readonly DbSet<Setor> _dbSet;
         public SetorRepository(RncContext context) : base(context)

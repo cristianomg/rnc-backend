@@ -22,7 +22,13 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
-            CreateMap<Setor, DtoSetor>();
+            CreateMap<Setor, DtoSetor>()
+                .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src=>src.Supervisor));
+
+            CreateMap<User, DtoSupervisor>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
             CreateMap<User, DtoUserActive>()
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))

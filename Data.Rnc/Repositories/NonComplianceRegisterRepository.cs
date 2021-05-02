@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class NonComplianceRegisterRepository : BaseRepository<NonComplianceRegister>,
+    public class NonComplianceRegisterRepository : BaseRepository<NonComplianceRegister, int>,
                                                    INonComplianceRegisterRepository
     {
         private readonly RncContext _context;

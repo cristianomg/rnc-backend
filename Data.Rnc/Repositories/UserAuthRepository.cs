@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class UserAuthRepository : BaseRepository<UserAuth>, IUserAuthRepository
+    public class UserAuthRepository : BaseRepository<UserAuth, int>, IUserAuthRepository
     {
         private readonly DbSet<UserAuth> _dbSet;
         public UserAuthRepository(RncContext context) : base(context)

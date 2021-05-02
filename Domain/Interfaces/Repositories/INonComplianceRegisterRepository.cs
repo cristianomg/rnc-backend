@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface INonComplianceRegisterRepository : IBaseRepository<NonComplianceRegister>
+    public interface INonComplianceRegisterRepository : IBaseRepository<NonComplianceRegister, int>
     {
         Task<NonComplianceRegister> GetByIdWithInclude(int id);
         Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate);

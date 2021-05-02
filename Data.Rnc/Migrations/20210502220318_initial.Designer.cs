@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    [Migration("20210430032936_initial")]
+    [Migration("20210502220318_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,10 +260,15 @@ namespace Data.Rnc.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int?>("SupervisorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SupervisorId");
 
                     b.ToTable("Setor");
 
@@ -272,42 +277,42 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 667, DateTimeKind.Local).AddTicks(6308),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(1773),
                             Name = "Coleta"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(275),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5417),
                             Name = "Microbiologia"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(455),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5529),
                             Name = "Parasitologia"
                         },
                         new
                         {
                             Id = 4,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(470),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5537),
                             Name = "Imunologia"
                         },
                         new
                         {
                             Id = 5,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(478),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5541),
                             Name = "Hematologia"
                         },
                         new
                         {
                             Id = 6,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(610),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5555),
                             Name = "Triagem"
                         });
                 });
@@ -340,21 +345,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 668, DateTimeKind.Local).AddTicks(9984),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(1758),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4598),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(4905),
                             NameNonCompliance = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 669, DateTimeKind.Local).AddTicks(4859),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(5351),
                             NameNonCompliance = "Pos-Analitica"
                         });
                 });
@@ -372,7 +377,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 30, 0, 29, 35, 660, DateTimeKind.Local).AddTicks(3689));
+                        .HasDefaultValue(new DateTime(2021, 5, 2, 19, 3, 17, 488, DateTimeKind.Local).AddTicks(1165));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
@@ -424,7 +429,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 30, 0, 29, 35, 653, DateTimeKind.Local).AddTicks(1573));
+                        .HasDefaultValue(new DateTime(2021, 5, 2, 19, 3, 17, 476, DateTimeKind.Local).AddTicks(8063));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -471,21 +476,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(521),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(2604),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2742),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6768),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 30, 0, 29, 35, 665, DateTimeKind.Local).AddTicks(2816),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6890),
                             Name = "QualityBiomedical"
                         });
                 });
@@ -600,12 +605,22 @@ namespace Data.Rnc.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Setor", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "Supervisor")
+                        .WithMany("SetoresSupervisao")
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Supervisor");
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.HasOne("Domain.Entities.Setor", "Setor")
                         .WithMany("Users")
                         .HasForeignKey("SetorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.UserAuth", "UserAuth")
@@ -683,6 +698,8 @@ namespace Data.Rnc.Migrations
                     b.Navigation("AnalyzeRootCauses");
 
                     b.Navigation("NonComplianceRegisters");
+
+                    b.Navigation("SetoresSupervisao");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserAuth", b =>

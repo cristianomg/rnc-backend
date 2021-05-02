@@ -16,6 +16,11 @@ namespace Data.Rnc.Mapping
             builder.HasMany(x => x.Users)
                 .WithOne(x => x.Setor)
                 .HasForeignKey(x => x.SetorId);
+
+            builder.HasOne(x => x.Supervisor)
+                .WithMany(x => x.SetoresSupervisao)
+                .HasForeignKey(x => x.SupervisorId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
