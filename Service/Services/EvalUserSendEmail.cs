@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.Services;
+using Domain.Interfaces.Util;
 using Domain.Models.Helps;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,8 +8,8 @@ namespace Service.Services
 {
     public class EvalUserSendEmail : AbstractService, IEvalUserSendEmail
     {
-        public readonly ISenderEmail _senderEmail;
-        public EvalUserSendEmail(ISenderEmail senderEmail)
+        public readonly IEmailSender _senderEmail;
+        public EvalUserSendEmail(IEmailSender senderEmail)
         {
             _senderEmail = senderEmail;
         }
