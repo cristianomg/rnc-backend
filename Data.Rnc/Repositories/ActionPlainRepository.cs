@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class ActionPlainRepository : BaseRepository<ActionPlain>, IActionPlainRepository
+    public class ActionPlainRepository : BaseRepository<ActionPlain, int>, IActionPlainRepository
     {
         private readonly RncContext _context;
         public ActionPlainRepository(RncContext context) : base(context)

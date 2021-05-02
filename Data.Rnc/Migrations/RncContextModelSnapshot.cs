@@ -15,9 +15,9 @@ namespace Data.Rnc.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.12")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Domain.Entities.ActionPlain", b =>
                 {
@@ -34,8 +34,8 @@ namespace Data.Rnc.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -69,8 +69,8 @@ namespace Data.Rnc.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.HasKey("Id");
 
@@ -106,8 +106,8 @@ namespace Data.Rnc.Migrations
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.HasKey("Id");
 
@@ -135,8 +135,8 @@ namespace Data.Rnc.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("character varying(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.Property<int>("TypeNonComplianceId")
                         .HasColumnType("integer");
@@ -149,176 +149,6 @@ namespace Data.Rnc.Migrations
                     b.HasIndex("TypeNonComplianceId");
 
                     b.ToTable("NonCompliance");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(782),
-                            Description = "Erros de cadastro do paciente ou médico.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(3259),
-                            Description = "Requisições ilegíveis.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5178),
-                            Description = "Paciente com preparo inadequado.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5302),
-                            Description = "Incidente com cliente.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5328),
-                            Description = "Amostra insuficiente.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5363),
-                            Description = "Tubo inadequado.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5383),
-                            Description = "Amostra com identificação errada ou incompleta.",
-                            TypeNonComplianceId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5402),
-                            Description = "Material não tirado da pendência.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5423),
-                            Description = "Equipamento em manutenção.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5556),
-                            Description = "Perda de amostra.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5769),
-                            Description = "Material fora da validade.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5860),
-                            Description = "Centrifugação incorreta.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5882),
-                            Description = "Queda de energia.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5900),
-                            Description = "Armazenamento errado da amostra.",
-                            TypeNonComplianceId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5919),
-                            Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5938),
-                            Description = "Laudos entregues trocados.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5957),
-                            Description = "Atraso na liberação do laudo.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(5984),
-                            Description = "Falta da assinatura do Biomédico no laudo.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(6002),
-                            Description = "Erro de transcrição de resultado na ficha de bancada.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(6021),
-                            Description = "Questionamento do resultado feito pelo médico ou cliente.",
-                            TypeNonComplianceId = 3
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 29, DateTimeKind.Local).AddTicks(6040),
-                            Description = "Perda do laudo.",
-                            TypeNonComplianceId = 3
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.NonComplianceRegister", b =>
@@ -336,20 +166,17 @@ namespace Data.Rnc.Migrations
 
                     b.Property<string>("ImmediateAction")
                         .IsRequired()
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("MoreInformation")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<int>("NonComplianceId")
-                        .HasColumnType("integer");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("PeopleInvolved")
                         .IsRequired()
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("timestamp without time zone");
@@ -368,8 +195,6 @@ namespace Data.Rnc.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("NonComplianceId");
 
                     b.HasIndex("SetorId");
 
@@ -450,42 +275,42 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(935),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(1773),
                             Name = "Coleta"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(3509),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5417),
                             Name = "Microbiologia"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(3591),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5529),
                             Name = "Parasitologia"
                         },
                         new
                         {
                             Id = 4,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(3595),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5537),
                             Name = "Imunologia"
                         },
                         new
                         {
                             Id = 5,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(3597),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5541),
                             Name = "Hematologia"
                         },
                         new
                         {
                             Id = 6,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(3605),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5555),
                             Name = "Triagem"
                         });
                 });
@@ -518,21 +343,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 26, DateTimeKind.Local).AddTicks(8459),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(1758),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 27, DateTimeKind.Local).AddTicks(1261),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(4905),
                             NameNonCompliance = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 27, DateTimeKind.Local).AddTicks(1316),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(5351),
                             NameNonCompliance = "Pos-Analitica"
                         });
                 });
@@ -547,25 +372,20 @@ namespace Data.Rnc.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Crbm")
-                        .IsRequired()
-                        .HasColumnType("character varying(15)")
-                        .HasMaxLength(15);
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 27, 20, 49, 2, 12, DateTimeKind.Local).AddTicks(5582));
+                        .HasDefaultValue(new DateTime(2021, 5, 2, 19, 3, 17, 488, DateTimeKind.Local).AddTicks(1165));
 
                     b.Property<string>("Enrollment")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("SetorId")
                         .HasColumnType("integer");
@@ -607,7 +427,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 4, 27, 20, 49, 2, 2, DateTimeKind.Local).AddTicks(7087));
+                        .HasDefaultValue(new DateTime(2021, 5, 2, 19, 3, 17, 476, DateTimeKind.Local).AddTicks(8063));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -654,23 +474,38 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 23, DateTimeKind.Local).AddTicks(2423),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(2604),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 23, DateTimeKind.Local).AddTicks(4884),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6768),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 4, 27, 20, 49, 2, 23, DateTimeKind.Local).AddTicks(4977),
+                            CreatedAt = new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6890),
                             Name = "QualityBiomedical"
                         });
+                });
+
+            modelBuilder.Entity("NonComplianceNonComplianceRegister", b =>
+                {
+                    b.Property<int>("NonComplianceRegistersId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NonCompliancesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("NonComplianceRegistersId", "NonCompliancesId");
+
+                    b.HasIndex("NonCompliancesId");
+
+                    b.ToTable("NonComplianceNonComplianceRegister");
                 });
 
             modelBuilder.Entity("Domain.Entities.ActionPlainQuestion", b =>
@@ -680,6 +515,8 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("ActionPlainId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ActionPlain");
                 });
 
             modelBuilder.Entity("Domain.Entities.ActionPlainResponse", b =>
@@ -701,6 +538,12 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("RootCauseAnalysisId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ActionPlain");
+
+                    b.Navigation("ActionPlainQuestion");
+
+                    b.Navigation("RootCauseAnalysis");
                 });
 
             modelBuilder.Entity("Domain.Entities.NonCompliance", b =>
@@ -710,16 +553,12 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("TypeNonComplianceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("TypeNonCompliance");
                 });
 
             modelBuilder.Entity("Domain.Entities.NonComplianceRegister", b =>
                 {
-                    b.HasOne("Domain.Entities.NonCompliance", "NonCompliance")
-                        .WithMany("NonCompliceRegisters")
-                        .HasForeignKey("NonComplianceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Setor", "Setor")
                         .WithMany("NonComplianceRegisters")
                         .HasForeignKey("SetorId")
@@ -731,6 +570,10 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Setor");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.RootCauseAnalysis", b =>
@@ -752,6 +595,12 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ActionPlain");
+
+                    b.Navigation("NonComplianceRegister");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Setor", b =>
@@ -760,6 +609,8 @@ namespace Data.Rnc.Migrations
                         .WithMany("SetoresSupervisao")
                         .HasForeignKey("SupervisorId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Supervisor");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -781,6 +632,82 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("UserPermissionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Setor");
+
+                    b.Navigation("UserAuth");
+
+                    b.Navigation("UserPermission");
+                });
+
+            modelBuilder.Entity("NonComplianceNonComplianceRegister", b =>
+                {
+                    b.HasOne("Domain.Entities.NonComplianceRegister", null)
+                        .WithMany()
+                        .HasForeignKey("NonComplianceRegistersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.NonCompliance", null)
+                        .WithMany()
+                        .HasForeignKey("NonCompliancesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.ActionPlain", b =>
+                {
+                    b.Navigation("Questions");
+
+                    b.Navigation("Responses");
+
+                    b.Navigation("RootCauseAnalysis");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ActionPlainQuestion", b =>
+                {
+                    b.Navigation("ActionPlainResponse");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NonComplianceRegister", b =>
+                {
+                    b.Navigation("RootCauseAnalysis");
+                });
+
+            modelBuilder.Entity("Domain.Entities.RootCauseAnalysis", b =>
+                {
+                    b.Navigation("ActionPlainResponses");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Setor", b =>
+                {
+                    b.Navigation("NonComplianceRegisters");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.TypeNonCompliance", b =>
+                {
+                    b.Navigation("NonCompliances");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Navigation("AnalyzeRootCauses");
+
+                    b.Navigation("NonComplianceRegisters");
+
+                    b.Navigation("SetoresSupervisao");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserAuth", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserPermission", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

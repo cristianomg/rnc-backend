@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IActionPlainQuestionRepository : IBaseRepository<ActionPlainQuestion>
+    public interface IActionPlainQuestionRepository : IBaseRepository<ActionPlainQuestion, int>
     {
     }
 }

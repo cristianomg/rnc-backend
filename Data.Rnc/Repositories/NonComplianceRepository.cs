@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Data.Rnc.Repositories
 {
-    public class NonComplianceRepository : BaseRepository<NonCompliance>, INonComplianceRepository
+    public class NonComplianceRepository : BaseRepository<NonCompliance, int>, INonComplianceRepository
     {
         private readonly DbSet<NonCompliance> _dbSet;
         public NonComplianceRepository(RncContext context) : base(context)
