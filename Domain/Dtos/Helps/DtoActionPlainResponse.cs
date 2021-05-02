@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Dtos.Helps
+﻿namespace Domain.Dtos.Helps
 {
     public class DtoActionPlainResponse
     {

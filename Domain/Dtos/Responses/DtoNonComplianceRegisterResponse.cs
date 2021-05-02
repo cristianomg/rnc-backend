@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Dtos.Inputs;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.Dtos.Responses
 {
@@ -15,27 +17,31 @@ namespace Domain.Dtos.Responses
         /// <summary>
         /// Data do registro
         /// </summary>
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         /// <summary>
         /// Hora do registro
         /// </summary>
         public string Hour { get; set; }
         /// <summary>
-        /// Setor
-        /// </summary>
-        public string Setor { get; set; }
-        /// <summary>
-        /// Tipo de não comformidade
-        /// </summary>
-        public string NonComplianceType { get; set; }
-        /// <summary>
-        /// Descrição da não conformidade
-        /// </summary>
-        public string NonCompliance { get; set; }
-        /// <summary>
         /// Pessoas envolvidas
         /// </summary>
         public string PeopleInvolved { get; set; }
+        /// <summary>
+        /// mais informações
+        /// </summary>
+        public string MoreInformation { get; set; }
+        /// <summary>
+        /// ação imediata
+        /// </summary>
+        public string ImmediateAction { get; set; }
+        /// <summary>
+        /// Não conformidades
+        /// </summary>
+        public IEnumerable<DtoNonCompliance> NonCompliances { get; set; }
+        /// <summary>
+        /// Setor
+        /// </summary>
+        public string Setor { get; set; }
         /// <summary>
         /// Flag para informar se o registro de não conformidade já passou pela fase de analise de causa raiz
         /// </summary>

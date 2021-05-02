@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,14 @@ namespace Api.Rnc.Controllers
     {
         private readonly IActionPlainRepository _actionPlainRepository;
         private readonly IMapper _mapper;
-        public ActionPlainController(IActionPlainRepository actionPlainRepository, IMapper mapper)
+        private readonly ICreateActionPlainService _createActionPlainService;
+        public ActionPlainController(IActionPlainRepository actionPlainRepository,
+                                     IMapper mapper,
+                                     ICreateActionPlainService createActionPlainService)
         {
             _actionPlainRepository = actionPlainRepository;
             _mapper = mapper;
+            _createActionPlainService = createActionPlainService;
         }
         /// <summary>
         /// Endpoint responsável por listar os planos de ação existentes
@@ -41,6 +47,21 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(_mapper.Map<DtoActionPlainDetailResponse>(await _actionPlainRepository.GetByIdWithIncludes(id)));
+        }
+        /// <summary>
+        /// Endpoint responsável criar um novo plano de ação
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(DtoActionPlainDetailResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Insert([FromBody] DtoCreateActionPlainInput dto)
+        {
+            var responseService = await _createActionPlainService.Execute(dto);
+            if (responseService.Success)
+                return Ok();
+
+            return BadRequest(responseService.Message);
         }
     }
 }

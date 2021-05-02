@@ -12,5 +12,6 @@ namespace Domain.Interfaces.Repositories
         Task<NonComplianceRegister> GetByIdWithInclude(int id);
         Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate);
         Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor, int month);
+        Task<NonComplianceRegister> GetByIdForReport(int id);
     }
 }

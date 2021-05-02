@@ -1,15 +1,13 @@
-﻿using AutoMapper;
+﻿using Api.Rnc.Extensions;
+using AutoMapper;
 using Domain.Dtos.Inputs;
+using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Domain.Interfaces.Services;
-using Api.Rnc.Extensions;
-using Domain.Dtos.Responses;
 
 namespace Api.Rnc.Controllers
 {

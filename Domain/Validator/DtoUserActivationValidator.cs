@@ -1,9 +1,5 @@
 ﻿using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Validator
 {
@@ -24,10 +20,6 @@ namespace Domain.Validator
                .WithMessage("O Nome não pode ser vazio ou nulo.");
             RuleFor(x => x.Email)
                 .EmailAddress();
-            RuleFor(x => x.Crbm)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("O CRBM não pode ser vazio ou nulo.");
             RuleFor(x => x.Enrollment)
                 .NotNull()
                 .NotEmpty()

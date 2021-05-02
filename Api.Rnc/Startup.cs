@@ -1,6 +1,5 @@
 using Api.Rnc.Extensions;
 using Data.Rnc.Context;
-using Domain.Configs;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using System.Text.Json;
 
 namespace Api.Rnc
 {
@@ -98,7 +96,8 @@ namespace Api.Rnc
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample Api V1");
                 c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
             });

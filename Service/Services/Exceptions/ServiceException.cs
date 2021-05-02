@@ -6,7 +6,7 @@ namespace Service.Services.Exceptions
     {
         public ServiceException(string msg) : base(msg)
         {
-        
+
         }
     }
 }

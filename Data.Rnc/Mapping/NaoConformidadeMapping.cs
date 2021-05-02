@@ -1,9 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Data.Rnc.Mapping
 {
@@ -26,6 +23,10 @@ namespace Data.Rnc.Mapping
             builder.HasOne(x => x.TypeNonCompliance)
                 .WithMany(x => x.NonCompliances)
                 .HasForeignKey(x => x.TypeNonComplianceId);
+
+            builder.HasMany(x => x.NonComplianceRegisters)
+                .WithMany(x => x.NonCompliances)
+                .UsingEntity(x => x.ToTable(nameof(NonComplianceNonComplianceRegister)));
         }
     }
 }

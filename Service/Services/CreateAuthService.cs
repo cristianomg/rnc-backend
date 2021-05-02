@@ -1,19 +1,19 @@
-﻿using Domain.Dtos.Inputs;
+﻿using Domain.Configs;
+using Domain.Dtos.Helps;
+using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
 using Domain.Models.Helps;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System;
-using Domain.Configs;
 using Microsoft.Extensions.Options;
-using Domain.Interfaces.Services;
-using Domain.Dtos.Helps;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Util.Extensions;
 
 namespace Service.Services
 {
@@ -34,7 +34,7 @@ namespace Service.Services
         {
             var existingAuth = await _userAuthRepository.GetByEmail(dtoCreateAuth.Email);
 
-            if (existingAuth != null)
+            if (existingAuth != null && (_cryptograph.VerifyPassword(dtoCreateAuth.Password, existingAuth.Password)))
             {
                 if (existingAuth.Active)
                 {
@@ -67,11 +67,10 @@ namespace Service.Services
                             CompleteName = existingAuth.User.Name,
                             Email = existingAuth.Email,
                             Enrollment = existingAuth.User.Enrollment,
-                            Setor = existingAuth.User.SetorId,
-                            Crbm = existingAuth.User.Crbm
+                            Setor = existingAuth.User.SetorId
                         };
 
-                        var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermission.Name };
+                        var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Permission = existingAuth.User.UserPermissionId.GetDescription() };
 
 
                         return GenerateSuccessServiceResponse(authResult);

@@ -1,6 +1,4 @@
-﻿using Domain.ValueObjects;
-
-namespace Domain.Dtos.Helps
+﻿namespace Domain.Dtos.Helps
 {
     public class DtoUserActive
     {
@@ -24,10 +22,6 @@ namespace Domain.Dtos.Helps
         /// Setor do usuário
         /// </summary>
         public string Setor { get; set; }
-        /// <summary>
-        /// Crbm do usuário
-        /// </summary>
-        public string Crbm { get; set; }
         /// <summary>
         /// Flag ativo ou inativo
         /// </summary>

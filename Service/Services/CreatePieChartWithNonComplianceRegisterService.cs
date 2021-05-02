@@ -26,8 +26,8 @@ namespace Service.Services
             var chartData = new Dictionary<string, double>();
 
             nonComplianceGroup.ToList().ForEach(x => chartData.Add(x.NonCompliance, x.Quantity));
-            var chart = PieChart(chartData);
 
+            var chart = PieChart(chartData);
 
             return GenerateSuccessServiceResponse(chart);
         }

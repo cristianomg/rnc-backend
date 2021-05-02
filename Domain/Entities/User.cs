@@ -1,5 +1,4 @@
 ﻿using Domain.ValueObjects;
-using System;
 using System.Collections.Generic;
 
 namespace Domain.Entities
@@ -22,10 +21,6 @@ namespace Domain.Entities
         /// Matricula
         /// </summary>
         public SetorType SetorId { get; set; }
-        /// <summary>
-        /// Matricula
-        /// </summary>
-        public string Crbm { get; set; }
         /// <summary>
         /// Dados de autenticação do usuário
         /// </summary>

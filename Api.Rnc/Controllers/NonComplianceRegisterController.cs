@@ -9,7 +9,6 @@ using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,7 +41,7 @@ namespace Api.Rnc.Controllers
         {
             var responseService = await _createNonComplianceRegisterService.Execute(User.GetUserId(), dto);
             if (responseService.Success)
-                return Created("{id}", _mapper.Map<DtoNonComplianceRegisterResponse>(responseService.Value));
+                return Ok();
             return BadRequest(responseService.Message);
         }
         /// <summary>
@@ -54,8 +53,10 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAll()
         {
-            var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository
+                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
+            nonComplianceRegisters.OrderBy(x => x.Id);
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
         }
         /// <summary>
@@ -69,7 +70,6 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
-
             return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
         }
     }

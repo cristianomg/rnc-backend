@@ -25,6 +25,7 @@ namespace Api.Rnc.Controllers
         /// Endpoint responsável por retornar os setores
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(IQueryable<DtoSetor>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]

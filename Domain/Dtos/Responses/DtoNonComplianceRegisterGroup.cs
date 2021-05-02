@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace Domain.Dtos.Responses
+﻿namespace Domain.Dtos.Responses
 {
     public class DtoNonComplianceRegisterGroup
     {

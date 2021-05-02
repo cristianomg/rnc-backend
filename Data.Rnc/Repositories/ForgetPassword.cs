@@ -1,13 +1,14 @@
 ﻿using Domain.Interfaces.Services;
+using Domain.Interfaces.Util;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
 {
-    public class EsqueciSenha : IForgotPassword
+    public class ForgetPassword : IForgotPassword
     {
-        public readonly ISenderEmail _senderEmail; 
-        public EsqueciSenha(ISenderEmail senderEmail)
+        public readonly IEmailSender _senderEmail;
+        public ForgetPassword(IEmailSender senderEmail)
         {
             _senderEmail = senderEmail;
         }

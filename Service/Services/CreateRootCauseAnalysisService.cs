@@ -38,11 +38,11 @@ namespace Service.Services
             if (nonComplianceRegister.RootCauseAnalysis != null)
                 return GenerateErroServiceResponse<RootCauseAnalysis>
                        ("O registro de não conformidade já foi analisado.");
-            using(var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
-                    var actionPlain = await CreateOrGetActionPlain(analyzeRootCause);
+                    var actionPlain = await _actionPlainRepository.GetByIdWithIncludes(analyzeRootCause.ActionPlain.Id.Value);
 
                     if (actionPlain == null)
                         return GenerateErroServiceResponse<RootCauseAnalysis>("O plano de ação não foi encontrado.");
@@ -50,8 +50,8 @@ namespace Service.Services
                     var responses = analyzeRootCause.ActionPlain.Questions.Select(x => new ActionPlainResponse
                     {
                         Value = x.Response.Value,
-                        ActionPlainQuestionId = actionPlain.Questions.First(x => x.Value == x.Value).Id,
-                        ActionPlainQuestion = actionPlain.Questions.First(x => x.Value == x.Value),
+                        ActionPlainQuestionId = actionPlain.Questions.First(y => y.Value == x.Value).Id,
+                        ActionPlainQuestion = actionPlain.Questions.First(y => y.Value == x.Value),
                         CreatedAt = DateTime.Now,
                         Active = true,
                         ActionPlainId = actionPlain.Id
@@ -72,54 +72,18 @@ namespace Service.Services
                     scoped.Complete();
                     return GenerateSuccessServiceResponse(newAnalyzeRootCause);
                 }
-                catch(ServiceException ex)
+                catch (ServiceException ex)
                 {
                     scoped.Dispose();
                     return GenerateErroServiceResponse<RootCauseAnalysis>(ex.Message);
                 }
-                catch(Exception ex)
+                catch (Exception)
                 {
                     scoped.Dispose();
                     return GenerateErroServiceResponse<RootCauseAnalysis>("Erro ao inserir analise.");
                 }
             }
-           
-        }
-        private async Task<ActionPlain> CreateOrGetActionPlain(DtoRootCauseAnalysisInput analyzeRootCause)
-        {
-            if (analyzeRootCause.ActionPlain.Id.HasValue && analyzeRootCause.ActionPlain.Id != 0)
-            {
-                return await _actionPlainRepository.GetByIdWithIncludes(analyzeRootCause.ActionPlain.Id.Value);
-            }
-            else
-            {
-                var hasActionPlainWithName = await _actionPlainRepository.GetAll(x => x.Name.ToLower() == analyzeRootCause.ActionPlain.Name.ToLower());
-                if (hasActionPlainWithName.FirstOrDefault() != null)
-                    throw new ServiceException("Já existe um plano de ação com esse nome.");
 
-                var questions = analyzeRootCause.ActionPlain.Questions
-                      .Select(x => new ActionPlainQuestion
-                      {
-                          Value = x.Value,
-                          CreatedAt = DateTime.Now,
-                          Active = true,
-                      }).ToList();
-
-                var actionPlain = new ActionPlain
-                {
-                    Name = analyzeRootCause.ActionPlain.Name,
-                    Active = true,
-                    CreatedAt = DateTime.Now,
-                    Questions = questions
-                };
-                actionPlain = await _actionPlainRepository.Insert(actionPlain);
-
-                await _actionPlainRepository.SaveChanges();
-                
-                actionPlain.Questions = await _actionPlainQuestionRepository.GetAll(x => x.ActionPlainId == actionPlain.Id);
-                
-                return actionPlain;
-            }
         }
     }
 }

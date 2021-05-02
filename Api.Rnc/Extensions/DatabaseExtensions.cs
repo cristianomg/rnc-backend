@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql;
 using System;
 
 namespace Api.Rnc.Extensions
@@ -21,6 +20,7 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
             var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("RncContext");
+            Console.WriteLine(connection);
             services.AddDbContext<RncContext>(options =>
                 options.UseNpgsql(connection));
             return services;

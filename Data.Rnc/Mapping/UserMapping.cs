@@ -1,9 +1,7 @@
 ﻿using Domain.Entities;
-using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Linq;
 
 namespace Data.Rnc.Mapping
 {
@@ -28,10 +26,6 @@ namespace Data.Rnc.Mapping
 
             builder.HasIndex(x => x.Enrollment)
                 .IsUnique();
-
-            builder.Property(x => x.Crbm)
-                .IsRequired()
-                .HasMaxLength(15);
 
             builder.Property(x => x.Active)
                 .IsRequired();
