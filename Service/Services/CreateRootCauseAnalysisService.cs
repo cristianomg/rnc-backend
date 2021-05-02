@@ -49,7 +49,7 @@ namespace Service.Services
 
                     var responses = analyzeRootCause.ActionPlain.Questions.Select(x => new ActionPlainResponse
                     {
-                        Value = x.Response.Value,
+                        Value = x.Response,
                         ActionPlainQuestionId = actionPlain.Questions.First(y => y.Value == x.Value).Id,
                         ActionPlainQuestion = actionPlain.Questions.First(y => y.Value == x.Value),
                         CreatedAt = DateTime.Now,

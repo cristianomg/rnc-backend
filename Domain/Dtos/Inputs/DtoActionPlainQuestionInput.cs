@@ -14,6 +14,9 @@
         /// Id do plano de ação
         /// </summary>
         public int? ActionPlainId { get; set; }
-        public DtoActionPlainResponseInput Response { get; set; }
+        /// <summary>
+        /// Resposta
+        /// </summary>
+        public string Response { get; set; }
     }
 }
