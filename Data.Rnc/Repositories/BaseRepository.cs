@@ -1,5 +1,4 @@
 ﻿using Data.Rnc.Context;
-using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -57,7 +56,7 @@ namespace Data.Rnc.Repositories
         public async Task<TEntity> Update(TEntity obj) =>
             await Task.FromResult(_dbSet.Update(obj).Entity);
 
-        public async Task<int> SaveChanges() => 
+        public async Task<int> SaveChanges() =>
             await _context.SaveChangesAsync();
     }
 }

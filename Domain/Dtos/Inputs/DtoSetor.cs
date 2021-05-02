@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Dtos.Inputs
+﻿namespace Domain.Dtos.Inputs
 {
     public class DtoSetor
     {

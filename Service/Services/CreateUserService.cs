@@ -1,5 +1,4 @@
 ﻿using Domain.Dtos.Requests;
-using Domain.Dtos.Responses;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -46,7 +45,7 @@ namespace Service.Services
             if (createUserInput.Password != createUserInput.ConfirmPassword)
                 return GenerateErroServiceResponse("As senhas não coincidem,");
 
-            var newUser = await _userRepository.Insert(new User 
+            var newUser = await _userRepository.Insert(new User
             {
                 Name = createUserInput.CompleteName,
                 UserAuth = new UserAuth

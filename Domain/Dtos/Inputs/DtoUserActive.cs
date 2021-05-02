@@ -1,6 +1,4 @@
-﻿using Domain.ValueObjects;
-
-namespace Domain.Dtos.Helps
+﻿namespace Domain.Dtos.Helps
 {
     public class DtoUserActive
     {

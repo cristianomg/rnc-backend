@@ -12,7 +12,7 @@ namespace Data.Rnc.Mapping
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x=>x.Id)
+            builder.Property(x => x.Id)
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 

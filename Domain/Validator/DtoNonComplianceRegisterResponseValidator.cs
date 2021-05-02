@@ -1,8 +1,5 @@
 ﻿using Domain.Dtos.Responses;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Validator
 {
@@ -30,14 +27,14 @@ namespace Domain.Validator
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("o setor não pode ser nulo ou vazio.");
-            RuleFor(x => x.NonCompliance)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("A não conformidade não pode ser nula ou vazia.");
-            RuleFor(x => x.NonComplianceType)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("O tipo de não conformidade não pode ser nulo ou vazio.");
+            //RuleFor(x => x.NonCompliances)
+            //    .NotNull()
+            //    .NotEmpty()
+            //    .WithMessage("A não conformidade não pode ser nula ou vazia.");
+            //RuleFor(x => x.NonComplianceType)
+            //    .NotNull()
+            //    .NotEmpty()
+            //    .WithMessage("O tipo de não conformidade não pode ser nulo ou vazio.");
             RuleFor(x => x.PeopleInvolved)
                 .NotNull()
                 .NotEmpty()

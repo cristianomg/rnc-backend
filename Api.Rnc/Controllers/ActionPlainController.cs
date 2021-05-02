@@ -55,7 +55,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(DtoActionPlainDetailResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Insert([FromBody] DtoCreateActionPlainInput dto) 
+        public async Task<IActionResult> Insert([FromBody] DtoCreateActionPlainInput dto)
         {
             var responseService = await _createActionPlainService.Execute(dto);
             if (responseService.Success)

@@ -46,7 +46,7 @@ namespace Data.Rnc.Repositories
             var user = _dbSet
                 .AsNoTracking()
                 .Include(n => n.UserAuth)
-                .Include(n=>n.Setor)
+                .Include(n => n.Setor)
                 .Where(n => n.UserAuth.Email == email)
                 .FirstOrDefaultAsync();
             return await user;

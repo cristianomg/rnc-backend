@@ -38,7 +38,7 @@ namespace Service.Services
             if (nonComplianceRegister.RootCauseAnalysis != null)
                 return GenerateErroServiceResponse<RootCauseAnalysis>
                        ("O registro de não conformidade já foi analisado.");
-            using(var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
@@ -72,18 +72,18 @@ namespace Service.Services
                     scoped.Complete();
                     return GenerateSuccessServiceResponse(newAnalyzeRootCause);
                 }
-                catch(ServiceException ex)
+                catch (ServiceException ex)
                 {
                     scoped.Dispose();
                     return GenerateErroServiceResponse<RootCauseAnalysis>(ex.Message);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     scoped.Dispose();
                     return GenerateErroServiceResponse<RootCauseAnalysis>("Erro ao inserir analise.");
                 }
             }
-           
+
         }
     }
 }
