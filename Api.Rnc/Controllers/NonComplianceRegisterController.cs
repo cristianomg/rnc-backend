@@ -65,7 +65,7 @@ namespace Api.Rnc.Controllers
         /// <param name="date"></param>
         /// <param name="setor"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{date:DateTime}/{setor:required}")]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
