@@ -9,6 +9,7 @@ using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -56,8 +57,23 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
-            nonComplianceRegisters.OrderBy(x => x.Id);
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters));
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id)));
+        }
+        /// <summary>
+        /// Endpoint responsável por trazer as não conformidades registradas por data e setor
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="setor"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
+        {
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository
+                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x=>x.SetorId == setor && x.RegisterDate.Date == date.Date)));
         }
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas por id
@@ -72,5 +88,6 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
             return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
         }
+        
     }
 }
