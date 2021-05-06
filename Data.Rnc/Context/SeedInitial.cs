@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,10 @@ namespace Data.Rnc.Context
             if (!_context.NonCompliance.Any())
             {
                 SeedNaoConformidade();
+            }
+            if (!_context.Setors.Any())
+            {
+                SeedSetor();
             }
         }
 
@@ -187,6 +192,21 @@ namespace Data.Rnc.Context
                 TypeNonComplianceId = 3,
                 Description = "Perda do laudo.",
             });
+
+            _context.SaveChanges();
+        }
+        private void SeedSetor()
+        {
+            var setores = Enum.GetValues(typeof(SetorType))
+               .Cast<SetorType>()
+               .Select(x => new Setor()
+               {
+                   Id = x,
+                   Name = x.ToString(),
+                   Active = true,
+               });
+
+            _context.Setors.AddRange(setores);
 
             _context.SaveChanges();
         }

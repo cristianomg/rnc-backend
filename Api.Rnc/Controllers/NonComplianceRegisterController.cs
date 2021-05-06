@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Util.Extensions;
 
 namespace Api.Rnc.Controllers
 {
@@ -46,18 +47,39 @@ namespace Api.Rnc.Controllers
             return BadRequest(responseService.Message);
         }
         /// <summary>
-        /// Endpoint responsável por trazer as não conformidades registradas
+        /// Endpoint responsável por trazer as não conformidades por setor do usuário logado
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("setor/{setor}")]
+        [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllBySetor(SetorType setor, HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
-
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id)));
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
+                    .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
+                    .Where(x => x.SetorId == setor)
+                    .OrderBy(x => x.RootCauseAnalysis != null)
+                    .ThenBy(x => x.Id)));
+        }
+        /// <summary>
+        /// Endpoint responsável por trazer as não conformidades registradas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
+        [HttpGet("all/{hasRootCauseAnalysis}")]
+        [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        public async Task<IActionResult> GetAll(HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
+        {
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository
+                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
+                .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
+                .OrderBy(x => x.RootCauseAnalysis != null)
+                .ThenBy(x => x.Id)));
         }
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas por data e setor

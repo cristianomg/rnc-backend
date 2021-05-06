@@ -38,10 +38,7 @@ namespace Data.Rnc.Context
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-
-
             SeedUserPermission(modelBuilder);
-            SeedSetor(modelBuilder);
             SeedTipoNaoConformidade(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
@@ -65,21 +62,7 @@ namespace Data.Rnc.Context
                 NameNonCompliance = "Pos-Analitica",
             });
         }
-
-        private void SeedSetor(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Setor>().HasData(
-               Enum.GetValues(typeof(SetorType))
-                   .Cast<SetorType>()
-                   .Select(x => new Setor()
-                   {
-                       Id = x,
-                       Name = x.ToString(),
-                       Active = true,
-                   }));
-        }
-
-        private void SeedUserPermission(ModelBuilder modelBuilder)
+         private void SeedUserPermission(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserPermission>().HasData(
                 Enum.GetValues(typeof(UserPermissionType))

@@ -7,6 +7,10 @@
         Parasitologia,
         Imunologia,
         Hematologia,
-        Triagem
+        Triagem,
+        Recepcao,
+        Almoxarifado,
+        Bioquimica,
+        Uroanalise,
     }
 }

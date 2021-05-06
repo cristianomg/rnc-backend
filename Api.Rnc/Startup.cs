@@ -81,7 +81,7 @@ namespace Api.Rnc
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<RncContext>();
-                //context.Database.Migrate();
+                context.Database.Migrate();
 
                 new SeedInitial(context).Init();
             }
