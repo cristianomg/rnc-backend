@@ -3,6 +3,7 @@ using Domain.Dtos.Helps;
 using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
 using Domain.Entities;
+using Util.Extensions;
 
 namespace Api.Rnc.Extensions.AutoMapper
 {
@@ -23,6 +24,7 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
             CreateMap<Setor, DtoSetor>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Id.GetDescription()))
                 .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src=>src.Supervisor));
 
             CreateMap<User, DtoSupervisor>()
