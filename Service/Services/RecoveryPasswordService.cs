@@ -54,7 +54,7 @@ namespace Service.Services
                     var hasUserWithEmail = await _userAuthRepository
                         .GetAllWithIncludes(nameof(UserAuth.User));
 
-                    var user = hasUserWithEmail.FirstOrDefault();
+                    var user = hasUserWithEmail.FirstOrDefault(x=>x.Email == email);
 
                     if (user == null)
                         return GenerateErroServiceResponse("O email não foi encontrado.");
