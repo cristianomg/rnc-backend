@@ -1,16 +1,28 @@
-﻿namespace Domain.ValueObjects
+﻿using System.ComponentModel;
+
+namespace Domain.ValueObjects
 {
     public enum SetorType : int
     {
+        [Description("Coleta")]
         Coleta = 1,
+        [Description("Microbiologia")]
         Microbiologia,
+        [Description("Parasitologia")]
         Parasitologia,
+        [Description("Imunologia")]
         Imunologia,
+        [Description("Hematologia")]
         Hematologia,
+        [Description("Triagem")]
         Triagem,
-        Recepcao,
+        [Description("Recepção")]
+        Recepcao, 
+        [Description("Almoxarifado")]
         Almoxarifado,
+        [Description("Bioquímica")]
         Bioquimica,
+        [Description("Uroanálise")]
         Uroanalise,
     }
 }

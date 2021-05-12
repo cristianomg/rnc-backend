@@ -30,6 +30,9 @@ namespace Service.Services
             if (nonCompliance.RegisterHour == null)
                 return GenerateErroServiceResponse<NonComplianceRegister>("O horário que ocorreu a não conformidade precisa ser informada.");
 
+            if (string.IsNullOrEmpty(nonCompliance.ImmediateAction))
+                return GenerateErroServiceResponse<NonComplianceRegister>("A ação imediata não pode ser vazia.");
+
             using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
