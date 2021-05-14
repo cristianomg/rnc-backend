@@ -91,7 +91,7 @@ namespace Api.Rnc.Controllers
         public async Task<ActionResult> ApproveUser(string email)
         {
             await _userRepository.ActiveUser(email);
-            var approved = await _evalUserSendEmail.Disapproved(email);
+            var approved = await _evalUserSendEmail.Approved(email);
             if (approved.Success)
             {
                 return Ok();
