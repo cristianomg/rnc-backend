@@ -95,7 +95,8 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x=>x.SetorId == setor && x.RegisterDate.Date == date.Date)));
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x=>x.SetorId == setor && x.RegisterDate.Year == date.Year 
+            && x.RegisterDate.Month == date.Month)));
         }
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas por id
