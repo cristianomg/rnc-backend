@@ -24,5 +24,9 @@ namespace Domain.ValueObjects
         Bioquimica,
         [Description("Uroanálise")]
         Uroanalise,
+        [Description("Qualidade")]
+        Qualidade,
+        [Description("Coordenação")]
+        Coordenação,
     }
 }
