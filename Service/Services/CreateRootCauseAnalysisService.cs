@@ -16,18 +16,17 @@ namespace Service.Services
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IActionPlainRepository _actionPlainRepository;
-        private readonly IActionPlainQuestionRepository _actionPlainQuestionRepository;
+
         public CreateRootCauseAnalysisService(IRootCauseAnalysisRepository analyzeRootCauseRepository,
                                       INonComplianceRegisterRepository nonComplianceRegisterRepository,
-                                      IActionPlainRepository actionPlainRepository,
-                                      IActionPlainQuestionRepository actionPlainQuestionRepository)
+                                      IActionPlainRepository actionPlainRepository)
         {
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _actionPlainRepository = actionPlainRepository;
-            _actionPlainQuestionRepository = actionPlainQuestionRepository;
         }
-        public async Task<ResponseService<RootCauseAnalysis>> Execute(int userId, DtoRootCauseAnalysisInput analyzeRootCause)
+
+        public async Task<ResponseService<RootCauseAnalysis>> Execute(DtoRootCauseAnalysisInput analyzeRootCause)
         {
             var nonComplianceRegister = await
                 _nonComplianceRegisterRepository.GetByIdWithInclude(analyzeRootCause.NonComplianceRegisterId);
@@ -53,14 +52,16 @@ namespace Service.Services
                         ActionPlainQuestionId = actionPlain.Questions.First(y => y.Value == x.Value).Id,
                         ActionPlainQuestion = actionPlain.Questions.First(y => y.Value == x.Value),
                         CreatedAt = DateTime.Now,
+                        CreatedBy = analyzeRootCause.UserName,
                         Active = true,
-                        ActionPlainId = actionPlain.Id
+                        ActionPlainId = actionPlain.Id,
 
                     }).ToList();
                     var newAnalyzeRootCause = await _analyzeRootCauseRepository.Insert(new RootCauseAnalysis
                     {
                         NonComplianceRegisterId = analyzeRootCause.NonComplianceRegisterId,
-                        UserId = userId,
+                        UserId = analyzeRootCause.UserId,
+                        CreatedBy = analyzeRootCause.UserName,
                         Analyze = analyzeRootCause.Analyze,
                         ActionPlainId = actionPlain.Id,
                         ActionPlain = actionPlain,

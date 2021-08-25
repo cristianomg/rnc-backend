@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Rnc.Extensions;
+using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
@@ -57,6 +58,8 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(DtoActionPlainDetailResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> Insert([FromBody] DtoCreateActionPlainInput dto)
         {
+            dto.UserName = User.GetUserName();
+
             var responseService = await _createActionPlainService.Execute(dto);
             if (responseService.Success)
                 return Ok();

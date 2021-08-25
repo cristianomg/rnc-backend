@@ -21,9 +21,11 @@ namespace Data.Rnc.Repositories
         }
         public async Task<IQueryable<TEntity>> GetAll() =>
             await Task.FromResult(_dbSet.AsQueryable());
+
         public async Task<IQueryable<TEntity>> GetAll
             (Expression<Func<TEntity, bool>> query) =>
             await Task.FromResult(_dbSet.Where(query).AsQueryable());
+
         public async Task<IQueryable<TEntity>> GetAllWithIncludes
             (params string[] includes)
         {
@@ -34,6 +36,7 @@ namespace Data.Rnc.Repositories
             }
             return await Task.FromResult(result);
         }
+
         public async Task<IQueryable<TEntity>> GetAllWithIncludes
             (Expression<Func<TEntity, bool>> query, params string[] includes)
         {
@@ -44,19 +47,41 @@ namespace Data.Rnc.Repositories
             }
             return await Task.FromResult(result);
         }
+
         public async Task<TEntity> GetById(TKey id) =>
             await _dbSet.FindAsync(id);
+
         public async Task<TEntity> Insert(TEntity obj)
         {
             var entity = await _dbSet.AddAsync(obj);
             return entity.Entity;
         }
+
         public async Task InsertMany(IEnumerable<TEntity> objs) =>
             await _dbSet.AddRangeAsync(objs);
+
         public async Task<TEntity> Update(TEntity obj) =>
             await Task.FromResult(_dbSet.Update(obj).Entity);
 
-        public async Task<int> SaveChanges() =>
-            await _context.SaveChangesAsync();
+        public async Task<int> SaveChanges()
+        {
+            foreach (var entry in _context.ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("CreatedAt").CurrentValue = DateTime.UtcNow;
+                    entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("CreatedAt").IsModified = false;
+                    entry.Property("Control_CreationUser").IsModified = false;
+                    entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                }
+            }
+
+            return await _context.SaveChangesAsync();
+        }
     }
 }

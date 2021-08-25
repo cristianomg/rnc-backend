@@ -35,5 +35,14 @@ namespace Domain.Dtos.Inputs
         /// </summary>
         public string ImmediateAction { get; set; }
 
+        /// <summary>
+        /// Identificador do usuário
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Nome do usuário
+        /// </summary>
+        public string UserName { get; set; }
     }
 }

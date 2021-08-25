@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Services
 {
     public interface ICreateRootCauseAnalysisService : IService
     {
-        Task<ResponseService<RootCauseAnalysis>> Execute(int userId, DtoRootCauseAnalysisInput rootCauseAnalysis);
+        Task<ResponseService<RootCauseAnalysis>> Execute(DtoRootCauseAnalysisInput rootCauseAnalysis);
     }
 }

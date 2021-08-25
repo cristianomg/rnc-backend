@@ -12,5 +12,10 @@ namespace Domain.Dtos.Inputs
         /// Perguntas do plano de ação
         /// </summary>
         public IEnumerable<DtoCreateActionPlainQuestionInput> Questions { get; set; }
+
+        /// <summary>
+        /// Nome do usuário
+        /// </summary>
+        public string UserName { get; set; }
     }
 }

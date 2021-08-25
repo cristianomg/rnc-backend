@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class SetSupervisorOnSetorService : AbstractService , ISetSupervisorOnSetorService
+    public class SetSupervisorOnSetorService : AbstractService, ISetSupervisorOnSetorService
     {
         private readonly ISetorRepository _setorRepository;
         private readonly IUserRepository _userRepository;
 
-        public SetSupervisorOnSetorService(ISetorRepository setorRepository, IUserRepository userRepository) 
+        public SetSupervisorOnSetorService(ISetorRepository setorRepository, IUserRepository userRepository)
         {
             _setorRepository = setorRepository;
             _userRepository = userRepository;
         }
 
-        public async Task<ResponseService> Execute(DtoSetSupervisor createSetor) 
+        public async Task<ResponseService> Execute(DtoSetSupervisor createSetor)
         {
 
             var setor = await _setorRepository.GetById(createSetor.SetorId);
@@ -35,6 +35,7 @@ namespace Service.Services
                 return GenerateErroServiceResponse("Usuário não é um supervisor.");
 
             setor.SupervisorId = user.Id;
+            setor.UpdatedBy = createSetor.UserName;
 
             await _setorRepository.Update(setor);
 
