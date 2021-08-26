@@ -83,7 +83,7 @@ namespace Data.Rnc.Repositories
                 if (entry.State == EntityState.Modified)
                 {
                     entry.Property("CreatedAt").IsModified = false;
-                    entry.Property("Control_CreationUser").IsModified = false;
+                    entry.Property("CreatedBy").IsModified = false;
                     entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
                 }
 
