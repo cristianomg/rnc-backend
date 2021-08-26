@@ -1,10 +1,13 @@
 ﻿using Data.Rnc.Context;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Data.Rnc.Repositories
@@ -14,11 +17,13 @@ namespace Data.Rnc.Repositories
     {
         private readonly RncContext _context;
         private readonly DbSet<TEntity> _dbSet;
+
         public BaseRepository(RncContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
+
         public async Task<IQueryable<TEntity>> GetAll() =>
             await Task.FromResult(_dbSet.AsQueryable());
 
@@ -65,6 +70,8 @@ namespace Data.Rnc.Repositories
 
         public async Task<int> SaveChanges()
         {
+            var historics = new List<Historic>();
+
             foreach (var entry in _context.ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
             {
                 if (entry.State == EntityState.Added)
@@ -79,9 +86,29 @@ namespace Data.Rnc.Repositories
                     entry.Property("Control_CreationUser").IsModified = false;
                     entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
                 }
+
+                var entity = entry.Entity;
+                historics.Add(CreateHistoric(entity));
             }
 
+            var historyDb = _context.Set<Historic>();
+            historyDb.AddRange(historics);
+
             return await _context.SaveChangesAsync();
+        }
+
+        private Historic CreateHistoric(object entity)
+        {
+            var json = JsonConvert.SerializeObject(entity, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+
+            return new Historic()
+            {
+                Entity = entity.ToString(),
+                Values = json
+            };
         }
     }
 }

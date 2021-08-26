@@ -3,15 +3,17 @@ using System;
 using Data.Rnc.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    partial class RncContextModelSnapshot : ModelSnapshot
+    [Migration("20210826004218_InserindoTabelaDeHistory")]
+    partial class InserindoTabelaDeHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,41 +138,6 @@ namespace Data.Rnc.Migrations
                     b.HasIndex("RootCauseAnalysisId");
 
                     b.ToTable("ActionPlainResponse");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Historic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Entity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Values")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Historic");
                 });
 
             modelBuilder.Entity("Domain.Entities.NonCompliance", b =>
@@ -382,21 +349,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(6809),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(5616),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(8090),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(6915),
                             NameNonCompliance = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(8168),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(6989),
                             NameNonCompliance = "Pos-Analitica"
                         });
                 });
@@ -414,7 +381,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 21, 53, 26, 200, DateTimeKind.Local).AddTicks(1761));
+                        .HasDefaultValue(new DateTime(2021, 8, 25, 21, 42, 17, 875, DateTimeKind.Local).AddTicks(143));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -472,7 +439,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 8, 25, 21, 53, 26, 195, DateTimeKind.Local).AddTicks(8478));
+                        .HasDefaultValue(new DateTime(2021, 8, 25, 21, 42, 17, 870, DateTimeKind.Local).AddTicks(2806));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -531,21 +498,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(2235),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(1090),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(3328),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(2152),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 25, 21, 53, 26, 203, DateTimeKind.Local).AddTicks(3402),
+                            CreatedAt = new DateTime(2021, 8, 25, 21, 42, 17, 878, DateTimeKind.Local).AddTicks(2205),
                             Name = "QualityBiomedical"
                         });
                 });
