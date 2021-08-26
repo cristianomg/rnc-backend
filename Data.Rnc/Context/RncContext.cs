@@ -29,6 +29,7 @@ namespace Data.Rnc.Context
         public DbSet<ActionPlainQuestion> ActionPlainQuestions { get; set; }
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
+        public DbSet<Historic> Historics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -27,6 +27,7 @@ namespace Api.Rnc.Controllers
             _mapper = mapper;
             _createAnalyzeRootCauseService = createAnalyzeRootCauseService;
         }
+
         /// <summary>
         /// Endpoint responsável por criar a análise de causa raiz
         /// </summary>
@@ -35,9 +36,10 @@ namespace Api.Rnc.Controllers
         [HttpPost("AnalyzeRootCause")]
         public async Task<IActionResult> AnalyzeRootCause([FromBody] DtoRootCauseAnalysisInput analyze)
         {
-            var userId = User.GetUserId();
+            analyze.UserId = User.GetUserId();
+            analyze.UserName = User.GetUserName();
 
-            var responseService = await _createAnalyzeRootCauseService.Execute(userId, analyze);
+            var responseService = await _createAnalyzeRootCauseService.Execute(analyze);
             if (responseService.Success)
                 return Ok(_mapper.Map<DtoCreateRootCauseAnalysisResponse>(responseService.Value));
 

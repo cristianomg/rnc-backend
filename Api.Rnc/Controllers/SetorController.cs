@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Rnc.Extensions;
+using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -46,6 +47,8 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SetSupervisorOnSetor(DtoSetSupervisor setSupervisor)
         {
+            setSupervisor.UserName = User.GetUserName();
+
             var responseService = await _setSupervisorOnSetorService.Execute(setSupervisor);
             if (responseService.Success)
                 return Ok();

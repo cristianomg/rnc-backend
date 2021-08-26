@@ -38,6 +38,7 @@ namespace Service.Services
                               Value = x.Value,
                               CreatedAt = DateTime.Now,
                               Active = true,
+                              CreatedBy = dto.UserName
                           }).ToList();
 
                     var actionPlain = new ActionPlain
@@ -45,8 +46,10 @@ namespace Service.Services
                         Name = dto.Name,
                         Active = true,
                         CreatedAt = DateTime.Now,
-                        Questions = questions
+                        Questions = questions,
+                        CreatedBy = dto.UserName
                     };
+
                     actionPlain = await _actionPlainRepository.Insert(actionPlain);
 
                     await _actionPlainRepository.SaveChanges();

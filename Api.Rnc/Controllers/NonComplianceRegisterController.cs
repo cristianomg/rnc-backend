@@ -41,7 +41,10 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput dto)
         {
-            var responseService = await _createNonComplianceRegisterService.Execute(User.GetUserId(), dto);
+            dto.UserId = User.GetUserId();
+            dto.UserName = User.GetUserName();
+
+            var responseService = await _createNonComplianceRegisterService.Execute(dto);
             if (responseService.Success)
                 return Ok();
             return BadRequest(responseService.Message);
@@ -95,7 +98,7 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x=>x.SetorId == setor && x.RegisterDate.Year == date.Year 
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x => x.SetorId == setor && x.RegisterDate.Year == date.Year
             && x.RegisterDate.Month == date.Month && x.RootCauseAnalysis != null)));
         }
         /// <summary>
@@ -111,6 +114,6 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
             return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
         }
-        
+
     }
 }

@@ -23,7 +23,7 @@ namespace Service.Services
             _nonComplianceRepository = nonComplianceRepository;
         }
 
-        public async Task<ResponseService> Execute(int userId, DtoNonComplianceRegisterInput nonCompliance)
+        public async Task<ResponseService> Execute(DtoNonComplianceRegisterInput nonCompliance)
         {
             if (nonCompliance.RegisterDate == DateTime.MinValue)
                 return GenerateErroServiceResponse<NonComplianceRegister>("A data precisa ser informada.");
@@ -37,7 +37,7 @@ namespace Service.Services
             {
                 try
                 {
-                    var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
+                    var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
 
                     var existingNonCompliance = await CheckExistingNonCompliances(nonCompliance.NonCompliances.Where(x => x.Id.HasValue));
 
@@ -48,7 +48,7 @@ namespace Service.Services
 
                     var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                     {
-                        UserId = userId,
+                        UserId = nonCompliance.UserId,
                         ImmediateAction = nonCompliance.ImmediateAction,
                         MoreInformation = nonCompliance.MoreInformation,
                         PeopleInvolved = nonCompliance.PeopleInvolved,
@@ -56,7 +56,8 @@ namespace Service.Services
                         RegisterHour = nonCompliance.RegisterHour,
                         SetorId = nonCompliance.Setor,
                         CreatedAt = DateTime.Now,
-                        NonCompliances = allNonCompliances.ToList()
+                        NonCompliances = allNonCompliances.ToList(),
+                        CreatedBy = nonCompliance.UserName
                     });
 
                     await _nonComplianceRegisterRepository.SaveChanges();
@@ -74,7 +75,8 @@ namespace Service.Services
             }
 
         }
-        private async Task<List<NonCompliance>> CreateNewNonCompliance(IEnumerable<DtoNonCompliance> nonCompliances)
+
+        private async Task<List<NonCompliance>> CreateNewNonCompliance(string creationUserName, IEnumerable<DtoNonCompliance> nonCompliances)
         {
             if (!nonCompliances.Any())
                 return new List<NonCompliance>();
@@ -88,7 +90,8 @@ namespace Service.Services
                     Active = false,
                     Description = nc.Description,
                     TypeNonComplianceId = nc.TypeNonComplianceId,
-                    CreatedAt = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = creationUserName
 
                 });
 

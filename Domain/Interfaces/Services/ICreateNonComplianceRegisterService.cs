@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Services
 {
     public interface ICreateNonComplianceRegisterService : IService
     {
-        Task<ResponseService> Execute(int userId, DtoNonComplianceRegisterInput nonCompliance);
+        Task<ResponseService> Execute(DtoNonComplianceRegisterInput nonCompliance);
     }
 }
