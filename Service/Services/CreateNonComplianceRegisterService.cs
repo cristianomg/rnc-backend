@@ -19,10 +19,12 @@ namespace Service.Services
         private readonly INonComplianceRepository _nonComplianceRepository;
         private readonly IMapper _mapper;
         public CreateNonComplianceRegisterService(INonComplianceRegisterRepository nonComplianceRegisterRepository,
-                                                  INonComplianceRepository nonComplianceRepository)
+                                                  INonComplianceRepository nonComplianceRepository,
+                                                  IMapper mapper)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _nonComplianceRepository = nonComplianceRepository;
+            _mapper = mapper;
         }
 
         public async Task<ResponseService> Execute(DtoNonComplianceRegisterInput nonCompliance)
@@ -47,6 +49,8 @@ namespace Service.Services
                         return GenerateErroServiceResponse(existingNonCompliance.Message);
 
                     var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
+                    List<Archives> archives = new();
+                    archives = _mapper.Map<List<Archives>>(nonCompliance.Archives);
 
                     var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                     {
@@ -60,7 +64,7 @@ namespace Service.Services
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
                         CreatedBy = nonCompliance.UserName,
-                        Archives = _mapper.Map<List<Archives>>(nonCompliance.Archives)
+                        Archives = archives
                     });
 
                     await _nonComplianceRegisterRepository.SaveChanges();

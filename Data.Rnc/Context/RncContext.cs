@@ -19,6 +19,7 @@ namespace Data.Rnc.Context
         }
 
         public DbSet<NonComplianceRegister> NonComplianceRegisters { get; set; }
+        public DbSet<Archives> Archives { get; set; }
         public DbSet<NonCompliance> NonCompliance { get; set; }
         public DbSet<TypeNonCompliance> TypeNonCompliance { get; set; }
         public DbSet<User> Users { get; set; }
@@ -63,7 +64,7 @@ namespace Data.Rnc.Context
                 NameNonCompliance = "Pos-Analitica",
             });
         }
-         private void SeedUserPermission(ModelBuilder modelBuilder)
+        private void SeedUserPermission(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserPermission>().HasData(
                 Enum.GetValues(typeof(UserPermissionType))

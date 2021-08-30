@@ -22,7 +22,7 @@ namespace Data.Rnc.Mapping
 
             builder.HasOne(x => x.NonComplimance)
                 .WithMany(x => x.Archives)
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.IdNonComplimance);
 
         }
     }
