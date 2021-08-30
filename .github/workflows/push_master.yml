@@ -32,8 +32,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: rnc-dev
-        environment_name: Rncdev-env
+        application_name: rnc
+        environment_name: Rnc-env1
         version_label: ${{github.run_id}}
         region: us-east-2
         deployment_package: ${{ github.workspace }}/out.zip
