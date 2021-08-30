@@ -17,6 +17,7 @@ namespace Domain.Entities
         public ICollection<NonCompliance> NonCompliances { get; set; }
         public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
         public virtual Setor Setor { get; set; }
+        public virtual List<Archives> Archives { get; set; }
 
         public bool HasRootCauseAnalysis() => RootCauseAnalysis != null;
     }

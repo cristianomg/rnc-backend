@@ -1,4 +1,5 @@
-﻿using Domain.Dtos.Inputs;
+﻿using AutoMapper;
+using Domain.Dtos.Inputs;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -16,6 +17,7 @@ namespace Service.Services
     {
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly INonComplianceRepository _nonComplianceRepository;
+        private readonly IMapper _mapper;
         public CreateNonComplianceRegisterService(INonComplianceRegisterRepository nonComplianceRegisterRepository,
                                                   INonComplianceRepository nonComplianceRepository)
         {
@@ -57,7 +59,8 @@ namespace Service.Services
                         SetorId = nonCompliance.Setor,
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
-                        CreatedBy = nonCompliance.UserName
+                        CreatedBy = nonCompliance.UserName,
+                        Archives = _mapper.Map<List<Archives>>(nonCompliance.Archives)
                     });
 
                     await _nonComplianceRegisterRepository.SaveChanges();
