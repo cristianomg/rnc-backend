@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class initial : Migration
+    public partial class inserirIdEvidencias : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,11 +17,32 @@ namespace Data.Rnc.Migrations
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActionPlain", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Historic",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Entity = table.Column<string>(type: "text", nullable: false),
+                    Values = table.Column<string>(type: "text", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Historic", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,7 +54,9 @@ namespace Data.Rnc.Migrations
                     NameNonCompliance = table.Column<string>(type: "text", nullable: true),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,8 +72,10 @@ namespace Data.Rnc.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 5, 2, 19, 3, 17, 476, DateTimeKind.Local).AddTicks(8063)),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 8, 30, 15, 52, 13, 442, DateTimeKind.Local).AddTicks(125)),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,7 +90,9 @@ namespace Data.Rnc.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,7 +109,9 @@ namespace Data.Rnc.Migrations
                     ActionPlainId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,7 +134,9 @@ namespace Data.Rnc.Migrations
                     Description = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,7 +161,9 @@ namespace Data.Rnc.Migrations
                     ActionPlainId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -161,7 +194,9 @@ namespace Data.Rnc.Migrations
                     ActionPlainId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,6 +228,25 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Archives",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdArchive = table.Column<int>(type: "integer", nullable: false),
+                    IdNonComplimance = table.Column<int>(type: "integer", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 8, 30, 15, 52, 13, 420, DateTimeKind.Local).AddTicks(3290)),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Archives", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NonComplianceRegister",
                 columns: table => new
                 {
@@ -207,7 +261,9 @@ namespace Data.Rnc.Migrations
                     ImmediateAction = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -226,8 +282,10 @@ namespace Data.Rnc.Migrations
                     SetorId = table.Column<int>(type: "integer", nullable: false),
                     UserPermissionId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 5, 2, 19, 3, 17, 488, DateTimeKind.Local).AddTicks(1165)),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 8, 30, 15, 52, 13, 444, DateTimeKind.Local).AddTicks(4489)),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,7 +313,9 @@ namespace Data.Rnc.Migrations
                     SupervisorId = table.Column<int>(type: "integer", nullable: true),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,36 +329,23 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Setor",
-                columns: new[] { "Id", "Active", "CreatedAt", "Name", "SupervisorId", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(1773), "Coleta", null, null },
-                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5417), "Microbiologia", null, null },
-                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5529), "Parasitologia", null, null },
-                    { 4, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5537), "Imunologia", null, null },
-                    { 5, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5541), "Hematologia", null, null },
-                    { 6, true, new DateTime(2021, 5, 2, 19, 3, 17, 498, DateTimeKind.Local).AddTicks(5555), "Triagem", null, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "TypeNonCompliance",
-                columns: new[] { "Id", "Active", "CreatedAt", "NameNonCompliance", "UpdatedAt" },
+                columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "NameNonCompliance", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(1758), "Pre-Analitica", null },
-                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(4905), "Analitica", null },
-                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 499, DateTimeKind.Local).AddTicks(5351), "Pos-Analitica", null }
+                    { 1, true, new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(9316), null, "Pre-Analitica", null, null },
+                    { 2, true, new DateTime(2021, 8, 30, 15, 52, 13, 450, DateTimeKind.Local).AddTicks(1173), null, "Analitica", null, null },
+                    { 3, true, new DateTime(2021, 8, 30, 15, 52, 13, 450, DateTimeKind.Local).AddTicks(1265), null, "Pos-Analitica", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserPermission",
-                columns: new[] { "Id", "Active", "CreatedAt", "Name", "UpdatedAt" },
+                columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(2604), "Employee", null },
-                    { 2, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6768), "Supervisor", null },
-                    { 3, true, new DateTime(2021, 5, 2, 19, 3, 17, 494, DateTimeKind.Local).AddTicks(6890), "QualityBiomedical", null }
+                    { 1, true, new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(2031), null, "Employee", null, null },
+                    { 2, true, new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(4188), null, "Supervisor", null, null },
+                    { 3, true, new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(4284), null, "QualityBiomedical", null, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -326,6 +373,11 @@ namespace Data.Rnc.Migrations
                 name: "IX_ActionPlainResponse_RootCauseAnalysisId",
                 table: "ActionPlainResponse",
                 column: "RootCauseAnalysisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Archives_IdNonComplimance",
+                table: "Archives",
+                column: "IdNonComplimance");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NonCompliance_TypeNonComplianceId",
@@ -429,6 +481,14 @@ namespace Data.Rnc.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Archives_NonComplianceRegister_IdNonComplimance",
+                table: "Archives",
+                column: "IdNonComplimance",
+                principalTable: "NonComplianceRegister",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_NonComplianceRegister_Setor_SetorId",
                 table: "NonComplianceRegister",
                 column: "SetorId",
@@ -461,6 +521,12 @@ namespace Data.Rnc.Migrations
 
             migrationBuilder.DropTable(
                 name: "ActionPlainResponse");
+
+            migrationBuilder.DropTable(
+                name: "Archives");
+
+            migrationBuilder.DropTable(
+                name: "Historic");
 
             migrationBuilder.DropTable(
                 name: "NonComplianceNonComplianceRegister");
