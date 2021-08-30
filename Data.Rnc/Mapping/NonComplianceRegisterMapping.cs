@@ -36,6 +36,9 @@ namespace Data.Rnc.Mapping
             builder.Property(x => x.RegisterHour)
                 .IsRequired();
 
+            builder.Property(x => x.Archives)
+                .IsRequired();
+
             builder.HasOne(x => x.User)
                 .WithMany(x => x.NonComplianceRegisters)
                 .HasForeignKey(x => x.UserId);

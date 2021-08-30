@@ -1,4 +1,6 @@
-﻿namespace Domain.Dtos.Inputs
+﻿using System.Collections.Generic;
+
+namespace Domain.Dtos.Inputs
 {
     public class DtoNonCompliance
     {
@@ -18,5 +20,7 @@
         /// Nome do tipo da não conformidade
         /// </summary>
         public string NameNonCompliance { get; set; }
+
+        public List<DtoArchives> IdArchive { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Util.Extensions;
 
@@ -95,7 +96,7 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x=>x.SetorId == setor && x.RegisterDate.Year == date.Year 
+            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x => x.SetorId == setor && x.RegisterDate.Year == date.Year
             && x.RegisterDate.Month == date.Month && x.RootCauseAnalysis != null)));
         }
         /// <summary>
@@ -111,6 +112,5 @@ namespace Api.Rnc.Controllers
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
             return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
         }
-        
     }
 }

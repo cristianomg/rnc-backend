@@ -34,6 +34,10 @@ namespace Domain.Dtos.Inputs
         /// Ação imediata
         /// </summary>
         public string ImmediateAction { get; set; }
+        /// <summary>
+        /// Id de imagens
+        /// </summary>
+
 
     }
 }
