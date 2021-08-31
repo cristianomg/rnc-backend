@@ -8,5 +8,6 @@ namespace Domain.Interfaces.Util
         Task<MemoryStream> GetFileAsync(string objectKey);
         Task<bool> UploadFileAsync(string objectKey, MemoryStream fileContent);
         Task DeleteFileAsync(string objectKey);
+        Task<string> GetGetPreSignedURL(string objectKey);
     }
 }

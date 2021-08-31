@@ -6,6 +6,9 @@ namespace Domain.Dtos.Responses
 {
     public class DtoNonComplianceRegisterResponse
     {
+        public DtoNonComplianceRegisterResponse()
+        {
+        }
         /// <summary>
         /// Id
         /// </summary>
@@ -46,5 +49,7 @@ namespace Domain.Dtos.Responses
         /// Flag para informar se o registro de não conformidade já passou pela fase de analise de causa raiz
         /// </summary>
         public bool HasRootCauseAnalysis { get; set; }
+
+        public List<string> Archives { get; set; } = new List<string>();
     }
 }

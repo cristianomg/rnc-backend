@@ -45,6 +45,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IGeneratePDF, GeneratePDF>();
             services.AddScoped<ISetSupervisorOnSetorService, SetSupervisorOnSetorService>();
             services.AddScoped<IEvalUserSendEmail, EvalUserSendEmail>();
+            services.AddScoped<IGetNonComplieanceRegisterByIdService, GetNonComplieanceRegisterByIdService>();
             services.AddSingleton<IAmazonS3>(new AmazonS3Client(ACCESS_KEY_ID, ACCESS_KEY, RegionEndpoint.USEast1));
             services.AddScoped<IStorageService, S3StorageService>();
             return services;

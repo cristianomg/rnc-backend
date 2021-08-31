@@ -25,6 +25,7 @@ namespace Data.Rnc.Repositories
                  .Include(x => x.Setor)
                  .Include(x => x.User)
                  .Include(x => x.RootCauseAnalysis)
+                 .Include(x => x.Archives)
                  .Include(x => x.NonCompliances)
                  .ThenInclude(x => x.TypeNonCompliance)
                  .FirstOrDefaultAsync(x => x.Id == id);

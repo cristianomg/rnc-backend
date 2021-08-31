@@ -24,13 +24,16 @@ namespace Api.Rnc.Controllers
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
         private readonly ICreateNonComplianceRegisterService _createNonComplianceRegisterService;
+        private readonly IGetNonComplieanceRegisterByIdService _getNonComplianceRegisterByIdService;
         public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository,
                                                IMapper mapper,
-                                               ICreateNonComplianceRegisterService createNonComplianceRegisterService)
+                                               ICreateNonComplianceRegisterService createNonComplianceRegisterService,
+                                               IGetNonComplieanceRegisterByIdService getNonComplianceRegisterByIdService)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _mapper = mapper;
             _createNonComplianceRegisterService = createNonComplianceRegisterService;
+            _getNonComplianceRegisterByIdService = getNonComplianceRegisterByIdService;
         }
         /// <summary>
         /// Endpoint responsável por inserir um registro de não conformidade.
@@ -111,8 +114,8 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetById(int id)
         {
-            var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
-            return Ok(_mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister));
+            var nonComplianceRegister = await _getNonComplianceRegisterByIdService.Execute(id);
+            return Ok(nonComplianceRegister.Value);
         }
 
     }

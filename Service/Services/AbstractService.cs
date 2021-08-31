@@ -6,7 +6,7 @@ namespace Service.Services
 {
     public abstract class AbstractService : IService
     {
-        public ResponseService GenerateErroServiceResponse
+        protected ResponseService GenerateErroServiceResponse
             (string message, HttpStatusCode status = HttpStatusCode.BadRequest) =>
             new ResponseService
             {
@@ -14,7 +14,7 @@ namespace Service.Services
                 Status = status,
                 Success = false
             };
-        public ResponseService<T> GenerateErroServiceResponse<T>
+        protected ResponseService<T> GenerateErroServiceResponse<T>
             (string message, HttpStatusCode status = HttpStatusCode.BadRequest) =>
             new ResponseService<T>
             {
@@ -23,7 +23,7 @@ namespace Service.Services
                 Success = false,
                 Value = default
             };
-        public ResponseService GenerateSuccessServiceResponse
+        protected ResponseService GenerateSuccessServiceResponse
             (HttpStatusCode status = HttpStatusCode.OK) =>
             new ResponseService
             {
@@ -31,7 +31,7 @@ namespace Service.Services
                 Status = status,
                 Message = string.Empty
             };
-        public ResponseService<T> GenerateSuccessServiceResponse<T>
+        protected ResponseService<T> GenerateSuccessServiceResponse<T>
             (T value, HttpStatusCode status = HttpStatusCode.OK) =>
             new ResponseService<T>
             {

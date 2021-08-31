@@ -42,7 +42,8 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
-                .ForMember(dest => dest.HasRootCauseAnalysis, opt => opt.MapFrom(src => src.RootCauseAnalysis != null));
+                .ForMember(dest => dest.HasRootCauseAnalysis, opt => opt.MapFrom(src => src.RootCauseAnalysis != null))
+                .ForMember(dest => dest.Archives, opt => opt.Ignore());
 
             CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()
                 .ForMember(dest => dest.NonComplianceRegisterId, opt => opt.MapFrom(src => src.NonComplianceRegisterId))

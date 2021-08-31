@@ -3,6 +3,7 @@ using Amazon.S3.Model;
 using Domain.Configs;
 using Domain.Interfaces.Util;
 using Microsoft.Extensions.Options;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -53,6 +54,15 @@ namespace Util.AmazonS3
             {
                 return default;
             }
+        }
+        public async Task<string> GetGetPreSignedURL(string objectKey)
+        {
+            return await Task.FromResult(_s3Client.GetPreSignedURL(new GetPreSignedUrlRequest
+            {
+                BucketName = _bucketName,
+                Expires = DateTime.Now.AddMinutes(30),
+                Key = objectKey
+            }));
         }
 
         public async Task DeleteFileAsync(string objectKey)
