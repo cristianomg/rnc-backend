@@ -1,7 +1,11 @@
-﻿using Domain.Interfaces.Services;
+﻿using Amazon;
+using Amazon.S3;
+using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Services;
+using Util.AmazonS3;
 using Util.GeneratePDF;
 using Util.RenderRazorPage;
 
@@ -18,8 +22,12 @@ namespace Api.Rnc.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddServicesInjections(this IServiceCollection services)
+        public static IServiceCollection AddServicesInjections(this IServiceCollection services, IConfiguration configuration)
         {
+
+            var ACCESS_KEY_ID = configuration.GetValue<string>("S3Config:AccessKeyId");
+            var ACCESS_KEY = configuration.GetValue<string>("S3Config:AccessKey");
+
             services.AddScoped<ICreateUserService, CreateUserService>();
             services.AddScoped<ICreateAuthService, CreateAuthService>();
             services.AddScoped<IRecoveryPasswordService, RecoveryPasswordService>();
@@ -37,6 +45,8 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IGeneratePDF, GeneratePDF>();
             services.AddScoped<ISetSupervisorOnSetorService, SetSupervisorOnSetorService>();
             services.AddScoped<IEvalUserSendEmail, EvalUserSendEmail>();
+            services.AddSingleton<IAmazonS3>(new AmazonS3Client(ACCESS_KEY_ID, ACCESS_KEY, RegionEndpoint.USEast1));
+            services.AddScoped<IStorageService, S3StorageService>();
             return services;
         }
     }

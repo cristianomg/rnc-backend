@@ -44,6 +44,6 @@ namespace Domain.Dtos.Inputs
         /// Nome do usuário
         /// </summary>
         public string UserName { get; set; }
-        public List<DtoArchive> Archives { get; set; }
+        public List<DtoCreateArchive> Archives { get; set; }
     }
 }

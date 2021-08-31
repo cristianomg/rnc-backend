@@ -67,7 +67,7 @@ namespace Api.Rnc
                     .AddCustomSwaggerGen()
                     .AddCustomConfiguration(Configuration)
                     .AddRepositoriesInjections()
-                    .AddServicesInjections()
+                    .AddServicesInjections(Configuration)
                     .AddCustomHealthChecks()
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()

@@ -10,6 +10,6 @@ namespace Api.Rnc.Extensions
             Convert.ToInt32(user.Claims.First(x => x.Type == "UserId").Value);
 
         public static string GetUserName(this ClaimsPrincipal user) =>
-            user.Claims.First(x => x.Type == "Name").Value;
+            user.Claims.First(x => x.Type == ClaimTypes.Name).Value;
     }
 }

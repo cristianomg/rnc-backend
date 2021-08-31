@@ -14,12 +14,13 @@ namespace Data.Rnc.Context
         {
             this.ChangeTracker.LazyLoadingEnabled = false;
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private RncContext()
         {
+
         }
 
         public DbSet<NonComplianceRegister> NonComplianceRegisters { get; set; }
-        public DbSet<Archives> Archives { get; set; }
+        public DbSet<Archive> Archives { get; set; }
         public DbSet<NonCompliance> NonCompliance { get; set; }
         public DbSet<TypeNonCompliance> TypeNonCompliance { get; set; }
         public DbSet<User> Users { get; set; }

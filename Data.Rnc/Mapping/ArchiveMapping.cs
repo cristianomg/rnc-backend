@@ -5,20 +5,19 @@ using System;
 
 namespace Data.Rnc.Mapping
 {
-    public class ArchivesMapping : IEntityTypeConfiguration<Archives>
+    public class ArchiveMapping : IEntityTypeConfiguration<Archive>
     {
-        public void Configure(EntityTypeBuilder<Archives> builder)
+        public void Configure(EntityTypeBuilder<Archive> builder)
         {
-            builder.ToTable(nameof(Archives));
+            builder.ToTable(nameof(Archive));
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.CreatedAt)
-                .IsRequired()
-                .HasDefaultValue(DateTime.Now);
+            builder.Property(x => x.Key)
+                .IsRequired();
 
             builder.HasOne(x => x.NonComplimance)
                 .WithMany(x => x.Archives)

@@ -3,9 +3,11 @@ using Domain.Dtos.Inputs;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.Interfaces.Util;
 using Domain.Models.Helps;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -18,13 +20,16 @@ namespace Service.Services
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly INonComplianceRepository _nonComplianceRepository;
         private readonly IMapper _mapper;
+        private readonly IStorageService _storageService;
         public CreateNonComplianceRegisterService(INonComplianceRegisterRepository nonComplianceRegisterRepository,
                                                   INonComplianceRepository nonComplianceRepository,
-                                                  IMapper mapper)
+                                                  IMapper mapper,
+                                                  IStorageService storageService)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _nonComplianceRepository = nonComplianceRepository;
             _mapper = mapper;
+            _storageService = storageService;
         }
 
         public async Task<ResponseService> Execute(DtoNonComplianceRegisterInput nonCompliance)
@@ -39,6 +44,8 @@ namespace Service.Services
 
             using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
+                nonCompliance.Archives.Select(CreateObjectKeyToArchive);
+
                 try
                 {
                     var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
@@ -49,8 +56,8 @@ namespace Service.Services
                         return GenerateErroServiceResponse(existingNonCompliance.Message);
 
                     var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
-                    List<Archives> archives = new();
-                    archives = _mapper.Map<List<Archives>>(nonCompliance.Archives);
+
+                    var archives = await UploadFiles(nonCompliance.Archives);
 
                     var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                     {
@@ -64,7 +71,7 @@ namespace Service.Services
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
                         CreatedBy = nonCompliance.UserName,
-                        Archives = archives
+                        Archives = archives.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList()
                     });
 
                     await _nonComplianceRegisterRepository.SaveChanges();
@@ -75,12 +82,53 @@ namespace Service.Services
                 }
                 catch (Exception ex)
                 {
+                    DeleteFiles(nonCompliance.Archives);
                     Console.Write(ex);
                     scope.Dispose();
                     return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
                 }
             }
 
+        }
+
+        private async Task DeleteFiles(List<DtoCreateArchive> files)
+        {
+            foreach (var item in files)
+            {
+                await _storageService.DeleteFileAsync(item.FileName);
+            }
+        }
+
+        private async Task<IEnumerable<Archive>> UploadFiles(List<DtoCreateArchive> files)
+        {
+            var archives = new List<Archive>();
+            foreach(var file in files)
+            {
+                using(var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
+                {
+                    var objectKey = $"{file.FileName}-{Guid.NewGuid()}";
+                    await _storageService.UploadFileAsync(objectKey, memoryStream);
+
+                    archives.Add(new Archive
+                    {
+                        Key = objectKey,
+                    });
+                }
+            }
+            return archives;
+        }
+
+        private DtoCreateArchive CreateObjectKeyToArchive(DtoCreateArchive dto)
+        {
+            dto.FileName = $"{dto.FileName}-{Guid.NewGuid()}";
+            return dto;
+        }
+
+        private Archive AddAttributesToArchive(Archive archive, DtoNonComplianceRegisterInput nonCompliance)
+        {
+            archive.CreatedBy = nonCompliance.UserName;
+
+            return archive;
         }
 
         private async Task<List<NonCompliance>> CreateNewNonCompliance(string creationUserName, IEnumerable<DtoNonCompliance> nonCompliances)

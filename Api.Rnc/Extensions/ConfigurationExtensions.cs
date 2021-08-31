@@ -21,6 +21,7 @@ namespace Api.Rnc.Extensions
             services.Configure<OpenApiInfo>(configuration.GetSection("ApiInfo"));
             services.Configure<CryptographConfig>(configuration.GetSection("CryptographConfig"));
             services.Configure<SendEmailConfig>(configuration.GetSection("SendEmail"));
+            services.Configure<S3Config>(configuration.GetSection("S3Config"));
 
             services.AddHttpClient();
 
