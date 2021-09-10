@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
@@ -44,7 +45,9 @@ namespace Service.Services
 
             using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
-                nonCompliance.Archives.Select(CreateObjectKeyToArchive);
+                var hasArchives = nonCompliance.Archives != null;
+                if (hasArchives)
+                    nonCompliance.Archives.Select(CreateObjectKeyToArchive);
 
                 try
                 {
@@ -57,7 +60,7 @@ namespace Service.Services
 
                     var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
 
-                    var archives = await UploadFiles(nonCompliance.Archives);
+                    var archives = hasArchives ? await UploadFiles(nonCompliance.Archives) : null;
 
                     var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                     {
@@ -71,7 +74,8 @@ namespace Service.Services
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
                         CreatedBy = nonCompliance.UserName,
-                        Archives = archives.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList()
+                        Archives = archives?.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList(),
+                        OcurrencePendency = OcurrencePendency.RootCauseAnalysisAndActionPlan
                     });
 
                     await _nonComplianceRegisterRepository.SaveChanges();
