@@ -13,8 +13,8 @@ namespace Domain.Dtos.Inputs
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Dados do supervisor
+        /// Dados do responsável pelo setor
         /// </summary>
-        public DtoSupervisor Supervisor { get; set; }
+        public DtoResponsavelSetor ResponsavelDoSetor { get; set; }
     }
 }

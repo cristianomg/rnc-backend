@@ -6,9 +6,9 @@ namespace Domain.ValueObjects
     {
         [Description("Funcionario")]
         Employee = 1,
-        [Description("Supervisor")]
-        Supervisor,
-        [Description("Biomédico de Qualidade")]
-        QualityBiomedical
+        [Description("Resposável do Setor")]
+        ResponsibleFS,
+        [Description("Analista de Qualidade")]
+        AnalystBiomedical
     }
 }

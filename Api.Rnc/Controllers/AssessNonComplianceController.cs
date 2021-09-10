@@ -13,7 +13,7 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+    [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalystBiomedical))]
     public class AssessNonComplianceController : ControllerBase
     {
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
