@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Rnc.Migrations
 {
     [DbContext(typeof(RncContext))]
-    [Migration("20210830185214_inserirIdEvidencias")]
-    partial class inserirIdEvidencias
+    [Migration("20210910222048_Rnc")]
+    partial class Rnc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,7 +140,7 @@ namespace Data.Rnc.Migrations
                     b.ToTable("ActionPlainResponse");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Archives", b =>
+            modelBuilder.Entity("Domain.Entities.Archive", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,18 +151,17 @@ namespace Data.Rnc.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 8, 30, 15, 52, 13, 420, DateTimeKind.Local).AddTicks(3290));
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<int>("IdArchive")
-                        .HasColumnType("integer");
-
                     b.Property<int>("IdNonComplimance")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -174,7 +173,7 @@ namespace Data.Rnc.Migrations
 
                     b.HasIndex("IdNonComplimance");
 
-                    b.ToTable("Archives");
+                    b.ToTable("Archive");
                 });
 
             modelBuilder.Entity("Domain.Entities.Historic", b =>
@@ -274,6 +273,9 @@ namespace Data.Rnc.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
+                    b.Property<int>("OccurrenceClassificationId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PeopleInvolved")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -300,11 +302,41 @@ namespace Data.Rnc.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OccurrenceClassificationId");
+
                     b.HasIndex("SetorId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("NonComplianceRegister");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OccurrenceClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OccurrenceClassification");
                 });
 
             modelBuilder.Entity("Domain.Entities.RootCauseAnalysis", b =>
@@ -421,21 +453,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(9316),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(925),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 450, DateTimeKind.Local).AddTicks(1173),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(2387),
                             NameNonCompliance = "Analitica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 450, DateTimeKind.Local).AddTicks(1265),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(2466),
                             NameNonCompliance = "Pos-Analitica"
                         });
                 });
@@ -453,7 +485,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 8, 30, 15, 52, 13, 444, DateTimeKind.Local).AddTicks(4489));
+                        .HasDefaultValue(new DateTime(2021, 9, 10, 19, 20, 48, 402, DateTimeKind.Local).AddTicks(9950));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -511,7 +543,7 @@ namespace Data.Rnc.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2021, 8, 30, 15, 52, 13, 442, DateTimeKind.Local).AddTicks(125));
+                        .HasDefaultValue(new DateTime(2021, 9, 10, 19, 20, 48, 397, DateTimeKind.Local).AddTicks(8270));
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -570,21 +602,21 @@ namespace Data.Rnc.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(2031),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(5657),
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(4188),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(6998),
                             Name = "Supervisor"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 8, 30, 15, 52, 13, 449, DateTimeKind.Local).AddTicks(4284),
+                            CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(7073),
                             Name = "QualityBiomedical"
                         });
                 });
@@ -642,7 +674,7 @@ namespace Data.Rnc.Migrations
                     b.Navigation("RootCauseAnalysis");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Archives", b =>
+            modelBuilder.Entity("Domain.Entities.Archive", b =>
                 {
                     b.HasOne("Domain.Entities.NonComplianceRegister", "NonComplimance")
                         .WithMany("Archives")
@@ -666,6 +698,12 @@ namespace Data.Rnc.Migrations
 
             modelBuilder.Entity("Domain.Entities.NonComplianceRegister", b =>
                 {
+                    b.HasOne("Domain.Entities.OccurrenceClassification", "OccurrenceClassification")
+                        .WithMany("NonComplianceRegisters")
+                        .HasForeignKey("OccurrenceClassificationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Setor", "Setor")
                         .WithMany("NonComplianceRegisters")
                         .HasForeignKey("SetorId")
@@ -677,6 +715,8 @@ namespace Data.Rnc.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("OccurrenceClassification");
 
                     b.Navigation("Setor");
 
@@ -781,6 +821,11 @@ namespace Data.Rnc.Migrations
                     b.Navigation("Archives");
 
                     b.Navigation("RootCauseAnalysis");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OccurrenceClassification", b =>
+                {
+                    b.Navigation("NonComplianceRegisters");
                 });
 
             modelBuilder.Entity("Domain.Entities.RootCauseAnalysis", b =>

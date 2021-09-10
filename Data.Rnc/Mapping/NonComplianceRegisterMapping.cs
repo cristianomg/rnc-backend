@@ -43,6 +43,10 @@ namespace Data.Rnc.Mapping
             builder.HasMany(x => x.NonCompliances)
                 .WithMany(x => x.NonComplianceRegisters)
                 .UsingEntity(x => x.ToTable(nameof(NonComplianceNonComplianceRegister)));
+
+            builder.HasOne(x => x.OccurrenceClassification)
+                .WithMany(x => x.NonComplianceRegisters)
+                .HasForeignKey(x => x.OccurrenceClassificationId);
         }
     }
 }

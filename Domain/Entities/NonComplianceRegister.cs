@@ -7,6 +7,7 @@ namespace Domain.Entities
     public class NonComplianceRegister : Entity<int>
     {
         public int UserId { get; set; }
+        public OccurrenceClassificationType OccurrenceClassificationId { get; set; }
         public DateTime RegisterDate { get; set; }
         public string RegisterHour { get; set; }
         public SetorType SetorId { get; set; }
@@ -18,6 +19,7 @@ namespace Domain.Entities
         public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
         public virtual Setor Setor { get; set; }
         public virtual List<Archive> Archives { get; set; }
+        public virtual OccurrenceClassification OccurrenceClassification { get; set; }
 
         public bool HasRootCauseAnalysis() => RootCauseAnalysis != null;
     }

@@ -62,6 +62,7 @@ namespace Service.Services
                     var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                     {
                         UserId = nonCompliance.UserId,
+                        OccurrenceClassificationId = nonCompliance.OccurrenceClassification,
                         ImmediateAction = nonCompliance.ImmediateAction,
                         MoreInformation = nonCompliance.MoreInformation,
                         PeopleInvolved = nonCompliance.PeopleInvolved,
@@ -82,7 +83,7 @@ namespace Service.Services
                 }
                 catch (Exception ex)
                 {
-                    DeleteFiles(nonCompliance.Archives);
+                    await DeleteFiles(nonCompliance.Archives);
                     Console.Write(ex);
                     scope.Dispose();
                     return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
