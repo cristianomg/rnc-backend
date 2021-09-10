@@ -17,7 +17,7 @@ namespace Data.Rnc.Mapping
                 .WithOne(x => x.Setor)
                 .HasForeignKey(x => x.SetorId);
 
-            builder.HasOne(x => x.Supervisor)
+            builder.HasOne(x => x.ResponsibleFS)
                 .WithMany(x => x.SetoresSupervisao)
                 .HasForeignKey(x => x.SupervisorId)
                 .OnDelete(DeleteBehavior.SetNull);

@@ -9,7 +9,7 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserPermissionType.QualityBiomedical))]
+    [Authorize(Roles = nameof(UserPermissionType.AnalystBiomedical))]
     public class ReportController : ControllerBase
     {
         private readonly ICreateNonComplianceRegisterReportService _createNonConplianceRegisterReportService;

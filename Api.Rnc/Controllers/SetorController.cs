@@ -18,10 +18,10 @@ namespace Api.Rnc.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ISetorRepository _setorRepository;
-        private readonly ISetSupervisorOnSetorService _setSupervisorOnSetorService;
+        private readonly ISetResponsibleOnSetorService _setSupervisorOnSetorService;
         public SetorController(IMapper mapper,
                                ISetorRepository setorRepository,
-                               ISetSupervisorOnSetorService setSupervisorOnSetorService)
+                               ISetResponsibleOnSetorService setSupervisorOnSetorService)
         {
             _mapper = mapper;
             _setorRepository = setorRepository;
@@ -45,7 +45,7 @@ namespace Api.Rnc.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SetSupervisorOnSetor(DtoSetSupervisor setSupervisor)
+        public async Task<IActionResult> SetSupervisorOnSetor(DtoSetResponsible setSupervisor)
         {
             setSupervisor.UserName = User.GetUserName();
 

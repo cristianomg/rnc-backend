@@ -56,7 +56,7 @@ namespace Api.Rnc.Controllers
         [HttpGet("setor/{setor}")]
         [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalystBiomedical))]
         public async Task<IActionResult> GetAllBySetor(SetorType setor, HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
@@ -74,7 +74,7 @@ namespace Api.Rnc.Controllers
         [HttpGet("all")]
         [HttpGet("all/{hasRootCauseAnalysis}")]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalystBiomedical))]
         public async Task<IActionResult> GetAll(HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
@@ -92,7 +92,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{date:DateTime}/{setor:required}")]
         [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalystBiomedical))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
@@ -108,7 +108,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalystBiomedical))]
         public async Task<IActionResult> GetById(int id)
         {
             var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);

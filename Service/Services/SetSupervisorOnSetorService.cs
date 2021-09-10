@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class SetSupervisorOnSetorService : AbstractService, ISetSupervisorOnSetorService
+    public class SetSupervisorOnSetorService : AbstractService, ISetResponsibleOnSetorService
     {
         private readonly ISetorRepository _setorRepository;
         private readonly IUserRepository _userRepository;
@@ -18,7 +18,7 @@ namespace Service.Services
             _userRepository = userRepository;
         }
 
-        public async Task<ResponseService> Execute(DtoSetSupervisor createSetor)
+        public async Task<ResponseService> Execute(DtoSetResponsible createSetor)
         {
 
             var setor = await _setorRepository.GetById(createSetor.SetorId);
@@ -31,8 +31,8 @@ namespace Service.Services
             if (user == null)
                 return GenerateErroServiceResponse("Usuário não encontrado.");
 
-            if (user.UserPermissionId != UserPermissionType.Supervisor)
-                return GenerateErroServiceResponse("Usuário não é um supervisor.");
+            if (user.UserPermissionId != UserPermissionType.ResponsibleFS)
+                return GenerateErroServiceResponse("Usuário não é o responsável pelo Setor.");
 
             setor.SupervisorId = user.Id;
             setor.UpdatedBy = createSetor.UserName;

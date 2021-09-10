@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services
 {
-    public interface ISetSupervisorOnSetorService : IService
+    public interface ISetResponsibleOnSetorService : IService
     {
-        Task<ResponseService> Execute(DtoSetSupervisor createSetor);
+        Task<ResponseService> Execute(DtoSetResponsible createSetor);
     }
 }

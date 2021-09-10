@@ -15,6 +15,6 @@ namespace Domain.Dtos.Inputs
         /// <summary>
         /// Dados do supervisor
         /// </summary>
-        public DtoSupervisor Supervisor { get; set; }
+        public DtoResponsible ResponsibleFS { get; set; }
     }
 }

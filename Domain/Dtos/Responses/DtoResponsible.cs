@@ -1,6 +1,6 @@
 ﻿namespace Domain.Dtos.Responses
 {
-    public class DtoSupervisor
+    public class DtoResponsible
     {
         public int Id { get; set; }
         public string Name { get; set; }

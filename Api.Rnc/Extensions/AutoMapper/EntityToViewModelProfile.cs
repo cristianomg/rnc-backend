@@ -25,9 +25,9 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
             CreateMap<Setor, DtoSetor>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Id.GetDescription()))
-                .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src=>src.Supervisor));
+                .ForMember(dest => dest.ResponsibleFS, opt => opt.MapFrom(src=>src.ResponsibleFS));
 
-            CreateMap<User, DtoSupervisor>()
+            CreateMap<User, DtoResponsible>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
 

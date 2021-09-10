@@ -2,7 +2,7 @@
 
 namespace Domain.Dtos.Inputs
 {
-    public class DtoSetSupervisor
+    public class DtoSetResponsible
     {
         public SetorType SetorId { get; set; }
         public string UserEmail { get; set; }
