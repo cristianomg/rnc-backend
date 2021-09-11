@@ -26,6 +26,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<ISetorRepository, SetorRepository>();
             services.AddScoped<IActionPlainRepository, ActionPlainRepository>();
             services.AddScoped<IActionPlainQuestionRepository, ActionPlainQuestionRepository>();
+            services.AddScoped<IOccurrenceClassificationRepository, OccurrenceClassificationRepository>();
             return services;
         }
     }
