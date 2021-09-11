@@ -54,12 +54,7 @@ namespace Service.Services
                     return GenerateErroServiceResponse(existingNonCompliance.Message);
 
                 var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
-                IEnumerable<Archive> archives = null;
-                if (nonCompliance.Archives.Count != 0)
-                {
-                    _ = nonCompliance.Archives.Select(CreateObjectKeyToArchive);
-                    archives = await UploadFiles(nonCompliance.Archives);
-                }
+
                 var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                 {
                     UserId = nonCompliance.UserId,
@@ -73,9 +68,14 @@ namespace Service.Services
                     CreatedAt = DateTime.Now,
                     NonCompliances = allNonCompliances.ToList(),
                     CreatedBy = nonCompliance.UserName,
-                    Archives = archives.Any() ? archives.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList() : null
                 });
-
+                IEnumerable<Archive> archives = null;
+                if (nonCompliance.Archives != null)
+                {
+                    _ = nonCompliance.Archives.Select(CreateObjectKeyToArchive);
+                    archives = await UploadFiles(nonCompliance.Archives);
+                    entity.Archives = archives.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList();
+                }
                 await _nonComplianceRegisterRepository.SaveChanges();
 
                 scope.Complete();
