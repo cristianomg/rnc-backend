@@ -8,8 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Api.Rnc/Api.Rnc.csproj", "Api.Rnc/"]
-COPY ["Data.Rnc/Data.Rnc.csproj", "Data.Rnc/"]
+COPY ["Util/Util.csproj", "Util/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Service/Service.csproj", "Service/"]
+COPY ["Data.Rnc/Data.Rnc.csproj", "Data.Rnc/"]
 RUN dotnet restore "Api.Rnc/Api.Rnc.csproj"
 COPY . .
 WORKDIR "/src/Api.Rnc"

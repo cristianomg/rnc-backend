@@ -6,9 +6,15 @@ namespace Domain.ValueObjects
     {
         [Description("Near miss")]
         NearMiss = 1,
-        [Description("Eventos adversos")]
-        AdverseEvent,
+        [Description("Evento adverso leve")]
+        MildAdverseEvent,
+        [Description("Evento adverso moderado")]
+        ModerateAdverseEvent,
+        [Description("Evento adverso grave")]
+        SeriousAdverseEvent,
         [Description("Evento sem dano")]
-        UndamagedEvent
+        UndamagedEvent,
+        [Description("Não conformidade")]
+        NonCompliance
     }
 } 
