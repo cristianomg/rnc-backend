@@ -42,52 +42,52 @@ namespace Service.Services
             if (string.IsNullOrEmpty(nonCompliance.ImmediateAction))
                 return GenerateErroServiceResponse<NonComplianceRegister>("A ação imediata não pode ser vazia.");
 
-            using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
+            using var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled);
+
+            try
             {
-                nonCompliance.Archives.Select(CreateObjectKeyToArchive);
+                var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
 
-                try
+                var existingNonCompliance = await CheckExistingNonCompliances(nonCompliance.NonCompliances.Where(x => x.Id.HasValue));
+
+                if (!existingNonCompliance.Success)
+                    return GenerateErroServiceResponse(existingNonCompliance.Message);
+
+                var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
+                IEnumerable<Archive> archives = null;
+                if (nonCompliance.Archives.Count != 0)
                 {
-                    var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
-
-                    var existingNonCompliance = await CheckExistingNonCompliances(nonCompliance.NonCompliances.Where(x => x.Id.HasValue));
-
-                    if (!existingNonCompliance.Success)
-                        return GenerateErroServiceResponse(existingNonCompliance.Message);
-
-                    var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
-
-                    var archives = await UploadFiles(nonCompliance.Archives);
-
-                    var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
-                    {
-                        UserId = nonCompliance.UserId,
-                        OccurrenceClassificationId = nonCompliance.OccurrenceClassification,
-                        ImmediateAction = nonCompliance.ImmediateAction,
-                        MoreInformation = nonCompliance.MoreInformation,
-                        PeopleInvolved = nonCompliance.PeopleInvolved,
-                        RegisterDate = nonCompliance.RegisterDate,
-                        RegisterHour = nonCompliance.RegisterHour,
-                        SetorId = nonCompliance.Setor,
-                        CreatedAt = DateTime.Now,
-                        NonCompliances = allNonCompliances.ToList(),
-                        CreatedBy = nonCompliance.UserName,
-                        Archives = archives.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList()
-                    });
-
-                    await _nonComplianceRegisterRepository.SaveChanges();
-
-                    scope.Complete();
-
-                    return GenerateSuccessServiceResponse(HttpStatusCode.Created);
+                    _ = nonCompliance.Archives.Select(CreateObjectKeyToArchive);
+                    archives = await UploadFiles(nonCompliance.Archives);
                 }
-                catch (Exception ex)
+                var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
                 {
-                    await DeleteFiles(nonCompliance.Archives);
-                    Console.Write(ex);
-                    scope.Dispose();
-                    return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
-                }
+                    UserId = nonCompliance.UserId,
+                    OccurrenceClassificationId = nonCompliance.OccurrenceClassification,
+                    ImmediateAction = nonCompliance.ImmediateAction,
+                    MoreInformation = nonCompliance.MoreInformation,
+                    PeopleInvolved = nonCompliance.PeopleInvolved,
+                    RegisterDate = nonCompliance.RegisterDate,
+                    RegisterHour = nonCompliance.RegisterHour,
+                    SetorId = nonCompliance.Setor,
+                    CreatedAt = DateTime.Now,
+                    NonCompliances = allNonCompliances.ToList(),
+                    CreatedBy = nonCompliance.UserName,
+                    Archives = archives.Any() ? archives.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList() : null
+                });
+
+                await _nonComplianceRegisterRepository.SaveChanges();
+
+                scope.Complete();
+
+                return GenerateSuccessServiceResponse(HttpStatusCode.Created);
+            }
+            catch (Exception ex)
+            {
+                await DeleteFiles(nonCompliance.Archives);
+                Console.Write(ex);
+                scope.Dispose();
+                return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
             }
 
         }
@@ -103,9 +103,9 @@ namespace Service.Services
         private async Task<IEnumerable<Archive>> UploadFiles(List<DtoCreateArchive> files)
         {
             var archives = new List<Archive>();
-            foreach(var file in files)
+            foreach (var file in files)
             {
-                using(var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
+                using (var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
                 {
                     var objectKey = $"{file.FileName}-{Guid.NewGuid()}";
                     await _storageService.UploadFileAsync(objectKey, memoryStream);
