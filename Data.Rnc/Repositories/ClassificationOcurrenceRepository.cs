@@ -17,7 +17,7 @@ namespace Data.Rnc.Repositories
         }
         public async Task<IQueryable<OccurrenceClassification>> GetAllClassification()
         {
-            var occurrenceClassification = _dbSet.AsQueryable();
+            var occurrenceClassification = _dbSet.AsQueryable().OrderBy(x=>x.Id);
             return await Task.FromResult(occurrenceClassification);
         }
     }
