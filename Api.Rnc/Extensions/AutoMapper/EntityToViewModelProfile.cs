@@ -26,7 +26,8 @@ namespace Api.Rnc.Extensions.AutoMapper
             CreateMap<Setor, DtoSetor>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Id.GetDescription()))
                 .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src=>src.Supervisor));
-
+            CreateMap<OccurrenceClassification, DtoOccurrenceClassification>()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
             CreateMap<User, DtoSupervisor>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));

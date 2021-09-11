@@ -1,8 +1,7 @@
-﻿using Api.Rnc.Extensions;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Dtos.Inputs;
+using Domain.Dtos.Responses;
 using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +33,8 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllClassifications()
         {
-            var users = await _occurrenceClassificationRepository.GetAllClassification();
-            return Ok(_mapper.ProjectTo<DtoSetor>(users));
+            var classifications = await _occurrenceClassificationRepository.GetAllClassification();
+            return Ok(_mapper.ProjectTo<DtoOccurrenceClassification>(classifications));
         }
     }
 }
