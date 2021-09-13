@@ -1,4 +1,5 @@
 ﻿using Domain.Dtos.Inputs;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -49,6 +50,10 @@ namespace Domain.Dtos.Responses
         /// Flag para informar se o registro de não conformidade já passou pela fase de analise de causa raiz
         /// </summary>
         public bool HasRootCauseAnalysis { get; set; }
+        /// <summary>
+        /// Pendência para registro de ocorrências
+        /// </summary>
+        public OcurrencePendency? OcurrencePendency { get; set; }
 
         public List<string> Archives { get; set; } = new List<string>();
     }
