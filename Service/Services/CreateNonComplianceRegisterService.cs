@@ -74,52 +74,26 @@ namespace Service.Services
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
                         CreatedBy = nonCompliance.UserName,
-                        Archives = archives?.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList(),
+                        Archives = archives?.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList(),
                         OcurrencePendency = OcurrencePendency.RootCauseAnalysisAndActionPlan
                     });
 
-                if (!existingNonCompliance.Success)
-                    return GenerateErroServiceResponse(existingNonCompliance.Message);
+                    await _nonComplianceRegisterRepository.SaveChanges();
 
-                var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
+                    scope.Complete();
 
-                var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
-                {
-                    UserId = nonCompliance.UserId,
-                    OccurrenceClassificationId = nonCompliance.OccurrenceClassification,
-                    ImmediateAction = nonCompliance.ImmediateAction,
-                    MoreInformation = nonCompliance.MoreInformation,
-                    PeopleInvolved = nonCompliance.PeopleInvolved,
-                    RegisterDate = nonCompliance.RegisterDate,
-                    RegisterHour = nonCompliance.RegisterHour,
-                    SetorId = nonCompliance.Setor,
-                    CreatedAt = DateTime.Now,
-                    NonCompliances = allNonCompliances.ToList(),
-                    CreatedBy = nonCompliance.UserName,
-                });
-                IEnumerable<Archive> archives = null;
-                if (nonCompliance.Archives != null)
-                {
-                    _ = nonCompliance.Archives.Select(CreateObjectKeyToArchive);
-                    archives = await UploadFiles(nonCompliance.Archives);
-                    entity.Archives = archives.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList();
+                    return GenerateSuccessServiceResponse(HttpStatusCode.Created);
                 }
-                await _nonComplianceRegisterRepository.SaveChanges();
+                catch (Exception ex)
+                {
+                    await DeleteFiles(nonCompliance.Archives);
+                    Console.Write(ex);
+                    scope.Dispose();
+                    return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
+                }
 
-                scope.Complete();
-
-                return GenerateSuccessServiceResponse(HttpStatusCode.Created);
             }
-            catch (Exception ex)
-            {
-                await DeleteFiles(nonCompliance.Archives);
-                Console.Write(ex);
-                scope.Dispose();
-                return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
-            }
-
         }
-
         private async Task DeleteFiles(List<DtoCreateArchive> files)
         {
             foreach (var item in files)

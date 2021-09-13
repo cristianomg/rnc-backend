@@ -272,7 +272,7 @@ namespace Data.Rnc.Migrations
                         .HasColumnType("character varying(255)");
 
 
-                    b.Property<int>("OccurrenceClassificationId")
+                    b.Property<int>("OccurrenceClassificationId");
 
                     b.Property<int?>("OcurrencePendency")
 
@@ -458,7 +458,6 @@ namespace Data.Rnc.Migrations
 
                             CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(925),
 
-                            CreatedAt = new DateTime(2021, 9, 8, 20, 10, 12, 835, DateTimeKind.Local).AddTicks(669),
                             NameNonCompliance = "Pre-Analitica"
                         },
                         new
@@ -468,7 +467,6 @@ namespace Data.Rnc.Migrations
 
                             CreatedAt = new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(2387),
 
-                            CreatedAt = new DateTime(2021, 9, 8, 20, 10, 12, 835, DateTimeKind.Local).AddTicks(2032),
 
                             NameNonCompliance = "Analitica"
                         },
