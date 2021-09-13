@@ -28,8 +28,8 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
             CreateMap<Setor, DtoSetor>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Id.GetDescription()))
-                .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src=>src.Supervisor));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()))
+                .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src => src.Supervisor));
             CreateMap<OccurrenceClassification, DtoOccurrenceClassification>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
             CreateMap<User, DtoSupervisor>()
@@ -40,7 +40,7 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserAuth.Email));
-                
+
             CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
@@ -51,9 +51,8 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.HasRootCauseAnalysis, opt => opt.MapFrom(src => src.RootCauseAnalysis != null))
                 .ForMember(dest => dest.OcurrencePendency, opt => opt.MapFrom(src => src.OcurrencePendency));
 
-            CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()
-                .ForMember(dest => dest.NonComplianceRegisterId, opt => opt.MapFrom(src => src.NonComplianceRegisterId))
-                .ForMember(dest => dest.Analyze, opt => opt.MapFrom(src => src.Analyze));
+
+
 
             CreateMap<ActionPlain, DtoActionPlainListResponse>();
             CreateMap<ActionPlain, DtoActionPlainDetailResponse>()
@@ -64,7 +63,12 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Value))
                 .ForMember(dest => dest.ActionPlainId, opt => opt.MapFrom(src => src.ActionPlainId));
-            CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>();
+            CreateMap<RootCauseAnalysis, DtoCreateRootCauseAnalysisResponse>()
+                .ForMember(dest => dest.NonComplianceRegisterId, opt => opt.MapFrom(src => src.NonComplianceRegisterId))
+                .ForMember(dest => dest.FiveWhat, opt => opt.MapFrom(src => src.FiveWhats));
+
+            CreateMap<FiveWhat, DtoFiveWhat>()
+                .ForMember(dest => dest.What, opt => opt.MapFrom(src => src.What));
             CreateMap<ActionPlainResponse, DtoActionPlainResponse>();
         }
     }

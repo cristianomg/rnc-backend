@@ -5,6 +5,7 @@ using Domain.Interfaces.Services;
 using Domain.Models.Helps;
 using Service.Services.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -57,12 +58,22 @@ namespace Service.Services
                         ActionPlainId = actionPlain.Id,
 
                     }).ToList();
+                    var fivewhats = new List<FiveWhat>();
+                    foreach (var what in analyzeRootCause.FiveWhat)
+                    {
+                        fivewhats.Add(new FiveWhat
+                        {
+                            What = what.What,
+                        });
+
+                    }
+ 
                     var newAnalyzeRootCause = await _analyzeRootCauseRepository.Insert(new RootCauseAnalysis
                     {
                         NonComplianceRegisterId = analyzeRootCause.NonComplianceRegisterId,
                         UserId = analyzeRootCause.UserId,
                         CreatedBy = analyzeRootCause.UserName,
-                        Analyze = analyzeRootCause.Analyze,
+                        FiveWhats = fivewhats,
                         ActionPlainId = actionPlain.Id,
                         ActionPlain = actionPlain,
                         ActionPlainResponses = responses

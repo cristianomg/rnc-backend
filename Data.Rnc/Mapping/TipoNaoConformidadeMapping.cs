@@ -1,17 +1,14 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Data.Rnc.Mapping
 {
-    public class TipoNaoConformidadeMapping : IEntityTypeConfiguration<TipoNaoConformidade>
+    public class TipoNaoConformidadeMapping : IEntityTypeConfiguration<TypeNonCompliance>
     {
-        public void Configure(EntityTypeBuilder<TipoNaoConformidade> builder)
+        public void Configure(EntityTypeBuilder<TypeNonCompliance> builder)
         {
-            builder.ToTable(nameof(TipoNaoConformidade));
+            builder.ToTable(nameof(TypeNonCompliance));
 
             builder.HasKey(x => x.Id);
 
@@ -19,16 +16,16 @@ namespace Data.Rnc.Mapping
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.NomeTipoNaoConformidade)
+            builder.Property(x => x.NameNonCompliance)
                 .IsRequired()
                 .HasMaxLength(25);
 
-            builder.HasIndex(x => x.NomeTipoNaoConformidade)
+            builder.HasIndex(x => x.NameNonCompliance)
                 .IsUnique();
 
-            builder.HasMany(x => x.NaoConformidades)
-                .WithOne(x => x.TipoNaoConformidade)
-                .HasForeignKey(x => x.TipoNaoConformidadeId);
+            builder.HasMany(x => x.NonCompliances)
+                .WithOne(x => x.TypeNonCompliance)
+                .HasForeignKey(x => x.TypeNonComplianceId);
         }
     }
 }
