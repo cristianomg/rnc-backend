@@ -28,6 +28,10 @@ namespace Data.Rnc.Context
             {
                 SeedSetor();
             }
+            if (!_context.OccurrenceClassifications.Any())
+            {
+                SeedOccurrenceClassification();
+            }
         }
 
         private void ActionPlain()
@@ -207,6 +211,21 @@ namespace Data.Rnc.Context
                });
 
             _context.Setors.AddRange(setores);
+
+            _context.SaveChanges();
+        }
+        private void SeedOccurrenceClassification()
+        {
+            var occurrenceClassifications = Enum.GetValues(typeof(OccurrenceClassificationType))
+               .Cast<OccurrenceClassificationType>()
+               .Select(x => new OccurrenceClassification()
+               {
+                   Id = x,
+                   Name = x.ToString(),
+                   Active = true,
+               });
+
+            _context.OccurrenceClassifications.AddRange(occurrenceClassifications);
 
             _context.SaveChanges();
         }

@@ -32,6 +32,7 @@ namespace Data.Rnc.Context
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
         public DbSet<Historic> Historics { get; set; }
+        public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

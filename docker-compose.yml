@@ -1,17 +1,17 @@
-version: '2'
+version: '3'
  
 services:
   postgresserver:
     image: postgres:latest
-    container_name: 
-      db
+    container_name: db
     restart: always
-    ports:
-      - 5432:5432
+    user: postgres
     environment: 
-      POSTGRES_USER: "RncDev"
+      PGUSER: "postgres"
       POSTGRES_PASSWORD: "docker"
       POSTGRES_DB: "RncDev"
+    ports:
+      - 5432:5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
@@ -28,7 +28,7 @@ services:
     ports:
       - 5000:80
     environment: 
-      CONNECTION: "User ID=RncDev;Password=docker;Host=postgresserver;Port=5432;Database=RncDev;Pooling=true;"
+      CONNECTION: "User ID=postgres;Password=docker;Host=postgresserver;Port=5432;Database=RncDev;Pooling=true;"
     build:
       context: .
       dockerfile: Dockerfile

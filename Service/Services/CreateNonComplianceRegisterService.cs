@@ -74,7 +74,7 @@ namespace Service.Services
                         CreatedAt = DateTime.Now,
                         NonCompliances = allNonCompliances.ToList(),
                         CreatedBy = nonCompliance.UserName,
-                        Archives = archives?.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList(),
+                        Archives = archives?.Select(x => AddAttributesToArchive(x, nonCompliance)).ToList(),
                         OcurrencePendency = OcurrencePendency.RootCauseAnalysisAndActionPlan
                     });
 
@@ -86,15 +86,14 @@ namespace Service.Services
                 }
                 catch (Exception ex)
                 {
-                    DeleteFiles(nonCompliance.Archives);
+                    await DeleteFiles(nonCompliance.Archives);
                     Console.Write(ex);
                     scope.Dispose();
                     return GenerateErroServiceResponse("Erro ao criar novo registro de não conformidades.");
                 }
+
             }
-
         }
-
         private async Task DeleteFiles(List<DtoCreateArchive> files)
         {
             foreach (var item in files)
@@ -106,9 +105,9 @@ namespace Service.Services
         private async Task<IEnumerable<Archive>> UploadFiles(List<DtoCreateArchive> files)
         {
             var archives = new List<Archive>();
-            foreach(var file in files)
+            foreach (var file in files)
             {
-                using(var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
+                using (var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
                 {
                     var objectKey = $"{file.FileName}-{Guid.NewGuid()}";
                     await _storageService.UploadFileAsync(objectKey, memoryStream);
