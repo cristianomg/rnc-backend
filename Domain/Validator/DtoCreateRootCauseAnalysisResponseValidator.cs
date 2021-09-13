@@ -11,10 +11,6 @@ namespace Domain.Validator
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("O Id da não conformidade não pode ser nulo ou vazio");
-            RuleFor(x => x.Analyze)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("O analizador não pode ser nulo ou vazio.");
             RuleFor(x => x.UserId)
                 .NotNull()
                 .NotEmpty()

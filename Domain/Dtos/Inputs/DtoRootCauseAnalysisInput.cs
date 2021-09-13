@@ -1,4 +1,6 @@
-﻿namespace Domain.Dtos.Inputs
+﻿using System.Collections.Generic;
+
+namespace Domain.Dtos.Inputs
 {
     public class DtoRootCauseAnalysisInput
     {
@@ -7,9 +9,9 @@
         /// </summary>
         public int NonComplianceRegisterId { get; set; }
         /// <summary>
-        /// Descrição da analise
+        /// 5 Porques
         /// </summary>
-        public string Analyze { get; set; }
+        public List<DtoFiveWhat> FiveWhat { get; set; }
         /// <summary>
         /// Plano de ação
         /// </summary>
