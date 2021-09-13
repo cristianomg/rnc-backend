@@ -21,14 +21,31 @@ namespace Data.Rnc.Repositories
 
         public async Task<NonComplianceRegister> GetByIdWithInclude(int id)
         {
-            return await _context.NonComplianceRegisters.AsNoTracking()
+            var nonComplianceRegister = await _context.NonComplianceRegisters.AsNoTracking()
                  .Include(x => x.Setor)
                  .Include(x => x.User)
                  .Include(x => x.RootCauseAnalysis)
-                 .Include(x => x.Archives)
+                 .Include(x => x.NonCompliances)
                  .Include(x => x.NonCompliances)
                  .ThenInclude(x => x.TypeNonCompliance)
                  .FirstOrDefaultAsync(x => x.Id == id);
+
+
+            nonComplianceRegister.NonCompliances
+                .Select(x => FillArchive(nonComplianceRegister.Id, x))
+                .ToList();
+
+
+            return nonComplianceRegister;
+        }
+        private NonCompliance FillArchive(int nonComplianceRegisterId, 
+                                          NonCompliance nonCompliance)
+        {
+            nonCompliance.Archives = _context.Archives
+                .Where(x => x.NonComplianceId == nonCompliance.Id &&
+                            x.NonComplianceRegisterId == nonComplianceRegisterId)
+                .ToList();
+            return nonCompliance;
         }
         public async Task<NonComplianceRegister> GetByIdForReport(int id)
         {

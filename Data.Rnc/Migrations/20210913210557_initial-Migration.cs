@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Rnc.Migrations
 {
-    public partial class Rnc : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,7 +89,7 @@ namespace Data.Rnc.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 9, 10, 19, 20, 48, 397, DateTimeKind.Local).AddTicks(8270)),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 9, 13, 18, 5, 56, 956, DateTimeKind.Local).AddTicks(4046)),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     UpdatedBy = table.Column<string>(type: "text", nullable: true)
@@ -227,6 +227,30 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Archive",
+                columns: table => new
+                {
+                    NonComplianceId = table.Column<int>(type: "integer", nullable: false),
+                    NonComplianceRegisterId = table.Column<int>(type: "integer", nullable: false),
+                    Key = table.Column<string>(type: "text", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Archive", x => new { x.NonComplianceId, x.NonComplianceRegisterId });
+                    table.ForeignKey(
+                        name: "FK_Archive_NonCompliance_NonComplianceId",
+                        column: x => x.NonComplianceId,
+                        principalTable: "NonCompliance",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NonComplianceNonComplianceRegister",
                 columns: table => new
                 {
@@ -245,25 +269,6 @@ namespace Data.Rnc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Archive",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Key = table.Column<string>(type: "text", nullable: false),
-                    IdNonComplimance = table.Column<int>(type: "integer", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Archive", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "NonComplianceRegister",
                 columns: table => new
                 {
@@ -277,6 +282,7 @@ namespace Data.Rnc.Migrations
                     PeopleInvolved = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     MoreInformation = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     ImmediateAction = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    OcurrencePendency = table.Column<int>(type: "integer", nullable: true),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -306,7 +312,7 @@ namespace Data.Rnc.Migrations
                     SetorId = table.Column<int>(type: "integer", nullable: false),
                     UserPermissionId = table.Column<int>(type: "integer", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 9, 10, 19, 20, 48, 402, DateTimeKind.Local).AddTicks(9950)),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2021, 9, 13, 18, 5, 56, 964, DateTimeKind.Local).AddTicks(8240)),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     UpdatedBy = table.Column<string>(type: "text", nullable: true)
@@ -357,9 +363,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "NameNonCompliance", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(925), null, "Pre-Analitica", null, null },
-                    { 2, true, new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(2387), null, "Analitica", null, null },
-                    { 3, true, new DateTime(2021, 9, 10, 19, 20, 48, 407, DateTimeKind.Local).AddTicks(2466), null, "Pos-Analitica", null, null }
+                    { 1, true, new DateTime(2021, 9, 13, 18, 5, 56, 969, DateTimeKind.Local).AddTicks(5654), null, "Pre-Analitica", null, null },
+                    { 2, true, new DateTime(2021, 9, 13, 18, 5, 56, 969, DateTimeKind.Local).AddTicks(7693), null, "Analitica", null, null },
+                    { 3, true, new DateTime(2021, 9, 13, 18, 5, 56, 969, DateTimeKind.Local).AddTicks(7816), null, "Pos-Analitica", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -367,9 +373,9 @@ namespace Data.Rnc.Migrations
                 columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(5657), null, "Employee", null, null },
-                    { 2, true, new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(6998), null, "Supervisor", null, null },
-                    { 3, true, new DateTime(2021, 9, 10, 19, 20, 48, 406, DateTimeKind.Local).AddTicks(7073), null, "QualityBiomedical", null, null }
+                    { 1, true, new DateTime(2021, 9, 13, 18, 5, 56, 968, DateTimeKind.Local).AddTicks(9713), null, "Employee", null, null },
+                    { 2, true, new DateTime(2021, 9, 13, 18, 5, 56, 969, DateTimeKind.Local).AddTicks(1593), null, "Supervisor", null, null },
+                    { 3, true, new DateTime(2021, 9, 13, 18, 5, 56, 969, DateTimeKind.Local).AddTicks(1671), null, "QualityBiomedical", null, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -399,9 +405,9 @@ namespace Data.Rnc.Migrations
                 column: "RootCauseAnalysisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Archive_IdNonComplimance",
+                name: "IX_Archive_NonComplianceRegisterId",
                 table: "Archive",
-                column: "IdNonComplimance");
+                column: "NonComplianceRegisterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NonCompliance_TypeNonComplianceId",
@@ -502,17 +508,17 @@ namespace Data.Rnc.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_NonComplianceNonComplianceRegister_NonComplianceRegister_No~",
-                table: "NonComplianceNonComplianceRegister",
-                column: "NonComplianceRegistersId",
+                name: "FK_Archive_NonComplianceRegister_NonComplianceRegisterId",
+                table: "Archive",
+                column: "NonComplianceRegisterId",
                 principalTable: "NonComplianceRegister",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Archive_NonComplianceRegister_IdNonComplimance",
-                table: "Archive",
-                column: "IdNonComplimance",
+                name: "FK_NonComplianceNonComplianceRegister_NonComplianceRegister_No~",
+                table: "NonComplianceNonComplianceRegister",
+                column: "NonComplianceRegistersId",
                 principalTable: "NonComplianceRegister",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);

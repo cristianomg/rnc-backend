@@ -9,7 +9,7 @@ namespace Domain.Dtos.Inputs
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
         /// </summary>
-        public IEnumerable<DtoNonCompliance> NonCompliances { get; set; }
+        public IEnumerable<DtoNonCompliance> NonCompliances { get; set; } 
         /// <summary>
         /// Data do registro
         /// </summary>
@@ -48,6 +48,5 @@ namespace Domain.Dtos.Inputs
         /// Nome do usuário
         /// </summary>
         public string UserName { get; set; }
-        public List<DtoCreateArchive> Archives { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
 using Domain.Models.Helps;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Service.Services
@@ -31,9 +32,12 @@ namespace Service.Services
             var nonCompliance = _mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister);
 
 
-            foreach (var item in nonComplianceRegister.Archives)
+            foreach (var item in nonComplianceRegister.NonCompliances?.SelectMany(x=>x.Archives))
             {
-                nonCompliance.Archives.Add(await _storageService.GetGetPreSignedURL(item.Key));
+
+                nonCompliance.NonCompliances
+                    .First(x => x.Id == item.NonComplianceId)
+                    .Archives.Add(await _storageService.GetGetPreSignedURL(item.Key));
             }
 
             return GenerateSuccessServiceResponse(nonCompliance);

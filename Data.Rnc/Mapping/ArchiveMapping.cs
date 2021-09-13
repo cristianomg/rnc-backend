@@ -12,16 +12,19 @@ namespace Data.Rnc.Mapping
             builder.ToTable(nameof(Archive));
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .IsRequired()
-                .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Key)
                 .IsRequired();
 
-            builder.HasOne(x => x.NonComplimance)
+            builder.HasOne(x => x.NonCompliance)
                 .WithMany(x => x.Archives)
-                .HasForeignKey(x => x.IdNonComplimance);
+                .HasForeignKey(x => x.NonComplianceId)
+                .IsRequired();
+
+            builder.HasOne(x => x.NonComplianceRegister)
+                .WithMany()
+                .HasForeignKey(x => x.NonComplianceRegisterId)
+                .IsRequired();
 
         }
     }
