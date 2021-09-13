@@ -33,6 +33,7 @@ namespace Data.Rnc.Context
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
         public DbSet<Historic> Historics { get; set; }
         public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
+        public DbSet<FiveWhat> FiveWhats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

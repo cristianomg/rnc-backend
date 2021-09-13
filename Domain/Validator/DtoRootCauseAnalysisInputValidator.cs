@@ -11,10 +11,6 @@ namespace Domain.Validator
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("O plano de ação não pode ser nulo ou vazio");
-            RuleFor(x => x.Analyze)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("O analizador não pode ser vazio ou nulo.");
             RuleFor(x => x.NonComplianceRegisterId)
                 .NotEmpty()
                 .NotNull()

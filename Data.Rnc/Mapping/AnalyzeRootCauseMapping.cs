@@ -16,8 +16,6 @@ namespace Data.Rnc.Mapping
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Analyze).IsRequired();
-
             builder.Property(x => x.NonComplianceRegisterId)
                 .IsRequired();
 
