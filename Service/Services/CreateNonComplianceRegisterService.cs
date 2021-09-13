@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Inputs;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;
@@ -42,13 +43,40 @@ namespace Service.Services
             if (string.IsNullOrEmpty(nonCompliance.ImmediateAction))
                 return GenerateErroServiceResponse<NonComplianceRegister>("A ação imediata não pode ser vazia.");
 
-            using var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled);
-
-            try
+            using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
-                var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
+                var hasArchives = nonCompliance.Archives != null;
+                if (hasArchives)
+                    nonCompliance.Archives.Select(CreateObjectKeyToArchive);
 
-                var existingNonCompliance = await CheckExistingNonCompliances(nonCompliance.NonCompliances.Where(x => x.Id.HasValue));
+                try
+                {
+                    var notExistingNonCompliance = await CreateNewNonCompliance(nonCompliance.UserName, nonCompliance.NonCompliances.Where(x => !x.Id.HasValue));
+
+                    var existingNonCompliance = await CheckExistingNonCompliances(nonCompliance.NonCompliances.Where(x => x.Id.HasValue));
+
+                    if (!existingNonCompliance.Success)
+                        return GenerateErroServiceResponse(existingNonCompliance.Message);
+
+                    var allNonCompliances = existingNonCompliance.Value.Union(notExistingNonCompliance);
+
+                    var archives = hasArchives ? await UploadFiles(nonCompliance.Archives) : null;
+
+                    var entity = await _nonComplianceRegisterRepository.Insert(new NonComplianceRegister
+                    {
+                        UserId = nonCompliance.UserId,
+                        ImmediateAction = nonCompliance.ImmediateAction,
+                        MoreInformation = nonCompliance.MoreInformation,
+                        PeopleInvolved = nonCompliance.PeopleInvolved,
+                        RegisterDate = nonCompliance.RegisterDate,
+                        RegisterHour = nonCompliance.RegisterHour,
+                        SetorId = nonCompliance.Setor,
+                        CreatedAt = DateTime.Now,
+                        NonCompliances = allNonCompliances.ToList(),
+                        CreatedBy = nonCompliance.UserName,
+                        Archives = archives?.Select(x=>AddAttributesToArchive(x, nonCompliance)).ToList(),
+                        OcurrencePendency = OcurrencePendency.RootCauseAnalysisAndActionPlan
+                    });
 
                 if (!existingNonCompliance.Success)
                     return GenerateErroServiceResponse(existingNonCompliance.Message);

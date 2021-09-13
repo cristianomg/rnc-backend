@@ -44,9 +44,14 @@ namespace Data.Rnc.Mapping
                 .WithMany(x => x.NonComplianceRegisters)
                 .UsingEntity(x => x.ToTable(nameof(NonComplianceNonComplianceRegister)));
 
+
             builder.HasOne(x => x.OccurrenceClassification)
                 .WithMany(x => x.NonComplianceRegisters)
                 .HasForeignKey(x => x.OccurrenceClassificationId);
+
+            builder.Property(x => x.OcurrencePendency)
+                .HasDefaultValue(null);
+
         }
     }
 }
