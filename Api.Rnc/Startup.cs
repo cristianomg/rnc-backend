@@ -78,16 +78,13 @@ namespace Api.Rnc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (!env.IsProduction())
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-                {
-                    var context = serviceScope.ServiceProvider.GetRequiredService<RncContext>();
+                var context = serviceScope.ServiceProvider.GetRequiredService<RncContext>();
+                if (!env.IsProduction())
                     context.Database.Migrate();
 
-                    new SeedInitial(context).Init();
-                }
-
+                new SeedInitial(context).Init();
             }
             if (env.IsProduction())
             {
