@@ -1,4 +1,5 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Enums;
+using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
@@ -18,6 +19,7 @@ namespace Domain.Entities
         public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
         public virtual Setor Setor { get; set; }
         public virtual List<Archive> Archives { get; set; }
+        public OcurrencePendency? OcurrencePendency { get; set; }
 
         public bool HasRootCauseAnalysis() => RootCauseAnalysis != null;
     }
