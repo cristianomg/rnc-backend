@@ -18,7 +18,11 @@ namespace Api.Rnc.Extensions.AutoMapper
         public EntityToViewModelProfile()
         {
             CreateMap<NonCompliance, DtoNonCompliance>()
-                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
+                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))
+                .ForMember(dest => dest.Archives, opt => opt.Ignore());
+            CreateMap<NonCompliance, DtoNonComplianceResponse>()
+                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))
+                .ForMember(dest => dest.Archives, opt => opt.Ignore());
             CreateMap<User, DtoUserResponse>()
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.CompleteName, opt => opt.MapFrom(src => src.Name))
@@ -45,7 +49,6 @@ namespace Api.Rnc.Extensions.AutoMapper
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
                 .ForMember(dest => dest.HasRootCauseAnalysis, opt => opt.MapFrom(src => src.RootCauseAnalysis != null))
-                .ForMember(dest => dest.Archives, opt => opt.Ignore())
                 .ForMember(dest => dest.OcurrencePendency, opt => opt.MapFrom(src => src.OcurrencePendency));
 
 

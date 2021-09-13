@@ -8,5 +8,7 @@ namespace Domain.Entities
         public string Description { get; set; }
         public ICollection<NonComplianceRegister> NonComplianceRegisters { get; set; }
         public virtual TypeNonCompliance TypeNonCompliance { get; set; }
+        public virtual List<Archive> Archives { get; set; } = new List<Archive>();
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.Dtos.Inputs
+namespace Domain.Dtos.Responses
 {
-    public class DtoNonCompliance
+    public class DtoNonComplianceResponse
     {
         /// <summary>
         /// Id da não conformidade
@@ -21,9 +21,8 @@ namespace Domain.Dtos.Inputs
         /// </summary>
         public string NameNonCompliance { get; set; }
         /// <summary>
-        /// Anexos
+        /// Link para os Anexos
         /// </summary>
-        public List<DtoCreateArchive> Archives { get; set; }
-
+        public List<string> Archives { get; set; } = new List<string>();
     }
 }

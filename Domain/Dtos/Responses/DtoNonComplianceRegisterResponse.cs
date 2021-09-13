@@ -41,7 +41,7 @@ namespace Domain.Dtos.Responses
         /// <summary>
         /// Não conformidades
         /// </summary>
-        public IEnumerable<DtoNonCompliance> NonCompliances { get; set; }
+        public IEnumerable<DtoNonComplianceResponse> NonCompliances { get; set; }
         /// <summary>
         /// Setor
         /// </summary>
@@ -54,7 +54,5 @@ namespace Domain.Dtos.Responses
         /// Pendência para registro de ocorrências
         /// </summary>
         public OcurrencePendency? OcurrencePendency { get; set; }
-
-        public List<string> Archives { get; set; } = new List<string>();
     }
 }
