@@ -5,6 +5,7 @@ using _4lab.Infrastructure.Smtp;
 using _4Lab.Administration.Domain.Models;
 using _4Lab.Core.DomainObjects.Extensions;
 using _4Lab.Infrastructure.Authorization;
+using AutoMapper;
 using System;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,39 @@ namespace _4lab.Administration.Application.Service
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly ICryptograph _cryptograph;
         private readonly IEmailSender _senderEmail;
+        private readonly IMapper _mapper;
 
         public UserAppService(IUserRepository userRepository, IUserAuthRepository userAuthRepository, ICryptograph cryptograph,
-                              IEmailSender senderEmail)
+                              IEmailSender senderEmail, IMapper mapper)
         {
             _userRepository = userRepository;
             _userAuthRepository = userAuthRepository;
             _cryptograph = cryptograph;
             _senderEmail = senderEmail;
+            _mapper = mapper;
+        }
+
+        public async Task<IQueryable<DtoUserActive>> GetAllDontActive()
+        {
+            var users = await _userRepository.GetAllDontActive();
+            return _mapper.ProjectTo<DtoUserActive>(users);
+        }
+
+        public async Task<DtoUserResponse> GetByEmail(string email)
+        {
+            var user = await _userRepository.GetByEmail(email);
+            return _mapper.Map<DtoUserResponse>(user);
+        }
+
+        public async Task<DtoUserResponse> ActiveUser(string email)
+        {
+            var user = await _userRepository.ActiveUser(email);
+            return _mapper.Map<DtoUserResponse>(user);
+        }
+
+        public async Task DeleteUserByEmail(string email)
+        {
+            await _userRepository.DeleteUserByEmail(email);
         }
 
         public async Task<bool> ChangeName(int id, DtoChangeNameInput dtoChangeName)
@@ -49,32 +75,32 @@ namespace _4lab.Administration.Application.Service
 
         public async Task<bool> ChangePassword(DtoChangePassword dtoChangePassword)
         {
-            using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
+            using var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled);
+
+            try
             {
-                try
-                {
-                    var user = await _userAuthRepository.GetByEmail(dtoChangePassword.Email);
+                var user = await _userAuthRepository.GetByEmail(dtoChangePassword.Email);
 
-                    if (user == null)
-                        throw new Exception("O email não foi encontrado.");
-                    if (!(_cryptograph.VerifyPassword(dtoChangePassword.OldPassword, user.Password)))
-                        throw new Exception("Senha não é a correta");
+                if (user == null)
+                    throw new Exception("O email não foi encontrado.");
 
-                    var newPassword = _cryptograph.EncryptPassword(dtoChangePassword.NewPassword);
-                    user.SetPassword(newPassword);
+                if (!(_cryptograph.VerifyPassword(dtoChangePassword.OldPassword, user.Password)))
+                    throw new Exception("Senha não é a correta");
 
-                    await _userAuthRepository.Update(user);
-                    await _userAuthRepository.SaveChanges();
+                var newPassword = _cryptograph.EncryptPassword(dtoChangePassword.NewPassword);
+                user.SetPassword(newPassword);
 
-                    scope.Complete();
+                await _userAuthRepository.Update(user);
+                await _userAuthRepository.SaveChanges();
 
-                    return true;
-                }
-                catch
-                {
-                    scope.Dispose();
-                    throw new Exception("Não foi possível trocar a senha.");
-                }
+                scope.Complete();
+
+                return true;
+            }
+            catch
+            {
+                scope.Dispose();
+                throw new Exception("Não foi possível trocar a senha.");
             }
         }
 
@@ -146,7 +172,7 @@ namespace _4lab.Administration.Application.Service
         {
             try
             {
-                StringBuilder template = new StringBuilder();
+                var template = new StringBuilder();
                 template.AppendLine("Olá, seu cadastro foi aprovado com sucesso.");
                 template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do Rnc");
                 template.AppendLine("");
@@ -166,7 +192,7 @@ namespace _4lab.Administration.Application.Service
         {
             try
             {
-                StringBuilder template = new StringBuilder();
+                var template = new StringBuilder();
                 template.AppendLine("Olá, seu cadastro infelizmente foi reprovado.");
                 template.AppendLine("Você poderá realizar um novo cadastro, mas recomendamos que verifique com atenção os dados inseridos.");
                 template.AppendLine("");
@@ -186,36 +212,35 @@ namespace _4lab.Administration.Application.Service
 
         public async Task<bool> RecoveryPassword(string email)
         {
-            using (var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
+            using var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled);
+
+            try
             {
-                try
-                {
-                    var hasUserWithEmail = await _userAuthRepository.GetAllWithIncludes(nameof(UserAuth.User));
+                var hasUserWithEmail = await _userAuthRepository.GetAllWithIncludes(nameof(UserAuth.User));
 
-                    var user = hasUserWithEmail.FirstOrDefault(x => x.Email == email);
+                var user = hasUserWithEmail.FirstOrDefault(x => x.Email == email);
 
-                    if (user == null)
-                        throw new Exception("O email não foi encontrado.");
+                if (user == null)
+                    throw new Exception("O email não foi encontrado.");
 
-                    var newPassword = RandomPassword();
-                    var password = _cryptograph.EncryptPassword(newPassword);
+                var newPassword = RandomPassword();
+                var password = _cryptograph.EncryptPassword(newPassword);
 
-                    user.SetPassword(password);
+                user.SetPassword(password);
 
-                    await _userAuthRepository.Update(user);
-                    await _userAuthRepository.SaveChanges();
+                await _userAuthRepository.Update(user);
+                await _userAuthRepository.SaveChanges();
 
-                    await SendEmailToForgotpassword(email, user.User.Name, newPassword);
+                await SendEmailToForgotpassword(email, user.User.Name, newPassword);
 
-                    scope.Complete();
+                scope.Complete();
 
-                    return true;
-                }
-                catch
-                {
-                    scope.Dispose();
-                    throw new Exception("Erro ao enviar email.");
-                }
+                return true;
+            }
+            catch
+            {
+                scope.Dispose();
+                throw new Exception("Erro ao enviar email.");
             }
         }
 
@@ -228,7 +253,7 @@ namespace _4lab.Administration.Application.Service
 
             for (int i = 0; i < tamanhoPass; i++)
             {
-                Random random = new Random();
+                var random = new Random();
                 int codigo = Convert.ToInt32(random.Next(0, tam - 1).ToString());
                 password += ArrayAlph[codigo];
             }
@@ -239,6 +264,7 @@ namespace _4lab.Administration.Application.Service
         private async Task SendEmailToForgotpassword(string email, string name, string password)
         {
             var template = new StringBuilder();
+
             template.AppendLine($"Olá <strong>{name}</strong>");
             template.AppendLine("<p>Recebemos uma solicitação para redefinir sua senha do 4Labs.</p>");
             template.AppendLine("</br>");

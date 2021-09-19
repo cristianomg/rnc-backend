@@ -31,8 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Rnc\Data.Rnc.csproj" />
     <ProjectReference Include="..\Service\Service.csproj" />
+    <ProjectReference Include="..\src\4lab.Administration.Application\4Lab.Administration.Application.csproj" />
+    <ProjectReference Include="..\src\4lab.Administration.Data\4Lab.Administration.Data.csproj" />
+    <ProjectReference Include="..\src\_4lab.Ocurrences.Data\_4lab.Ocurrences.Data.csproj" />
     <ProjectReference Include="..\Util\Util.csproj" />
   </ItemGroup>
 

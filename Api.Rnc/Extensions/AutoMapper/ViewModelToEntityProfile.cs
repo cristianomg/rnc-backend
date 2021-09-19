@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Entities;
 
 namespace Api.Rnc.Extensions.AutoMapper

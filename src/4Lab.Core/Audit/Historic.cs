@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using _4Lab.Core.DomainObjects;
 
 namespace _4Lab.Core.Audit
 {

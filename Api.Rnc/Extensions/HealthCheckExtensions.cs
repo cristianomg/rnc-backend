@@ -14,7 +14,7 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
         {
             services.AddHealthChecks()
-                    .AddDbCheck<RncContext>();
+                    .AddDbCheck<OcurrencesContext>();
 
             return services;
         }

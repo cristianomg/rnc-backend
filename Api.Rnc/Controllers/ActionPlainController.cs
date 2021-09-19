@@ -1,8 +1,5 @@
 ﻿using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Responses;
-using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

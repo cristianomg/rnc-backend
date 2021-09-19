@@ -16,8 +16,10 @@ namespace _4Lab.Administration.Domain.Models
 
         public void SetPassword(string passowrd)
         {
-            if (string.IsNullOrEmpty(passowrd))
+            if (!string.IsNullOrEmpty(passowrd))
                 Password = passowrd;
+            else
+                throw new System.Exception("Senha do usuário não pode ser nula ou vazia.");
         }
     }
 }

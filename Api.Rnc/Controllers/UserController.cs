@@ -1,7 +1,6 @@
 ﻿using _4lab.Administration.Application.DTOs;
 using _4lab.Administration.Application.Service;
 using Api.Rnc.Extensions;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +15,10 @@ namespace Api.Rnc.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IUserAppService _userAppService;
 
-        public UserController(IMapper mapper, IUserAppService userAppService)
+        public UserController(IUserAppService userAppService)
         {
-            _mapper = mapper;
             _userAppService = userAppService;
         }
 
@@ -42,8 +39,8 @@ namespace Api.Rnc.Controllers
 
                 if (createUserServiceResponse)
                     return Ok();
-                else
-                    return BadRequest();
+
+                return BadRequest();
             }
             catch (Exception ex)
             {
@@ -61,7 +58,7 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetAllDontActive()
         {
             var users = await _userAppService.GetAllDontActive();
-            return Ok(_mapper.ProjectTo<DtoUserActive>(users));
+            return Ok(users);
         }
 
         /// <summary>
@@ -74,7 +71,7 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetUser(string email)
         {
             var user = await _userAppService.GetByEmail(email);
-            return Ok(_mapper.Map<DtoUserResponse>(user));
+            return Ok(user);
         }
 
         /// <summary>
@@ -87,14 +84,20 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ApproveUser(string email)
         {
-            await _userAppService.ActiveUser(email);
-            var approved = await _userAppService.Approved(email);
-            if (approved)
+            try
             {
-                return Ok();
+                await _userAppService.ActiveUser(email);
+                var approved = await _userAppService.Approved(email);
+
+                if (approved)
+                    return Ok();
+
+                return BadRequest();
             }
-            else
-                return BadRequest(approved.Message);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -107,14 +110,20 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Disapprove(string email)
         {
-            await _userAppService.DeleteUserByEmail(email);
-            var disapproved = await _userAppService.Disapproved(email);
-            if (disapproved)
+            try
             {
-                return Ok();
+                await _userAppService.DeleteUserByEmail(email);
+                var disapproved = await _userAppService.Disapproved(email);
+
+                if (disapproved)
+                    return Ok();
+
+                return BadRequest();
             }
-            else
-                return BadRequest(disapproved.Message);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         ///<summary>
@@ -125,11 +134,18 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ChangePassword([FromBody] DtoChangePassword dtoChangePassword)
         {
-            var responseService = await _userAppService.ChangePassword(dtoChangePassword);
-            if (responseService)
-                return Ok();
+            try
+            {
+                var responseService = await _userAppService.ChangePassword(dtoChangePassword);
+                if (responseService)
+                    return Ok();
 
-            return BadRequest(responseService.Message);
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         ///<summary>
@@ -140,12 +156,20 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ChangeName([FromBody] DtoChangeNameInput dtoChangeName)
         {
-            var userId = User.GetUserId();
-            var responseService = await _userAppService.ChangeName(userId, dtoChangeName);
-            if (responseService)
-                return Ok();
+            try
+            {
+                var userId = User.GetUserId();
+                var changed = await _userAppService.ChangeName(userId, dtoChangeName);
 
-            return BadRequest(responseService.Message);
+                if (changed)
+                    return Ok();
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

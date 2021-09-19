@@ -1,6 +1,6 @@
 ﻿using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Dtos.Inputs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;

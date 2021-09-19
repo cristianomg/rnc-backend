@@ -1,4 +1,4 @@
-﻿using Data.Rnc.Context;
+﻿using _4lab.Ocurrences.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +19,9 @@ namespace Api.Rnc.Extensions
         /// <returns></returns>
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
-            var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("RncContext");
+            var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("OcurrencesContext");
             Console.WriteLine(connection);
-            services.AddDbContext<RncContext>(options =>
+            services.AddDbContext<OcurrencesContext>(options =>
                 options.UseNpgsql(connection));
             return services;
 

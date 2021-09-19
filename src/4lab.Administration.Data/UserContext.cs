@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Domain.ValueObjects;
+﻿using _4Lab.Administration.Domain.Models;
+using _4Lab.Core.DomainObjects.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

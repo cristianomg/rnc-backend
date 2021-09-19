@@ -1,4 +1,4 @@
-﻿using Domain.Dtos.Inputs;
+﻿using _4lab.Ocurrences.Application.DTOs;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models.Helps;

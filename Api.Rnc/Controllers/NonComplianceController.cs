@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

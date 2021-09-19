@@ -17,8 +17,8 @@ namespace _4lab.Administration.Data.Repositories
             _dbSetAuth = context.Set<UserAuth>();
         }
 
-        public async Task<User> GetByEnrollment(string enrollment) =>
-            await _dbSet.FirstOrDefaultAsync(x => x.Enrollment == enrollment);
+        public async Task<User> GetByEnrollment(string enrollment) => await _dbSet.FirstOrDefaultAsync(x => x.Enrollment == enrollment);
+
         public async Task<IQueryable<User>> GetAllDontActive()
         {
             var usersDontActive = _dbSet.AsQueryable().Where(a => a.UserAuth.Active == false).OrderBy(t => t.Id);

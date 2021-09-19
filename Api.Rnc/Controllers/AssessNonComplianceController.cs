@@ -1,10 +1,7 @@
-﻿using Api.Rnc.Extensions;
+﻿using _4Lab.Core.DomainObjects.Enums;
+using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Responses;
-using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
-using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

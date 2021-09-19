@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Dtos.Responses;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Util;

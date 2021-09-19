@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Responses;
+using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Entities;
 
 namespace Api.Rnc.Extensions.AutoMapper

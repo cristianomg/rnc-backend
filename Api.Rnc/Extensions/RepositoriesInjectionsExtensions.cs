@@ -1,6 +1,7 @@
-﻿using Data.Rnc.Repositories;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+﻿using _4lab.Administration.Data.Repositories;
+using _4lab.Administration.Domain.Interfaces;
+using _4lab.Ocurrences.Data.Repositories;
+using _4lab.Ocurrences.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Rnc.Extensions
@@ -20,7 +21,6 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAuthRepository, UserAuthRepository>();
             services.AddScoped<INonComplianceRepository, NonComplianceRepository>();
-            services.AddScoped<IForgotPassword, ForgetPassword>();
             services.AddScoped<INonComplianceRegisterRepository, NonComplianceRegisterRepository>();
             services.AddScoped<IRootCauseAnalysisRepository, RootCauseAnalysisRepository>();
             services.AddScoped<ISetorRepository, SetorRepository>();

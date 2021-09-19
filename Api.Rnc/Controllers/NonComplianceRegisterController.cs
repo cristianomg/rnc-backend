@@ -1,7 +1,7 @@
 ﻿using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Responses;
+using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;

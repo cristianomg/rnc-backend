@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Dtos.Inputs;
+using _4lab.Ocurrences.Application.DTOs;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces.Repositories;
