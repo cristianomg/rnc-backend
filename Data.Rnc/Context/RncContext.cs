@@ -23,9 +23,6 @@ namespace Data.Rnc.Context
         public DbSet<Archive> Archives { get; set; }
         public DbSet<NonCompliance> NonCompliance { get; set; }
         public DbSet<TypeNonCompliance> TypeNonCompliance { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserAuth> UserAuths { get; set; }
-        public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<Setor> Setors { get; set; }
         public DbSet<ActionPlain> ActionPlains { get; set; }
         public DbSet<ActionPlainQuestion> ActionPlainQuestions { get; set; }
@@ -43,7 +40,6 @@ namespace Data.Rnc.Context
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            SeedUserPermission(modelBuilder);
             SeedTipoNaoConformidade(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
@@ -66,18 +62,6 @@ namespace Data.Rnc.Context
                 Id = (int)DtoNonComplianceType.PosAnalitica,
                 NameNonCompliance = "Pos-Analitica",
             });
-        }
-        private void SeedUserPermission(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserPermission>().HasData(
-                Enum.GetValues(typeof(UserPermissionType))
-                    .Cast<UserPermissionType>()
-                    .Select(x => new UserPermission()
-                    {
-                        Id = x,
-                        Name = x.ToString(),
-                        Active = true,
-                    }));
         }
     }
 }

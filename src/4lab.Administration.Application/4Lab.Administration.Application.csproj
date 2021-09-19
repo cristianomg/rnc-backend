@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_4lab.Administration.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4lab.Administration.Domain\4Lab.Administration.Domain.csproj" />
+    <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
+    <ProjectReference Include="..\4Lab.CrossCutting\4Lab.CrossCutting.csproj" />
+    <ProjectReference Include="..\4Lab.Infrastructure.Authorization\4Lab.Infrastructure.Authorization.csproj" />
+  </ItemGroup>
+
+</Project>
