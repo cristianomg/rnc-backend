@@ -1,6 +1,4 @@
-﻿using Domain.Dtos.Helps;
-using _4lab.Ocurrences.Application.DTOs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Application.DTOs
 {

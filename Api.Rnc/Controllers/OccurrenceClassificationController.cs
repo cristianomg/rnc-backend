@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Domain.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,7 @@ namespace Api.Rnc.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IOccurrenceClassificationRepository _occurrenceClassificationRepository;
+
         public OccurrenceClassificationController(IMapper mapper, IOccurrenceClassificationRepository occurrenceClassificationRepository)
         {
             _mapper = mapper;

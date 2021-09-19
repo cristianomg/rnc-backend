@@ -1,9 +1,13 @@
-﻿using Api.Rnc.Extensions;
-using Domain.Interfaces.Services;
-using Domain.ValueObjects;
+﻿using _4lab.Administration.Application.Service;
+using _4lab.Infrastructure.Smtp;
+using _4lab.Ocurrences.Application.Service;
+using _4Lab.Core.DomainObjects.Enums;
+using Api.Rnc.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
+using Util.GeneratePDF;
 
 namespace Api.Rnc.Controllers
 {
@@ -12,33 +16,58 @@ namespace Api.Rnc.Controllers
     [Authorize(Roles = nameof(UserPermissionType.QualityBiomedical))]
     public class ReportController : ControllerBase
     {
-        private readonly ICreateNonComplianceRegisterReportService _createNonConplianceRegisterReportService;
-        private readonly ISendNonComplianceRegisterReportToEmailService _sendNonComplianceRegisterReportToEmailService;
+        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IUserAppService _userAppService;
+        private readonly IEmailSender _senderEmail;
 
-        public ReportController(ICreateNonComplianceRegisterReportService createNonConplianceRegisterReportService,
-                                ISendNonComplianceRegisterReportToEmailService sendNonComplianceRegisterReportToEmailService)
+        public ReportController(IOcurrenceAppService ocurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
         {
-            _createNonConplianceRegisterReportService = createNonConplianceRegisterReportService;
-            _sendNonComplianceRegisterReportToEmailService = sendNonComplianceRegisterReportToEmailService;
+            _ocurrenceAppService = ocurrenceAppService;
+            _userAppService = userAppService;
+            _senderEmail = senderEmail;
         }
+
         [HttpGet("{nonComplianceRegisterId:int}")]
         public async Task<IActionResult> GetReport(int nonComplianceRegisterId)
         {
-            var responseService = await _createNonConplianceRegisterReportService.Execute(nonComplianceRegisterId);
-            if (responseService.Success)
-                return Ok(responseService.Value);
+            try
+            {
+                var responseService = await _ocurrenceAppService.CreateNonComplianceRegisterReport(nonComplianceRegisterId);
 
-            return BadRequest(responseService.Message);
+                if (!string.IsNullOrEmpty(responseService))
+                    return Ok(responseService);
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
         [HttpGet("email/{nonComplianceRegisterId:int}")]
         public async Task<IActionResult> SendReportOnEmail(int nonComplianceRegisterId)
         {
             var userAuthId = User.GetUserId();
-            var responseService = await _sendNonComplianceRegisterReportToEmailService.Execute(userAuthId, nonComplianceRegisterId);
-            if (responseService.Success)
-                return Ok();
 
-            return BadRequest(responseService.Message);
+            var user = await _userAppService.GetUserAuthById(userAuthId);
+
+            if (user == null)
+                BadRequest("Usuário não encontrado.");
+
+            var report = await _ocurrenceAppService.CreateNonComplianceRegisterReport(nonComplianceRegisterId);
+
+            if (string.IsNullOrEmpty(report))
+                BadRequest("Relatório não gerado.");
+
+            await _senderEmail.SendEmail(user.Email,
+                                         "Relatório em anexo",
+                                         "Relatorio do registro de não conformidade",
+                                         GeneratePDF.FromHtml(report),
+                                         "Relátorio",
+                                         true);
+
+            return Ok();
         }
     }
 }

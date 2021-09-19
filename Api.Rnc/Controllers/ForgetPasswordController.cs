@@ -1,6 +1,7 @@
-﻿using Domain.Interfaces.Services;
+﻿using _4lab.Administration.Application.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -9,12 +10,13 @@ namespace Api.Rnc.Controllers
     [ApiController]
     public class ForgetPasswordController : ControllerBase
     {
-        private readonly IRecoveryPasswordService _recoveryPasswordService;
+        private readonly IUserAppService _userAppService;
 
-        public ForgetPasswordController(IRecoveryPasswordService recoveryPasswordService)
+        public ForgetPasswordController(IUserAppService userAppService)
         {
-            _recoveryPasswordService = recoveryPasswordService;
+            _userAppService = userAppService;
         }
+
         /// <summary>
         /// Endpoint responsável pelo esqueci a senha
         /// </summary>
@@ -25,11 +27,19 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ForgotPassword(string email)
         {
-            var responseService = await _recoveryPasswordService.Execute(email);
-            if (responseService.Success)
-                return Ok();
+            try
+            {
+                var responseService = await _userAppService.RecoveryPassword(email);
 
-            return BadRequest(responseService.Message);
+                if (responseService)
+                    return Ok();
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

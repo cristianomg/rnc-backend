@@ -1,5 +1,4 @@
-﻿using Domain.Interfaces.Util;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -13,18 +12,15 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Util.RenderRazorPage
+namespace _4Lab.Infrastructure.Charts
 {
-    public class RazorViewToStringRenderer : IRazorViewToStringRenderer
+    public class RazorRender : IRazorRender
     {
         private IRazorViewEngine _viewEngine;
         private ITempDataProvider _tempDataProvider;
         private IServiceProvider _serviceProvider;
 
-        public RazorViewToStringRenderer(
-            IRazorViewEngine viewEngine,
-            ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider)
+        public RazorRender(IRazorViewEngine viewEngine, ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
         {
             _viewEngine = viewEngine;
             _tempDataProvider = tempDataProvider;

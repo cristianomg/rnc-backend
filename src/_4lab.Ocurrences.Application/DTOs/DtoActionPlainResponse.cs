@@ -1,4 +1,4 @@
-﻿namespace Domain.Dtos.Helps
+﻿namespace _4lab.Ocurrences.Application.DTOs
 {
     public class DtoActionPlainResponse
     {

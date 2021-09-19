@@ -1,11 +1,10 @@
-﻿using Domain.Interfaces.Util;
-using SelectPdf;
+﻿using SelectPdf;
 
 namespace Util.GeneratePDF
 {
-    public class GeneratePDF : IGeneratePDF
+    public class GeneratePDF
     {
-        public byte[] FromHtml(string html)
+        public static byte[] FromHtml(string html)
         {
             var converter = new HtmlToPdf();
             converter.Options.PdfPageSize = PdfPageSize.A4;

@@ -1,42 +1,19 @@
-﻿using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Domain.Models.Helps;
-using Domain.ValueObjects;
-using SautinSoft.Document;
+﻿using SautinSoft.Document;
 using SautinSoft.Document.Drawing;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Service.Services
+namespace _4Lab.Infrastructure.Charts
 {
-    public class CreatePieChartWithNonComplianceRegisterService : AbstractService, ICreatePieChartWithNonComplianceRegisterService
+    public class ChartGenerator
     {
-        private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
-        public CreatePieChartWithNonComplianceRegisterService(INonComplianceRegisterRepository nonComplianceRegisterRepository)
+        public static byte[] GeneratePieChart(Dictionary<string, double> chartData)
         {
-            _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
-        }
-        public async Task<ResponseService<byte[]>> Execute(SetorType setor, int month)
-        {
-            var nonComplianceGroup = await _nonComplianceRegisterRepository.GetGroupBySetor(setor, month);
-            var nonComplianceGroupList = nonComplianceGroup.ToList();
+            var dc = new DocumentCore();
 
-            var chartData = new Dictionary<string, double>();
-
-            nonComplianceGroupList.ForEach(x => chartData.Add(x.NonCompliance, x.Quantity));
-
-            var chart = PieChart(chartData);
-
-            return GenerateSuccessServiceResponse(chart);
-        }
-        private byte[] PieChart(Dictionary<string, double> chartData)
-        {
-            DocumentCore dc = new DocumentCore();
-
-            FloatingLayout fl = new FloatingLayout(
+            var fl = new FloatingLayout(
                 new HorizontalPosition(20f, LengthUnit.Millimeter, HorizontalPositionAnchor.LeftMargin),
                 new VerticalPosition(15f, LengthUnit.Millimeter, VerticalPositionAnchor.TopMargin),
                 new Size(400, 400));
@@ -48,7 +25,7 @@ namespace Service.Services
             // Let's save the document into PDF format (you may choose another).
             byte[] fileData = null;
             //string filePath = @"Result.pdf";
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
                 // 2nd parameter: we've explicitly set to save our document in PDF format.
                 dc.Save(ms, new PdfSaveOptions());
@@ -62,6 +39,7 @@ namespace Service.Services
 
             return fileData;
         }
+
         /// <summary>
         /// This method creates a pie chart.
         /// </summary>
@@ -78,7 +56,7 @@ namespace Service.Services
         /// </remarks>
         public static void AddPieChart(DocumentCore dc, FloatingLayout chartLayout, Dictionary<string, double> data, bool addLabels = true, string labelSign = null, bool addLegend = true)
         {
-            List<string> colors = new List<string>()
+            var colors = new List<string>()
             {
                 "#70AD47", // light green
                 "#4472C4", // blue
@@ -229,7 +207,7 @@ namespace Service.Services
                 }
             }
         }
-            private string RemoveEspecialCharacters(string word)
+        private string RemoveEspecialCharacters(string word)
         {
             var map = new Dictionary<string, string>()
             {

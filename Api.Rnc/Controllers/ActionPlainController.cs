@@ -1,9 +1,12 @@
-﻿using Api.Rnc.Extensions;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Application.Service;
+using _4lab.Ocurrences.Domain.Interfaces;
+using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,17 +17,17 @@ namespace Api.Rnc.Controllers
     [Authorize]
     public class ActionPlainController : ControllerBase
     {
-        private readonly IActionPlainRepository _actionPlainRepository;
         private readonly IMapper _mapper;
-        private readonly ICreateActionPlainService _createActionPlainService;
-        public ActionPlainController(IActionPlainRepository actionPlainRepository,
-                                     IMapper mapper,
-                                     ICreateActionPlainService createActionPlainService)
+        private readonly IActionPlainRepository _actionPlainRepository;
+        private readonly IOcurrenceAppService _ocurrenceAppService;
+
+        public ActionPlainController(IActionPlainRepository actionPlainRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
         {
             _actionPlainRepository = actionPlainRepository;
             _mapper = mapper;
-            _createActionPlainService = createActionPlainService;
+            _ocurrenceAppService = ocurrenceAppService;
         }
+
         /// <summary>
         /// Endpoint responsável por listar os planos de ação existentes
         /// </summary>
@@ -35,6 +38,7 @@ namespace Api.Rnc.Controllers
         {
             return Ok(_mapper.ProjectTo<DtoActionPlainListResponse>(await _actionPlainRepository.GetAll()));
         }
+
         /// <summary>
         /// Endpoint responsável por detalhar um plano de ação pelo id do mesmo
         /// </summary>
@@ -46,6 +50,7 @@ namespace Api.Rnc.Controllers
         {
             return Ok(_mapper.Map<DtoActionPlainDetailResponse>(await _actionPlainRepository.GetByIdWithIncludes(id)));
         }
+
         /// <summary>
         /// Endpoint responsável criar um novo plano de ação
         /// </summary>
@@ -55,13 +60,20 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(DtoActionPlainDetailResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> Insert([FromBody] DtoCreateActionPlainInput dto)
         {
-            dto.UserName = User.GetUserName();
+            try
+            {
+                dto.UserName = User.GetUserName();
 
-            var responseService = await _createActionPlainService.Execute(dto);
-            if (responseService.Success)
-                return Ok();
+                var responseService = await _ocurrenceAppService.CreateActionPlain(dto);
+                if (responseService)
+                    return Ok();
 
-            return BadRequest(responseService.Message);
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

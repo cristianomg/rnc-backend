@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Domain.Dtos.Helps;
-using _4lab.Ocurrences.Application.DTOs;
-using Domain.Interfaces.Repositories;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Domain.Interfaces;
+using _4Lab.Core.DomainObjects.Enums;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +16,14 @@ namespace Api.Rnc.Controllers
     {
         private readonly INonComplianceRepository _nonComplianceRepository;
         private readonly IMapper _mapper;
+
         public NonComplianceController(INonComplianceRepository nonComplianceRepository,
                                             IMapper mapper)
         {
             _nonComplianceRepository = nonComplianceRepository;
             _mapper = mapper;
         }
+
         /// <summary>
         /// Endpoint reponsavel por trazer as não conformidades
         /// </summary>

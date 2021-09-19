@@ -1,6 +1,6 @@
 ﻿@using System.Linq;
 
-@model Domain.Entities.NonComplianceRegister
+@model _4lab.Ocurrences.Domain.Models.NonComplianceRegister
 
 @{
     var peopleInvolved = string.IsNullOrEmpty(Model.PeopleInvolved) ? "Nenhuma" : Model.PeopleInvolved.Trim();
@@ -29,7 +29,7 @@
 </style>
 <article style="">
     <p>
-        No dia <strong>@Model.RegisterDate.ToString("dd/MM/yyyy")</strong>, às <strong>@Model.RegisterHour</strong>, o funcionário(a) <strong>@Model.User.Name</strong>, do setor de <strong>@Model.User.Setor.Name</strong>, sendo a sua supervisora <strong>Ana Luiza Santos</strong>,
+        No dia <strong>@Model.RegisterDate.ToString("dd/MM/yyyy")</strong>, às <strong>@Model.RegisterHour</strong>, o funcionário(a) <strong>@*@Model.User.Name*@</strong>, do setor de <strong>@*@Model.User.Setor.Name*@</strong>, sendo a sua supervisora <strong>Ana Luiza Santos</strong>,
         realizou/presenciou a(s) seguinte(s) não conformidade(s) : <strong>@nonCompliances</strong>,
         ocorrida(s) no setor <Strong>@Model.Setor.Name</Strong>, supervisionado(s) por <strong>Ana Luiza Santos</strong>.
     </p>

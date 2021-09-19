@@ -11,10 +11,12 @@ namespace _4lab.Ocurrences.Data.Repositories
     public class SetorRepository : BaseRepository<Setor, SetorType>, ISetorRepository
     {
         private readonly DbSet<Setor> _dbSet;
+
         public SetorRepository(OcurrencesContext context) : base(context)
         {
             _dbSet = context.Set<Setor>();
         }
+
         public async Task<IQueryable<Setor>> GetAllSetor()
         {
             var setor = _dbSet.AsQueryable();

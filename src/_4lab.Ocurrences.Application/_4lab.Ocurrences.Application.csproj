@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mapper\" />
-    <Folder Include="Service\" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
+    <ProjectReference Include="..\4Lab.Infrastructure.Charts\4Lab.Infrastructure.Charts.csproj" />
+    <ProjectReference Include="..\4Lab.Infrastructure.Storage\4Lab.Infrastructure.Storage.csproj" />
+    <ProjectReference Include="..\_4lab.Ocurrences.Domain\_4lab.Ocurrences.Domain.csproj" />
   </ItemGroup>
 
 </Project>

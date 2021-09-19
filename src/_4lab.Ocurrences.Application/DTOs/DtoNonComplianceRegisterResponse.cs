@@ -1,5 +1,4 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
-using Domain.Enums;
+﻿using _4Lab.Core.DomainObjects.Enums;
 using System;
 using System.Collections.Generic;
 

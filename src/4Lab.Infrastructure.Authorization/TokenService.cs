@@ -25,7 +25,6 @@ namespace _4Lab.Infrastructure.Authorization
 
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),
-
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

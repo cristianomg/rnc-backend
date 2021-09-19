@@ -1,6 +1,8 @@
-﻿using Domain.Interfaces.Services;
+﻿using _4lab.Administration.Application.DTOs;
+using _4lab.Administration.Application.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -9,11 +11,13 @@ namespace Api.Rnc.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly ICreateAuthService _createAuthService;
-        public AuthController(ICreateAuthService createAuthService)
+        private readonly IUserAppService _userAppService;
+
+        public AuthController(IUserAppService userAppService)
         {
-            _createAuthService = createAuthService;
+            _userAppService = userAppService;
         }
+
         /// <summary>
         /// Endpoint responsável por realizar login
         /// </summary>
@@ -24,12 +28,19 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] DtoCreateAuthInput authInput)
         {
-            var createAuthResponse = await _createAuthService.Execute(authInput);
+            try
+            {
+                var createAuthResponse = await _userAppService.CreateAuth(authInput);
 
-            if (createAuthResponse.Success)
-                return Ok(createAuthResponse.Value);
+                if (createAuthResponse != null)
+                    return Ok(createAuthResponse);
 
-            return BadRequest(createAuthResponse.Message);
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

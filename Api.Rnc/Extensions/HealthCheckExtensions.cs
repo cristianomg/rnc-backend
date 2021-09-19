@@ -1,5 +1,5 @@
-﻿using Api.Rnc.Extensions.HealthChecks;
-using Data.Rnc.Context;
+﻿using _4lab.Ocurrences.Data;
+using Api.Rnc.Extensions.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

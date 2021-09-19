@@ -32,6 +32,17 @@ namespace _4lab.Administration.Application.Service
             _mapper = mapper;
         }
 
+        public async Task<User> GetUserByIdWithInclude(int id, params string[] includes)
+        {
+            var user = await _userRepository.GetByIdWithInclude(id, includes);
+            return user;
+        }
+
+        public async Task<UserAuth> GetUserAuthById(int id)
+        {
+            return await _userAuthRepository.GetById(id);
+        }
+
         public async Task<IQueryable<DtoUserActive>> GetAllDontActive()
         {
             var users = await _userRepository.GetAllDontActive();

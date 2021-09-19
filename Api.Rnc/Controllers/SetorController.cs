@@ -1,8 +1,8 @@
-﻿using Api.Rnc.Extensions;
-using AutoMapper;
+﻿using _4lab.Administration.Application.Service;
 using _4lab.Ocurrences.Application.DTOs;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using _4lab.Ocurrences.Application.Service;
+using _4Lab.Core.DomainObjects.Enums;
+using Api.Rnc.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,18 +16,15 @@ namespace Api.Rnc.Controllers
     [Authorize]
     public class SetorController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly ISetorRepository _setorRepository;
-        private readonly ISetSupervisorOnSetorService _setSupervisorOnSetorService;
-        public SetorController(IMapper mapper,
-                               ISetorRepository setorRepository,
-                               ISetSupervisorOnSetorService setSupervisorOnSetorService)
-        {
-            _mapper = mapper;
-            _setorRepository = setorRepository;
-            _setSupervisorOnSetorService = setSupervisorOnSetorService;
+        private readonly ISetorAppService _setorAppService;
+        private readonly IUserAppService _userAppService;
 
+        public SetorController(ISetorAppService setorAppService, IUserAppService userAppService)
+        {
+            _setorAppService = setorAppService;
+            _userAppService = userAppService;
         }
+
         /// <summary>
         /// Endpoint responsável por retornar os setores
         /// </summary>
@@ -38,8 +35,8 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllSetors()
         {
-            var users = await _setorRepository.GetAllSetor();
-            return Ok(_mapper.ProjectTo<DtoSetor>(users));
+            var setors = await _setorAppService.GetAllSetor();
+            return Ok(setors);
         }
 
         [HttpPut]
@@ -49,11 +46,25 @@ namespace Api.Rnc.Controllers
         {
             setSupervisor.UserName = User.GetUserName();
 
-            var responseService = await _setSupervisorOnSetorService.Execute(setSupervisor);
-            if (responseService.Success)
-                return Ok();
+            var setor = await _setorAppService.GetById(setSupervisor.SetorId);
 
-            return BadRequest(responseService.Message);
+            if (setor == null)
+                return BadRequest("Setor não encontrado.");
+
+            var user = await _userAppService.GetByEmail(setSupervisor.UserEmail);
+
+            if (user == null)
+                return BadRequest("Usuário não encontrado.");
+
+            if (user.UserPermissionId != UserPermissionType.Supervisor)
+                return BadRequest("Usuário não é um supervisor.");
+
+            setor.SupervisorId = user.Id;
+            setor.UpdatedBy = setSupervisor.UserName;
+
+            await _setorAppService.Update(setor);
+
+            return Ok();
         }
     }
 }

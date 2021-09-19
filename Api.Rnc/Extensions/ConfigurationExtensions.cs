@@ -1,4 +1,4 @@
-﻿using Domain.Configs;
+﻿using _4Lab.Core.Configs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;

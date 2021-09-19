@@ -1,18 +1,17 @@
-﻿using Api.Rnc.Extensions;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Application.Service;
+using _4lab.Ocurrences.Domain.Interfaces;
+using _4lab.Ocurrences.Domain.Models;
+using _4Lab.Core.DomainObjects.Enums;
+using _4Lab.WebApi.Extensions;
+using Api.Rnc.Extensions;
 using AutoMapper;
-using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Application.DTOs;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Util.Extensions;
 
 namespace Api.Rnc.Controllers
 {
@@ -23,18 +22,15 @@ namespace Api.Rnc.Controllers
     {
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
-        private readonly ICreateNonComplianceRegisterService _createNonComplianceRegisterService;
-        private readonly IGetNonComplieanceRegisterByIdService _getNonComplianceRegisterByIdService;
-        public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository,
-                                               IMapper mapper,
-                                               ICreateNonComplianceRegisterService createNonComplianceRegisterService,
-                                               IGetNonComplieanceRegisterByIdService getNonComplianceRegisterByIdService)
+        private readonly IOcurrenceAppService _ocurrenceAppService;
+
+        public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _mapper = mapper;
-            _createNonComplianceRegisterService = createNonComplianceRegisterService;
-            _getNonComplianceRegisterByIdService = getNonComplianceRegisterByIdService;
+            _ocurrenceAppService = ocurrenceAppService;
         }
+
         /// <summary>
         /// Endpoint responsável por inserir um registro de não conformidade.
         /// </summary>
@@ -44,14 +40,23 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput dto)
         {
-            dto.UserId = User.GetUserId();
-            dto.UserName = User.GetUserName();
+            try
+            {
+                dto.UserId = User.GetUserId();
+                dto.UserName = User.GetUserName();
 
-            var responseService = await _createNonComplianceRegisterService.Execute(dto);
-            if (responseService.Success)
-                return Ok();
-            return BadRequest(responseService.Message);
+                var responseService = await _ocurrenceAppService.CreateNonComplianceRegister(dto);
+                if (responseService)
+                    return Ok();
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades por setor do usuário logado
         /// </summary>
@@ -62,14 +67,15 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAllBySetor(SetorType setor, HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
-            var nonComplianceRegisters = await _nonComplianceRegisterRepository
-                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+            var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
+
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
                     .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
                     .Where(x => x.SetorId == setor)
                     .OrderBy(x => x.RootCauseAnalysis != null)
                     .ThenBy(x => x.Id)));
         }
+
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas
         /// </summary>
@@ -81,12 +87,14 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetAll(HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
-                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+                .GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
+
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
                 .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
                 .OrderBy(x => x.RootCauseAnalysis != null)
                 .ThenBy(x => x.Id)));
         }
+
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas por data e setor
         /// </summary>
@@ -99,11 +107,12 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
-                .GetAllWithIncludes(nameof(NonComplianceRegister.User), nameof(NonComplianceRegister.Setor));
+                .GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
 
             return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x => x.SetorId == setor && x.RegisterDate.Year == date.Year
             && x.RegisterDate.Month == date.Month && x.RootCauseAnalysis != null)));
         }
+
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas por id
         /// </summary>
@@ -114,8 +123,8 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetById(int id)
         {
-            var nonComplianceRegister = await _getNonComplianceRegisterByIdService.Execute(id);
-            return Ok(nonComplianceRegister.Value);
+            var nonComplianceRegister = await _ocurrenceAppService.GetNonComplieanceRegisterById(id);
+            return Ok(nonComplianceRegister);
         }
 
     }

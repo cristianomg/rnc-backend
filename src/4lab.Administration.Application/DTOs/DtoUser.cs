@@ -1,4 +1,4 @@
-﻿using Domain.ValueObjects;
+﻿using _4Lab.Core.DomainObjects.Enums;
 
 namespace _4lab.Administration.Application.DTOs
 {

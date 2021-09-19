@@ -1,7 +1,9 @@
-﻿using Api.Rnc.Extensions;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Domain.ValueObjects;
+﻿using _4lab.Administration.Application.Service;
+using _4lab.Infrastructure.Smtp;
+using _4lab.Ocurrences.Application.Service;
+using _4Lab.Administration.Domain.Models;
+using _4Lab.Core.DomainObjects.Enums;
+using Api.Rnc.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,17 +15,17 @@ namespace Api.Rnc.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-        private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
-        private readonly ISendChartToEmailService _sendChartToEmailService;
-        private readonly ICreatePieChartWithNonComplianceRegisterService _createPieChartWithNonComplianceRegisterService;
-        public ChartController(INonComplianceRegisterRepository nonComplianceRegisterRepository,
-                               ISendChartToEmailService sendChartToEmailService,
-                               ICreatePieChartWithNonComplianceRegisterService createPieChartWithNonComplianceRegisterService)
+        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IUserAppService _userAppService;
+        private readonly IEmailSender _senderEmail;
+
+        public ChartController(IOcurrenceAppService ocurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
         {
-            _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
-            _sendChartToEmailService = sendChartToEmailService;
-            _createPieChartWithNonComplianceRegisterService = createPieChartWithNonComplianceRegisterService;
+            _ocurrenceAppService = ocurrenceAppService;
+            _userAppService = userAppService;
+            _senderEmail = senderEmail;
         }
+
         /// <summary>
         /// Endpoint responsável por retornar o grafico de registros para o mes e setor informado
         /// </summary>
@@ -35,12 +37,21 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetChartBySetor(SetorType setor, int month)
         {
-            var createPieChartResponse = await _createPieChartWithNonComplianceRegisterService.Execute(setor, month);
-            if (createPieChartResponse.Success)
-                return Ok(Convert.ToBase64String(createPieChartResponse.Value));
-            else
-                return BadRequest(createPieChartResponse.Message);
+            try
+            {
+                var createPieChartResponse = await _ocurrenceAppService.CreatePieChartWithNonComplianceRegister(setor, month);
+
+                if (createPieChartResponse != null && createPieChartResponse.Length > 0)
+                    return Ok(Convert.ToBase64String(createPieChartResponse));
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
         /// <summary>
         /// Endpoint responsável por enviar email contendo o grafico de registros para o mes e setor informado
         /// </summary>
@@ -53,11 +64,19 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> SendEmail(SetorType setor, int month)
         {
             var userId = User.GetUserId();
-            var sendChartToEmailResponse = await _sendChartToEmailService.Execute(userId, setor, month);
-            if (sendChartToEmailResponse.Success)
-                return Ok();
-            else
-                return BadRequest(sendChartToEmailResponse.Message);
+
+            var user = await _userAppService.GetUserByIdWithInclude(userId, nameof(UserAuth));
+
+            if (user == null)
+                throw new Exception("Usuário não encontrado.");
+
+            var chart = await _ocurrenceAppService.CreatePieChartWithNonComplianceRegister(setor, month);
+
+            var template = "<p>O grafico está anexado.</p>";
+
+            await _senderEmail.SendEmail(user.UserAuth.Email, template, "Grafico", chart, "Gráfico", true);
+
+            return Ok();
         }
     }
 }

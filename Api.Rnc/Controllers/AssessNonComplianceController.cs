@@ -1,9 +1,12 @@
-﻿using _4Lab.Core.DomainObjects.Enums;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4lab.Ocurrences.Application.Service;
+using _4lab.Ocurrences.Domain.Interfaces;
+using _4Lab.Core.DomainObjects.Enums;
 using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -14,15 +17,14 @@ namespace Api.Rnc.Controllers
     public class AssessNonComplianceController : ControllerBase
     {
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
-        private readonly ICreateRootCauseAnalysisService _createAnalyzeRootCauseService;
         private readonly IMapper _mapper;
-        public AssessNonComplianceController(IRootCauseAnalysisRepository analyzeRootCauseRepository,
-                                             ICreateRootCauseAnalysisService createAnalyzeRootCauseService,
-                                             IMapper mapper)
+        private readonly IOcurrenceAppService _ocurrenceAppService;
+
+        public AssessNonComplianceController(IRootCauseAnalysisRepository analyzeRootCauseRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
         {
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _mapper = mapper;
-            _createAnalyzeRootCauseService = createAnalyzeRootCauseService;
+            _ocurrenceAppService = ocurrenceAppService;
         }
 
         /// <summary>
@@ -33,14 +35,22 @@ namespace Api.Rnc.Controllers
         [HttpPost("AnalyzeRootCause")]
         public async Task<IActionResult> AnalyzeRootCause([FromBody] DtoRootCauseAnalysisInput analyze)
         {
-            analyze.UserId = User.GetUserId();
-            analyze.UserName = User.GetUserName();
+            try
+            {
+                analyze.UserId = User.GetUserId();
+                analyze.UserName = User.GetUserName();
 
-            var responseService = await _createAnalyzeRootCauseService.Execute(analyze);
-            if (responseService.Success)
-                return Ok(_mapper.Map<DtoCreateRootCauseAnalysisResponse>(responseService.Value));
+                var responseService = await _ocurrenceAppService.CreateRootCauseAnalysis(analyze);
 
-            return BadRequest(responseService.Message);
+                if (responseService != null)
+                    return Ok(_mapper.Map<DtoCreateRootCauseAnalysisResponse>(responseService));
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
