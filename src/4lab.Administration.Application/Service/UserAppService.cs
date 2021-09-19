@@ -1,11 +1,13 @@
 ﻿using _4lab.Administration.Application.DTOs;
 using _4lab.Administration.Domain.Interfaces;
 using _4lab.Infrastructure.Authorization;
+using _4lab.Infrastructure.Smtp;
 using _4Lab.Administration.Domain.Models;
 using _4Lab.Core.DomainObjects.Extensions;
 using _4Lab.Infrastructure.Authorization;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -16,12 +18,15 @@ namespace _4lab.Administration.Application.Service
         private readonly IUserRepository _userRepository;
         private readonly IUserAuthRepository _userAuthRepository;
         private readonly ICryptograph _cryptograph;
+        private readonly IEmailSender _senderEmail;
 
-        public UserAppService(IUserRepository userRepository, IUserAuthRepository userAuthRepository, ICryptograph cryptograph)
+        public UserAppService(IUserRepository userRepository, IUserAuthRepository userAuthRepository, ICryptograph cryptograph,
+                              IEmailSender senderEmail)
         {
             _userRepository = userRepository;
             _userAuthRepository = userAuthRepository;
             _cryptograph = cryptograph;
+            _senderEmail = senderEmail;
         }
 
         public async Task<bool> ChangeName(int id, DtoChangeNameInput dtoChangeName)
@@ -137,6 +142,47 @@ namespace _4lab.Administration.Application.Service
             return true;
         }
 
+        public async Task<bool> Approved(string email)
+        {
+            try
+            {
+                StringBuilder template = new StringBuilder();
+                template.AppendLine("Olá, seu cadastro foi aprovado com sucesso.");
+                template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do Rnc");
+                template.AppendLine("");
+                template.AppendLine("Atenciosamente, time do RNC");
+                var subjectEmail = "Cadastro aprovado";
+
+                await _senderEmail.SendEmail(email, template.ToString(), subjectEmail);
+                return true;
+            }
+            catch
+            {
+                throw new Exception("Erro ao enviar email.");
+            }
+        }
+
+        public async Task<bool> Disapproved(string email)
+        {
+            try
+            {
+                StringBuilder template = new StringBuilder();
+                template.AppendLine("Olá, seu cadastro infelizmente foi reprovado.");
+                template.AppendLine("Você poderá realizar um novo cadastro, mas recomendamos que verifique com atenção os dados inseridos.");
+                template.AppendLine("");
+                template.AppendLine("Atenciosamente, time do RNC");
+
+                var subjectEmail = "Cadastro reprovado";
+
+                await _senderEmail.SendEmail(email, template.ToString(), subjectEmail);
+                return true;
+            }
+            catch
+            {
+                throw new Exception("Erro ao enviar email.");
+            }
+        }
+
 
         public async Task<bool> RecoveryPassword(string email)
         {
@@ -144,8 +190,7 @@ namespace _4lab.Administration.Application.Service
             {
                 try
                 {
-                    var hasUserWithEmail = await _userAuthRepository
-                        .GetAllWithIncludes(nameof(UserAuth.User));
+                    var hasUserWithEmail = await _userAuthRepository.GetAllWithIncludes(nameof(UserAuth.User));
 
                     var user = hasUserWithEmail.FirstOrDefault(x => x.Email == email);
 
@@ -153,15 +198,14 @@ namespace _4lab.Administration.Application.Service
                         throw new Exception("O email não foi encontrado.");
 
                     var newPassword = RandomPassword();
-
                     var password = _cryptograph.EncryptPassword(newPassword);
+
                     user.SetPassword(password);
 
                     await _userAuthRepository.Update(user);
-
                     await _userAuthRepository.SaveChanges();
 
-                    await _esqueciSenha.SendEmailToForgotpassword(email, user.User.Name, newPassword);
+                    await SendEmailToForgotpassword(email, user.User.Name, newPassword);
 
                     scope.Complete();
 
@@ -175,21 +219,38 @@ namespace _4lab.Administration.Application.Service
             }
         }
 
-        private string RandomPassword()
+        private static string RandomPassword()
         {
             var ArrayAlph = "abcdefghijklm".ToCharArray();
             int tamanhoPass = 6;
             int tam = ArrayAlph.Length;
             string password = string.Empty;
+
             for (int i = 0; i < tamanhoPass; i++)
             {
                 Random random = new Random();
                 int codigo = Convert.ToInt32(random.Next(0, tam - 1).ToString());
-
                 password += ArrayAlph[codigo];
             }
 
             return password;
+        }
+
+        private async Task SendEmailToForgotpassword(string email, string name, string password)
+        {
+            var template = new StringBuilder();
+            template.AppendLine($"Olá <strong>{name}</strong>");
+            template.AppendLine("<p>Recebemos uma solicitação para redefinir sua senha do 4Labs.</p>");
+            template.AppendLine("</br>");
+            template.AppendLine($"<p>Aqui está sua nova senha: <strong>{password}</strong></p>");
+            template.AppendLine("</br>");
+            template.AppendLine("<p>Recomendamos que você troque essa senha pois ela é provisória.</p>");
+            template.AppendLine("</br>");
+            template.AppendLine("<p>Atenciosamente, equipe 4Labs.</p>");
+
+            var subjectEmail = "Envio de senha provisória";
+
+            await _senderEmail.SendEmail(email, template.ToString(), subjectEmail, isHtml: true);
         }
     }
 }

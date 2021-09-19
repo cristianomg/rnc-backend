@@ -1,4 +1,6 @@
 ﻿using _4Lab.Core.Configs;
+using Clinia.FluentMailer.Core;
+using Clinia.FluentMailer.Smtp;
 using Microsoft.Extensions.Options;
 using System.IO;
 using System.Net;

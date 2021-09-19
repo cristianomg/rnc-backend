@@ -5,4 +5,14 @@
     <RootNamespace>_4Lab.Infrastructure.Smtp</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Clinia.FluentMailer.Core" Version="3.1.0" />
+    <PackageReference Include="Clinia.FluentMailer.Smtp" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
+  </ItemGroup>
+
 </Project>

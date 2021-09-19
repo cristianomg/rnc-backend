@@ -1,14 +1,11 @@
-﻿using Api.Rnc.Extensions;
+﻿using _4lab.Administration.Application.DTOs;
+using _4lab.Administration.Application.Service;
+using Api.Rnc.Extensions;
 using AutoMapper;
-using Domain.Dtos.Helps;
-using Domain.Dtos.Inputs;
-using Domain.Dtos.Requests;
-using Domain.Dtos.Responses;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,26 +16,15 @@ namespace Api.Rnc.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly ICreateUserService _createUserService;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
-        private readonly IChangePasswordService _changePasswordService;
-        private readonly IChangeNameService _changeNameService;
-        private readonly IEvalUserSendEmail _evalUserSendEmail;
-        public UserController(ICreateUserService createUserService,
-                              IMapper mapper,
-                              IUserRepository userRepository,
-                              IChangePasswordService changePasswordService,
-                              IChangeNameService changeNameService,
-                              IEvalUserSendEmail evalUserSendEmail)
+        private readonly IUserAppService _userAppService;
+
+        public UserController(IMapper mapper, IUserAppService userAppService)
         {
-            _createUserService = createUserService;
             _mapper = mapper;
-            _userRepository = userRepository;
-            _changePasswordService = changePasswordService;
-            _changeNameService = changeNameService;
-            _evalUserSendEmail = evalUserSendEmail;
+            _userAppService = userAppService;
         }
+
         /// <summary>
         /// Endpoint responsável pela criação do usuário
         /// </summary>
@@ -50,12 +36,21 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] DtoCreateUserInput dtoCreateUser)
         {
-            var createUserServiceResponse = await _createUserService.Execute(dtoCreateUser);
-            if (createUserServiceResponse.Success)
-                return Ok();
-            else
-                return BadRequest(createUserServiceResponse.Message);
+            try
+            {
+                var createUserServiceResponse = await _userAppService.CreateUser(dtoCreateUser);
+
+                if (createUserServiceResponse)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
         /// <summary>
         /// Endpoint responsável por retornar os usuários com cadastro não aprovado ainda
         /// </summary>
@@ -65,9 +60,10 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllDontActive()
         {
-            var users = await _userRepository.GetAllDontActive();
+            var users = await _userAppService.GetAllDontActive();
             return Ok(_mapper.ProjectTo<DtoUserActive>(users));
         }
+
         /// <summary>
         /// Endpoint responsável por retornar o usuário via email
         /// </summary>
@@ -77,9 +73,10 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetUser(string email)
         {
-            var user = await _userRepository.GetByEmail(email);
+            var user = await _userAppService.GetByEmail(email);
             return Ok(_mapper.Map<DtoUserResponse>(user));
         }
+
         /// <summary>
         /// Endpoint responsável por aprovar cadastros
         /// </summary>
@@ -90,15 +87,16 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ApproveUser(string email)
         {
-            await _userRepository.ActiveUser(email);
-            var approved = await _evalUserSendEmail.Approved(email);
-            if (approved.Success)
+            await _userAppService.ActiveUser(email);
+            var approved = await _userAppService.Approved(email);
+            if (approved)
             {
                 return Ok();
             }
             else
                 return BadRequest(approved.Message);
         }
+
         /// <summary>
         /// Endpoint responsável por reprovar cadastros
         /// </summary>
@@ -109,15 +107,16 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Disapprove(string email)
         {
-            await _userRepository.DeleteUserByEmail(email);
-            var disapproved = await _evalUserSendEmail.Disapproved(email);
-            if (disapproved.Success)
+            await _userAppService.DeleteUserByEmail(email);
+            var disapproved = await _userAppService.Disapproved(email);
+            if (disapproved)
             {
                 return Ok();
             }
             else
                 return BadRequest(disapproved.Message);
         }
+
         ///<summary>
         ///Endpoint responsável por torcar senha do usuário
         /// </summary>
@@ -126,12 +125,13 @@ namespace Api.Rnc.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ChangePassword([FromBody] DtoChangePassword dtoChangePassword)
         {
-            var responseService = await _changePasswordService.Execute(dtoChangePassword);
-            if (responseService.Success)
+            var responseService = await _userAppService.ChangePassword(dtoChangePassword);
+            if (responseService)
                 return Ok();
 
             return BadRequest(responseService.Message);
         }
+
         ///<summary>
         ///Endpoint responsável por torcar nome do usuário
         /// </summary>
@@ -141,8 +141,8 @@ namespace Api.Rnc.Controllers
         public async Task<ActionResult> ChangeName([FromBody] DtoChangeNameInput dtoChangeName)
         {
             var userId = User.GetUserId();
-            var responseService = await _changeNameService.Execute(userId, dtoChangeName);
-            if (responseService.Success)
+            var responseService = await _userAppService.ChangeName(userId, dtoChangeName);
+            if (responseService)
                 return Ok();
 
             return BadRequest(responseService.Message);

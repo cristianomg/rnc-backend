@@ -1,4 +1,4 @@
-﻿namespace Domain.Dtos.Responses
+﻿namespace _4lab.Administration.Application.DTOs
 {
     public class DtoSupervisor
     {
