@@ -8,7 +8,7 @@ namespace _4lab.Occurrences.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ActionPlain> builder)
         {
-            builder.ToTable(nameof(ActionPlain));
+            builder.ToTable(nameof(ActionPlain), "Occurrences");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)

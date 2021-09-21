@@ -9,7 +9,7 @@ namespace _4lab.Occurrences.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<TypeOccurrence> builder)
         {
-            builder.ToTable(nameof(TypeOccurrence));
+            builder.ToTable(nameof(TypeOccurrence), "Occurrences");
 
             builder.HasKey(x => x.Id);
 
@@ -21,8 +21,7 @@ namespace _4lab.Occurrences.Data.Mapping
                 .IsRequired()
                 .HasMaxLength(25);
 
-            builder.HasIndex(x => x.OccurrenceTypeName)
-                .IsUnique();
+            builder.HasIndex(x => x.OccurrenceTypeName);
 
             builder.HasMany(x => x.Occurrences)
                 .WithOne(x => x.OccurrenceType)

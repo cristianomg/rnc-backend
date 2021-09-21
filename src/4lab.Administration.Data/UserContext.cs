@@ -1,4 +1,5 @@
 ﻿using _4Lab.Administration.Domain.Models;
+using _4Lab.Core.Data;
 using _4Lab.Core.DomainObjects.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,14 +8,12 @@ using System.Reflection;
 
 namespace _4lab.Administration.Data
 {
-    public class UserContext : DbContext
+    public class UserContext : CoreContext
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
             ChangeTracker.LazyLoadingEnabled = false;
         }
-
-        private UserContext() { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserAuth> UserAuths { get; set; }

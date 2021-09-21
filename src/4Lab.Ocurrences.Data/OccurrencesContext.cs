@@ -1,5 +1,5 @@
 ﻿using _4lab.Occurrences.Domain.Models;
-using _4Lab.Core.Audit;
+using _4Lab.Core.Data;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Core.DomainObjects.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -8,15 +8,12 @@ using System.Reflection;
 
 namespace _4lab.Occurrences.Data
 {
-    public class OccurrencesContext : DbContext
+    public class OccurrencesContext : CoreContext
     {
         public OccurrencesContext(DbContextOptions<OccurrencesContext> options) : base(options)
         {
             ChangeTracker.LazyLoadingEnabled = false;
         }
-
-        private OccurrencesContext() { }
-
         public DbSet<OccurrenceRegister> OccurrenceRegisters { get; set; }
         public DbSet<Occurrence> Occurrences { get; set; }
         public DbSet<TypeOccurrence> OccurrenceTypes { get; set; }
@@ -25,7 +22,6 @@ namespace _4lab.Occurrences.Data
         public DbSet<ActionPlainQuestion> ActionPlainQuestions { get; set; }
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
-        public DbSet<Historic> Historics { get; set; }
         public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
         public DbSet<FiveWhat> FiveWhats { get; set; }
 
@@ -38,10 +34,10 @@ namespace _4lab.Occurrences.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             SeedTipoNaoConformidade(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
+
         }
-
-
         private void SeedTipoNaoConformidade(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
