@@ -1,6 +1,6 @@
 ﻿using _4lab.Administration.Application.Service;
 using _4lab.Infrastructure.Smtp;
-using _4lab.Ocurrences.Application.Service;
+using _4lab.Occurrences.Application.Service;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Infrastructure.Render.PDF;
 using Api.Rnc.Extensions;
@@ -16,23 +16,23 @@ namespace Api.Rnc.Controllers
     [Authorize(Roles = nameof(UserPermissionType.QualityBiomedical))]
     public class ReportController : ControllerBase
     {
-        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IOccurrenceAppService _occurrenceAppService;
         private readonly IUserAppService _userAppService;
         private readonly IEmailSender _senderEmail;
 
-        public ReportController(IOcurrenceAppService ocurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
+        public ReportController(IOccurrenceAppService occurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
         {
-            _ocurrenceAppService = ocurrenceAppService;
+            _occurrenceAppService = occurrenceAppService;
             _userAppService = userAppService;
             _senderEmail = senderEmail;
         }
 
         [HttpGet("{nonComplianceRegisterId:Guid}")]
-        public async Task<IActionResult> GetReport(Guid nonComplianceRegisterId)
+        public async Task<IActionResult> GetReport(Guid occurrenceRegisterId)
         {
             try
             {
-                var responseService = await _ocurrenceAppService.CreateNonComplianceRegisterReport(nonComplianceRegisterId);
+                var responseService = await _occurrenceAppService.CreateOccurrenceRegisterReport(occurrenceRegisterId);
 
                 if (!string.IsNullOrEmpty(responseService))
                     return Ok(responseService);
@@ -55,7 +55,7 @@ namespace Api.Rnc.Controllers
             if (user == null)
                 BadRequest("Usuário não encontrado.");
 
-            var report = await _ocurrenceAppService.CreateNonComplianceRegisterReport(nonComplianceRegisterId);
+            var report = await _occurrenceAppService.CreateOccurrenceRegisterReport(nonComplianceRegisterId);
 
             if (string.IsNullOrEmpty(report))
                 BadRequest("Relatório não gerado.");

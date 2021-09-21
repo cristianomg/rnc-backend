@@ -1,7 +1,7 @@
 ﻿using _4Lab.Core.DomainObjects;
 using System;
 
-namespace _4lab.Ocurrences.Domain.Models
+namespace _4lab.Occurrences.Domain.Models
 {
     public class FiveWhat : Entity<Guid>
     {

@@ -1,6 +1,6 @@
 ﻿using _4lab.Administration.Application.Service;
 using _4lab.Infrastructure.Smtp;
-using _4lab.Ocurrences.Application.Service;
+using _4lab.Occurrences.Application.Service;
 using _4Lab.Administration.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using Api.Rnc.Extensions;
@@ -15,13 +15,13 @@ namespace Api.Rnc.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IOccurrenceAppService _occurrenceAppService;
         private readonly IUserAppService _userAppService;
         private readonly IEmailSender _senderEmail;
 
-        public ChartController(IOcurrenceAppService ocurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
+        public ChartController(IOccurrenceAppService occurrenceAppService, IUserAppService userAppService, IEmailSender senderEmail)
         {
-            _ocurrenceAppService = ocurrenceAppService;
+            _occurrenceAppService = occurrenceAppService;
             _userAppService = userAppService;
             _senderEmail = senderEmail;
         }
@@ -39,7 +39,7 @@ namespace Api.Rnc.Controllers
         {
             try
             {
-                var createPieChartResponse = await _ocurrenceAppService.CreatePieChartWithNonComplianceRegister(setor, month);
+                var createPieChartResponse = await _occurrenceAppService.CreatePieChartWithOccurrenceRegister(setor, month);
 
                 if (createPieChartResponse != null && createPieChartResponse.Length > 0)
                     return Ok(Convert.ToBase64String(createPieChartResponse));
@@ -70,7 +70,7 @@ namespace Api.Rnc.Controllers
             if (user == null)
                 throw new Exception("Usuário não encontrado.");
 
-            var chart = await _ocurrenceAppService.CreatePieChartWithNonComplianceRegister(setor, month);
+            var chart = await _occurrenceAppService.CreatePieChartWithOccurrenceRegister(setor, month);
 
             var template = "<p>O grafico está anexado.</p>";
 

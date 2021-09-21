@@ -1,5 +1,5 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Domain.Interfaces;
+﻿using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Domain.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

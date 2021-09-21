@@ -1,9 +1,9 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
+﻿using _4lab.Occurrences.Application.DTOs;
 using _4Lab.Core.DomainObjects.Enums;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _4lab.Ocurrences.Application.Service
+namespace _4lab.Occurrences.Application.Service
 {
     public interface ISetorAppService
     {

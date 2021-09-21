@@ -1,5 +1,5 @@
 ﻿using _4lab.Administration.Data;
-using _4lab.Ocurrences.Data;
+using _4lab.Occurrences.Data;
 using _4Lab.Archives.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,8 +21,8 @@ namespace Api.Rnc.Extensions
         /// <returns></returns>
         public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
         {
-            var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("OcurrencesContext");
-            services.AddDbContext<OcurrencesContext>(options =>
+            var connection = Environment.GetEnvironmentVariable("CONNECTION") ?? configuration.GetConnectionString("OccurrencesContext");
+            services.AddDbContext<OccurrencesContext>(options =>
                 options.UseNpgsql(connection));
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(connection));

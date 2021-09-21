@@ -1,9 +1,9 @@
-﻿using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.Data;
 using System;
 using System.Threading.Tasks;
 
-namespace _4lab.Ocurrences.Domain.Interfaces
+namespace _4lab.Occurrences.Domain.Interfaces
 {
     public interface IActionPlainRepository : IBaseRepository<ActionPlain, Guid>
     {

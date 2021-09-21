@@ -1,6 +1,6 @@
 ﻿using _4Lab.Core.DomainObjects.Enums;
 
-namespace _4lab.Ocurrences.Application.DTOs
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoSetor
     {

@@ -1,11 +1,13 @@
-﻿namespace _4lab.Ocurrences.Application.DTOs
+﻿using System;
+
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoOccurrenceClassification
     {
         /// <summary>
         /// Id do setor
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// Nome do setor
         /// </summary>

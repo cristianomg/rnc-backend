@@ -1,6 +1,6 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Application.Service;
-using _4lab.Ocurrences.Domain.Interfaces;
+﻿using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Application.Service;
+using _4lab.Occurrences.Domain.Interfaces;
 using Api.Rnc.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -19,13 +19,13 @@ namespace Api.Rnc.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IActionPlainRepository _actionPlainRepository;
-        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IOccurrenceAppService _occurrenceAppService;
 
-        public ActionPlainController(IActionPlainRepository actionPlainRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
+        public ActionPlainController(IActionPlainRepository actionPlainRepository, IMapper mapper, IOccurrenceAppService occurrenceAppService)
         {
             _actionPlainRepository = actionPlainRepository;
             _mapper = mapper;
-            _ocurrenceAppService = ocurrenceAppService;
+            _occurrenceAppService = occurrenceAppService;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Api.Rnc.Controllers
             {
                 dto.UserName = User.GetUserName();
 
-                var responseService = await _ocurrenceAppService.CreateActionPlain(dto);
+                var responseService = await _occurrenceAppService.CreateActionPlain(dto);
                 if (responseService)
                     return Ok();
 

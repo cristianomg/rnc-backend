@@ -1,5 +1,5 @@
-﻿using _4lab.Ocurrences.Data;
-using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Data;
+using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,8 +9,8 @@ namespace Data.Rnc.Context
 {
     public sealed class SeedInitial
     {
-        private readonly OcurrencesContext _context;
-        public SeedInitial(OcurrencesContext context)
+        private readonly OccurrencesContext _context;
+        public SeedInitial(OccurrencesContext context)
         {
             _context = context;
         }
@@ -21,9 +21,9 @@ namespace Data.Rnc.Context
             {
                 ActionPlain();
             }
-            if (!_context.NonCompliance.Any())
+            if (!_context.Occurrences.Any())
             {
-                SeedNaoConformidade();
+                SeedOccurrences();
             }
             if (!_context.Setors.Any())
             {
@@ -91,111 +91,111 @@ namespace Data.Rnc.Context
             _context.SaveChanges();
         }
 
-        private void SeedNaoConformidade()
+        private void SeedOccurrences()
         {
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Erros de cadastro do paciente ou médico.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Requisições ilegíveis.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Paciente com preparo inadequado.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Incidente com cliente.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Amostra insuficiente.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Tubo inadequado.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PreAnalitica,
+                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Amostra com identificação errada ou incompleta.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Material não tirado da pendência.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Equipamento em manutenção.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Perda de amostra.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Material fora da validade.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Centrifugação incorreta.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Queda de energia.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.Analitica,
+                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Armazenamento errado da amostra.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Laudos entregues trocados.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Atraso na liberação do laudo.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Falta da assinatura do Biomédico no laudo.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Erro de transcrição de resultado na ficha de bancada.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Questionamento do resultado feito pelo médico ou cliente.",
             });
-            _context.NonCompliance.Add(new NonCompliance
+            _context.Occurrences.Add(new Occurrence
             {
-                TypeNonComplianceId = NonComplianceType.PosAnalitica,
+                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Perda do laudo.",
             });
 

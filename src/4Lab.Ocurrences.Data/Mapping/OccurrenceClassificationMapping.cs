@@ -1,8 +1,8 @@
-﻿using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace _4lab.Ocurrences.Data.Mapping
+namespace _4lab.Occurrences.Data.Mapping
 {
     public class OccurrenceClassificationMapping : IEntityTypeConfiguration<OccurrenceClassification>
     {
@@ -13,7 +13,7 @@ namespace _4lab.Ocurrences.Data.Mapping
             builder.HasKey(x => x.Id);
 
 
-            builder.HasMany(x => x.NonComplianceRegisters)
+            builder.HasMany(x => x.OccurrenceRegisters)
                 .WithOne(x => x.OccurrenceClassification)
                 .HasForeignKey(x => x.OccurrenceClassificationId);
 

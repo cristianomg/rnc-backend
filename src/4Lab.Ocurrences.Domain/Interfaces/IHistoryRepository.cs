@@ -2,7 +2,7 @@
 using _4Lab.Core.Data;
 using System;
 
-namespace _4lab.Ocurrences.Domain.Interfaces
+namespace _4lab.Occurrences.Domain.Interfaces
 {
     public interface IHistoryRepository : IBaseRepository<Historic, Guid> { }
 }

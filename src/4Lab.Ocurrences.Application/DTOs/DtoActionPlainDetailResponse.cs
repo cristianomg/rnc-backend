@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Application.DTOs
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoActionPlainDetailResponse
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<DtoActionPlainQuestionResponse> Questions { get; set; }
     }

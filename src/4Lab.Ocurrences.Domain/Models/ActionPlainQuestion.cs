@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Domain.Models
+namespace _4lab.Occurrences.Domain.Models
 {
     public class ActionPlainQuestion : Entity<Guid>
     {

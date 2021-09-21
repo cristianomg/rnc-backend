@@ -29,7 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\4lab.Administration.Data\4Lab.Administration.Data.csproj" />
     <ProjectReference Include="..\4Lab.Archives.Data\4Lab.Archives.Data.csproj" />
-    <ProjectReference Include="..\4Lab.Ocurrences.Data\4Lab.Ocurrences.Data.csproj" />
+    <ProjectReference Include="..\4Lab.Ocurrences.Data\4Lab.Occurrences.Data.csproj" />
     <ProjectReference Include="..\4Lab.Orchestrator\4Lab.Orchestrator.csproj" />
   </ItemGroup>
 

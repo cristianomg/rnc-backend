@@ -1,4 +1,4 @@
-﻿using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.Data;
 using System;
 

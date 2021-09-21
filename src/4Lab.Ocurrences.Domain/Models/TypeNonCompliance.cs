@@ -2,11 +2,11 @@
 using _4Lab.Core.DomainObjects.Enums;
 using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Domain.Models
+namespace _4lab.Occurrences.Domain.Models
 {
-    public class TypeNonCompliance : Entity<NonComplianceType>
+    public class TypeOccurrence : Entity<OccurrenceType>
     {
-        public string NameNonCompliance { get; set; }
-        public virtual IEnumerable<NonCompliance> NonCompliances { get; set; }
+        public string OccurrenceTypeName { get; set; }
+        public virtual IEnumerable<Occurrence> Occurrences { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using _4lab.Administration.Data.Repositories;
 using _4lab.Administration.Domain.Interfaces;
-using _4lab.Ocurrences.Data.Repositories;
-using _4lab.Ocurrences.Domain.Interfaces;
+using _4lab.Occurrences.Data.Repositories;
+using _4lab.Occurrences.Domain.Interfaces;
 using _4Lab.Archives.Data.Repositories;
 using _4Lab.Archives.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +22,8 @@ namespace Api.Rnc.Extensions
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAuthRepository, UserAuthRepository>();
-            services.AddScoped<INonComplianceRepository, NonComplianceRepository>();
-            services.AddScoped<INonComplianceRegisterRepository, NonComplianceRegisterRepository>();
+            services.AddScoped<IOccurrenceRepository, OccurrenceRepository>();
+            services.AddScoped<IOccurrenceRegisterRepository, OccurrenceRegisterRepository>();
             services.AddScoped<IRootCauseAnalysisRepository, RootCauseAnalysisRepository>();
             services.AddScoped<ISetorRepository, SetorRepository>();
             services.AddScoped<IActionPlainRepository, ActionPlainRepository>();

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_4lab.Ocurrences.Domain.Models.NonComplianceRegisterGroup>
+﻿@model IEnumerable<_4lab.Occurrences.Domain.Models.OccurrenceGroup>
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
@@ -8,12 +8,12 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-        const dataNonCompliances = [['Não conformidades', 'Quantidade']];
+        const dataNonCompliances = [['Ocorrências', 'Quantidade']];
 
 
         @foreach (var d in Model)
         {
-            @:dataNonCompliances.push(['@d.NonCompliance', @d.Quantity])
+            @:dataNonCompliances.push(['@d.Occurrence', @d.Quantity])
         }
 
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -24,7 +24,7 @@
             var data = google.visualization.arrayToDataTable(dataNonCompliances);
 
             var options = {
-                title: 'Não conformidades cadastradas',
+                title: 'Ocorrências cadastradas',
                 pieHole: 0.5,
                 pieSliceTextStyle: {
                     color: 'black',

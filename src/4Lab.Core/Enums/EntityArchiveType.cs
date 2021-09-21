@@ -2,6 +2,6 @@
 {
     public enum EntityArchiveType
     {
-        NonCompliance = 1
+        Occurrence = 1
     }
 }

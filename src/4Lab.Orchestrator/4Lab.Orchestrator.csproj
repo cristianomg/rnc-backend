@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\4lab.Administration.Application\4Lab.Administration.Application.csproj" />
     <ProjectReference Include="..\4Lab.Archives.Application\4Lab.Archives.Application.csproj" />
-    <ProjectReference Include="..\4Lab.Ocurrences.Application\4Lab.Ocurrences.Application.csproj" />
+    <ProjectReference Include="..\4Lab.Ocurrences.Application\4Lab.Occurrences.Application.csproj" />
   </ItemGroup>
 
 </Project>

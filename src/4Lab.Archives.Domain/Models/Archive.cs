@@ -2,7 +2,7 @@
 using _4Lab.Core.Enums;
 using System;
 
-namespace _4lab.Ocurrences.Domain.Models
+namespace _4lab.Occurrences.Domain.Models
 {
     public class Archive : Entity<Guid>
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace _4lab.Ocurrences.Data.Mapping
+namespace _4lab.Occurrences.Data.Mapping
 {
     public class HistoricMapping : IEntityTypeConfiguration<Historic>
     {

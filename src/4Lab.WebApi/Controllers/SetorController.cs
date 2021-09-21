@@ -1,6 +1,6 @@
 ﻿using _4lab.Administration.Application.Service;
-using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Application.Service;
+using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Application.Service;
 using _4Lab.Core.DomainObjects.Enums;
 using Api.Rnc.Extensions;
 using Microsoft.AspNetCore.Authorization;

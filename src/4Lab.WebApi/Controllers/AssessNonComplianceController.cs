@@ -1,6 +1,6 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Application.Service;
-using _4lab.Ocurrences.Domain.Interfaces;
+﻿using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Application.Service;
+using _4lab.Occurrences.Domain.Interfaces;
 using _4Lab.Core.DomainObjects.Enums;
 using Api.Rnc.Extensions;
 using AutoMapper;
@@ -18,13 +18,13 @@ namespace Api.Rnc.Controllers
     {
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly IMapper _mapper;
-        private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly IOccurrenceAppService _occurrenceAppService;
 
-        public AssessNonComplianceController(IRootCauseAnalysisRepository analyzeRootCauseRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
+        public AssessNonComplianceController(IRootCauseAnalysisRepository analyzeRootCauseRepository, IMapper mapper, IOccurrenceAppService occurrenceAppService)
         {
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _mapper = mapper;
-            _ocurrenceAppService = ocurrenceAppService;
+            _occurrenceAppService = occurrenceAppService;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Api.Rnc.Controllers
                 analyze.UserId = User.GetUserId();
                 analyze.UserName = User.GetUserName();
 
-                var responseService = await _ocurrenceAppService.CreateRootCauseAnalysis(analyze);
+                var responseService = await _occurrenceAppService.CreateRootCauseAnalysis(analyze);
 
                 if (responseService != null)
                     return Ok(_mapper.Map<DtoCreateRootCauseAnalysisResponse>(responseService));

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Application.DTOs
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoCreateRootCauseAnalysisResponse
     {
@@ -8,10 +9,10 @@ namespace _4lab.Ocurrences.Application.DTOs
         {
             FiveWhat = new List<DtoFiveWhat>();
         }
-        public int NonComplianceRegisterId { get; set; }
+        public Guid OccurrenceRegisterId { get; set; }
         public IEnumerable<DtoFiveWhat> FiveWhat { get; set; }
-        public int UserId { get; set; }
-        public int ActionPlainId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid ActionPlainId { get; set; }
         public virtual IEnumerable<DtoActionPlainResponse> ActionPlainResponses { get; set; }
 
     }

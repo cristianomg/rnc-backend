@@ -1,12 +1,12 @@
-﻿using _4lab.Ocurrences.Application.DTOs;
-using _4lab.Ocurrences.Domain.Interfaces;
-using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Domain.Interfaces;
+using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _4lab.Ocurrences.Application.Service
+namespace _4lab.Occurrences.Application.Service
 {
     public class SetorAppService : ISetorAppService
     {

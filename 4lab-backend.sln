@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{D7FC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{37EDF0CA-9670-4A9E-8228-E14B48872EED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ocurrences", "Ocurrences", "{DC5C135E-A7C0-485F-82A2-02C2E70F67EE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Occurrences", "Occurrences", "{DC5C135E-A7C0-485F-82A2-02C2E70F67EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E917BB90-C238-4895-BE04-DE338171A032}"
 EndProject
@@ -41,11 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Infrastructure.Smtp", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Infrastructure.Storage", "src\4Lab.Infrastructure.Storage\4Lab.Infrastructure.Storage.csproj", "{E50E343A-95BB-472A-A445-181F33B09AE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Ocurrences.Application", "src\4Lab.Ocurrences.Application\4Lab.Ocurrences.Application.csproj", "{C5EC1237-8C1E-4A48-BAE5-4862732FE8F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Occurrences.Application", "src\4Lab.Ocurrences.Application\4Lab.Occurrences.Application.csproj", "{C5EC1237-8C1E-4A48-BAE5-4862732FE8F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Ocurrences.Data", "src\4Lab.Ocurrences.Data\4Lab.Ocurrences.Data.csproj", "{F1FC8DEA-922F-4AAA-BEFB-42CC4624767B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Occurrences.Data", "src\4Lab.Ocurrences.Data\4Lab.Occurrences.Data.csproj", "{F1FC8DEA-922F-4AAA-BEFB-42CC4624767B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Ocurrences.Domain", "src\4Lab.Ocurrences.Domain\4Lab.Ocurrences.Domain.csproj", "{8086B6CF-D383-4A4A-A785-CD5CB26E54F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Occurrences.Domain", "src\4Lab.Ocurrences.Domain\4Lab.Occurrences.Domain.csproj", "{8086B6CF-D383-4A4A-A785-CD5CB26E54F2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Infrastructure.Charts", "src\4Lab.Infrastructure.Charts\4Lab.Infrastructure.Charts.csproj", "{50EDE251-B761-4656-8339-53A757C2F866}"
 EndProject

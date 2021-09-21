@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Application.DTOs
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoRootCauseAnalysisInput
     {
         /// <summary>
-        /// Id do registro de não conformidade
+        /// Id do registro de ocorrência
         /// </summary>
-        public Guid NonComplianceRegisterId { get; set; }
+        public Guid OccurrenceRegisterId { get; set; }
         /// <summary>
         /// 5 Porques
         /// </summary>

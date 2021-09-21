@@ -1,8 +1,10 @@
-﻿namespace _4lab.Ocurrences.Application.DTOs
+﻿using System;
+
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoActionPlainListResponse
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

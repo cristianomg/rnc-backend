@@ -1,16 +1,16 @@
-﻿using _4lab.Ocurrences.Domain.Interfaces;
-using _4lab.Ocurrences.Domain.Models;
+﻿using _4lab.Occurrences.Domain.Interfaces;
+using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace _4lab.Ocurrences.Data.Repositories
+namespace _4lab.Occurrences.Data.Repositories
 {
     public class ActionPlainRepository : BaseRepository<ActionPlain, Guid>, IActionPlainRepository
     {
-        private readonly OcurrencesContext _context;
-        public ActionPlainRepository(OcurrencesContext context) : base(context)
+        private readonly OccurrencesContext _context;
+        public ActionPlainRepository(OccurrencesContext context) : base(context)
         {
             _context = context;
         }

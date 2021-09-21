@@ -75,7 +75,7 @@ namespace Api.Rnc
         {
             //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             //{
-            //    var context = serviceScope.ServiceProvider.GetRequiredService<OcurrencesContext>();
+            //    var context = serviceScope.ServiceProvider.GetRequiredService<OccurrencesContext>();
             //    if (!env.IsProduction())
             //    {
             //        context.Database.Migrate();

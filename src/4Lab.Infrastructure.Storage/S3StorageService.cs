@@ -24,7 +24,11 @@ namespace _4lab.Infrastructure.Storage
         {
             try
             {
-                await _s3Client.UploadObjectFromStreamAsync(_bucketName, objectKey, fileContent, null, CancellationToken.None);
+                await _s3Client.UploadObjectFromStreamAsync(_bucketName
+                                                            , objectKey
+                                                            , fileContent
+                                                            , null
+                                                            , CancellationToken.None);
                 return true;
             }
             catch

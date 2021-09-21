@@ -1,11 +1,13 @@
-﻿namespace _4lab.Ocurrences.Application.DTOs
+﻿using System;
+
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoActionPlainQuestionInput
     {
         /// <summary>
         /// Id das perguntas no plano de ação
         /// </summary>
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
         /// <summary>
         /// Descrição da pergunta
         /// </summary>
@@ -13,7 +15,7 @@
         /// <summary>
         /// Id do plano de ação
         /// </summary>
-        public int? ActionPlainId { get; set; }
+        public Guid? ActionPlainId { get; set; }
         /// <summary>
         /// Resposta
         /// </summary>

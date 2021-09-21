@@ -20,7 +20,12 @@ namespace _4lab.Infrastructure.Smtp
             _passwordEmail = emailDeEnvio.Value.Password;
         }
 
-        public async Task SendEmail(string email, string template, string subjectEmail, byte[] anexo = null, string anexoName = null, bool isHtml = false)
+        public async Task SendEmail(string email
+                                    , string template
+                                    , string subjectEmail
+                                    , byte[] anexo = null
+                                    , string anexoName = null
+                                    , bool isHtml = false)
         {
             var sender = new SmtpSender(() => new SmtpClient(host: "smtp.gmail.com", 587)
             {

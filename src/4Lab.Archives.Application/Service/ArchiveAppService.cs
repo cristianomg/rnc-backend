@@ -1,5 +1,5 @@
 ﻿using _4lab.Infrastructure.Storage;
-using _4lab.Ocurrences.Domain.Models;
+using _4lab.Occurrences.Domain.Models;
 using _4Lab.Archives.Application.DTOs;
 using _4Lab.Archives.Domain.Interfaces;
 using _4Lab.Core.Enums;

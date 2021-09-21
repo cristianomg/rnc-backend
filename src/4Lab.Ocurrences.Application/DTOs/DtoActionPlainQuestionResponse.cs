@@ -1,9 +1,11 @@
-﻿namespace _4lab.Ocurrences.Application.DTOs
+﻿using System;
+
+namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoActionPlainQuestionResponse
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Value { get; set; }
-        public int ActionPlainId { get; set; }
+        public Guid ActionPlainId { get; set; }
     }
 }
