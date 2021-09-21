@@ -1,4 +1,6 @@
-﻿using _4lab.Ocurrences.Data;
+﻿using _4lab.Administration.Data;
+using _4lab.Ocurrences.Data;
+using _4Lab.Archives.Data;
 using Api.Rnc.Extensions.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +16,9 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
         {
             services.AddHealthChecks()
-                    .AddDbCheck<OcurrencesContext>();
+                    .AddDbCheck<OcurrencesContext>()
+                    .AddDbCheck<UserContext>()
+                    .AddDbCheck<ArchiveContext>();
 
             return services;
         }

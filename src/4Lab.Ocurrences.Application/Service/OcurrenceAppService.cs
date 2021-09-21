@@ -22,19 +22,22 @@ namespace _4lab.Ocurrences.Application.Service
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly INonComplianceRepository _nonComplianceRepository;
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
-        private readonly IStorageService _storageService;
         private readonly IRazorRender _razorRender;
 
-        public OcurrenceAppService(IActionPlainRepository actionPlainRepository, IActionPlainQuestionRepository actionPlainQuestionRepository,
-                                   IMapper mapper, INonComplianceRegisterRepository nonComplianceRegisterRepository, INonComplianceRepository nonComplianceRepository,
-                                   IStorageService storageService, IRootCauseAnalysisRepository analyzeRootCauseRepository, IRazorRender razorRender)
+        public OcurrenceAppService(IActionPlainRepository actionPlainRepository
+                                   , IActionPlainQuestionRepository actionPlainQuestionRepository
+                                   , IMapper mapper
+                                   , INonComplianceRegisterRepository nonComplianceRegisterRepository
+                                   , INonComplianceRepository nonComplianceRepository
+                                   , IStorageService storageService
+                                   , IRootCauseAnalysisRepository analyzeRootCauseRepository
+                                   , IRazorRender razorRender)
         {
             _actionPlainRepository = actionPlainRepository;
             _actionPlainQuestionRepository = actionPlainQuestionRepository;
             _mapper = mapper;
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _nonComplianceRepository = nonComplianceRepository;
-            _storageService = storageService;
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _razorRender = razorRender;
         }

@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>_4Lab.Archives.Data</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\4Lab.Archives.Domain\4Lab.Archives.Domain.csproj" />
+    <ProjectReference Include="..\4Lab.Ocurrences.Domain\4Lab.Ocurrences.Domain.csproj" />
   </ItemGroup>
 
 </Project>
