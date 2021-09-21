@@ -11,7 +11,7 @@ namespace _4lab.Ocurrences.Application.Service
         Task<bool> CreateActionPlain(DtoCreateActionPlainInput dto);
         Task<bool> CreateNonComplianceRegister(DtoNonComplianceRegister nonCompliance);
         Task<RootCauseAnalysis> CreateRootCauseAnalysis(DtoRootCauseAnalysisInput analyzeRootCause);
-        Task<DtoNonComplianceRegisterResponse> GetNonComplieanceRegisterById(Guid id);
+        Task<DtoOcurrenceRegisterResponse> GetOcurrenceRegisterById(Guid id);
         Task<byte[]> CreatePieChartWithNonComplianceRegister(SetorType setor, int month);
         Task<string> CreateNonComplianceRegisterReport(Guid nonComplianceRegisterId);
     }

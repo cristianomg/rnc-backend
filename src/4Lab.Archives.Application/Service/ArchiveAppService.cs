@@ -2,6 +2,7 @@
 using _4lab.Ocurrences.Domain.Models;
 using _4Lab.Archives.Application.DTOs;
 using _4Lab.Archives.Domain.Interfaces;
+using _4Lab.Core.Enums;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,23 @@ namespace _4Lab.Archives.Application.Service
             }
 
             return archives;
+        }
+
+        public async Task<IEnumerable<DtoCreatedArchive>> GetFilesByEntityId(EntityArchiveType entityType, Guid entityId)
+        {
+            var archives = await _archiveRepository.GetAll();
+
+            var filteredArchives = archives.Where(x => x.EntityType == entityType &&
+                                x.EntityId == entityId).ToList();
+
+            return await Task.WhenAll(filteredArchives.Select(async archive =>
+            {
+                var result = _mapper.Map<DtoCreatedArchive>(archive);
+
+                result.Url = await _storageService.GetGetPreSignedURL(archive.Key);
+
+                return result;
+            }));
         }
     }
 }

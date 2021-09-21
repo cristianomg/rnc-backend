@@ -247,12 +247,10 @@ namespace _4lab.Ocurrences.Application.Service
             }
         }
 
-        public async Task<DtoNonComplianceRegisterResponse> GetNonComplieanceRegisterById(Guid id)
+        public async Task<DtoOcurrenceRegisterResponse> GetOcurrenceRegisterById(Guid id)
         {
-            var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
-            var nonCompliance = _mapper.Map<DtoNonComplianceRegisterResponse>(nonComplianceRegister);
-
-            return nonCompliance;
+            var ocurrenceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
+            return _mapper.Map<DtoOcurrenceRegisterResponse>(ocurrenceRegister);
         }
 
         public async Task<byte[]> CreatePieChartWithNonComplianceRegister(SetorType setor, int month)

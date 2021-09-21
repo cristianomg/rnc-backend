@@ -12,7 +12,7 @@ namespace _4lab.Ocurrences.Application.Mapper
             CreateMap<NonCompliance, DtoNonCompliance>()
                 .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
 
-            CreateMap<NonCompliance, DtoNonComplianceResponse>()
+            CreateMap<NonCompliance, DtoOcurrenceResponse>()
                 .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))
                 .ForMember(dest => dest.Archives, opt => opt.Ignore());
 
@@ -22,7 +22,7 @@ namespace _4lab.Ocurrences.Application.Mapper
             CreateMap<OccurrenceClassification, DtoOccurrenceClassification>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
 
-            CreateMap<NonComplianceRegister, DtoNonComplianceRegisterResponse>()
+            CreateMap<NonComplianceRegister, DtoOcurrenceRegisterResponse>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.RegisterDate))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))

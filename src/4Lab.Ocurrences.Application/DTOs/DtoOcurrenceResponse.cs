@@ -1,11 +1,9 @@
-﻿using _4Lab.Archives.Application.DTOs;
-using _4Lab.Core.DomainObjects.Enums;
+﻿using _4Lab.Core.DomainObjects.Enums;
 using System;
-using System.Collections.Generic;
 
-namespace _4Lab.Orchestrator.DTOs.Inputs
+namespace _4lab.Ocurrences.Application.DTOs
 {
-    public class DtoNonComplianceInput
+    public class DtoOcurrenceResponse
     {
         /// <summary>
         /// Id da não conformidade
@@ -23,9 +21,5 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// Nome do tipo da não conformidade
         /// </summary>
         public string NameNonCompliance { get; set; }
-        /// <summary>
-        /// Anexos
-        /// </summary>
-        public List<DtoArchiveInput> Archives { get; set; }
     }
 }

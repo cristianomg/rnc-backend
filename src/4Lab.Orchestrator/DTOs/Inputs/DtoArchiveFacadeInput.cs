@@ -4,7 +4,7 @@ using System;
 
 namespace _4Lab.Orchestrator.DTOs.Inputs
 {
-    public class DtoArchiveInput
+    public class DtoArchiveFacadeInput
     {
         [JsonIgnore]
         public int? Id { get; set; } = null;

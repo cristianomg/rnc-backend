@@ -1,14 +1,12 @@
-﻿using _4Lab.Core.DomainObjects.Enums;
+﻿using _4lab.Ocurrences.Application.DTOs;
+using _4Lab.Core.DomainObjects.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace _4lab.Ocurrences.Application.DTOs
+namespace _4Lab.Orchestrator.DTOs.Response
 {
-    public class DtoNonComplianceRegisterResponse
+    public class DtoOcurrenceRegisterFacadeResponse
     {
-        public DtoNonComplianceRegisterResponse()
-        {
-        }
         /// <summary>
         /// Id
         /// </summary>
@@ -40,7 +38,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Não conformidades
         /// </summary>
-        public IEnumerable<DtoNonComplianceResponse> NonCompliances { get; set; }
+        public IEnumerable<DtoOcurrenceFacadeResponse> Ocurrences { get; set; }
         /// <summary>
         /// Setor
         /// </summary>

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace _4Lab.Orchestrator.DTOs.Inputs
 {
-    public class DtoNonComplianceRegisterInput
+    public class DtoOcurrenceRegisteFacaderInput
     {
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
         /// </summary>
-        public IEnumerable<DtoNonComplianceInput> NonCompliances { get; set; }
+        public IEnumerable<DtoOcurrenceFacadeInput> NonCompliances { get; set; }
         /// <summary>
         /// Data do registro
         /// </summary>

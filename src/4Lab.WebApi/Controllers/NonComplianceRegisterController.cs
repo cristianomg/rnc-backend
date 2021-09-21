@@ -25,17 +25,20 @@ namespace Api.Rnc.Controllers
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
         private readonly IOcurrenceAppService _ocurrenceAppService;
-        private readonly INonComplianceRegisterFacade _NonComplianceRegisterHandler;
+        private readonly ICreateNonComplianceRegisterFacade _createNonComplianceRegisterFacade;
+        private readonly IGetOcurrenceRegisterByIdFacade _getOcurrenceRegisterByIdFacade;
 
         public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository
                                              , IMapper mapper
                                              , IOcurrenceAppService ocurrenceAppService
-                                             , INonComplianceRegisterFacade nonComplianceRegisterHandler)
+                                             , ICreateNonComplianceRegisterFacade createNonComplianceRegisterFacade
+                                             , IGetOcurrenceRegisterByIdFacade getOcurrenceRegisterByIdFacade)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _mapper = mapper;
             _ocurrenceAppService = ocurrenceAppService;
-            _NonComplianceRegisterHandler = nonComplianceRegisterHandler;
+            _createNonComplianceRegisterFacade = createNonComplianceRegisterFacade;
+            _getOcurrenceRegisterByIdFacade = getOcurrenceRegisterByIdFacade;
         }
 
         /// <summary>
@@ -44,15 +47,15 @@ namespace Api.Rnc.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status201Created)]
-        public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput input)
+        [ProducesResponseType(typeof(DtoOcurrenceRegisterResponse), StatusCodes.Status201Created)]
+        public async Task<IActionResult> Register([FromBody] DtoOcurrenceRegisteFacaderInput input)
         {
             try
             {
                 input.UserId = User.GetUserId();
                 input.UserName = User.GetUserName();
 
-                if (await _NonComplianceRegisterHandler.Register(input))
+                if (await _createNonComplianceRegisterFacade.Execute(input))
                     return Ok();
 
                 return BadRequest();
@@ -69,13 +72,13 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("setor/{setor}")]
         [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
-        [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOcurrenceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAllBySetor(SetorType setor, HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository.GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
+            return Ok(_mapper.ProjectTo<DtoOcurrenceRegisterResponse>(nonComplianceRegisters
                     .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
                     .Where(x => x.SetorId == setor)
                     .OrderBy(x => x.RootCauseAnalysis != null)
@@ -88,14 +91,14 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("all")]
         [HttpGet("all/{hasRootCauseAnalysis}")]
-        [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOcurrenceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAll(HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters
+            return Ok(_mapper.ProjectTo<DtoOcurrenceRegisterResponse>(nonComplianceRegisters
                 .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
                 .OrderBy(x => x.RootCauseAnalysis != null)
                 .ThenBy(x => x.Id)));
@@ -108,14 +111,14 @@ namespace Api.Rnc.Controllers
         /// <param name="setor"></param>
         /// <returns></returns>
         [HttpGet("{date:DateTime}/{setor:required}")]
-        [ProducesResponseType(typeof(IQueryable<DtoNonComplianceRegisterResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOcurrenceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _nonComplianceRegisterRepository
                 .GetAllWithIncludes(nameof(NonComplianceRegister.Setor));
 
-            return Ok(_mapper.ProjectTo<DtoNonComplianceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x => x.SetorId == setor && x.RegisterDate.Year == date.Year
+            return Ok(_mapper.ProjectTo<DtoOcurrenceRegisterResponse>(nonComplianceRegisters.OrderBy(x => x.Id).Where(x => x.SetorId == setor && x.RegisterDate.Year == date.Year
             && x.RegisterDate.Month == date.Month && x.RootCauseAnalysis != null)));
         }
 
@@ -125,12 +128,11 @@ namespace Api.Rnc.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(DtoOcurrenceRegisterResponse), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var nonComplianceRegister = await _ocurrenceAppService.GetNonComplieanceRegisterById(id);
-            return Ok(nonComplianceRegister);
+            return Ok(await _getOcurrenceRegisterByIdFacade.Execute(id));
         }
 
     }

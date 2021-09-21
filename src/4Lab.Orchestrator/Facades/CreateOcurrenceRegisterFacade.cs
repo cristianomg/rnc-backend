@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace _4Lab.Orchestrator.Facades
 {
-    public class NonComplianceRegisterFacade : INonComplianceRegisterFacade
+    public class CreateOcurrenceRegisterFacade : ICreateNonComplianceRegisterFacade
     {
         private readonly IArchiveAppService _archiveAppService;
         private readonly IOcurrenceAppService _ocurrenceAppService;
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
-        public NonComplianceRegisterFacade(IArchiveAppService archiveAppService
+        public CreateOcurrenceRegisterFacade(IArchiveAppService archiveAppService
                                           , IOcurrenceAppService ocurrenceAppService
                                           , INonComplianceRegisterRepository nonComplianceRegisterRepository
                                           , IMapper mapper)
@@ -29,7 +29,7 @@ namespace _4Lab.Orchestrator.Facades
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
         }
 
-        public async Task<bool> Register(DtoNonComplianceRegisterInput input)
+        public async Task<bool> Execute(DtoOcurrenceRegisteFacaderInput input)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace _4Lab.Orchestrator.Facades
                 throw;
             }
         }
-        private DtoNonComplianceInput FillNonCompliance(DtoNonComplianceInput nonCompliance)
+        private DtoOcurrenceFacadeInput FillNonCompliance(DtoOcurrenceFacadeInput nonCompliance)
         {
             nonCompliance.Id = Guid.NewGuid();
             nonCompliance.Archives.Select(archive =>
