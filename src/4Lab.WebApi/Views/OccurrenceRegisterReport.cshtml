@@ -1,0 +1,47 @@
+﻿@using System.Linq;
+@using _4Lab.Core.DomainObjects.Extensions;
+
+@model _4lab.Occurrences.Domain.Models.OccurrenceRegister
+
+@{
+    var peopleInvolved = string.IsNullOrEmpty(Model.PeopleInvolved) ? "Nenhuma" : Model.PeopleInvolved.Trim();
+    var questionsAndResponses = string.Join(';', Model.RootCauseAnalysis.ActionPlain.Questions
+                                                .Zip(Model.RootCauseAnalysis.ActionPlainResponses, (first, second) => $"{first.Value} {second.Value}"))
+                                                .Replace(";", "; ");
+    var occurrences = string.Join(';', @Model.Occurrences
+                                                .GroupBy(x => x.OccurrenceTypeId.GetDescription())
+                                                .Select(x => $"{string.Join(';', x.Select(y => $"{y.Description}"))} sendo essa(s) não conformidade(s) caracterizada(s) como: {x.Key}"))
+                                                .Replace(";", ", ");
+
+}
+
+<style type="text/css">
+    article {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+    p {
+        margin-bottom: 0;
+        text-indent: 1.5em;
+    }
+
+        p + p {
+            margin-top: 0;
+        }
+</style>
+<article style="">
+    <p>
+        No dia <strong>@Model.RegisterDate.ToString("dd/MM/yyyy")</strong>, às <strong>@Model.RegisterHour</strong>, o funcionário(a) <strong>@*@Model.User.Name*@</strong>, do setor de <strong>@*@Model.User.Setor.Name*@</strong>, sendo a sua supervisora <strong>Ana Luiza Santos</strong>,
+        realizou/presenciou a(s) seguinte(s) ocorrências(s) : <strong>@occurrences</strong>,
+        ocorrida(s) no setor <Strong>@Model.Setor.Name</Strong>, supervisionado(s) por <strong>Ana Luiza Santos</strong>.
+    </p>
+    <p>
+        A(s) pessoa(s) envolvida(s) na ocorrência além da funcionária é/são: <strong>@peopleInvolved</strong>. A ação imediata tomada pela funcionária foi <strong>@Model.ImmediateAction</strong>. Após análise da(s) não conformidade(s) acometida(s), a supervisora do setor do ocorrido,
+        <strong>Ana Luiza Santos</strong>, descreveu como análise da causa raiz o seguinte: <strong>@Model.RootCauseAnalysis.FiveWhats.</strong>
+    </p>
+    <p>
+        Após essa análise elaborou um plano de ação para visualizar os detalhes de forma mais aprofundada, para solucionar o problema e evitar futuros erros,
+        sendo utilizada a ferramenta <strong>@Model.RootCauseAnalysis.ActionPlain.Name</strong>, onde foi descrita da seguinte forma: <strong>@questionsAndResponses</strong>.
+    </p>
+</article>

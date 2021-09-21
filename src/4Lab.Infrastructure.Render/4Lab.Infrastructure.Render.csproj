@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_4Lab.Infrastructure.Render</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\cristiano.oliveira\.nuget\packages\select.htmltopdf\21.1.0\contentFiles\any\any\Select.Html.dep" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="21.1.0" />
+  </ItemGroup>
+
+</Project>

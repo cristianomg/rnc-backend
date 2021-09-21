@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_4Lab.Infrastructure.Charts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\cristiano.oliveira\.nuget\packages\select.htmltopdf.netcore\21.1.0\contentFiles\any\any\Select.Html.dep" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sautinsoft.document" Version="5.3.6.22" />
+  </ItemGroup>
+
+</Project>
