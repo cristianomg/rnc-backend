@@ -3,6 +3,8 @@ using _4lab.Ocurrences.Application.Service;
 using _4lab.Ocurrences.Domain.Interfaces;
 using _4lab.Ocurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
+using _4Lab.Orchestrator.DTOs.Inputs;
+using _4Lab.Orchestrator.Interfaces;
 using _4Lab.WebApi.Extensions;
 using Api.Rnc.Extensions;
 using AutoMapper;
@@ -23,12 +25,17 @@ namespace Api.Rnc.Controllers
         private readonly INonComplianceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
         private readonly IOcurrenceAppService _ocurrenceAppService;
+        private readonly INonComplianceRegisterFacade _NonComplianceRegisterHandler;
 
-        public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository, IMapper mapper, IOcurrenceAppService ocurrenceAppService)
+        public NonComplianceRegisterController(INonComplianceRegisterRepository nonComplianceRegisterRepository
+                                             , IMapper mapper
+                                             , IOcurrenceAppService ocurrenceAppService
+                                             , INonComplianceRegisterFacade nonComplianceRegisterHandler)
         {
             _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
             _mapper = mapper;
             _ocurrenceAppService = ocurrenceAppService;
+            _NonComplianceRegisterHandler = nonComplianceRegisterHandler;
         }
 
         /// <summary>
@@ -38,15 +45,14 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status201Created)]
-        public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput dto)
+        public async Task<IActionResult> Register([FromBody] DtoNonComplianceRegisterInput input)
         {
             try
             {
-                dto.UserId = User.GetUserId();
-                dto.UserName = User.GetUserName();
+                input.UserId = User.GetUserId();
+                input.UserName = User.GetUserName();
 
-                var responseService = await _ocurrenceAppService.CreateNonComplianceRegister(dto);
-                if (responseService)
+                if (await _NonComplianceRegisterHandler.Register(input))
                     return Ok();
 
                 return BadRequest();
@@ -121,7 +127,7 @@ namespace Api.Rnc.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoNonComplianceRegisterResponse), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var nonComplianceRegister = await _ocurrenceAppService.GetNonComplieanceRegisterById(id);
             return Ok(nonComplianceRegister);

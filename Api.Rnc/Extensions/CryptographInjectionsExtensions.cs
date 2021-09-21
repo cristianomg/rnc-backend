@@ -1,4 +1,5 @@
 ﻿using _4lab.Infrastructure.Authorization;
+using _4Lab.Infrastructure.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Rnc.Extensions
@@ -16,6 +17,7 @@ namespace Api.Rnc.Extensions
         public static IServiceCollection AddCryptographInjection(this IServiceCollection services)
         {
             services.AddScoped<ICryptograph, SHA256Cryptograph>();
+            services.AddScoped<ITokenService, TokenService>();
             return services;
         }
     }

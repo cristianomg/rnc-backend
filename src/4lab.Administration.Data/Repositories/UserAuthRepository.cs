@@ -2,11 +2,12 @@
 using _4Lab.Administration.Domain.Models;
 using _4Lab.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace _4lab.Administration.Data.Repositories
 {
-    public class UserAuthRepository : BaseRepository<UserAuth, int>, IUserAuthRepository
+    public class UserAuthRepository : BaseRepository<UserAuth, Guid>, IUserAuthRepository
     {
         private readonly DbSet<UserAuth> _dbSet;
         public UserAuthRepository(UserContext context) : base(context)

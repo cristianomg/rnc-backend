@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Application.DTOs
 {
@@ -7,7 +8,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Id do plano de ação
         /// </summary>
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
         /// <summary>
         /// Nome do plano de ação
         /// </summary>

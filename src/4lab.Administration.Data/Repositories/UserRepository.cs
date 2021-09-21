@@ -2,12 +2,13 @@
 using _4Lab.Administration.Domain.Models;
 using _4Lab.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace _4lab.Administration.Data.Repositories
 {
-    public class UserRepository : BaseRepository<User, int>, IUserRepository
+    public class UserRepository : BaseRepository<User, Guid>, IUserRepository
     {
         private readonly DbSet<User> _dbSet;
         private readonly DbSet<UserAuth> _dbSetAuth;
@@ -54,7 +55,7 @@ namespace _4lab.Administration.Data.Repositories
             return await user;
         }
 
-        public async Task<User> GetByIdWithInclude(int id, params string[] includes)
+        public async Task<User> GetByIdWithInclude(Guid id, params string[] includes)
         {
             var users = await this.GetAllWithIncludes(includes);
 

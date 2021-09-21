@@ -44,9 +44,9 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:Guid}")]
         [ProducesResponseType(typeof(DtoActionPlainDetailResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             return Ok(_mapper.Map<DtoActionPlainDetailResponse>(await _actionPlainRepository.GetByIdWithIncludes(id)));
         }

@@ -9,11 +9,12 @@ namespace _4Lab.Administration.Domain.Models
         public string Name { get; private set; }
         public virtual IEnumerable<User> Users { get; private set; }
 
-        public UserPermission(UserPermissionType id, string name, IEnumerable<User> users)
+        public UserPermission(UserPermissionType id, string name)
         {
             Id = id;
             Name = name;
-            Users = users;
         }
+        protected UserPermission() { }
+
     }
 }

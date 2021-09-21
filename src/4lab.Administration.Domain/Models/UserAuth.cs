@@ -1,8 +1,9 @@
 ﻿using _4Lab.Core.DomainObjects;
+using System;
 
 namespace _4Lab.Administration.Domain.Models
 {
-    public class UserAuth : Entity<int>
+    public class UserAuth : Entity<Guid>
     {
         public string Email { get; private set; }
         public string Password { get; private set; }
@@ -13,6 +14,8 @@ namespace _4Lab.Administration.Domain.Models
             Email = email;
             Password = password;
         }
+        protected UserAuth() { }
+
 
         public void SetPassword(string passowrd)
         {

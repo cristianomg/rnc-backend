@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_4Lab.Archives.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4Lab.Archives.Domain\4Lab.Archives.Domain.csproj" />
+    <ProjectReference Include="..\src\4Lab.Infrastructure.Storage\4Lab.Infrastructure.Storage.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,4 +9,8 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
+  </ItemGroup>
+
 </Project>

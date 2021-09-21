@@ -45,7 +45,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_4lab.Ocurrences.Data", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_4lab.Ocurrences.Domain", "src\_4lab.Ocurrences.Domain\_4lab.Ocurrences.Domain.csproj", "{8086B6CF-D383-4A4A-A785-CD5CB26E54F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Infrastructure.Charts", "src\4Lab.Infrastructure.Charts\4Lab.Infrastructure.Charts.csproj", "{50EDE251-B761-4656-8339-53A757C2F866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Infrastructure.Charts", "src\4Lab.Infrastructure.Charts\4Lab.Infrastructure.Charts.csproj", "{50EDE251-B761-4656-8339-53A757C2F866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Archives.Domain", "4Lab.Archives.Domain\4Lab.Archives.Domain.csproj", "{5978589B-4F6B-4079-A091-DFBBD4B165B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Archives.Data", "4Lab.Archives.Data\4Lab.Archives.Data.csproj", "{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Archives.Application", "4Lab.Archives.Application\4Lab.Archives.Application.csproj", "{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestrator", "Orchestrator", "{63792A54-5BD2-4188-A777-92BE59E6C678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Orchestrator", "4Lab.Orchestrator\4Lab.Orchestrator.csproj", "{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +115,22 @@ Global
 		{50EDE251-B761-4656-8339-53A757C2F866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50EDE251-B761-4656-8339-53A757C2F866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50EDE251-B761-4656-8339-53A757C2F866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5978589B-4F6B-4079-A091-DFBBD4B165B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5978589B-4F6B-4079-A091-DFBBD4B165B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5978589B-4F6B-4079-A091-DFBBD4B165B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5978589B-4F6B-4079-A091-DFBBD4B165B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +156,10 @@ Global
 		{F1FC8DEA-922F-4AAA-BEFB-42CC4624767B} = {DC5C135E-A7C0-485F-82A2-02C2E70F67EE}
 		{8086B6CF-D383-4A4A-A785-CD5CB26E54F2} = {DC5C135E-A7C0-485F-82A2-02C2E70F67EE}
 		{50EDE251-B761-4656-8339-53A757C2F866} = {D7C4A7D7-44EE-4D8C-AB2C-C395CFE1D55B}
+		{5978589B-4F6B-4079-A091-DFBBD4B165B9} = {2E9E3066-DEE5-4A16-8980-AFB9635B261B}
+		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663} = {2E9E3066-DEE5-4A16-8980-AFB9635B261B}
+		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A} = {2E9E3066-DEE5-4A16-8980-AFB9635B261B}
+		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5} = {63792A54-5BD2-4188-A777-92BE59E6C678}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5AD169FC-33D8-463D-BEFA-7605375AF9B7}

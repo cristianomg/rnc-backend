@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="Clinia.FluentMailer.Core" Version="3.1.0" />
-    <PackageReference Include="Clinia.FluentMailer.Razor" Version="3.1.0" />
-    <PackageReference Include="Clinia.FluentMailer.Smtp" Version="3.1.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
     <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
@@ -25,12 +22,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4Lab.Archives.Data\4Lab.Archives.Data.csproj" />
+    <ProjectReference Include="..\4Lab.Orchestrator\4Lab.Orchestrator.csproj" />
     <ProjectReference Include="..\src\4lab.Administration.Application\4Lab.Administration.Application.csproj" />
     <ProjectReference Include="..\src\4lab.Administration.Data\4Lab.Administration.Data.csproj" />
     <ProjectReference Include="..\src\_4lab.Ocurrences.Application\_4lab.Ocurrences.Application.csproj" />

@@ -2,11 +2,12 @@
 using _4lab.Ocurrences.Domain.Models;
 using _4Lab.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace _4lab.Ocurrences.Data.Repositories
 {
-    public class ActionPlainRepository : BaseRepository<ActionPlain, int>, IActionPlainRepository
+    public class ActionPlainRepository : BaseRepository<ActionPlain, Guid>, IActionPlainRepository
     {
         private readonly OcurrencesContext _context;
         public ActionPlainRepository(OcurrencesContext context) : base(context)
@@ -14,7 +15,7 @@ namespace _4lab.Ocurrences.Data.Repositories
             _context = context;
         }
 
-        public Task<ActionPlain> GetByIdWithIncludes(int id)
+        public Task<ActionPlain> GetByIdWithIncludes(Guid id)
         {
             return _context.ActionPlains
                 .AsQueryable()

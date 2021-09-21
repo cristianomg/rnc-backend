@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using _4Lab.Core.DomainObjects.Enums;
+using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Application.DTOs
 {
@@ -11,7 +12,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Id do tipo de não conformidade
         /// </summary>
-        public int TypeNonComplianceId { get; set; }
+        public NonComplianceType TypeNonComplianceId { get; set; }
         /// <summary>
         /// Descrição
         /// </summary>

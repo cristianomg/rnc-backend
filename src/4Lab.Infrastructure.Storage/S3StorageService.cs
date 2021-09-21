@@ -53,6 +53,7 @@ namespace _4lab.Infrastructure.Storage
             }
             catch (AmazonS3Exception e)
             {
+                Console.WriteLine(e);
                 return default;
             }
         }

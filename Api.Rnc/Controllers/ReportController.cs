@@ -27,8 +27,8 @@ namespace Api.Rnc.Controllers
             _senderEmail = senderEmail;
         }
 
-        [HttpGet("{nonComplianceRegisterId:int}")]
-        public async Task<IActionResult> GetReport(int nonComplianceRegisterId)
+        [HttpGet("{nonComplianceRegisterId:Guid}")]
+        public async Task<IActionResult> GetReport(Guid nonComplianceRegisterId)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Api.Rnc.Controllers
         }
 
         [HttpGet("email/{nonComplianceRegisterId:int}")]
-        public async Task<IActionResult> SendReportOnEmail(int nonComplianceRegisterId)
+        public async Task<IActionResult> SendReportOnEmail(Guid nonComplianceRegisterId)
         {
             var userAuthId = User.GetUserId();
 

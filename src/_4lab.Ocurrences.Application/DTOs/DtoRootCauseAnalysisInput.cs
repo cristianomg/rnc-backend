@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Application.DTOs
 {
@@ -7,7 +8,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Id do registro de não conformidade
         /// </summary>
-        public int NonComplianceRegisterId { get; set; }
+        public Guid NonComplianceRegisterId { get; set; }
         /// <summary>
         /// 5 Porques
         /// </summary>
@@ -20,7 +21,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Identificador do usuário
         /// </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// Nome do usuário

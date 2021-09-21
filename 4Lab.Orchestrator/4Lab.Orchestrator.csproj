@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_4Lab.Orchestrator</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4Lab.Archives.Application\4Lab.Archives.Application.csproj" />
+    <ProjectReference Include="..\src\_4lab.Ocurrences.Application\_4lab.Ocurrences.Application.csproj" />
+  </ItemGroup>
+
+</Project>

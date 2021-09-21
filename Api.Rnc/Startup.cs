@@ -1,5 +1,5 @@
+using _4Lab.WebApi.Extensions;
 using Api.Rnc.Extensions;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Text;
 
 namespace Api.Rnc
@@ -25,8 +24,7 @@ namespace Api.Rnc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                    .AddCustomJsonOptions()
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                    .AddCustomJsonOptions();
 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
@@ -34,8 +32,6 @@ namespace Api.Rnc
             );
 
             var JWT_SECRET_KEY = Configuration.GetValue<string>("CryptographConfig:JwtSecretKey");
-
-            Console.WriteLine(JWT_SECRET_KEY);
 
             services.AddAuthentication(x =>
             {
@@ -69,6 +65,7 @@ namespace Api.Rnc
                     .AddCustomHealthChecks()
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()
+                    .AddApplicationServicesInjection()
                     .AddAutoMapper(typeof(Startup));
 
         }

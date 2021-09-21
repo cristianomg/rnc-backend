@@ -1,4 +1,5 @@
-﻿using _4lab.Infrastructure.Storage;
+﻿using _4lab.Infrastructure.Smtp;
+using _4lab.Infrastructure.Storage;
 using Amazon;
 using Amazon.S3;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace Api.Rnc.Extensions
 
             services.AddSingleton<IAmazonS3>(new AmazonS3Client(ACCESS_KEY_ID, ACCESS_KEY, RegionEndpoint.USEast1));
             services.AddScoped<IStorageService, S3StorageService>();
+            services.AddScoped<IEmailSender, SenderEmail>();
             return services;
         }
     }

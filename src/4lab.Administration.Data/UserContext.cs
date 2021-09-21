@@ -38,7 +38,7 @@ namespace _4lab.Administration.Data
             modelBuilder.Entity<UserPermission>().
                 HasData(Enum.GetValues(typeof(UserPermissionType))
                     .Cast<UserPermissionType>()
-                    .Select(x => new UserPermission(x, x.ToString(), null)
+                    .Select(x => new UserPermission(x, x.ToString())
                     {
                         Active = true,
                     }));

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace _4lab.Ocurrences.Domain.Interfaces
 {
-    public interface INonComplianceRegisterRepository : IBaseRepository<NonComplianceRegister, int>
+    public interface INonComplianceRegisterRepository : IBaseRepository<NonComplianceRegister, Guid>
     {
-        Task<NonComplianceRegister> GetByIdWithInclude(int id);
+        Task<NonComplianceRegister> GetByIdWithInclude(Guid id);
         Task<IQueryable<NonComplianceRegister>> GetBySetor(SetorType setor, DateTime initialDate, DateTime finalDate);
         Task<IQueryable<NonComplianceRegisterGroup>> GetGroupBySetor(SetorType setor, int month);
-        Task<NonComplianceRegister> GetByIdForReport(int id);
+        Task<NonComplianceRegister> GetByIdForReport(Guid id);
     }
 }

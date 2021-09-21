@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _4lab.Ocurrences.Data.Repositories
 {
-    public class NonComplianceRegisterRepository : BaseRepository<NonComplianceRegister, int>, INonComplianceRegisterRepository
+    public class NonComplianceRegisterRepository : BaseRepository<NonComplianceRegister, Guid>, INonComplianceRegisterRepository
     {
         private readonly OcurrencesContext _context;
         public NonComplianceRegisterRepository(OcurrencesContext context) : base(context)
@@ -17,7 +17,7 @@ namespace _4lab.Ocurrences.Data.Repositories
             _context = context;
         }
 
-        public async Task<NonComplianceRegister> GetByIdWithInclude(int id)
+        public async Task<NonComplianceRegister> GetByIdWithInclude(Guid id)
         {
             var nonComplianceRegister = await _context.NonComplianceRegisters.AsNoTracking()
                  .Include(x => x.Setor)
@@ -27,26 +27,10 @@ namespace _4lab.Ocurrences.Data.Repositories
                  .ThenInclude(x => x.TypeNonCompliance)
                  .FirstOrDefaultAsync(x => x.Id == id);
 
-
-            nonComplianceRegister.NonCompliances
-                .Select(x => FillArchive(nonComplianceRegister.Id, x))
-                .ToList();
-
-
             return nonComplianceRegister;
         }
 
-        private NonCompliance FillArchive(int nonComplianceRegisterId,
-                                          NonCompliance nonCompliance)
-        {
-            nonCompliance.Archives = _context.Archives
-                .Where(x => x.NonComplianceId == nonCompliance.Id &&
-                            x.NonComplianceRegisterId == nonComplianceRegisterId)
-                .ToList();
-            return nonCompliance;
-        }
-
-        public async Task<NonComplianceRegister> GetByIdForReport(int id)
+        public async Task<NonComplianceRegister> GetByIdForReport(Guid id)
         {
             return await _context.NonComplianceRegisters.AsNoTracking()
                  .Include(x => x.Setor)
@@ -83,6 +67,11 @@ namespace _4lab.Ocurrences.Data.Repositories
                     NonCompliance = x.Key,
                     Quantity = x.Count()
                 });
+        }
+
+        public Task<NonComplianceRegister> GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

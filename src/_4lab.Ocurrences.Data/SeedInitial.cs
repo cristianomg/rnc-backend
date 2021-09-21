@@ -95,107 +95,107 @@ namespace Data.Rnc.Context
         {
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Erros de cadastro do paciente ou médico.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Requisições ilegíveis.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Paciente com preparo inadequado.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Incidente com cliente.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Amostra insuficiente.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Tubo inadequado.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 1,
+                TypeNonComplianceId = NonComplianceType.PreAnalitica,
                 Description = "Amostra com identificação errada ou incompleta.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Material não tirado da pendência.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Equipamento em manutenção.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Perda de amostra.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Material fora da validade.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Centrifugação incorreta.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Queda de energia.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 2,
+                TypeNonComplianceId = NonComplianceType.Analitica,
                 Description = "Armazenamento errado da amostra.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Laudos entregues trocados.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Atraso na liberação do laudo.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Falta da assinatura do Biomédico no laudo.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Erro de transcrição de resultado na ficha de bancada.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Questionamento do resultado feito pelo médico ou cliente.",
             });
             _context.NonCompliance.Add(new NonCompliance
             {
-                TypeNonComplianceId = 3,
+                TypeNonComplianceId = NonComplianceType.PosAnalitica,
                 Description = "Perda do laudo.",
             });
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Application.DTOs
 {
-    public class DtoNonComplianceRegisterInput
+    public class DtoNonComplianceRegister
     {
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
@@ -42,7 +42,7 @@ namespace _4lab.Ocurrences.Application.DTOs
         /// <summary>
         /// Identificador do usuário
         /// </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// Nome do usuário

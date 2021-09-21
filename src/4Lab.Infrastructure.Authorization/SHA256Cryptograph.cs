@@ -24,17 +24,7 @@ namespace _4lab.Infrastructure.Authorization
             return sb.ToString();
         }
 
-        public bool VerifyPassword(string password, string encryptedPassword)
-        {
-            var _encryptedPassword = _algoritmo.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            var sb = new StringBuilder();
-            foreach (var caractere in _encryptedPassword)
-            {
-                sb.Append(caractere.ToString("X2"));
-            }
-
-            return sb.ToString() == encryptedPassword;
-        }
+        public bool VerifyPassword(string password, string encryptedPassword) =>
+            EncryptPassword(password) == encryptedPassword;
     }
 }

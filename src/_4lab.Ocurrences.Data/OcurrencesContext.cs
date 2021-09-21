@@ -17,7 +17,6 @@ namespace _4lab.Ocurrences.Data
         private OcurrencesContext() { }
 
         public DbSet<NonComplianceRegister> NonComplianceRegisters { get; set; }
-        public DbSet<Archive> Archives { get; set; }
         public DbSet<NonCompliance> NonCompliance { get; set; }
         public DbSet<TypeNonCompliance> TypeNonCompliance { get; set; }
         public DbSet<Setor> Setors { get; set; }
@@ -46,17 +45,17 @@ namespace _4lab.Ocurrences.Data
         {
             modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
-                Id = (int)DtoNonComplianceType.PreAnalitica,
+                Id = NonComplianceType.PreAnalitica,
                 NameNonCompliance = "Pre-Analitica",
             });
             modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
-                Id = (int)DtoNonComplianceType.Analitica,
+                Id = NonComplianceType.Analitica,
                 NameNonCompliance = "Analitica",
             });
             modelBuilder.Entity<TypeNonCompliance>().HasData(new TypeNonCompliance
             {
-                Id = (int)DtoNonComplianceType.PosAnalitica,
+                Id = NonComplianceType.PosAnalitica,
                 NameNonCompliance = "Pos-Analitica",
             });
         }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
+
 namespace Api.Rnc.Extensions
 {
     /// <summary>
@@ -18,7 +19,7 @@ namespace Api.Rnc.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.AddFluentValidationRules();
+                //c.AddFluentValidationRules();
                 c.OperationFilter<BearerAuthenticationFilter>();
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

@@ -10,8 +10,7 @@ namespace _4lab.Ocurrences.Application.Mapper
         public OcurrencesMapper()
         {
             CreateMap<NonCompliance, DtoNonCompliance>()
-                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))
-                .ForMember(dest => dest.Archives, opt => opt.Ignore());
+                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
 
             CreateMap<NonCompliance, DtoNonComplianceResponse>()
                 .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))

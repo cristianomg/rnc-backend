@@ -2,6 +2,8 @@
 using _4lab.Administration.Domain.Interfaces;
 using _4lab.Ocurrences.Data.Repositories;
 using _4lab.Ocurrences.Domain.Interfaces;
+using _4Lab.Archives.Data.Repositories;
+using _4Lab.Archives.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Rnc.Extensions
@@ -27,6 +29,8 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IActionPlainRepository, ActionPlainRepository>();
             services.AddScoped<IActionPlainQuestionRepository, ActionPlainQuestionRepository>();
             services.AddScoped<IOccurrenceClassificationRepository, OccurrenceClassificationRepository>();
+            services.AddScoped<IArchiveRepository, ArchiveRepository>();
+            
             return services;
         }
     }

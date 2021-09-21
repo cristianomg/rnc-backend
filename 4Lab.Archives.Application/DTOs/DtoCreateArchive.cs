@@ -1,4 +1,7 @@
-﻿namespace _4lab.Ocurrences.Application.DTOs
+﻿using _4Lab.Core.Enums;
+using System;
+
+namespace _4Lab.Archives.Application.DTOs
 {
     public class DtoCreateArchive
     {
@@ -14,5 +17,7 @@
         /// Tipo do arquivo
         /// </summary>
         public string FileType { get; set; }
+        public EntityArchiveType EntityType { get; set; }
+        public Guid EntityId { get; set; }
     }
 }

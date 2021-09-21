@@ -21,24 +21,26 @@ namespace _4lab.Administration.Application.Service
         private readonly ICryptograph _cryptograph;
         private readonly IEmailSender _senderEmail;
         private readonly IMapper _mapper;
+        private readonly ITokenService _tokenService;
 
         public UserAppService(IUserRepository userRepository, IUserAuthRepository userAuthRepository, ICryptograph cryptograph,
-                              IEmailSender senderEmail, IMapper mapper)
+                              IEmailSender senderEmail, IMapper mapper, ITokenService tokenService)
         {
             _userRepository = userRepository;
             _userAuthRepository = userAuthRepository;
             _cryptograph = cryptograph;
             _senderEmail = senderEmail;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
-        public async Task<User> GetUserByIdWithInclude(int id, params string[] includes)
+        public async Task<User> GetUserByIdWithInclude(Guid id, params string[] includes)
         {
             var user = await _userRepository.GetByIdWithInclude(id, includes);
             return user;
         }
 
-        public async Task<UserAuth> GetUserAuthById(int id)
+        public async Task<UserAuth> GetUserAuthById(Guid id)
         {
             return await _userAuthRepository.GetById(id);
         }
@@ -66,7 +68,7 @@ namespace _4lab.Administration.Application.Service
             await _userRepository.DeleteUserByEmail(email);
         }
 
-        public async Task<bool> ChangeName(int id, DtoChangeNameInput dtoChangeName)
+        public async Task<bool> ChangeName(Guid id, DtoChangeNameInput dtoChangeName)
         {
             var user = await _userRepository.GetById(id);
 
@@ -127,7 +129,7 @@ namespace _4lab.Administration.Application.Service
 
                     if (correctPassword)
                     {
-                        var token = TokenService.GenerateToken(existingAuth.Id, existingAuth.User.Name, existingAuth.User.UserPermission.Name);
+                        var token = _tokenService.GenerateToken(existingAuth.Id.ToString(), existingAuth.User.Name, existingAuth.User.UserPermission.Name);
 
                         var user = new DtoUser
                         {
@@ -185,9 +187,9 @@ namespace _4lab.Administration.Application.Service
             {
                 var template = new StringBuilder();
                 template.AppendLine("Olá, seu cadastro foi aprovado com sucesso.");
-                template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do Rnc");
+                template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do 4Labs");
                 template.AppendLine("");
-                template.AppendLine("Atenciosamente, time do RNC");
+                template.AppendLine("Atenciosamente, time do 4Labs");
                 var subjectEmail = "Cadastro aprovado";
 
                 await _senderEmail.SendEmail(email, template.ToString(), subjectEmail);
@@ -207,7 +209,7 @@ namespace _4lab.Administration.Application.Service
                 template.AppendLine("Olá, seu cadastro infelizmente foi reprovado.");
                 template.AppendLine("Você poderá realizar um novo cadastro, mas recomendamos que verifique com atenção os dados inseridos.");
                 template.AppendLine("");
-                template.AppendLine("Atenciosamente, time do RNC");
+                template.AppendLine("Atenciosamente, time do 4Labs");
 
                 var subjectEmail = "Cadastro reprovado";
 

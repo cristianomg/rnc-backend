@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace _4lab.Ocurrences.Domain.Models
 {
-    public class NonComplianceRegister : Entity<int>
+    public class NonComplianceRegister : Entity<Guid>
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public OccurrenceClassificationType OccurrenceClassificationId { get; set; }
         public DateTime RegisterDate { get; set; }
         public string RegisterHour { get; set; }

@@ -32,9 +32,9 @@ namespace Api.Rnc.Controllers
         [HttpGet("{nonComplianceTypeId}")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetNonCompliances(DtoNonComplianceType nonComplianceTypeId)
+        public async Task<IActionResult> GetNonCompliances(NonComplianceType nonComplianceTypeId)
         {
-            var nonCompliances = _nonComplianceRepository.GetByTypeNonCompliance((int)nonComplianceTypeId);
+            var nonCompliances = _nonComplianceRepository.GetByTypeNonCompliance(nonComplianceTypeId);
             return await Task.FromResult(Ok(_mapper.ProjectTo<DtoNonCompliance>(nonCompliances)));
         }
     }
