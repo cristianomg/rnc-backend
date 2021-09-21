@@ -1,6 +1,6 @@
 ﻿using SelectPdf;
 
-namespace Util.GeneratePDF
+namespace _4Lab.Infrastructure.Render.PDF
 {
     public class GeneratePDF
     {

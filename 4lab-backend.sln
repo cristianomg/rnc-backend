@@ -57,6 +57,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Archives.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Orchestrator", "src\4Lab.Orchestrator\4Lab.Orchestrator.csproj", "{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Infrastructure.Render", "src\4Lab.Infrastructure.Render\4Lab.Infrastructure.Render.csproj", "{4C9F3630-8189-4C9C-91F2-EA1E6A36B435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9F3630-8189-4C9C-91F2-EA1E6A36B435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9F3630-8189-4C9C-91F2-EA1E6A36B435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9F3630-8189-4C9C-91F2-EA1E6A36B435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9F3630-8189-4C9C-91F2-EA1E6A36B435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +166,7 @@ Global
 		{FA66C4EF-FCBA-4DB0-89F6-22C95F35B663} = {2E9E3066-DEE5-4A16-8980-AFB9635B261B}
 		{BB3AF17D-F3B9-4F43-9948-59614F9ADA5A} = {2E9E3066-DEE5-4A16-8980-AFB9635B261B}
 		{ED3E7B10-C7C9-4F0B-A365-55E9D617DCE5} = {63792A54-5BD2-4188-A777-92BE59E6C678}
+		{4C9F3630-8189-4C9C-91F2-EA1E6A36B435} = {D7C4A7D7-44EE-4D8C-AB2C-C395CFE1D55B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5AD169FC-33D8-463D-BEFA-7605375AF9B7}

@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+    <Content Remove="C:\Users\cristiano.oliveira\.nuget\packages\select.htmltopdf.netcore\21.1.0\contentFiles\any\any\Select.Html.dep" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="sautinsoft.document" Version="5.3.6.22" />
-    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="21.1.0" />
   </ItemGroup>
 
 </Project>

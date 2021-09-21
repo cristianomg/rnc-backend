@@ -2,12 +2,12 @@
 using _4lab.Infrastructure.Smtp;
 using _4lab.Ocurrences.Application.Service;
 using _4Lab.Core.DomainObjects.Enums;
+using _4Lab.Infrastructure.Render.PDF;
 using Api.Rnc.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Util.GeneratePDF;
 
 namespace Api.Rnc.Controllers
 {

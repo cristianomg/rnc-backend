@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace _4Lab.Infrastructure.Charts
+namespace _4Lab.Infrastructure.Render.Html
 {
     public interface IRazorRender
     {

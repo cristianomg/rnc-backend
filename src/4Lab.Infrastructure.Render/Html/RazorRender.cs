@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _4Lab.Infrastructure.Charts
+namespace _4Lab.Infrastructure.Render.Html
 {
     public class RazorRender : IRazorRender
     {
