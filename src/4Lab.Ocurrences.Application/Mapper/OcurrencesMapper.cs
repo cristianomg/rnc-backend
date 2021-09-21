@@ -13,8 +13,7 @@ namespace _4lab.Ocurrences.Application.Mapper
                 .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
 
             CreateMap<NonCompliance, DtoOcurrenceResponse>()
-                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance))
-                .ForMember(dest => dest.Archives, opt => opt.Ignore());
+                .ForMember(dest => dest.NameNonCompliance, opt => opt.MapFrom(src => src.TypeNonCompliance.NameNonCompliance));
 
             CreateMap<Setor, DtoSetor>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
