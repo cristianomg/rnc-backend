@@ -27,13 +27,13 @@ jobs:
       run : | 
         cd '${{ github.workspace }}/out'
         zip -r ${{ github.workspace }}/out.zip *
-    - name: Beanstalk Deploy
-      uses: einaregilsson/beanstalk-deploy@v16
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: RncBackend
-        environment_name: Rncbackend-env
-        version_label: ${{github.run_id}}
-        region: us-east-2
-        deployment_package: ${{ github.workspace }}/out.zip
+    # - name: Beanstalk Deploy
+    #   uses: einaregilsson/beanstalk-deploy@v16
+    #   with:
+    #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     application_name: RncBackend
+    #     environment_name: Rncbackend-env
+    #     version_label: ${{github.run_id}}
+    #     region: us-east-2
+    #     deployment_package: ${{ github.workspace }}/out.zip
