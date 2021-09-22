@@ -14,7 +14,8 @@
     <ProjectReference Include="..\4Lab.Infrastructure.Charts\4Lab.Infrastructure.Charts.csproj" />
     <ProjectReference Include="..\4Lab.Infrastructure.Render\4Lab.Infrastructure.Render.csproj" />
     <ProjectReference Include="..\4Lab.Infrastructure.Storage\4Lab.Infrastructure.Storage.csproj" />
-    <ProjectReference Include="..\4Lab.Ocurrences.Domain\4Lab.Occurrences.Domain.csproj" />
+    <ProjectReference Include="..\4Lab.Occurrences.Data\4Lab.Occurrences.Data.csproj" />
+    <ProjectReference Include="..\4Lab.Occurrences.Domain\4Lab.Occurrences.Domain.csproj" />
   </ItemGroup>
 
 </Project>

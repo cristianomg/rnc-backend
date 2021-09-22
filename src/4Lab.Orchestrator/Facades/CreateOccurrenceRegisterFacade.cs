@@ -1,6 +1,5 @@
 ﻿using _4lab.Occurrences.Application.DTOs;
 using _4lab.Occurrences.Application.Service;
-using _4lab.Occurrences.Domain.Interfaces;
 using _4Lab.Archives.Application.DTOs;
 using _4Lab.Archives.Application.Service;
 using _4Lab.Core.Enums;
@@ -17,17 +16,14 @@ namespace _4Lab.Orchestrator.Facades
     {
         private readonly IArchiveAppService _archiveAppService;
         private readonly IOccurrenceAppService _occurrenceAppService;
-        private readonly IOccurrenceRegisterRepository _nonComplianceRegisterRepository;
         private readonly IMapper _mapper;
         public CreateOccurrenceRegisterFacade(IArchiveAppService archiveAppService
                                              , IOccurrenceAppService occurrenceAppService
-                                             , IOccurrenceRegisterRepository nonComplianceRegisterRepository
                                              , IMapper mapper)
         {
             _archiveAppService = archiveAppService;
             _occurrenceAppService = occurrenceAppService;
             _mapper = mapper;
-            _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
         }
 
         public async Task<bool> Execute(DtoOccurrenceRegisteFacaderInput input)
@@ -54,16 +50,16 @@ namespace _4Lab.Orchestrator.Facades
                 throw;
             }
         }
-        private DtoOccurrenceFacadeInput FillNonCompliance(DtoOccurrenceFacadeInput nonCompliance)
+        private DtoOccurrenceFacadeInput FillNonCompliance(DtoOccurrenceFacadeInput occurrence)
         {
-            nonCompliance.Id = Guid.NewGuid();
-            nonCompliance.Archives.Select(archive =>
+            occurrence.Id = Guid.NewGuid();
+            occurrence.Archives.Select(archive =>
             {
                 archive.EntityType = EntityArchiveType.Occurrence;
-                archive.EntityId = nonCompliance.Id.Value;
+                archive.EntityId = occurrence.Id.Value;
                 return archive;
             });
-            return nonCompliance;
+            return occurrence;
         }
     }
 }

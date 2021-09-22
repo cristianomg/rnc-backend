@@ -9,8 +9,11 @@ namespace _4lab.Occurrences.Application.Mapper
     {
         public OccurrencesMapper()
         {
-            CreateMap<Occurrence, DtoOccurrence>()
-                .ForMember(dest => dest.DsOccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
+            CreateMap<Occurrence, DtoOccurrence>();
+            //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            //.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            //.ForMember(dest => dest.OccurrenceTypeId, opt => opt.MapFrom(src => src.OccurrenceTypeId));
+            //.ForMember(dest => dest.DsOccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
 
             CreateMap<Occurrence, DtoOccurrenceResponse>()
                 .ForMember(dest => dest.DsOccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
