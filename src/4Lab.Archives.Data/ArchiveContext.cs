@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _4Lab.Core.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 
 namespace _4Lab.Archives.Data
 {
-    public class ArchiveContext : DbContext
+    public class ArchiveContext : CoreContext
     {
         public ArchiveContext(DbContextOptions<ArchiveContext> options) : base(options)
         {

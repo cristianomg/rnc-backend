@@ -8,6 +8,7 @@ namespace _4lab.Administration.Application.Service
 {
     public interface IUserAppService
     {
+
         Task<User> GetUserByIdWithInclude(Guid id, params string[] includes);
         Task<UserAuth> GetUserAuthById(Guid id);
         Task<IQueryable<DtoUserActive>> GetAllDontActive();

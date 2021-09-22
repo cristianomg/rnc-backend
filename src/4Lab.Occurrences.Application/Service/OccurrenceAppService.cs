@@ -132,7 +132,7 @@ namespace _4lab.Occurrences.Application.Service
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 scope.Dispose();
                 throw new Exception("Erro ao criar novo registro de não conformidades.");

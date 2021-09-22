@@ -13,7 +13,7 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// <summary>
         /// Id do tipo de não conformidade
         /// </summary>
-        public OccurrenceType TypeNonComplianceId { get; set; }
+        public OccurrenceType OccurrenceTypeId { get; set; }
         /// <summary>
         /// Descrição
         /// </summary>
@@ -21,7 +21,7 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// <summary>
         /// Nome do tipo da não conformidade
         /// </summary>
-        public string NameNonCompliance { get; set; }
+        public string DsOccurrenceType { get; set; }
         /// <summary>
         /// Link para os Anexos
         /// </summary>

@@ -17,6 +17,7 @@ namespace _4Lab.WebApi.Extensions
             services.AddScoped<ISetorAppService, SetorAppService>();
 
             services.AddScoped<ICreateOccurrenceRegisterFacade, CreateOccurrenceRegisterFacade>();
+            services.AddScoped<IGetOccurrenceRegisterByIdFacade, GetOccurrenceRegisterByIdFacade>();
 
             return services;
         }

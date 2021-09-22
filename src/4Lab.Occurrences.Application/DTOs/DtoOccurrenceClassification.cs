@@ -1,4 +1,4 @@
-﻿using System;
+﻿using _4Lab.Core.DomainObjects.Enums;
 
 namespace _4lab.Occurrences.Application.DTOs
 {
@@ -7,7 +7,7 @@ namespace _4lab.Occurrences.Application.DTOs
         /// <summary>
         /// Id do setor
         /// </summary>
-        public Guid Id { get; set; }
+        public OccurrenceClassificationType Id { get; set; }
         /// <summary>
         /// Nome do setor
         /// </summary>

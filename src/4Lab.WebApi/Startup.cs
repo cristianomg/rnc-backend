@@ -1,7 +1,11 @@
+using _4lab.Administration.Application.Mapper;
 using _4lab.Administration.Data;
+using _4lab.Occurrences.Application.Mapper;
 using _4lab.Occurrences.Data;
+using _4Lab.Archives.Application.Mapper;
 using _4Lab.Archives.Data;
 using _4Lab.Core.Data;
+using _4Lab.Orchestrator.Mapper;
 using _4Lab.WebApi.Extensions;
 using Api.Rnc.Extensions;
 using Data.Rnc.Context;
@@ -72,7 +76,7 @@ namespace Api.Rnc
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()
                     .AddApplicationServicesInjection()
-                    .AddAutoMapper(typeof(Startup));
+                    .AddAutoMapper(typeof(UserMapper), typeof(OccurrencesMapper), typeof(ArchiveMapper), typeof(OrchestratorMapper));
 
         }
 

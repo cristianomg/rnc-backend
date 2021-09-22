@@ -6,9 +6,6 @@ namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoOccurrenceRegisterResponse
     {
-        public DtoOccurrenceRegisterResponse()
-        {
-        }
         /// <summary>
         /// Id
         /// </summary>
