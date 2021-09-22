@@ -39,7 +39,7 @@ namespace _4Lab.Archives.Application.Service
 
                     await _archiveRepository.SaveChanges();
 
-                    return _mapper.Map<IEnumerable<DtoCreatedArchive>>(uploadedArchives);
+                    return _mapper.Map<List<DtoCreatedArchive>>(uploadedArchives.ToList());
                 }
                 else
                 {
@@ -47,7 +47,7 @@ namespace _4Lab.Archives.Application.Service
                 }
 
             }
-            catch
+            catch(Exception e)
             {
                 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 DeleteFiles(files);

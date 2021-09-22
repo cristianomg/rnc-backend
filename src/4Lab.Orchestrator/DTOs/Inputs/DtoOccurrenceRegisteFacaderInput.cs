@@ -10,7 +10,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
         /// </summary>
-        public IEnumerable<DtoOccurrenceFacadeInput> NonCompliances { get; set; }
+        public IEnumerable<DtoOccurrenceFacadeInput> Occurrences { get; set; }
         /// <summary>
         /// Data do registro
         /// </summary>

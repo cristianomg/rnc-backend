@@ -12,10 +12,11 @@ namespace _4Lab.Orchestrator.Mapper
         {
             CreateMap<DtoArchiveFacadeInput, DtoCreateArchive>();
             CreateMap<DtoOccurrenceRegisteFacaderInput, DtoOccurrenceRegister>();
-
+            CreateMap<DtoOccurrenceFacadeInput, DtoOccurrence>();
             CreateMap<DtoCreatedArchive, DtoArchiveFacadeResponse>();
             CreateMap<DtoOccurrenceResponse, DtoOccurrenceFacadeResponse>();
             CreateMap<DtoOccurrenceRegisterResponse, DtoOccurrenceRegisterFacadeResponse>();
+
         }
     }
 }

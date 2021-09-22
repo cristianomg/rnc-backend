@@ -1,4 +1,5 @@
 ﻿using _4Lab.Core.DomainObjects.Enums;
+using System;
 
 namespace _4lab.Occurrences.Application.DTOs
 {
@@ -14,7 +15,7 @@ namespace _4lab.Occurrences.Application.DTOs
         /// </summary>
         public string Name { get; set; }
 
-        public int SupervisorId { get; set; }
+        public Guid? SupervisorId { get; set; }
 
         public string UpdatedBy { get; set; }
     }

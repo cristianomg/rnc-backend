@@ -1,11 +1,13 @@
-﻿namespace _4Lab.Archives.Application.DTOs
+﻿using System;
+
+namespace _4Lab.Archives.Application.DTOs
 {
     public class DtoCreatedArchive
     {
         /// <summary>
         /// Id
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// Link para o arquivo
         /// </summary>

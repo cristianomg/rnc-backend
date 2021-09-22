@@ -7,7 +7,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
     public class DtoArchiveFacadeInput
     {
         [JsonIgnore]
-        public int? Id { get; set; } = null;
+        public Guid? Id { get; set; } = null;
         /// <summary>
         /// Nome do arquivo
         /// </summary>

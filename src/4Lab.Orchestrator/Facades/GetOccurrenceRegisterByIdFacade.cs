@@ -1,8 +1,8 @@
-﻿using _4lab.Occurrences.Application.DTOs;
-using _4lab.Occurrences.Application.Service;
+﻿using _4lab.Occurrences.Application.Service;
 using _4Lab.Archives.Application.Service;
 using _4Lab.Core.Enums;
 using _4Lab.Orchestrator.DTOs.Response;
+using _4Lab.Orchestrator.Interfaces;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _4Lab.Orchestrator.Facades
 {
-    public class GetOccurrenceRegisterByIdFacade
+    public class GetOccurrenceRegisterByIdFacade : IGetOccurrenceRegisterByIdFacade
     {
         private readonly IOccurrenceAppService _occurrenceAppService;
         private readonly IArchiveAppService _archiveAppService;

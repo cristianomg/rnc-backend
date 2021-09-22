@@ -1,11 +1,13 @@
-﻿namespace _4Lab.Orchestrator.DTOs.Response
+﻿using System;
+
+namespace _4Lab.Orchestrator.DTOs.Response
 {
     public class DtoArchiveFacadeResponse
     {
         /// <summary>
         /// Id
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// Link para o arquivo
         /// </summary>

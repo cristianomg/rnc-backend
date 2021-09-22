@@ -10,7 +10,7 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// <summary>
         /// Id
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         /// <summary>
         /// Nome do usuário que realizou o registro
         /// </summary>

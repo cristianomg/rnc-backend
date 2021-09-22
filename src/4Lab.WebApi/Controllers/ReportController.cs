@@ -27,7 +27,7 @@ namespace Api.Rnc.Controllers
             _senderEmail = senderEmail;
         }
 
-        [HttpGet("{nonComplianceRegisterId:Guid}")]
+        [HttpGet("{occurrenceRegisterId:Guid}")]
         public async Task<IActionResult> GetReport(Guid occurrenceRegisterId)
         {
             try
@@ -45,8 +45,8 @@ namespace Api.Rnc.Controllers
             }
         }
 
-        [HttpGet("email/{nonComplianceRegisterId:int}")]
-        public async Task<IActionResult> SendReportOnEmail(Guid nonComplianceRegisterId)
+        [HttpGet("email/{occurrenceRegisterId:Guid}")]
+        public async Task<IActionResult> SendReportOnEmail(Guid occurrenceRegisterId)
         {
             var userAuthId = User.GetUserId();
 
@@ -55,7 +55,7 @@ namespace Api.Rnc.Controllers
             if (user == null)
                 BadRequest("Usuário não encontrado.");
 
-            var report = await _occurrenceAppService.CreateOccurrenceRegisterReport(nonComplianceRegisterId);
+            var report = await _occurrenceAppService.CreateOccurrenceRegisterReport(occurrenceRegisterId);
 
             if (string.IsNullOrEmpty(report))
                 BadRequest("Relatório não gerado.");
