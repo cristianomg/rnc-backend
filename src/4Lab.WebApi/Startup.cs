@@ -1,10 +1,14 @@
+using _4lab.Administration.Data;
 using _4lab.Occurrences.Data;
+using _4Lab.Archives.Data;
+using _4Lab.Core.Data;
 using _4Lab.WebApi.Extensions;
 using Api.Rnc.Extensions;
 using Data.Rnc.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -77,9 +81,28 @@ namespace Api.Rnc
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<OccurrencesContext>();
+                var occurrencesContext = serviceScope.ServiceProvider.GetRequiredService<OccurrencesContext>();
+                
+                occurrencesContext.Database
+                    .Migrate();
 
-                new SeedInitial(context).Init();
+                new SeedInitial(occurrencesContext)
+                    .Init();
+
+                var usersContext = serviceScope.ServiceProvider.GetRequiredService<UserContext>();
+                
+                usersContext.Database
+                    .Migrate();
+
+                var archiveContext = serviceScope.ServiceProvider.GetRequiredService<ArchiveContext>();
+                
+                archiveContext.Database
+                    .Migrate();
+
+                var coreContext = serviceScope.ServiceProvider.GetRequiredService<CoreContext>();
+
+                coreContext.Database
+                    .Migrate();
 
             }
 

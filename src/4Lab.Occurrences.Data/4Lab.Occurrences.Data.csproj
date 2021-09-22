@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
-    <ProjectReference Include="..\4Lab.Ocurrences.Domain\4Lab.Occurrences.Domain.csproj" />
+    <ProjectReference Include="..\4Lab.Occurrences.Domain\4Lab.Occurrences.Domain.csproj" />
   </ItemGroup>
 
 </Project>

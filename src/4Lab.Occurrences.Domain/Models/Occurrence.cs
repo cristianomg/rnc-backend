@@ -9,7 +9,7 @@ namespace _4lab.Occurrences.Domain.Models
     {
         public OccurrenceType OccurrenceTypeId { get; set; }
         public string Description { get; set; }
-        public ICollection<OccurrenceRegister> OccurrenceRegisters { get; set; }
+        public virtual ICollection<OccurrenceRegister> OccurrenceRegisters { get; set; }
         public virtual TypeOccurrence OccurrenceType { get; set; }
     }
 }

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4Lab.Archives.Data\4Lab.Archives.Data.csproj" />
     <ProjectReference Include="..\4Lab.Archives.Domain\4Lab.Archives.Domain.csproj" />
     <ProjectReference Include="..\4Lab.Infrastructure.Storage\4Lab.Infrastructure.Storage.csproj" />
   </ItemGroup>
