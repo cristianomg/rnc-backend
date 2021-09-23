@@ -8,7 +8,7 @@ namespace _4lab.Occurrences.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Occurrence> builder)
         {
-            builder.ToTable(nameof(Occurrence), "Occurrences");
+            builder.ToTable(nameof(Occurrence));
 
             builder.HasKey(x => x.Id);
 
@@ -25,8 +25,7 @@ namespace _4lab.Occurrences.Data.Mapping
                 .HasForeignKey(x => x.OccurrenceTypeId);
 
             builder.HasMany(x => x.OccurrenceRegisters)
-                .WithMany(x => x.Occurrences)
-                .UsingEntity(x => x.ToTable(nameof(OccurrenceOccurrenceRegister)));
+                .WithMany(x => x.Occurrences);
         }
     }
 }

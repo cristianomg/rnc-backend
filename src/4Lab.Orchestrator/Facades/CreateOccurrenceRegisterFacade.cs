@@ -45,7 +45,7 @@ namespace _4Lab.Orchestrator.Facades
                 return await _occurrenceAppService
                     .CreateOccurrenceRegister(occurrenceRegister);
             }
-            catch(Exception ex) 
+            catch
             {
                 throw;
             }

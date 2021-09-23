@@ -28,6 +28,9 @@ namespace _4Lab.Orchestrator.Facades
             var occurrenceRegister = _mapper.Map<DtoOccurrenceRegisterFacadeResponse>
                 (await _occurrenceAppService.GetOccurrenceRegisterById(id));
 
+            if (occurrenceRegister == null)
+                throw new Exception("Registro de ocorrencia não encontrado.");
+
             foreach (var occurrence in occurrenceRegister.Occurrences)
             {
                 occurrence.Archives = _mapper.Map<List<DtoArchiveFacadeResponse>>

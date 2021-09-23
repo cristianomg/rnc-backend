@@ -85,6 +85,11 @@ namespace Api.Rnc
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
+                var coreContext = serviceScope.ServiceProvider.GetRequiredService<CoreContext>();
+
+                coreContext.Database
+                    .Migrate();
+
                 var occurrencesContext = serviceScope.ServiceProvider.GetRequiredService<OccurrencesContext>();
                 
                 occurrencesContext.Database
@@ -101,11 +106,6 @@ namespace Api.Rnc
                 var archiveContext = serviceScope.ServiceProvider.GetRequiredService<ArchiveContext>();
                 
                 archiveContext.Database
-                    .Migrate();
-
-                var coreContext = serviceScope.ServiceProvider.GetRequiredService<CoreContext>();
-
-                coreContext.Database
                     .Migrate();
 
             }

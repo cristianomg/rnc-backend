@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace _4lab.Occurrences.Application.DTOs
@@ -21,11 +22,13 @@ namespace _4lab.Occurrences.Application.DTOs
         /// <summary>
         /// Identificador do usuário
         /// </summary>
+        [JsonIgnore]
         public Guid UserId { get; set; }
 
         /// <summary>
         /// Nome do usuário
         /// </summary>
+        [JsonIgnore]
         public string UserName { get; set; }
     }
 }

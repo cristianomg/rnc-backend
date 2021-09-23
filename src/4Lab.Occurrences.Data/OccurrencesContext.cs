@@ -1,4 +1,5 @@
 ﻿using _4lab.Occurrences.Domain.Models;
+using _4Lab.Core.Audit;
 using _4Lab.Core.Data;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Core.DomainObjects.Extensions;
@@ -22,7 +23,7 @@ namespace _4lab.Occurrences.Data
         public DbSet<ActionPlainQuestion> ActionPlainQuestions { get; set; }
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
-        public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
+        public DbSet<OccurrenceRisk> OccurrenceRisks { get; set; }
         public DbSet<FiveWhat> FiveWhats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +33,8 @@ namespace _4lab.Occurrences.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());
+
 
             SeedTipoNaoConformidade(modelBuilder);
 
@@ -48,12 +51,12 @@ namespace _4lab.Occurrences.Data
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
                 Id = OccurrenceType.Analitica,
-                OccurrenceTypeName = OccurrenceType.PreAnalitica.GetDescription(),
+                OccurrenceTypeName = OccurrenceType.Analitica.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
                 Id = OccurrenceType.PosAnalitica,
-                OccurrenceTypeName = OccurrenceType.PreAnalitica.GetDescription(),
+                OccurrenceTypeName = OccurrenceType.PosAnalitica.GetDescription(),
             });
         }
     }

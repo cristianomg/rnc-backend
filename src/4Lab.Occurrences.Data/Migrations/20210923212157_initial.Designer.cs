@@ -10,8 +10,8 @@ using _4lab.Occurrences.Data;
 namespace _4Lab.Occurrences.Data.Migrations
 {
     [DbContext(typeof(OccurrencesContext))]
-    [Migration("20210921173310_initial-occurrence-migration")]
-    partial class initialoccurrencemigration
+    [Migration("20210923212157_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,40 @@ namespace _4Lab.Occurrences.Data.Migrations
                     b.HasIndex("OccurrencesId");
 
                     b.ToTable("OccurrenceOccurrenceRegister");
+                });
+
+            modelBuilder.Entity("_4Lab.Core.Audit.Historic", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Entity")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Values")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Historic", "Audit", t => t.ExcludeFromMigrations());
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.ActionPlain", b =>
@@ -67,7 +101,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("ActionPlain", "Occurrences");
+                    b.ToTable("ActionPlain");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.ActionPlainQuestion", b =>
@@ -103,7 +137,7 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasIndex("ActionPlainId");
 
-                    b.ToTable("ActionPlainQuestion", "Occurrences");
+                    b.ToTable("ActionPlainQuestion");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.ActionPlainResponse", b =>
@@ -149,7 +183,7 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasIndex("RootCauseAnalysisId");
 
-                    b.ToTable("ActionPlainResponse", "Occurrences");
+                    b.ToTable("ActionPlainResponse");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.FiveWhat", b =>
@@ -183,7 +217,7 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasIndex("RootCauseAnalysisId");
 
-                    b.ToTable("FiveWhat", "Occurrences");
+                    b.ToTable("FiveWhat");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.Occurrence", b =>
@@ -219,35 +253,7 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasIndex("OccurrenceTypeId");
 
-                    b.ToTable("Occurrence", "Occurrences");
-                });
-
-            modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceClassification", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OccurrenceClassification", "Occurrences");
+                    b.ToTable("Occurrence");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceRegister", b =>
@@ -274,10 +280,10 @@ namespace _4Lab.Occurrences.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<int>("OccurrenceClassificationId")
+                    b.Property<int?>("OccurrencePendency")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("OccurrencePendency")
+                    b.Property<int?>("OccurrenceRiskId")
                         .HasColumnType("integer");
 
                     b.Property<string>("PeopleInvolved")
@@ -306,11 +312,39 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OccurrenceClassificationId");
+                    b.HasIndex("OccurrenceRiskId");
 
                     b.HasIndex("SetorId");
 
-                    b.ToTable("OccurrenceRegister", "Occurrences");
+                    b.ToTable("OccurrenceRegister");
+                });
+
+            modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceRisk", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OccurrenceRisk");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.RootCauseAnalysis", b =>
@@ -350,7 +384,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                     b.HasIndex("OccurrenceRegisterId")
                         .IsUnique();
 
-                    b.ToTable("RootCauseAnalysis", "Occurrences");
+                    b.ToTable("RootCauseAnalysis");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.Setor", b =>
@@ -381,7 +415,7 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Setor", "Occurrences");
+                    b.ToTable("Setor");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.TypeOccurrence", b =>
@@ -415,29 +449,29 @@ namespace _4Lab.Occurrences.Data.Migrations
 
                     b.HasIndex("OccurrenceTypeName");
 
-                    b.ToTable("TypeOccurrence", "Occurrences");
+                    b.ToTable("TypeOccurrence");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 9, 21, 14, 33, 10, 217, DateTimeKind.Local).AddTicks(388),
+                            CreatedAt = new DateTime(2021, 9, 23, 18, 21, 56, 75, DateTimeKind.Local).AddTicks(1592),
                             OccurrenceTypeName = "Pre-Analítica"
                         },
                         new
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 9, 21, 14, 33, 10, 226, DateTimeKind.Local).AddTicks(6701),
-                            OccurrenceTypeName = "Pre-Analítica"
+                            CreatedAt = new DateTime(2021, 9, 23, 18, 21, 56, 87, DateTimeKind.Local).AddTicks(522),
+                            OccurrenceTypeName = "Analítica"
                         },
                         new
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 9, 21, 14, 33, 10, 226, DateTimeKind.Local).AddTicks(7730),
-                            OccurrenceTypeName = "Pre-Analítica"
+                            CreatedAt = new DateTime(2021, 9, 23, 18, 21, 56, 87, DateTimeKind.Local).AddTicks(4154),
+                            OccurrenceTypeName = "Pos-Analítica"
                         });
                 });
 
@@ -518,11 +552,10 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceRegister", b =>
                 {
-                    b.HasOne("_4lab.Occurrences.Domain.Models.OccurrenceClassification", "OccurrenceClassification")
+                    b.HasOne("_4lab.Occurrences.Domain.Models.OccurrenceRisk", "OccurrenceRisk")
                         .WithMany("OccurrenceRegisters")
-                        .HasForeignKey("OccurrenceClassificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("OccurrenceRiskId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("_4lab.Occurrences.Domain.Models.Setor", "Setor")
                         .WithMany("NonComplianceRegisters")
@@ -530,7 +563,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("OccurrenceClassification");
+                    b.Navigation("OccurrenceRisk");
 
                     b.Navigation("Setor");
                 });
@@ -568,14 +601,14 @@ namespace _4Lab.Occurrences.Data.Migrations
                     b.Navigation("ActionPlainResponse");
                 });
 
-            modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceClassification", b =>
-                {
-                    b.Navigation("OccurrenceRegisters");
-                });
-
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceRegister", b =>
                 {
                     b.Navigation("RootCauseAnalysis");
+                });
+
+            modelBuilder.Entity("_4lab.Occurrences.Domain.Models.OccurrenceRisk", b =>
+                {
+                    b.Navigation("OccurrenceRegisters");
                 });
 
             modelBuilder.Entity("_4lab.Occurrences.Domain.Models.RootCauseAnalysis", b =>

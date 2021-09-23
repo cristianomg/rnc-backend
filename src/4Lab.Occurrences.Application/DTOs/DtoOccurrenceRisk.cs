@@ -2,12 +2,12 @@
 
 namespace _4lab.Occurrences.Application.DTOs
 {
-    public class DtoOccurrenceClassification
+    public class DtoOccurrenceRisk
     {
         /// <summary>
         /// Id do setor
         /// </summary>
-        public OccurrenceClassificationType Id { get; set; }
+        public OccurrenceRiskType Id { get; set; }
         /// <summary>
         /// Nome do setor
         /// </summary>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace _4lab.Occurrences.Domain.Models
 {
-    public class OccurrenceClassification : Entity<OccurrenceClassificationType>
+    public class OccurrenceRisk : Entity<OccurrenceRiskType>
     {
         public string Name { get; set; }
         public virtual ICollection<OccurrenceRegister> OccurrenceRegisters { get; set; }

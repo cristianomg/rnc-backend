@@ -5,6 +5,7 @@ using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Infrastructure.Charts;
 using _4Lab.Infrastructure.Render.Html;
+using _4Lab.Occurrences.Application.DTOs;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace _4lab.Occurrences.Application.Service
         private readonly IMapper _mapper;
         private readonly IActionPlainRepository _actionPlainRepository;
         private readonly IActionPlainQuestionRepository _actionPlainQuestionRepository;
-        private readonly IOccurrenceRegisterRepository _nonComplianceRegisterRepository;
+        private readonly IOccurrenceRegisterRepository _occurrenceRegisterRepository;
         private readonly IOccurrenceRepository _occurrenceRepository;
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly IRazorRender _razorRender;
@@ -27,7 +28,7 @@ namespace _4lab.Occurrences.Application.Service
         public OccurrenceAppService(IActionPlainRepository actionPlainRepository
                                    , IActionPlainQuestionRepository actionPlainQuestionRepository
                                    , IMapper mapper
-                                   , IOccurrenceRegisterRepository nonComplianceRegisterRepository
+                                   , IOccurrenceRegisterRepository occurrenceRegisterRepository
                                    , IOccurrenceRepository occurrenceRepository
                                    , IRootCauseAnalysisRepository analyzeRootCauseRepository
                                    , IRazorRender razorRender)
@@ -35,7 +36,7 @@ namespace _4lab.Occurrences.Application.Service
             _actionPlainRepository = actionPlainRepository;
             _actionPlainQuestionRepository = actionPlainQuestionRepository;
             _mapper = mapper;
-            _nonComplianceRegisterRepository = nonComplianceRegisterRepository;
+            _occurrenceRegisterRepository = occurrenceRegisterRepository;
             _occurrenceRepository = occurrenceRepository;
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _razorRender = razorRender;
@@ -86,7 +87,7 @@ namespace _4lab.Occurrences.Application.Service
             }
         }
 
-        public async Task<bool> CreateOccurrenceRegister(DtoOccurrenceRegister occurrenceRegister)
+        public async Task<bool> CreateOccurrenceRegister(DtoOccurrenceRegister  occurrenceRegister)
         {
             if (occurrenceRegister.RegisterDate == DateTime.MinValue)
                 throw new Exception("A data precisa ser informada.");
@@ -109,7 +110,7 @@ namespace _4lab.Occurrences.Application.Service
 
                 var allOccurrences = existingOccurrence.Union(notExistingOccurrence);
 
-                var entity = await _nonComplianceRegisterRepository
+                var entity = await _occurrenceRegisterRepository
                                               .Insert(new OccurrenceRegister
                                               {
                                                   UserId = occurrenceRegister.UserId,
@@ -123,17 +124,17 @@ namespace _4lab.Occurrences.Application.Service
                                                   Occurrences = allOccurrences.ToList(),
                                                   CreatedBy = occurrenceRegister.UserName,
                                                   OccurrencePendency = OccurrencePendency.RootCauseAnalysisAndActionPlan,
-                                                  OccurrenceClassificationId = occurrenceRegister.OccurrenceClassification
                                               });
 
-                await _nonComplianceRegisterRepository.SaveChanges();
+                await _occurrenceRegisterRepository.SaveChanges();
 
                 scope.Complete();
 
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
+                Console.WriteLine(ex);
                 scope.Dispose();
                 throw new Exception("Erro ao criar novo registro de não conformidades.");
             }
@@ -182,14 +183,17 @@ namespace _4lab.Occurrences.Application.Service
             return occurrencesResult;
         }
 
-        public async Task<RootCauseAnalysis> CreateRootCauseAnalysis(DtoRootCauseAnalysisInput analyzeRootCause)
+        public async Task<bool> CreateRootCauseAnalysis(DtoRootCauseAnalysisInput analyzeRootCause)
         {
-            var nonComplianceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(analyzeRootCause.OccurrenceRegisterId);
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetByIdWithInclude(analyzeRootCause.OccurrenceRegisterId);
 
-            if (nonComplianceRegister == null)
-                throw new Exception("Registro de não conformidade não encontrado.");
+            if (occurrenceRegister == null)
+                throw new Exception("O Registro de não conformidade não encontrado.");
 
-            if (nonComplianceRegister.RootCauseAnalysis != null)
+            if (occurrenceRegister.OccurrencePendency != OccurrencePendency.RootCauseAnalysisAndActionPlan)
+                throw new Exception("O Registro não está pendente de análise de causa raiz");
+
+            if (occurrenceRegister.RootCauseAnalysis != null)
                 throw new Exception("O registro de não conformidade já foi analisado.");
 
             using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -223,7 +227,7 @@ namespace _4lab.Occurrences.Application.Service
                     });
                 }
 
-                var newAnalyzeRootCause = await _analyzeRootCauseRepository.Insert(new RootCauseAnalysis
+                var analysis = await _analyzeRootCauseRepository.Insert( new RootCauseAnalysis
                 {
                     OccurrenceRegisterId = analyzeRootCause.OccurrenceRegisterId,
                     UserId = analyzeRootCause.UserId,
@@ -234,12 +238,15 @@ namespace _4lab.Occurrences.Application.Service
                     ActionPlainResponses = responses
                 });
 
-                await _analyzeRootCauseRepository.SaveChanges();
+                occurrenceRegister.OccurrencePendency = OccurrencePendency.RiskRating;
+                occurrenceRegister.RootCauseAnalysis = analysis;
+                
+                await _occurrenceRegisterRepository.SaveChanges();
 
                 scoped.Complete();
-                return newAnalyzeRootCause;
+                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 scoped.Dispose();
                 throw new Exception("Erro ao inserir analise.");
@@ -248,13 +255,13 @@ namespace _4lab.Occurrences.Application.Service
 
         public async Task<DtoOccurrenceRegisterResponse> GetOccurrenceRegisterById(Guid id)
         {
-            var occurrenceRegister = await _nonComplianceRegisterRepository.GetByIdWithInclude(id);
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetByIdWithInclude(id);
             return _mapper.Map<DtoOccurrenceRegisterResponse>(occurrenceRegister);
         }
 
         public async Task<byte[]> CreatePieChartWithOccurrenceRegister(SetorType setor, int month)
         {
-            var occurrenceGroup = await _nonComplianceRegisterRepository.GetGroupBySetor(setor, month);
+            var occurrenceGroup = await _occurrenceRegisterRepository.GetGroupBySetor(setor, month);
 
             var chartData = occurrenceGroup.ToDictionary(k => k.Occurrence,
                                                         v => (double)(v.Quantity));
@@ -266,17 +273,51 @@ namespace _4lab.Occurrences.Application.Service
 
         public async Task<string> CreateOccurrenceRegisterReport(Guid occurrenceRegisterId)
         {
-            var occurrenceRegister = await _nonComplianceRegisterRepository.GetByIdForReport(occurrenceRegisterId);
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetByIdForReport(occurrenceRegisterId);
 
             if (occurrenceRegister == null)
                 throw new Exception("Registro de não conformidade não encontrado.");
 
-            if (!occurrenceRegister.HasRootCauseAnalysis())
-                throw new Exception("Resgistro ainda não possui analise de causa raiz.");
+            if (!occurrenceRegister.HasAllAnalysis())
+                throw new Exception("Registro ainda está em análise.");
 
             var html = await _razorRender.RenderViewToStringAsync("OccurrenceRegisterReport", occurrenceRegister);
 
             return html;
+        }
+
+        public async Task<bool> CreateRiskAnalysis(DtoRiskAnalysisInput riskAnalysis)
+        {
+            var occurrenceRegisterRegister = await _occurrenceRegisterRepository.GetByIdWithInclude(riskAnalysis.OccurrenceRegisterId);
+
+            if (occurrenceRegisterRegister == null)
+                throw new Exception("O Registro de não conformidade não encontrado.");
+
+            if (occurrenceRegisterRegister.OccurrencePendency != OccurrencePendency.RiskRating)
+                throw new Exception("O Registro não está pendente de análise de risco");
+
+            if (occurrenceRegisterRegister.OccurrenceRiskId != null)
+                throw new Exception("O registro de não conformidade já foi analisado.");
+
+            using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            try
+            {
+                occurrenceRegisterRegister.OccurrencePendency = OccurrencePendency.VerificationOfEffectiveness;
+                occurrenceRegisterRegister.OccurrenceRiskId = riskAnalysis.OccurenceRisk;
+
+                await _occurrenceRegisterRepository.Update(occurrenceRegisterRegister);
+
+                await _analyzeRootCauseRepository.SaveChanges();
+
+                scoped.Complete();
+                return true;
+            }
+            catch
+            {
+                scoped.Dispose();
+                throw new Exception("Erro ao inserir analise.");
+            }
         }
     }
 }

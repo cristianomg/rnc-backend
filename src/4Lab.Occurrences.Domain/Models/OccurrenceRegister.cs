@@ -8,7 +8,7 @@ namespace _4lab.Occurrences.Domain.Models
     public class OccurrenceRegister : Entity<Guid>
     {
         public Guid UserId { get; set; }
-        public OccurrenceClassificationType OccurrenceClassificationId { get; set; }
+        public OccurrenceRiskType? OccurrenceRiskId { get; set; }
         public DateTime RegisterDate { get; set; }
         public string RegisterHour { get; set; }
         public SetorType SetorId { get; set; }
@@ -18,8 +18,8 @@ namespace _4lab.Occurrences.Domain.Models
         public ICollection<Occurrence> Occurrences { get; set; }
         public virtual RootCauseAnalysis RootCauseAnalysis { get; set; }
         public virtual Setor Setor { get; set; }
-        public virtual OccurrenceClassification OccurrenceClassification { get; set; }
+        public virtual OccurrenceRisk OccurrenceRisk { get; set; }
         public OccurrencePendency? OccurrencePendency { get; set; }
-        public bool HasRootCauseAnalysis() => RootCauseAnalysis != null;
+        public bool HasAllAnalysis() => OccurrencePendency.HasValue;
     }
 }

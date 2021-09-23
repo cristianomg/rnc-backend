@@ -8,7 +8,7 @@ namespace _4lab.Occurrences.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<RootCauseAnalysis> builder)
         {
-            builder.ToTable(nameof(RootCauseAnalysis), "Occurrences");
+            builder.ToTable(nameof(RootCauseAnalysis));
 
             builder.HasKey(x => x.Id);
 

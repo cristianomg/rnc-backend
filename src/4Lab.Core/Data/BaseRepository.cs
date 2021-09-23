@@ -59,7 +59,7 @@ namespace _4Lab.Core.Data
 
         public async Task InsertMany(IEnumerable<TEntity> objs) => await _dbSet.AddRangeAsync(objs);
 
-        public async Task<TEntity> Update(TEntity obj) => await Task.FromResult(_dbSet.Update(obj).Entity);
+        public virtual async Task<TEntity> Update(TEntity obj) => await Task.FromResult(_dbSet.Update(obj).Entity);
 
         public async Task<int> SaveChanges()
         {

@@ -3,16 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _4Lab.Occurrences.Data.Migrations
 {
-    public partial class initialoccurrencemigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Occurrences");
-
             migrationBuilder.CreateTable(
                 name: "ActionPlain",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -29,8 +25,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OccurrenceClassification",
-                schema: "Occurrences",
+                name: "OccurrenceRisk",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -43,12 +38,11 @@ namespace _4Lab.Occurrences.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OccurrenceClassification", x => x.Id);
+                    table.PrimaryKey("PK_OccurrenceRisk", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Setor",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -67,7 +61,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "TypeOccurrence",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
@@ -85,7 +78,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ActionPlainQuestion",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -103,7 +95,6 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_ActionPlainQuestion_ActionPlain_ActionPlainId",
                         column: x => x.ActionPlainId,
-                        principalSchema: "Occurrences",
                         principalTable: "ActionPlain",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -111,12 +102,11 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OccurrenceRegister",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OccurrenceClassificationId = table.Column<int>(type: "integer", nullable: false),
+                    OccurrenceRiskId = table.Column<int>(type: "integer", nullable: true),
                     RegisterDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     RegisterHour = table.Column<string>(type: "text", nullable: false),
                     SetorId = table.Column<int>(type: "integer", nullable: false),
@@ -134,16 +124,14 @@ namespace _4Lab.Occurrences.Data.Migrations
                 {
                     table.PrimaryKey("PK_OccurrenceRegister", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OccurrenceRegister_OccurrenceClassification_OccurrenceClass~",
-                        column: x => x.OccurrenceClassificationId,
-                        principalSchema: "Occurrences",
-                        principalTable: "OccurrenceClassification",
+                        name: "FK_OccurrenceRegister_OccurrenceRisk_OccurrenceRiskId",
+                        column: x => x.OccurrenceRiskId,
+                        principalTable: "OccurrenceRisk",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OccurrenceRegister_Setor_SetorId",
                         column: x => x.SetorId,
-                        principalSchema: "Occurrences",
                         principalTable: "Setor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -151,7 +139,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Occurrence",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -169,7 +156,6 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Occurrence_TypeOccurrence_OccurrenceTypeId",
                         column: x => x.OccurrenceTypeId,
-                        principalSchema: "Occurrences",
                         principalTable: "TypeOccurrence",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -177,7 +163,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RootCauseAnalysis",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -196,14 +181,12 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_RootCauseAnalysis_ActionPlain_ActionPlainId",
                         column: x => x.ActionPlainId,
-                        principalSchema: "Occurrences",
                         principalTable: "ActionPlain",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RootCauseAnalysis_OccurrenceRegister_OccurrenceRegisterId",
                         column: x => x.OccurrenceRegisterId,
-                        principalSchema: "Occurrences",
                         principalTable: "OccurrenceRegister",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -211,7 +194,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OccurrenceOccurrenceRegister",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     OccurrenceRegistersId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -223,14 +205,12 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_OccurrenceOccurrenceRegister_Occurrence_OccurrencesId",
                         column: x => x.OccurrencesId,
-                        principalSchema: "Occurrences",
                         principalTable: "Occurrence",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_OccurrenceOccurrenceRegister_OccurrenceRegister_OccurrenceR~",
                         column: x => x.OccurrenceRegistersId,
-                        principalSchema: "Occurrences",
                         principalTable: "OccurrenceRegister",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -238,7 +218,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ActionPlainResponse",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -258,21 +237,18 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_ActionPlainResponse_ActionPlain_ActionPlainId",
                         column: x => x.ActionPlainId,
-                        principalSchema: "Occurrences",
                         principalTable: "ActionPlain",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ActionPlainResponse_ActionPlainQuestion_ActionPlainQuestion~",
                         column: x => x.ActionPlainQuestionId,
-                        principalSchema: "Occurrences",
                         principalTable: "ActionPlainQuestion",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ActionPlainResponse_RootCauseAnalysis_RootCauseAnalysisId",
                         column: x => x.RootCauseAnalysisId,
-                        principalSchema: "Occurrences",
                         principalTable: "RootCauseAnalysis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -280,7 +256,6 @@ namespace _4Lab.Occurrences.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FiveWhat",
-                schema: "Occurrences",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -298,100 +273,85 @@ namespace _4Lab.Occurrences.Data.Migrations
                     table.ForeignKey(
                         name: "FK_FiveWhat_RootCauseAnalysis_RootCauseAnalysisId",
                         column: x => x.RootCauseAnalysisId,
-                        principalSchema: "Occurrences",
                         principalTable: "RootCauseAnalysis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                schema: "Occurrences",
                 table: "TypeOccurrence",
                 columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "OccurrenceTypeName", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 9, 21, 14, 33, 10, 217, DateTimeKind.Local).AddTicks(388), null, "Pre-Analítica", null, null },
-                    { 2, true, new DateTime(2021, 9, 21, 14, 33, 10, 226, DateTimeKind.Local).AddTicks(6701), null, "Pre-Analítica", null, null },
-                    { 3, true, new DateTime(2021, 9, 21, 14, 33, 10, 226, DateTimeKind.Local).AddTicks(7730), null, "Pre-Analítica", null, null }
+                    { 1, true, new DateTime(2021, 9, 23, 18, 21, 56, 75, DateTimeKind.Local).AddTicks(1592), null, "Pre-Analítica", null, null },
+                    { 2, true, new DateTime(2021, 9, 23, 18, 21, 56, 87, DateTimeKind.Local).AddTicks(522), null, "Analítica", null, null },
+                    { 3, true, new DateTime(2021, 9, 23, 18, 21, 56, 87, DateTimeKind.Local).AddTicks(4154), null, "Pos-Analítica", null, null }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionPlain_Name",
-                schema: "Occurrences",
                 table: "ActionPlain",
                 column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionPlainQuestion_ActionPlainId",
-                schema: "Occurrences",
                 table: "ActionPlainQuestion",
                 column: "ActionPlainId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionPlainResponse_ActionPlainId",
-                schema: "Occurrences",
                 table: "ActionPlainResponse",
                 column: "ActionPlainId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionPlainResponse_ActionPlainQuestionId",
-                schema: "Occurrences",
                 table: "ActionPlainResponse",
                 column: "ActionPlainQuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionPlainResponse_RootCauseAnalysisId",
-                schema: "Occurrences",
                 table: "ActionPlainResponse",
                 column: "RootCauseAnalysisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FiveWhat_RootCauseAnalysisId",
-                schema: "Occurrences",
                 table: "FiveWhat",
                 column: "RootCauseAnalysisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Occurrence_OccurrenceTypeId",
-                schema: "Occurrences",
                 table: "Occurrence",
                 column: "OccurrenceTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OccurrenceOccurrenceRegister_OccurrencesId",
-                schema: "Occurrences",
                 table: "OccurrenceOccurrenceRegister",
                 column: "OccurrencesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OccurrenceRegister_OccurrenceClassificationId",
-                schema: "Occurrences",
+                name: "IX_OccurrenceRegister_OccurrenceRiskId",
                 table: "OccurrenceRegister",
-                column: "OccurrenceClassificationId");
+                column: "OccurrenceRiskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OccurrenceRegister_SetorId",
-                schema: "Occurrences",
                 table: "OccurrenceRegister",
                 column: "SetorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RootCauseAnalysis_ActionPlainId",
-                schema: "Occurrences",
                 table: "RootCauseAnalysis",
                 column: "ActionPlainId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RootCauseAnalysis_OccurrenceRegisterId",
-                schema: "Occurrences",
                 table: "RootCauseAnalysis",
                 column: "OccurrenceRegisterId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TypeOccurrence_OccurrenceTypeName",
-                schema: "Occurrences",
                 table: "TypeOccurrence",
                 column: "OccurrenceTypeName");
         }
@@ -399,48 +359,37 @@ namespace _4Lab.Occurrences.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActionPlainResponse",
-                schema: "Occurrences");
+                name: "ActionPlainResponse");
 
             migrationBuilder.DropTable(
-                name: "FiveWhat",
-                schema: "Occurrences");
+                name: "FiveWhat");
 
             migrationBuilder.DropTable(
-                name: "OccurrenceOccurrenceRegister",
-                schema: "Occurrences");
+                name: "OccurrenceOccurrenceRegister");
 
             migrationBuilder.DropTable(
-                name: "ActionPlainQuestion",
-                schema: "Occurrences");
+                name: "ActionPlainQuestion");
 
             migrationBuilder.DropTable(
-                name: "RootCauseAnalysis",
-                schema: "Occurrences");
+                name: "RootCauseAnalysis");
 
             migrationBuilder.DropTable(
-                name: "Occurrence",
-                schema: "Occurrences");
+                name: "Occurrence");
 
             migrationBuilder.DropTable(
-                name: "ActionPlain",
-                schema: "Occurrences");
+                name: "ActionPlain");
 
             migrationBuilder.DropTable(
-                name: "OccurrenceRegister",
-                schema: "Occurrences");
+                name: "OccurrenceRegister");
 
             migrationBuilder.DropTable(
-                name: "TypeOccurrence",
-                schema: "Occurrences");
+                name: "TypeOccurrence");
 
             migrationBuilder.DropTable(
-                name: "OccurrenceClassification",
-                schema: "Occurrences");
+                name: "OccurrenceRisk");
 
             migrationBuilder.DropTable(
-                name: "Setor",
-                schema: "Occurrences");
+                name: "Setor");
         }
     }
 }

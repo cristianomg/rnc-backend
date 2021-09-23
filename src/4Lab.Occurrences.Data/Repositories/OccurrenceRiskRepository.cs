@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace _4lab.Occurrences.Data.Repositories
 {
-    public class OccurrenceClassificationRepository : BaseRepository<OccurrenceClassification, OccurrenceClassificationType>, IOccurrenceClassificationRepository
+    public class OccurrenceRiskRepository : BaseRepository<OccurrenceRisk, OccurrenceRiskType>, IOccurrenceRiskRepository
     {
-        private readonly DbSet<OccurrenceClassification> _dbSet;
-        public OccurrenceClassificationRepository(OccurrencesContext context) : base(context)
+        private readonly DbSet<OccurrenceRisk> _dbSet;
+        public OccurrenceRiskRepository(OccurrencesContext context) : base(context)
         {
-            _dbSet = context.Set<OccurrenceClassification>();
+            _dbSet = context.Set<OccurrenceRisk>();
         }
-        public async Task<IQueryable<OccurrenceClassification>> GetAllClassification()
+        public async Task<IQueryable<OccurrenceRisk>> GetAllRisks()
         {
             var occurrenceClassification = _dbSet.AsQueryable().OrderBy(x => x.Id);
             return await Task.FromResult(occurrenceClassification);

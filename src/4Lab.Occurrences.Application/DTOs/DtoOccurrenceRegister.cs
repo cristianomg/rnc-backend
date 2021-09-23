@@ -19,10 +19,6 @@ namespace _4lab.Occurrences.Application.DTOs
         /// </summary>
         public string RegisterHour { get; set; }
         /// <summary>
-        /// Classificação de ocorrênce
-        /// </summary>
-        public OccurrenceClassificationType OccurrenceClassification { get; set; }
-        /// <summary>
         /// Setor
         /// </summary>
         public SetorType Setor { get; set; }

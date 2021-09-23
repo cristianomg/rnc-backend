@@ -21,7 +21,7 @@ namespace _4lab.Occurrences.Application.Mapper
             CreateMap<Setor, DtoSetor>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
 
-            CreateMap<OccurrenceClassification, DtoOccurrenceClassification>()
+            CreateMap<OccurrenceRisk, DtoOccurrenceRisk>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
 
             CreateMap<OccurrenceRegister, DtoOccurrenceRegisterResponse>()

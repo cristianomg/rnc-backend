@@ -17,13 +17,16 @@ namespace _4lab.Occurrences.Data.Repositories
             _context = context;
         }
 
+        public override Task<OccurrenceRegister> Update(OccurrenceRegister obj)
+        {
+            return base.Update(obj);
+        }
+
         public async Task<OccurrenceRegister> GetByIdWithInclude(Guid id)
         {
-            var nonComplianceRegister = await _context.OccurrenceRegisters.AsNoTracking()
-                 .Include(x => x.Setor)
-                 .Include(x => x.RootCauseAnalysis)
-                 .Include(x => x.Occurrences)
-                 .FirstOrDefaultAsync(x => x.Id == id);
+            var nonComplianceRegister = await _context.OccurrenceRegisters
+                .Include(x=>x.Occurrences)
+                .FirstOrDefaultAsync(x=>x.Id == id);
 
             return nonComplianceRegister;
         }

@@ -2,6 +2,7 @@
 using _4lab.Occurrences.Domain.Interfaces;
 using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
+using _4Lab.Core.Enums;
 using _4Lab.Orchestrator.DTOs.Inputs;
 using _4Lab.Orchestrator.DTOs.Response;
 using _4Lab.Orchestrator.Filters;
@@ -71,15 +72,18 @@ namespace Api.Rnc.Controllers
         [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
-        public async Task<IActionResult> GetAllBySetor(SetorType setor, HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
+        public async Task<IActionResult> GetAllBySetor(SetorType setor
+                                                     , AnalyseFilter analyseFilter = AnalyseFilter.All
+                                                     , PendingFilter pendingFilter = PendingFilter.All)
         {
             var occurrenceRegisters = await _occurrenceRegisterRepository.GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
 
             return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(occurrenceRegisters
-                    .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
-                    .Where(x => x.SetorId == setor)
-                    .OrderBy(x => x.RootCauseAnalysis != null)
-                    .ThenBy(x => x.Id)));
+                             .Where(x => x.SetorId == setor)
+                             .OccurenceFilterByAnalyse(analyseFilter)
+                             .OccurrenceFilterByPending(pendingFilter)
+                             .OrderBy(x => x.RootCauseAnalysis != null)
+                             .ThenBy(x => x.Id)));
         }
 
         /// <summary>
@@ -87,18 +91,20 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("all")]
-        [HttpGet("all/{hasRootCauseAnalysis}")]
+        [HttpGet("all/{analyseFilter}/{pendingFilter}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
-        public async Task<IActionResult> GetAll(HasRootCauseAnalysisType hasRootCauseAnalysis = HasRootCauseAnalysisType.All)
+        public async Task<IActionResult> GetAll(AnalyseFilter analyseFilter = AnalyseFilter.All
+                                              , PendingFilter pendingFilter = PendingFilter.All)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
                 .GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
 
             return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
-                .FilterByHasRootCauseAnalysis(hasRootCauseAnalysis)
-                .OrderBy(x => x.RootCauseAnalysis != null)
-                .ThenBy(x => x.Id)));
+                             .OccurenceFilterByAnalyse(analyseFilter)
+                             .OccurrenceFilterByPending(pendingFilter)
+                             .OrderBy(x => x.RootCauseAnalysis != null)
+                             .ThenBy(x => x.Id)));
         }
 
         /// <summary>

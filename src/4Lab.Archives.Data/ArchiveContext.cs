@@ -1,4 +1,5 @@
-﻿using _4Lab.Core.Data;
+﻿using _4Lab.Core.Audit;
+using _4Lab.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
@@ -19,6 +20,8 @@ namespace _4Lab.Archives.Data
             }
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());
+
 
             base.OnModelCreating(modelBuilder);
         }

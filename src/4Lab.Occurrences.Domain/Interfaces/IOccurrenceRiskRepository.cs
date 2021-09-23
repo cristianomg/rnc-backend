@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace _4lab.Occurrences.Domain.Interfaces
 {
-    public interface IOccurrenceClassificationRepository : IBaseRepository<OccurrenceClassification, OccurrenceClassificationType>
+    public interface IOccurrenceRiskRepository : IBaseRepository<OccurrenceRisk, OccurrenceRiskType>
     {
-        Task<IQueryable<OccurrenceClassification>> GetAllClassification();
+        Task<IQueryable<OccurrenceRisk>> GetAllRisks();
     }
 }

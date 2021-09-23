@@ -2,7 +2,7 @@
 
 namespace _4Lab.Core.DomainObjects.Enums
 {
-    public enum OccurrenceClassificationType : int
+    public enum OccurrenceRiskType : int
     {
         [Description("Near miss")]
         NearMiss = 1,
@@ -14,7 +14,7 @@ namespace _4Lab.Core.DomainObjects.Enums
         SeriousAdverseEvent,
         [Description("Evento sem dano")]
         UndamagedEvent,
-        [Description("Não conformidade")]
-        NonCompliance
+        [Description("Sem risco")]
+        WithoutRisk
     }
 } 

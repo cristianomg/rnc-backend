@@ -12,15 +12,16 @@ namespace Api.Rnc.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class OccurrenceClassificationController : ControllerBase
+    public class OccurrenceRiskController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IOccurrenceClassificationRepository _occurrenceClassificationRepository;
+        private readonly IOccurrenceRiskRepository _occurrenceRiskRepository;
 
-        public OccurrenceClassificationController(IMapper mapper, IOccurrenceClassificationRepository occurrenceClassificationRepository)
+        public OccurrenceRiskController(IMapper mapper
+                                        , IOccurrenceRiskRepository occurrenceRiskRepository)
         {
             _mapper = mapper;
-            _occurrenceClassificationRepository = occurrenceClassificationRepository;
+            _occurrenceRiskRepository = occurrenceRiskRepository;
 
         }
         /// <summary>
@@ -29,12 +30,12 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceClassification>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRisk>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllClassifications()
+        public async Task<IActionResult> GetAllRisks()
         {
-            var classifications = await _occurrenceClassificationRepository.GetAllClassification();
-            return Ok(_mapper.ProjectTo<DtoOccurrenceClassification>(classifications));
+            var risks = await _occurrenceRiskRepository.GetAllRisks();
+            return Ok(_mapper.ProjectTo<DtoOccurrenceRisk>(risks));
         }
     }
 }
