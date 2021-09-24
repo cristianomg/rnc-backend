@@ -129,7 +129,7 @@ namespace _4lab.Administration.Application.Service
 
                     if (correctPassword)
                     {
-                        var token = _tokenService.GenerateToken(existingAuth.Id.ToString(), existingAuth.User.Name, existingAuth.User.UserPermission.Name);
+                        var token = _tokenService.GenerateToken(existingAuth.User.Id.ToString(), existingAuth.User.Name, existingAuth.User.UserPermission.Name);
 
                         var user = new DtoUser
                         {
