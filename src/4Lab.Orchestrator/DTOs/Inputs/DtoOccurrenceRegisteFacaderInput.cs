@@ -22,7 +22,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// <summary>
         /// Classificação de ocorrênce
         /// </summary>
-        public OccurrenceRiskType OccurrenceClassification { get; set; }
+        public OccurrenceClassificationType OccurrenceClassification { get; set; }
         /// <summary>
         /// Setor
         /// </summary>
