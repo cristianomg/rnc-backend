@@ -20,6 +20,10 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// </summary>
         public string RegisterHour { get; set; }
         /// <summary>
+        /// Classificação de ocorrência
+        /// </summary>
+        public OccurrenceClassificationType OccurrenceClassification { get; set; }
+        /// <summary>
         /// Setor
         /// </summary>
         public SetorType Setor { get; set; }

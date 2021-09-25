@@ -87,7 +87,7 @@ namespace _4lab.Occurrences.Application.Service
             }
         }
 
-        public async Task<bool> CreateOccurrenceRegister(DtoOccurrenceRegister  occurrenceRegister)
+        public async Task<bool> CreateOccurrenceRegister(DtoOccurrenceRegister occurrenceRegister)
         {
             if (occurrenceRegister.RegisterDate == DateTime.MinValue)
                 throw new Exception("A data precisa ser informada.");
@@ -124,6 +124,7 @@ namespace _4lab.Occurrences.Application.Service
                                                   Occurrences = allOccurrences.ToList(),
                                                   CreatedBy = occurrenceRegister.UserName,
                                                   OccurrencePendency = OccurrencePendency.RootCauseAnalysisAndActionPlan,
+                                                  OccurrenceClassificationId = occurrenceRegister.OccurrenceClassification,
                                               });
 
                 await _occurrenceRegisterRepository.SaveChanges();
@@ -132,7 +133,7 @@ namespace _4lab.Occurrences.Application.Service
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 scope.Dispose();
@@ -227,7 +228,7 @@ namespace _4lab.Occurrences.Application.Service
                     });
                 }
 
-                var analysis = await _analyzeRootCauseRepository.Insert( new RootCauseAnalysis
+                var analysis = await _analyzeRootCauseRepository.Insert(new RootCauseAnalysis
                 {
                     OccurrenceRegisterId = analyzeRootCause.OccurrenceRegisterId,
                     UserId = analyzeRootCause.UserId,
@@ -240,7 +241,7 @@ namespace _4lab.Occurrences.Application.Service
 
                 occurrenceRegister.OccurrencePendency = OccurrencePendency.RiskRating;
                 occurrenceRegister.RootCauseAnalysis = analysis;
-                
+
                 await _occurrenceRegisterRepository.SaveChanges();
 
                 scoped.Complete();
