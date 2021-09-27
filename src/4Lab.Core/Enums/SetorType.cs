@@ -4,29 +4,29 @@ namespace _4Lab.Core.DomainObjects.Enums
 {
     public enum SetorType : int
     {
-        [Description("Coleta")]
+        [Description("Coleta")] 
         Coleta = 1,
-        [Description("Microbiologia")]
+        [Description("Microbiologia")] 
         Microbiologia,
-        [Description("Parasitologia")]
+        [Description("Parasitologia")] 
         Parasitologia,
-        [Description("Imunologia")]
-        Imunologia,
-        [Description("Hematologia")]
-        Hematologia,
-        [Description("Triagem")]
+        [Description("Imuno-hematologia")] 
+        ImunoHematologia,
+        [Description("Triagem")] 
         Triagem,
-        [Description("Recepção")]
+        [Description("Recepção")] 
         Recepcao, 
-        [Description("Almoxarifado")]
-        Almoxarifado,
-        [Description("Bioquímica")]
+        [Description("Bioquímica")] 
         Bioquimica,
-        [Description("Uroanálise")]
-        Uroanalise,
-        [Description("Qualidade")]
-        Qualidade,
-        [Description("Coordenação")]
-        Coordenação,
+        [Description("Urinálise")] 
+        Urinalise,
+        [Description("Administrativo")] 
+        Administrativo,
+        [Description("Assistencial")] 
+        Assistencial,
+        [Description("Prestadores de serviço")] 
+        PrestadoresDeServiço,
+        [Description("Fornecedores")] 
+        Fornecedores,
     }
 }
