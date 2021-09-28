@@ -31,7 +31,7 @@ namespace _4Lab.Orchestrator.Facades
             try
             {
                 var archives = input.Occurrences
-                    .Select(FillNonCompliance)
+                    .Select(x=> FillNonCompliance(x, input.Id))
                     .SelectMany(x => x.Archives)
                     .Select(x=> _mapper.Map<DtoCreateArchive>(x))
                     .ToList();
@@ -50,13 +50,13 @@ namespace _4Lab.Orchestrator.Facades
                 throw;
             }
         }
-        private DtoOccurrenceFacadeInput FillNonCompliance(DtoOccurrenceFacadeInput occurrence)
+        private DtoOccurrenceFacadeInput FillNonCompliance(DtoOccurrenceFacadeInput occurrence, Guid occurrenceRegisterId)
         {
             occurrence.Id ??= Guid.NewGuid();
             occurrence.Archives = occurrence.Archives.Select(archive =>
             {
                 archive.EntityType = EntityArchiveType.Occurrence;
-                archive.EntityId = occurrence.Id.Value;
+                archive.EntityId = occurrence.Id.Value + "-" + occurrenceRegisterId;
                 return archive;
             }).ToList();
             return occurrence;

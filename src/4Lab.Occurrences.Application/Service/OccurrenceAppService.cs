@@ -113,6 +113,7 @@ namespace _4lab.Occurrences.Application.Service
                 var entity = await _occurrenceRegisterRepository
                                               .Insert(new OccurrenceRegister
                                               {
+                                                  Id = occurrenceRegister.Id,
                                                   UserId = occurrenceRegister.UserId,
                                                   ImmediateAction = occurrenceRegister.ImmediateAction,
                                                   MoreInformation = occurrenceRegister.MoreInformation,
@@ -121,6 +122,7 @@ namespace _4lab.Occurrences.Application.Service
                                                   RegisterHour = occurrenceRegister.RegisterHour,
                                                   SetorId = occurrenceRegister.Setor,
                                                   CreatedAt = DateTime.Now,
+                                                  OccurrenceTypeId = occurrenceRegister.OccurrenceTypeId,
                                                   Occurrences = allOccurrences.ToList(),
                                                   CreatedBy = occurrenceRegister.UserName,
                                                   OccurrencePendency = OccurrencePendency.RootCauseAnalysisAndActionPlan,
@@ -152,7 +154,6 @@ namespace _4lab.Occurrences.Application.Service
                 {
                     Active = false,
                     Description = oc.Description,
-                    OccurrenceTypeId = oc.OccurrenceTypeId,
                     CreatedAt = DateTime.Now,
                     CreatedBy = creationUserName
                 });

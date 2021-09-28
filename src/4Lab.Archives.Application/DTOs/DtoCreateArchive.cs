@@ -18,6 +18,6 @@ namespace _4Lab.Archives.Application.DTOs
         /// </summary>
         public string FileType { get; set; }
         public EntityArchiveType EntityType { get; set; }
-        public Guid EntityId { get; set; }
+        public string EntityId { get; set; }
     }
 }

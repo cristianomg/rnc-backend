@@ -45,6 +45,9 @@ namespace _4lab.Occurrences.Data.Mapping
 
             builder.Property(x => x.OccurrencePendency)
                 .HasDefaultValue(null);
+            builder.HasOne(x => x.OccurrenceType)
+                .WithMany(x => x.OccurrenceRegisters)
+                .HasForeignKey(x => x.OccurrenceTypeId);
         }
     }
 }
