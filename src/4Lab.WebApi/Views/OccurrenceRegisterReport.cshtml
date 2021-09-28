@@ -8,10 +8,8 @@
     var questionsAndResponses = string.Join(';', Model.RootCauseAnalysis.ActionPlain.Questions
                                                 .Zip(Model.RootCauseAnalysis.ActionPlainResponses, (first, second) => $"{first.Value} {second.Value}"))
                                                 .Replace(";", "; ");
-    var occurrences = string.Join(';', @Model.Occurrences
-                                                .GroupBy(x => x.OccurrenceTypeId.GetDescription())
-                                                .Select(x => $"{string.Join(';', x.Select(y => $"{y.Description}"))} sendo essa(s) não conformidade(s) caracterizada(s) como: {x.Key}"))
-                                                .Replace(";", ", ");
+    var occurrences = string.Join(';', @Model.Occurrences)
+                            .Replace(";", ", ");
 
 }
 

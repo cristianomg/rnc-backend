@@ -20,10 +20,6 @@ namespace _4lab.Occurrences.Data.Mapping
                 .IsRequired()
                 .HasMaxLength(150);
 
-            builder.HasOne(x => x.OccurrenceType)
-                .WithMany(x => x.Occurrences)
-                .HasForeignKey(x => x.OccurrenceTypeId);
-
             builder.HasMany(x => x.OccurrenceRegisters)
                 .WithMany(x => x.Occurrences);
         }

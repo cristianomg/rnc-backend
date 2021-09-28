@@ -1,12 +1,9 @@
 ﻿using _4lab.Occurrences.Application.DTOs;
 using _4lab.Occurrences.Domain.Interfaces;
-using _4Lab.Core.DomainObjects.Enums;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Api.Rnc.Controllers
@@ -29,14 +26,13 @@ namespace Api.Rnc.Controllers
         /// <summary>
         /// Endpoint reponsavel por trazer as ocorrencias
         /// </summary>
-        /// <param name="occurrenceType"></param>
         /// <returns></returns>
-        [HttpGet("{occurrenceType}")]
+        [HttpGet("")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetNonCompliances(OccurrenceType occurrenceType)
+        public async Task<IActionResult> GetNonCompliances()
         {
-            var occurrences = await _occurrenceRepository.GetByOccurrenceType(occurrenceType);
+            var occurrences = await _occurrenceRepository.GetAll();
             return Ok(_mapper.ProjectTo<DtoOccurrence>(occurrences));
         }
     }

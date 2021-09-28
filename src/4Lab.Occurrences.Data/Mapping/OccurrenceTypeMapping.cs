@@ -23,7 +23,7 @@ namespace _4lab.Occurrences.Data.Mapping
 
             builder.HasIndex(x => x.OccurrenceTypeName);
 
-            builder.HasMany(x => x.Occurrences)
+            builder.HasMany(x => x.OccurrenceRegisters)
                 .WithOne(x => x.OccurrenceType)
                 .HasForeignKey(x => x.OccurrenceTypeId);
         }

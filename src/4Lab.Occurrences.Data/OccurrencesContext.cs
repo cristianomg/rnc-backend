@@ -46,18 +46,28 @@ namespace _4lab.Occurrences.Data
         {
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.PreAnalitica,
-                OccurrenceTypeName = OccurrenceType.PreAnalitica.GetDescription(),
+                Id = OccurrenceType.Process,
+                OccurrenceTypeName = OccurrenceType.Process.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.Analitica,
-                OccurrenceTypeName = OccurrenceType.Analitica.GetDescription(),
+                Id = OccurrenceType.Audit,
+                OccurrenceTypeName = OccurrenceType.Audit.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.PosAnalitica,
-                OccurrenceTypeName = OccurrenceType.PosAnalitica.GetDescription(),
+                Id = OccurrenceType.CustomerComplaint,
+                OccurrenceTypeName = OccurrenceType.CustomerComplaint.GetDescription(),
+            });
+            modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
+            {
+                Id = OccurrenceType.Indicator,
+                OccurrenceTypeName = OccurrenceType.Indicator.GetDescription(),
+            });
+            modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
+            {
+                Id = OccurrenceType.RiskAnalysis,
+                OccurrenceTypeName = OccurrenceType.RiskAnalysis.GetDescription(),
             });
         }
     }
