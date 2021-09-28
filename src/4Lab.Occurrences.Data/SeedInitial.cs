@@ -33,7 +33,7 @@ namespace Data.Rnc.Context
             {
                 SeedOccurrenceRisks();
             }
-            if (!_context.OccurrenceRisks.Any())
+            if (!_context.OccurrenceClassifications.Any())
             {
                 SeedOccurrenceClassification();
             }
