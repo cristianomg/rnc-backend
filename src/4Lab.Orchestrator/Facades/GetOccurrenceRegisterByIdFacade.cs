@@ -37,7 +37,7 @@ namespace _4Lab.Orchestrator.Facades
                     (await _archiveAppService.GetFilesByEntityId
                             (
                                 EntityArchiveType.Occurrence,
-                                occurrence.Id.Value
+                                occurrence.Id.Value + "-" + occurrenceRegister.Id 
                             )
                     );
             }

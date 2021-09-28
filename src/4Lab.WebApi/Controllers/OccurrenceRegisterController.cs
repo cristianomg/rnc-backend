@@ -63,29 +63,6 @@ namespace Api.Rnc.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Endpoint responsável por trazer as não conformidades por setor do usuário logado
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("setor/{setor}")]
-        [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
-        public async Task<IActionResult> GetAllBySetor(SetorType setor
-                                                     , AnalyseFilter analyseFilter = AnalyseFilter.All
-                                                     , PendingFilter pendingFilter = PendingFilter.All)
-        {
-            var occurrenceRegisters = await _occurrenceRegisterRepository.GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
-
-            return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(occurrenceRegisters
-                             .Where(x => x.SetorId == setor)
-                             .OccurenceFilterByAnalyse(analyseFilter)
-                             .OccurrenceFilterByPending(pendingFilter)
-                             .OrderBy(x => x.RootCauseAnalysis != null)
-                             .ThenBy(x => x.Id)));
-        }
-
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas
         /// </summary>
