@@ -21,7 +21,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// </summary>
         public string FileType { get; set; }
         public EntityArchiveType EntityType { get; set; }
-        public Guid EntityId { get; set; }
+        public string EntityId { get; set; }
 
     }
 }

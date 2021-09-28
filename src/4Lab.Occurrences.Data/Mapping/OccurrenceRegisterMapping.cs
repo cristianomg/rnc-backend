@@ -43,8 +43,15 @@ namespace _4lab.Occurrences.Data.Mapping
                 .WithMany(x => x.OccurrenceRegisters)
                 .HasForeignKey(x => x.OccurrenceRiskId);
 
+            builder.HasOne(x => x.OccurrenceClassification)
+                .WithMany(x => x.OccurrenceRegisters)
+                .HasForeignKey(x => x.OccurrenceClassificationId);
+
             builder.Property(x => x.OccurrencePendency)
                 .HasDefaultValue(null);
+            builder.HasOne(x => x.OccurrenceType)
+                .WithMany(x => x.OccurrenceRegisters)
+                .HasForeignKey(x => x.OccurrenceTypeId);
         }
     }
 }

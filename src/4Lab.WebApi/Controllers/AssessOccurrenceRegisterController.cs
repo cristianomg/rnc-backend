@@ -14,7 +14,7 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalistBiomedical) + "," + nameof(UserPermissionType.ResponsibleT))]
+    [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
     public class AssessOccurrenceRegisterController : ControllerBase
     {
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;

@@ -81,7 +81,7 @@ namespace _4Lab.Archives.Application.Service
             return archives;
         }
 
-        public async Task<IEnumerable<DtoCreatedArchive>> GetFilesByEntityId(EntityArchiveType entityType, Guid entityId)
+        public async Task<IEnumerable<DtoCreatedArchive>> GetFilesByEntityId(EntityArchiveType entityType, string entityId)
         {
             var archives = await _archiveRepository.GetAll();
 

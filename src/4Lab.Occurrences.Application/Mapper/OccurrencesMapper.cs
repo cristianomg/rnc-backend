@@ -11,12 +11,9 @@ namespace _4lab.Occurrences.Application.Mapper
         {
             CreateMap<Occurrence, DtoOccurrence>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-            .ForMember(dest => dest.OccurrenceTypeId, opt => opt.MapFrom(src => src.OccurrenceTypeId))
-            .ForMember(dest => dest.DsOccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-            CreateMap<Occurrence, DtoOccurrenceResponse>()
-                .ForMember(dest => dest.DsOccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
+            CreateMap<Occurrence, DtoOccurrenceResponse>();
 
             CreateMap<Setor, DtoSetor>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
@@ -30,8 +27,9 @@ namespace _4lab.Occurrences.Application.Mapper
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))
                 .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.Setor.Name))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
-                .ForMember(dest => dest.HasRootCauseAnalysis, opt => opt.MapFrom(src => src.RootCauseAnalysis != null))
-                .ForMember(dest => dest.OccurrencePendency, opt => opt.MapFrom(src => src.OccurrencePendency));
+                .ForMember(dest => dest.OccurrencePendency, opt => opt.MapFrom(src => src.OccurrencePendency))
+                .ForMember(dest => dest.OccurrenceTypeId, opt => opt.MapFrom(src => src.OccurrenceTypeId))
+                .ForMember(dest => dest.OccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
 
             CreateMap<ActionPlain, DtoActionPlainListResponse>();
 

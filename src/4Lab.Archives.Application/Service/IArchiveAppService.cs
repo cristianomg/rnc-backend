@@ -9,6 +9,6 @@ namespace _4Lab.Archives.Application.Service
     public interface IArchiveAppService
     {
         Task<IEnumerable<DtoCreatedArchive>> UploadMany(List<DtoCreateArchive> files);
-        Task<IEnumerable<DtoCreatedArchive>> GetFilesByEntityId(EntityArchiveType entityType, Guid entityId);
+        Task<IEnumerable<DtoCreatedArchive>> GetFilesByEntityId(EntityArchiveType entityType, string entityId);
     }
 }

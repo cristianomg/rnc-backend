@@ -1,12 +1,12 @@
 ﻿using _4Lab.Core.DomainObjects;
-using System;
+using _4Lab.Core.DomainObjects.Enums;
 using System.Collections.Generic;
 
 namespace _4lab.Occurrences.Domain.Models
 {
-    public class Occurrence : Entity<Guid>
+    public class OccurrenceClassification : Entity<OccurrenceClassificationType>
     {
-        public string Description { get; set; }
+        public string Name { get; set; }
         public virtual ICollection<OccurrenceRegister> OccurrenceRegisters { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace _4lab.Occurrences.Data
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
         public DbSet<OccurrenceRisk> OccurrenceRisks { get; set; }
+        public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
         public DbSet<FiveWhat> FiveWhats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,28 +46,28 @@ namespace _4lab.Occurrences.Data
         {
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.Processo,
-                OccurrenceTypeName = OccurrenceType.Processo.GetDescription(),
+                Id = OccurrenceType.Process,
+                OccurrenceTypeName = OccurrenceType.Process.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.Auditoria,
-                OccurrenceTypeName = OccurrenceType.Auditoria.GetDescription(),
+                Id = OccurrenceType.Audit,
+                OccurrenceTypeName = OccurrenceType.Audit.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.ReclamacaoDeCliente,
-                OccurrenceTypeName = OccurrenceType.ReclamacaoDeCliente.GetDescription(),
+                Id = OccurrenceType.CustomerComplaint,
+                OccurrenceTypeName = OccurrenceType.CustomerComplaint.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.Indicador,
-                OccurrenceTypeName = OccurrenceType.Indicador.GetDescription(),
+                Id = OccurrenceType.Indicator,
+                OccurrenceTypeName = OccurrenceType.Indicator.GetDescription(),
             });
             modelBuilder.Entity<TypeOccurrence>().HasData(new TypeOccurrence
             {
-                Id = OccurrenceType.AnaliseDeRisco,
-                OccurrenceTypeName = OccurrenceType.AnaliseDeRisco.GetDescription(),
+                Id = OccurrenceType.RiskAnalysis,
+                OccurrenceTypeName = OccurrenceType.RiskAnalysis.GetDescription(),
             });
         }
     }

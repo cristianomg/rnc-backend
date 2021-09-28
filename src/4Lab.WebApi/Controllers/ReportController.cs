@@ -13,7 +13,7 @@ namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(UserPermissionType.AnalistBiomedical))]
+    [Authorize(Roles = nameof(UserPermissionType.QualityAnalist))]
     public class ReportController : ControllerBase
     {
         private readonly IOccurrenceAppService _occurrenceAppService;

@@ -1,12 +1,18 @@
 ﻿using _4Lab.Core.DomainObjects.Enums;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace _4Lab.Orchestrator.DTOs.Inputs
 {
     public class DtoOccurrenceRegisteFacaderInput
     {
+        public DtoOccurrenceRegisteFacaderInput()
+        {
+            Id = Guid.NewGuid();
+        }
+        [JsonIgnore]
+        public Guid Id { get; set; }
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
         /// </summary>
@@ -20,9 +26,9 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// </summary>
         public string RegisterHour { get; set; }
         /// <summary>
-        /// Classificação de ocorrênce
+        /// Classificação de ocorrência
         /// </summary>
-        public OccurrenceRiskType OccurrenceClassification { get; set; }
+        public OccurrenceClassificationType OccurrenceClassification { get; set; }
         /// <summary>
         /// Setor
         /// </summary>
@@ -51,5 +57,11 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// </summary>
         [JsonIgnore]
         public string UserName { get; set; }
+
+        /// <summary>
+        /// Id do tipo de não conformidade
+        /// </summary>
+        public OccurrenceType OccurrenceTypeId { get; set; }
+      
     }
 }

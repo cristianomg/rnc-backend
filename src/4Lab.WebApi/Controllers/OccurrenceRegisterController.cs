@@ -63,29 +63,6 @@ namespace Api.Rnc.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Endpoint responsável por trazer as não conformidades por setor do usuário logado
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("setor/{setor}")]
-        [HttpGet("setor/{setor}/{hasRootCauseAnalysis}")]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalistBiomedical) + "," + nameof(UserPermissionType.ResponsibleT))]
-        public async Task<IActionResult> GetAllBySetor(SetorType setor
-                                                     , AnalyseFilter analyseFilter = AnalyseFilter.All
-                                                     , PendingFilter pendingFilter = PendingFilter.All)
-        {
-            var occurrenceRegisters = await _occurrenceRegisterRepository.GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
-
-            return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(occurrenceRegisters
-                             .Where(x => x.SetorId == setor)
-                             .OccurenceFilterByAnalyse(analyseFilter)
-                             .OccurrenceFilterByPending(pendingFilter)
-                             .OrderBy(x => x.RootCauseAnalysis != null)
-                             .ThenBy(x => x.Id)));
-        }
-
         /// <summary>
         /// Endpoint responsável por trazer as não conformidades registradas
         /// </summary>
@@ -93,7 +70,7 @@ namespace Api.Rnc.Controllers
         [HttpGet("all")]
         [HttpGet("all/{analyseFilter}/{pendingFilter}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalistBiomedical) + "," + nameof(UserPermissionType.ResponsibleT))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAll(AnalyseFilter analyseFilter = AnalyseFilter.All
                                               , PendingFilter pendingFilter = PendingFilter.All)
         {
@@ -115,7 +92,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{date:DateTime}/{setor:required}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalistBiomedical) + "," + nameof(UserPermissionType.ResponsibleT))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
@@ -137,7 +114,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoOccurrenceRegisterFacadeResponse), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.AnalistBiomedical) + "," + nameof(UserPermissionType.ResponsibleT))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetById(Guid id)
         {
             return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));

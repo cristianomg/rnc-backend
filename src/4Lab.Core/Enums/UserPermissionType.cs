@@ -11,6 +11,6 @@ namespace _4Lab.Core.DomainObjects.Enums
         [Description("Responsável Técnico")]
         ResponsibleT,
         [Description("Analista da Qualidade")]
-        AnalistBiomedical
+        QualityAnalist
     }
 }

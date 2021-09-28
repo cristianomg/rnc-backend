@@ -7,6 +7,6 @@ namespace _4lab.Occurrences.Domain.Models
     public class TypeOccurrence : Entity<OccurrenceType>
     {
         public string OccurrenceTypeName { get; set; }
-        public virtual IEnumerable<Occurrence> Occurrences { get; set; }
+        public virtual IEnumerable<OccurrenceRegister> OccurrenceRegisters { get; set; }
     }
 }

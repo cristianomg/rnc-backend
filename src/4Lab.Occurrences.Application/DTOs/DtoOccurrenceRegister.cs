@@ -6,10 +6,15 @@ namespace _4lab.Occurrences.Application.DTOs
 {
     public class DtoOccurrenceRegister
     {
+        public Guid Id { get; set; }
         /// <summary>
         /// Lista de não conformidades aplicadas ao registro
         /// </summary>
         public IEnumerable<DtoOccurrence> Occurrences { get; set; }
+        /// <summary>
+        /// Id do tipo de Ocorrência
+        /// </summary>
+        public OccurrenceType OccurrenceTypeId { get; set; }
         /// <summary>
         /// Data do registro
         /// </summary>
@@ -18,6 +23,10 @@ namespace _4lab.Occurrences.Application.DTOs
         /// Hora do registro
         /// </summary>
         public string RegisterHour { get; set; }
+        /// <summary>
+        /// Classificação de ocorrencia
+        /// </summary>
+        public OccurrenceClassificationType OccurrenceClassification { get; set; }
         /// <summary>
         /// Setor
         /// </summary>

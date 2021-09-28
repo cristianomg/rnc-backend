@@ -33,6 +33,10 @@ namespace Data.Rnc.Context
             {
                 SeedOccurrenceRisks();
             }
+            if (!_context.OccurrenceRisks.Any())
+            {
+                SeedOccurrenceClassification();
+            }
         }
 
         private void ActionPlain()
@@ -95,107 +99,86 @@ namespace Data.Rnc.Context
         {
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Erros de cadastro do paciente ou médico.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Requisições ilegíveis.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Paciente com preparo inadequado.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Incidente com cliente.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Amostra insuficiente.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Tubo inadequado.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PreAnalitica,
                 Description = "Amostra com identificação errada ou incompleta.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Material não tirado da pendência.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Equipamento em manutenção.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Perda de amostra.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Material fora da validade.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Centrifugação incorreta.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Queda de energia.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.Analitica,
                 Description = "Armazenamento errado da amostra.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Erro de digitação dos laudos: resultados trocados, incoerente ou falta de resultados.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Laudos entregues trocados.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Atraso na liberação do laudo.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Falta da assinatura do Biomédico no laudo.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Erro de transcrição de resultado na ficha de bancada.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Questionamento do resultado feito pelo médico ou cliente.",
             });
             _context.Occurrences.Add(new Occurrence
             {
-                OccurrenceTypeId = OccurrenceType.PosAnalitica,
                 Description = "Perda do laudo.",
             });
 
@@ -219,7 +202,7 @@ namespace Data.Rnc.Context
 
         private void SeedOccurrenceRisks()
         {
-            var occurrenceClassifications = Enum.GetValues(typeof(OccurrenceRiskType))
+            var occurrenceRisk = Enum.GetValues(typeof(OccurrenceRiskType))
                .Cast<OccurrenceRiskType>()
                .Select(x => new OccurrenceRisk()
                {
@@ -228,7 +211,21 @@ namespace Data.Rnc.Context
                    Active = true,
                });
 
-            _context.OccurrenceRisks.AddRange(occurrenceClassifications);
+            _context.OccurrenceRisks.AddRange(occurrenceRisk);
+            _context.SaveChanges();
+        }
+        private void SeedOccurrenceClassification()
+        {
+            var occurrenceClassification = Enum.GetValues(typeof(OccurrenceClassificationType))
+               .Cast<OccurrenceClassificationType>()
+               .Select(x => new OccurrenceClassification()
+               {
+                   Id = x,
+                   Name = x.ToString(),
+                   Active = true,
+               });
+
+            _context.OccurrenceClassifications.AddRange(occurrenceClassification);
             _context.SaveChanges();
         }
     }

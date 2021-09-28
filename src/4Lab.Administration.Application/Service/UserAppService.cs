@@ -129,7 +129,7 @@ namespace _4lab.Administration.Application.Service
 
                     if (correctPassword)
                     {
-                        var token = _tokenService.GenerateToken(existingAuth.Id.ToString(), existingAuth.User.Name, existingAuth.User.UserPermission.Name);
+                        var token = _tokenService.GenerateToken(existingAuth.User.Id.ToString(), existingAuth.User.Name, existingAuth.User.UserPermission.Name);
 
                         var user = new DtoUser
                         {
@@ -187,9 +187,9 @@ namespace _4lab.Administration.Application.Service
             {
                 var template = new StringBuilder();
                 template.AppendLine("Olá, seu cadastro foi aprovado com sucesso.");
-                template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do 4Labs");
+                template.AppendLine("Agora você poderá efetuar o login e se desfrutar com as funcionalidades do 4Lab");
                 template.AppendLine("");
-                template.AppendLine("Atenciosamente, time do 4Labs");
+                template.AppendLine("Atenciosamente, time do 4Lab");
                 var subjectEmail = "Cadastro aprovado";
 
                 await _senderEmail.SendEmail(email, template.ToString(), subjectEmail);
@@ -209,7 +209,7 @@ namespace _4lab.Administration.Application.Service
                 template.AppendLine("Olá, seu cadastro infelizmente foi reprovado.");
                 template.AppendLine("Você poderá realizar um novo cadastro, mas recomendamos que verifique com atenção os dados inseridos.");
                 template.AppendLine("");
-                template.AppendLine("Atenciosamente, time do 4Labs");
+                template.AppendLine("Atenciosamente, time do 4Lab");
 
                 var subjectEmail = "Cadastro reprovado";
 
@@ -279,13 +279,13 @@ namespace _4lab.Administration.Application.Service
             var template = new StringBuilder();
 
             template.AppendLine($"Olá <strong>{name}</strong>");
-            template.AppendLine("<p>Recebemos uma solicitação para redefinir sua senha do 4Labs.</p>");
+            template.AppendLine("<p>Recebemos uma solicitação para redefinir sua senha do 4Lab.</p>");
             template.AppendLine("</br>");
             template.AppendLine($"<p>Aqui está sua nova senha: <strong>{password}</strong></p>");
             template.AppendLine("</br>");
             template.AppendLine("<p>Recomendamos que você troque essa senha pois ela é provisória.</p>");
             template.AppendLine("</br>");
-            template.AppendLine("<p>Atenciosamente, equipe 4Labs.</p>");
+            template.AppendLine("<p>Atenciosamente, equipe 4Lab.</p>");
 
             var subjectEmail = "Envio de senha provisória";
 

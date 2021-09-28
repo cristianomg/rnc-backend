@@ -6,7 +6,7 @@ namespace _4lab.Occurrences.Domain.Models
 {
     public class Archive : Entity<Guid>
     {
-        public Archive(string key, string fileName, string fileType, EntityArchiveType entityType, Guid entityId)
+        public Archive(string key, string fileName, string fileType, EntityArchiveType entityType, string entityId)
         {
             Id = Guid.NewGuid();
             Key = key;
@@ -20,7 +20,7 @@ namespace _4lab.Occurrences.Domain.Models
         public string FileName { get; private set; }
         public string FileType { get; private set; }
         public EntityArchiveType EntityType { get; private set; }
-        public Guid EntityId { get; private set; }
+        public string EntityId { get; private set; }
 
     }
 }

@@ -43,12 +43,16 @@ namespace _4lab.Occurrences.Application.DTOs
         /// </summary>
         public string Setor { get; set; }
         /// <summary>
-        /// Flag para informar se o registro de não conformidade já passou pela fase de analise de causa raiz
-        /// </summary>
-        public bool HasRootCauseAnalysis { get; set; }
-        /// <summary>
         /// Pendência para registro de ocorrências
         /// </summary>
         public OccurrencePendency? OccurrencePendency { get; set; }
+        /// <summary>
+        /// Id do tipo de não conformidade
+        /// </summary>
+        public OccurrenceType OccurrenceTypeId { get; set; }
+        /// <summary>
+        /// Nome do tipo da não conformidade
+        /// </summary>
+        public string OccurrenceType { get; set; }
     }
 }
