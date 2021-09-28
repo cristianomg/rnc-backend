@@ -33,6 +33,10 @@ namespace Data.Rnc.Context
             {
                 SeedOccurrenceRisks();
             }
+            if (!_context.OccurrenceRisks.Any())
+            {
+                SeedOccurrenceClassification();
+            }
         }
 
         private void ActionPlain()
@@ -198,7 +202,7 @@ namespace Data.Rnc.Context
 
         private void SeedOccurrenceRisks()
         {
-            var occurrenceClassifications = Enum.GetValues(typeof(OccurrenceRiskType))
+            var occurrenceRisk = Enum.GetValues(typeof(OccurrenceRiskType))
                .Cast<OccurrenceRiskType>()
                .Select(x => new OccurrenceRisk()
                {
@@ -207,7 +211,21 @@ namespace Data.Rnc.Context
                    Active = true,
                });
 
-            _context.OccurrenceRisks.AddRange(occurrenceClassifications);
+            _context.OccurrenceRisks.AddRange(occurrenceRisk);
+            _context.SaveChanges();
+        }
+        private void SeedOccurrenceClassification()
+        {
+            var occurrenceClassification = Enum.GetValues(typeof(OccurrenceClassificationType))
+               .Cast<OccurrenceClassificationType>()
+               .Select(x => new OccurrenceClassification()
+               {
+                   Id = x,
+                   Name = x.ToString(),
+                   Active = true,
+               });
+
+            _context.OccurrenceClassifications.AddRange(occurrenceClassification);
             _context.SaveChanges();
         }
     }

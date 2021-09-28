@@ -24,6 +24,7 @@ namespace _4lab.Occurrences.Data
         public DbSet<ActionPlainResponse> ActionPlainResponses { get; set; }
         public DbSet<RootCauseAnalysis> RootCauseAnalyses { get; set; }
         public DbSet<OccurrenceRisk> OccurrenceRisks { get; set; }
+        public DbSet<OccurrenceClassification> OccurrenceClassifications { get; set; }
         public DbSet<FiveWhat> FiveWhats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
