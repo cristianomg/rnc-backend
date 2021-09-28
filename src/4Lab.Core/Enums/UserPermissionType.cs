@@ -6,9 +6,11 @@ namespace _4Lab.Core.DomainObjects.Enums
     {
         [Description("Funcionario")]
         Employee = 1,
-        [Description("Supervisor")]
-        Supervisor,
-        [Description("Biomédico de Qualidade")]
-        QualityBiomedical
+        [Description("Responsável do Setor")]
+        ResponsibleFS,
+        [Description("Responsável Técnico")]
+        ResponsibleT,
+        [Description("Analista da Qualidade")]
+        QualityAnalist
     }
 }

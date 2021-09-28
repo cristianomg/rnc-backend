@@ -70,7 +70,7 @@ namespace Api.Rnc.Controllers
         [HttpGet("all")]
         [HttpGet("all/{analyseFilter}/{pendingFilter}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAll(AnalyseFilter analyseFilter = AnalyseFilter.All
                                               , PendingFilter pendingFilter = PendingFilter.All)
         {
@@ -92,7 +92,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{date:DateTime}/{setor:required}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
@@ -114,7 +114,7 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(DtoOccurrenceRegisterFacadeResponse), StatusCodes.Status200OK)]
-        [Authorize(Roles = nameof(UserPermissionType.Supervisor) + "," + nameof(UserPermissionType.QualityBiomedical))]
+        [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetById(Guid id)
         {
             return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
