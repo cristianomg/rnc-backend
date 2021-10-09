@@ -13,5 +13,6 @@ namespace _4lab.Occurrences.Application.DTOs
         /// Descrição
         /// </summary>
         public string Description { get; set; }
+        public bool IsExisting { get; set; }
     }
 }

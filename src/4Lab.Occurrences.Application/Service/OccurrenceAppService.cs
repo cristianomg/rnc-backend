@@ -6,6 +6,8 @@ using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Infrastructure.Charts;
 using _4Lab.Infrastructure.Render.Html;
 using _4Lab.Occurrences.Application.DTOs;
+using _4Lab.Occurrences.Domain.Interfaces;
+using _4Lab.Occurrences.Domain.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ namespace _4lab.Occurrences.Application.Service
         private readonly IOccurrenceRepository _occurrenceRepository;
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly IRazorRender _razorRender;
+        private readonly IVerificationOfEffectivenessRepository _verificationOfEffectivenessRepository;
 
         public OccurrenceAppService(IActionPlainRepository actionPlainRepository
                                    , IActionPlainQuestionRepository actionPlainQuestionRepository
@@ -31,7 +34,8 @@ namespace _4lab.Occurrences.Application.Service
                                    , IOccurrenceRegisterRepository occurrenceRegisterRepository
                                    , IOccurrenceRepository occurrenceRepository
                                    , IRootCauseAnalysisRepository analyzeRootCauseRepository
-                                   , IRazorRender razorRender)
+                                   , IRazorRender razorRender
+                                   , IVerificationOfEffectivenessRepository verificationOfEffectivenessRepository)
         {
             _actionPlainRepository = actionPlainRepository;
             _actionPlainQuestionRepository = actionPlainQuestionRepository;
@@ -40,6 +44,7 @@ namespace _4lab.Occurrences.Application.Service
             _occurrenceRepository = occurrenceRepository;
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _razorRender = razorRender;
+            _verificationOfEffectivenessRepository = verificationOfEffectivenessRepository;
         }
 
         public async Task<bool> CreateActionPlain(DtoCreateActionPlainInput dto)
@@ -102,13 +107,13 @@ namespace _4lab.Occurrences.Application.Service
 
             try
             {
-                var notExistingOccurrence = await CreateNewOccurrences(occurrenceRegister.UserName, occurrenceRegister.Occurrences.Where(x => !x.Id.HasValue));
-                var existingOccurrence = await CheckExistingOccurrence(occurrenceRegister.Occurrences.Where(x => x.Id.HasValue));
-
-                if (!existingOccurrence.Any())
-                    throw new Exception("Não existe não conformidades.");
+                var notExistingOccurrence = await CreateNewOccurrences(occurrenceRegister.UserName, occurrenceRegister.Occurrences.Where(x => !x.IsExisting));
+                var existingOccurrence = await CheckExistingOccurrence(occurrenceRegister.Occurrences.Where(x => x.IsExisting));
 
                 var allOccurrences = existingOccurrence.Union(notExistingOccurrence);
+
+                if (!allOccurrences.Any())
+                    throw new Exception("Não existe ocorrencias.");
 
                 var entity = await _occurrenceRegisterRepository
                                               .Insert(new OccurrenceRegister
@@ -320,6 +325,28 @@ namespace _4lab.Occurrences.Application.Service
                 scoped.Dispose();
                 throw new Exception("Erro ao inserir analise.");
             }
+        }
+        public async Task<bool> VerifyEffectiveness(DtoVerificationOfEffectivenessInput dto)
+        {
+
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetById(dto.OccurrenceRegisterId);
+
+            if (occurrenceRegister is null)
+                throw new Exception("Registro de ocorrencia não encontrado.");
+            if (occurrenceRegister.OccurrencePendency != OccurrencePendency.VerificationOfEffectiveness || !occurrenceRegister.CanVerifyEffectiveness)
+                throw new Exception("Registro de ocorrencia está disponivel para verificação de eficacia.");
+            try
+            {
+                await _verificationOfEffectivenessRepository.Insert(new VerificationOfEffectiveness(dto.OccurrenceRegisterId, dto.Description));
+
+                await _verificationOfEffectivenessRepository.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                throw new Exception("Erro ao verificar eficacia.");
+            }
+
         }
     }
 }

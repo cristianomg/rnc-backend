@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace _4Lab.Orchestrator.DTOs.Inputs
 {
@@ -17,5 +18,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// Anexos
         /// </summary>
         public List<DtoArchiveFacadeInput> Archives { get; set; }
+        [JsonIgnore]
+        public bool IsExisting { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _4Lab.Core.DomainObjects;
 using _4Lab.Core.DomainObjects.Enums;
+using _4Lab.Occurrences.Domain.Models;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,17 @@ namespace _4lab.Occurrences.Domain.Models
         public virtual OccurrenceRisk OccurrenceRisk { get; set; }
         public virtual OccurrenceClassification OccurrenceClassification { get; set; }
         public OccurrencePendency? OccurrencePendency { get; set; }
-        public bool HasAllAnalysis() => OccurrencePendency.HasValue;
+        public bool HasAllAnalysis() => !OccurrencePendency.HasValue;
         public virtual TypeOccurrence OccurrenceType { get; set; }
+        public virtual VerificationOfEffectiveness VerificatoinOfEffectiveness { get; set; }
+
+        public bool CanVerifyEffectiveness
+        {
+            get
+            {
+                return DateTime.Now.Subtract(this.CreatedAt).TotalDays > 30;
+            }
+        }
+
     }
 }

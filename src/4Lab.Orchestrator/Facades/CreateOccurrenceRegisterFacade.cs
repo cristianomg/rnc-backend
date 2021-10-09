@@ -52,6 +52,7 @@ namespace _4Lab.Orchestrator.Facades
         }
         private DtoOccurrenceFacadeInput FillNonCompliance(DtoOccurrenceFacadeInput occurrence, Guid occurrenceRegisterId)
         {
+            occurrence.IsExisting = occurrence.Id != null;
             occurrence.Id ??= Guid.NewGuid();
             occurrence.Archives = occurrence.Archives.Select(archive =>
             {
