@@ -158,6 +158,7 @@ namespace _4lab.Occurrences.Application.Service
             {
                 var occurrence = await _occurrenceRepository.Insert(new Occurrence
                 {
+                    Id = oc.Id.Value,
                     Active = false,
                     Description = oc.Description,
                     CreatedAt = DateTime.Now,
