@@ -1,6 +1,7 @@
 ﻿using _4lab.Occurrences.Application.DTOs;
 using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Extensions;
+using _4Lab.Occurrences.Application.DTOs;
 using AutoMapper;
 
 namespace _4lab.Occurrences.Application.Mapper
@@ -51,6 +52,12 @@ namespace _4lab.Occurrences.Application.Mapper
                 .ForMember(dest => dest.What, opt => opt.MapFrom(src => src.What));
 
             CreateMap<ActionPlainResponse, DtoActionPlainResponse>();
+
+            CreateMap<OccurrenceClassification, DtoOcurrenceClassification>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Id.GetDescription()));
+
+            CreateMap<TypeOccurrence, DtoOccurrenceType>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.OccurrenceTypeName));
         }
     }
 }

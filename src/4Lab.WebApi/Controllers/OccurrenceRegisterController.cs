@@ -3,6 +3,8 @@ using _4lab.Occurrences.Domain.Interfaces;
 using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Core.Enums;
+using _4Lab.Occurrences.Application.DTOs;
+using _4Lab.Occurrences.Domain.Interfaces;
 using _4Lab.Orchestrator.DTOs.Inputs;
 using _4Lab.Orchestrator.DTOs.Response;
 using _4Lab.Orchestrator.Filters;
@@ -27,16 +29,22 @@ namespace Api.Rnc.Controllers
         private readonly IMapper _mapper;
         private readonly ICreateOccurrenceRegisterFacade _createOccurrenceRegisterFacade;
         private readonly IGetOccurrenceRegisterByIdFacade _getOccurrenceRegisterByIdFacade;
+        private readonly IOccurrenceRegisterClassificationRepository _occurrenceClassificationRepository;
+        private readonly IOccurrenceRegisterTypeRepository _occurrenceRegisterTypeRepository;
 
         public OccurrenceRegisterController(IOccurrenceRegisterRepository occurrenceRegisterRepository
                                            , IMapper mapper
                                            , ICreateOccurrenceRegisterFacade createOccurrenceRegisterFacade
-                                           , IGetOccurrenceRegisterByIdFacade getOccurrenceRegisterByIdFacade)
+                                           , IGetOccurrenceRegisterByIdFacade getOccurrenceRegisterByIdFacade
+                                           , IOccurrenceRegisterClassificationRepository occurrenceClassificationRepository
+                                           , IOccurrenceRegisterTypeRepository occurrenceRegisterTypeRepository)
         {
             _occurrenceRegisterRepository = occurrenceRegisterRepository;
             _mapper = mapper;
             _createOccurrenceRegisterFacade = createOccurrenceRegisterFacade;
             _getOccurrenceRegisterByIdFacade = getOccurrenceRegisterByIdFacade;
+            _occurrenceClassificationRepository = occurrenceClassificationRepository;
+            _occurrenceRegisterTypeRepository = occurrenceRegisterTypeRepository;
         }
 
         /// <summary>
@@ -45,7 +53,7 @@ namespace Api.Rnc.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(DtoOccurrenceRegisterResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] DtoOccurrenceRegisteFacaderInput input)
         {
             try
@@ -119,6 +127,25 @@ namespace Api.Rnc.Controllers
         {
             return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
         }
-
+        /// <summary>
+        /// Endpoint responsável por trazer as classificações de registro de ocorrencia
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Classifications")]
+        [ProducesResponseType(typeof(IQueryable<DtoOcurrenceClassification>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetClassifications()
+        {
+            return Ok(_mapper.ProjectTo<DtoOcurrenceClassification>(await _occurrenceClassificationRepository.GetAll()));
+        }
+        /// <summary>
+        /// Endpoint responsável por trazer os tipos de registro de ocorrencia
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Types")]
+        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceType>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetOccurrenceTypes()
+        {
+            return Ok(_mapper.ProjectTo<DtoOccurrenceType>(await _occurrenceRegisterTypeRepository.GetAll()));
+        }
     }
 }

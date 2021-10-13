@@ -33,7 +33,10 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IOccurrenceRiskRepository, OccurrenceRiskRepository>();
             services.AddScoped<IArchiveRepository, ArchiveRepository>();
             services.AddScoped<IVerificationOfEffectivenessRepository, VerificationOfEffectivenessRepository>();
-            
+            services.AddScoped<IOccurrenceRegisterClassificationRepository, OccurrenceRegisterClassificationRepository>();
+            services.AddScoped<IOccurrenceRegisterTypeRepository, OccurrenceRegisterTypeRepository>();
+
+
             return services;
         }
     }
