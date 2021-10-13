@@ -71,7 +71,7 @@ namespace _4Lab.Archives.Application.Service
             {
                 using (var memoryStream = new MemoryStream(Convert.FromBase64String(file.File)))
                 {
-                    var objectKey = $"{file.FileName}-{Guid.NewGuid()}";
+                    var objectKey = $"{Guid.NewGuid()}-{file.FileName}";
                     await _storageService.UploadFileAsync(objectKey, memoryStream);
 
                     archives.Add(new Archive(objectKey, file.FileName, file.FileType, file.EntityType, file.EntityId));
