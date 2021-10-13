@@ -204,15 +204,15 @@ namespace _4lab.Occurrences.Application.Service
             if (occurrenceRegister.RootCauseAnalysis != null)
                 throw new Exception("O registro de não conformidade já foi analisado.");
 
+            var actionPlain = await _actionPlainRepository.GetByIdWithIncludes(analyzeRootCause.ActionPlain.Id.Value);
+            
+            if (actionPlain == null)
+                throw new Exception("O plano de ação não foi encontrado.");
+
             using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             try
             {
-                var actionPlain = await _actionPlainRepository.GetByIdWithIncludes(analyzeRootCause.ActionPlain.Id.Value);
-
-                if (actionPlain == null)
-                    throw new Exception("O plano de ação não foi encontrado.");
-
                 var responses = analyzeRootCause.ActionPlain.Questions.Select(x => new ActionPlainResponse
                 {
                     Value = x.Response,
@@ -222,7 +222,6 @@ namespace _4lab.Occurrences.Application.Service
                     CreatedBy = analyzeRootCause.UserName,
                     Active = true,
                     ActionPlainId = actionPlain.Id,
-
                 }).ToList();
 
                 var fivewhats = new List<FiveWhat>();
@@ -248,6 +247,7 @@ namespace _4lab.Occurrences.Application.Service
 
                 occurrenceRegister.OccurrencePendency = OccurrencePendency.RiskRating;
                 occurrenceRegister.RootCauseAnalysis = analysis;
+                occurrenceRegister.CreatedRootCauseAnalysis = DateTime.Now;
 
                 await _occurrenceRegisterRepository.SaveChanges();
 
@@ -313,6 +313,7 @@ namespace _4lab.Occurrences.Application.Service
             {
                 occurrenceRegisterRegister.OccurrencePendency = OccurrencePendency.VerificationOfEffectiveness;
                 occurrenceRegisterRegister.OccurrenceRiskId = riskAnalysis.OccurenceRisk;
+                occurrenceRegisterRegister.CreatedOcurrenceRisk = DateTime.Now;
 
                 await _occurrenceRegisterRepository.Update(occurrenceRegisterRegister);
 

@@ -55,5 +55,10 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// Nome do tipo da não conformidade
         /// </summary>
         public string OccurrenceType { get; set; }
+
+        /// <summary>
+        /// Flag para verificar se o registro de ocorrencia está em atraso
+        /// </summary>
+        public bool IsDelayed { get; set; }
     }
 }

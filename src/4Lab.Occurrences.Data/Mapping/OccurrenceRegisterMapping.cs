@@ -36,6 +36,12 @@ namespace _4lab.Occurrences.Data.Mapping
             builder.Property(x => x.RegisterHour)
                 .IsRequired();
 
+            builder.Property(x => x.CreatedRootCauseAnalysis);
+
+            builder.Property(x => x.CreatedOcurrenceRisk);
+
+            builder.Property(x => x.CreatedVerificatoinOfEffectiveness);
+
             builder.HasMany(x => x.Occurrences)
                 .WithMany(x => x.OccurrenceRegisters);
 
