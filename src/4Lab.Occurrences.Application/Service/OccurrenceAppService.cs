@@ -335,20 +335,34 @@ namespace _4lab.Occurrences.Application.Service
 
             if (occurrenceRegister is null)
                 throw new Exception("Registro de ocorrencia não encontrado.");
-            if (occurrenceRegister.OccurrencePendency != OccurrencePendency.VerificationOfEffectiveness || !occurrenceRegister.CanVerifyEffectiveness)
-                throw new Exception("Registro de ocorrencia está disponivel para verificação de eficacia.");
+
+            if (occurrenceRegister.OccurrencePendency != OccurrencePendency.VerificationOfEffectiveness)
+                throw new Exception("Registro de ocorrencia não está disponivel para verificação de eficacia.");
+
+            if (occurrenceRegister.CanVerifyEffectiveness)
+                throw new Exception("O periodo para verificação de eficacia ainda não está ativo.");
+
+            using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             try
             {
-                await _verificationOfEffectivenessRepository.Insert(new VerificationOfEffectiveness(dto.OccurrenceRegisterId, dto.Description));
+                occurrenceRegister.OccurrencePendency = null;
+                occurrenceRegister.CreatedVerificatoinOfEffectiveness = DateTime.Now;
+
+                await _occurrenceRegisterRepository.Update(occurrenceRegister);
+
+                await _verificationOfEffectivenessRepository.Insert(
+                    new VerificationOfEffectiveness(dto.OccurrenceRegisterId, dto.Description, dto.UserName));
 
                 await _verificationOfEffectivenessRepository.SaveChanges();
+
+                scoped.Complete();
                 return true;
             }
             catch
             {
-                throw new Exception("Erro ao verificar eficacia.");
+                scoped.Dispose();
+                throw new Exception("Erro ao inserir analise.");
             }
-
         }
     }
 }

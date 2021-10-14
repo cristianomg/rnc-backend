@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace _4Lab.Occurrences.Application.DTOs
 {
@@ -10,5 +7,9 @@ namespace _4Lab.Occurrences.Application.DTOs
     {
         public Guid OccurrenceRegisterId { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
+        public Guid UserId { get; set; }
+        [JsonIgnore]
+        public string UserName { get; set; }
     }
 }

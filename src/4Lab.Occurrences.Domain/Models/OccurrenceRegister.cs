@@ -51,12 +51,11 @@ namespace _4lab.Occurrences.Domain.Models
             }
         }
 
-
         public bool CanVerifyEffectiveness
         {
             get
             {
-                return DateTime.Now.Subtract(this.CreatedAt).TotalDays > 30;
+                return DateTime.Now.Subtract(this.CreatedOcurrenceRisk.Value).TotalDays > 31;
             }
         }
 

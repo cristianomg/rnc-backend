@@ -10,6 +10,7 @@ namespace _4lab.Occurrences.Application.DTOs
         /// Id
         /// </summary>
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         /// <summary>
         /// Nome do usuário que realizou o registro
         /// </summary>
@@ -59,5 +60,6 @@ namespace _4lab.Occurrences.Application.DTOs
         /// Flag para verificar se o registro de ocorrencia está em atraso
         /// </summary>
         public bool IsDelayed { get; set; }
+
     }
 }

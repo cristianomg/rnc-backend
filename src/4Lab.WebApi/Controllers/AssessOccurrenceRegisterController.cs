@@ -3,6 +3,7 @@ using _4lab.Occurrences.Application.Service;
 using _4lab.Occurrences.Domain.Interfaces;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Occurrences.Application.DTOs;
+using _4Lab.Orchestrator.Interfaces;
 using Api.Rnc.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -20,12 +21,17 @@ namespace Api.Rnc.Controllers
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly IMapper _mapper;
         private readonly IOccurrenceAppService _occurrenceAppService;
+        private readonly ICreateVerificationOfEffectivenessFacade _createVerificationOfEffectivenessFacade;
 
-        public AssessOccurrenceRegisterController(IRootCauseAnalysisRepository analyzeRootCauseRepository, IMapper mapper, IOccurrenceAppService occurrenceAppService)
+        public AssessOccurrenceRegisterController(IRootCauseAnalysisRepository analyzeRootCauseRepository
+                                                , IMapper mapper
+                                                , IOccurrenceAppService occurrenceAppService
+                                                , ICreateVerificationOfEffectivenessFacade createVerificationOfEffectivenessFacade)
         {
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _mapper = mapper;
             _occurrenceAppService = occurrenceAppService;
+            _createVerificationOfEffectivenessFacade = createVerificationOfEffectivenessFacade;
         }
 
         /// <summary>
@@ -72,6 +78,26 @@ namespace Api.Rnc.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+        [HttpPost("VerificationOfEffectiveness")]
+        public async Task<IActionResult> VerificationOfEffectiveness([FromBody] DtoVerificationOfEffectivenessInput analysis)
+        {
+            try
+            {
+                analysis.UserId = User.GetUserId();
+                analysis.UserName = User.GetUserName();
+
+                var responseService = await _createVerificationOfEffectivenessFacade.Execute(analysis);
+
+                if (responseService)
+                    return Ok();
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
