@@ -156,9 +156,9 @@ namespace Api.Rnc.Controllers
         /// Endpoint responsável por deletar registros de ocorrencia
         /// </summary>
         /// <returns></returns>
-        [HttpDelete("Id")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceType>), StatusCodes.Status200OK)]
-        public Task DeleteOccurrence(Guid id)
+        public void DeleteOccurences(Guid id)
         {
             _occurrenceAppService.DeleteOccurrenceRegister(id);
         }
