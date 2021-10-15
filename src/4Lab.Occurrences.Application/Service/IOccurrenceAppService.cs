@@ -16,6 +16,6 @@ namespace _4lab.Occurrences.Application.Service
         Task<byte[]> CreatePieChartWithOccurrenceRegister(SetorType setor, int month);
         Task<string> CreateOccurrenceRegisterReport(Guid occurrenceRegisterId);
         Task<bool> VerifyEffectiveness(DtoVerificationOfEffectivenessInput dto);
-        void DeleteOccurrences(Guid id);
+        void DeleteOccurrenceRegister(Guid id);
     }
 }

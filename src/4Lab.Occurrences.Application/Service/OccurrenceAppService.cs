@@ -366,7 +366,7 @@ namespace _4lab.Occurrences.Application.Service
 
         }
 
-        public async void DeleteOccurrences(Guid id)
+        public async void DeleteOccurrenceRegister(Guid id)
         {
             var obj = await _occurrenceRegisterRepository.GetById(id);
 
