@@ -1,4 +1,5 @@
 ﻿using _4Lab.Core.Audit;
+using _4Lab.Core.DomainObjects;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _4Lab.Core.Data
 {
-    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : class
+    public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : Entity
     {
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -58,6 +59,11 @@ namespace _4Lab.Core.Data
         }
 
         public async Task InsertMany(IEnumerable<TEntity> objs) => await _dbSet.AddRangeAsync(objs);
+
+        public async Task Delete(TEntity obj) 
+        {
+            await Task.FromResult(obj.IsDeleted = true);
+        }
 
         public virtual async Task<TEntity> Update(TEntity obj) => await Task.FromResult(_dbSet.Update(obj).Entity);
 

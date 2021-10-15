@@ -147,5 +147,10 @@ namespace Api.Rnc.Controllers
         {
             return Ok(_mapper.ProjectTo<DtoOccurrenceType>(await _occurrenceRegisterTypeRepository.GetAll()));
         }
+
+        /// <summary>
+        /// Endpoint responsável por deletar registros de ocorrencia
+        /// </summary>
+        /// <returns></returns>
     }
 }
