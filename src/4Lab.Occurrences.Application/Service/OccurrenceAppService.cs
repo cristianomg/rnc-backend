@@ -366,20 +366,14 @@ namespace _4lab.Occurrences.Application.Service
 
         }
 
-        public async void DeleteOccurrenceRegister(Guid id)
+        public async Task DeleteOccurrenceRegister(Guid id)
         {
-            var obj = await _occurrenceRegisterRepository.GetById(id);
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetById(id);
 
-            if (obj.IsDeleted == null)
+            if (occurrenceRegister is null)
                 throw new Exception("O Registro de Ocorrencia não foi encontrado");
 
-            if (obj.IsDeleted == true)
-                throw new Exception("O Registro de Ocorrencia já foi deletado");
-
-            if (id == null)
-                throw new Exception("O Id está incorreto ou não exite resgistro de Ocorrencia já foi deletado");
-
-            await _occurrenceRegisterRepository.Delete(obj);
+            await _occurrenceRegisterRepository.Delete(occurrenceRegister);
 
             await _occurrenceRegisterRepository.SaveChanges();
         }

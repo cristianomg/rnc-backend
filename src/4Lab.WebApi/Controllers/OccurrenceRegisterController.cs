@@ -129,7 +129,14 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
+            try
+            {
+                return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         /// <summary>
         /// Endpoint responsável por trazer as classificações de registro de ocorrencia
@@ -157,10 +164,20 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceType>), StatusCodes.Status200OK)]
-        public void DeleteOccurences(Guid id)
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteOccurrenceRegister(Guid id)
         {
-            _occurrenceAppService.DeleteOccurrenceRegister(id);
+            try
+            {
+                await _occurrenceAppService.DeleteOccurrenceRegister(id);
+                return Ok();
+            }
+
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
