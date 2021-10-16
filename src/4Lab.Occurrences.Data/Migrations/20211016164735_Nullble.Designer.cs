@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using _4lab.Occurrences.Data;
@@ -9,9 +10,10 @@ using _4lab.Occurrences.Data;
 namespace _4Lab.Occurrences.Data.Migrations
 {
     [DbContext(typeof(OccurrencesContext))]
-    partial class OccurrencesContextModelSnapshot : ModelSnapshot
+    [Migration("20211016164735_Nullble")]
+    partial class Nullble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

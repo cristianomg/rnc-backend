@@ -125,7 +125,7 @@ namespace _4lab.Occurrences.Application.Service
                                                   PeopleInvolved = occurrenceRegister.PeopleInvolved,
                                                   RegisterDate = occurrenceRegister.RegisterDate,
                                                   RegisterHour = occurrenceRegister.RegisterHour,
-                                                  SetorId = occurrenceRegister.Setor,
+                                                  SetorId = (SetorType)occurrenceRegister.Setor,
                                                   CreatedAt = DateTime.Now,
                                                   OccurrenceTypeId = occurrenceRegister.OccurrenceTypeId,
                                                   Occurrences = allOccurrences.ToList(),

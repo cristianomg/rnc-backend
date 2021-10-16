@@ -30,7 +30,7 @@ namespace _4lab.Occurrences.Application.DTOs
         /// <summary>
         /// Setor
         /// </summary>
-        public SetorType Setor { get; set; }
+        public SetorType? Setor { get; set; }
         /// <summary>
         /// Pessoas envolvidas
         /// </summary>

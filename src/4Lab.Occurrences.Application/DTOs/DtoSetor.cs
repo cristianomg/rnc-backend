@@ -8,7 +8,7 @@ namespace _4lab.Occurrences.Application.DTOs
         /// <summary>
         /// Id do setor
         /// </summary>
-        public SetorType Id { get; set; }
+        public SetorType? Id { get; set; }
 
         /// <summary>
         /// Nome do setor

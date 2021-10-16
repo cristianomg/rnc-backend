@@ -30,7 +30,7 @@ namespace _4lab.Occurrences.Application.Service
             var setor = new Setor()
             {
                 Active = true,
-                Id = dtoSetor.Id,
+                Id = (SetorType)dtoSetor.Id,
                 Name = dtoSetor.Name
             };
 

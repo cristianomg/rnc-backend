@@ -27,7 +27,6 @@ namespace _4lab.Occurrences.Data.Mapping
                 .HasMaxLength(255);
 
             builder.Property(x => x.PeopleInvolved)
-                .IsRequired()
                 .HasMaxLength(255);
 
             builder.Property(x => x.RegisterDate)
