@@ -5,6 +5,7 @@ using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Core.DomainObjects.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace _4lab.Occurrences.Data
@@ -29,9 +30,21 @@ namespace _4lab.Occurrences.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+                var isDeletedProprety = entityType.FindProperty("IsDeleted");
+                if (isDeletedProprety != null && isDeletedProprety.ClrType == typeof(bool)) 
+                {
+                    var parameter = Expression.Parameter(entityType.ClrType, "p");
+                    var filter = Expression.Lambda(
+                        Expression.Equal(
+                            Expression.Property(parameter, isDeletedProprety.PropertyInfo),
+                            Expression.Constant(false, typeof(bool))
+                            )
+
+                            , parameter);
+                    entityType.SetQueryFilter(filter);
+                }
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());

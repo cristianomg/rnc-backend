@@ -1,4 +1,5 @@
 ﻿using _4lab.Occurrences.Application.DTOs;
+using _4lab.Occurrences.Application.Service;
 using _4lab.Occurrences.Domain.Interfaces;
 using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
@@ -31,13 +32,15 @@ namespace Api.Rnc.Controllers
         private readonly IGetOccurrenceRegisterByIdFacade _getOccurrenceRegisterByIdFacade;
         private readonly IOccurrenceRegisterClassificationRepository _occurrenceClassificationRepository;
         private readonly IOccurrenceRegisterTypeRepository _occurrenceRegisterTypeRepository;
+        private readonly IOccurrenceAppService _occurrenceAppService;
 
         public OccurrenceRegisterController(IOccurrenceRegisterRepository occurrenceRegisterRepository
                                            , IMapper mapper
                                            , ICreateOccurrenceRegisterFacade createOccurrenceRegisterFacade
                                            , IGetOccurrenceRegisterByIdFacade getOccurrenceRegisterByIdFacade
                                            , IOccurrenceRegisterClassificationRepository occurrenceClassificationRepository
-                                           , IOccurrenceRegisterTypeRepository occurrenceRegisterTypeRepository)
+                                           , IOccurrenceRegisterTypeRepository occurrenceRegisterTypeRepository
+                                           , IOccurrenceAppService occurrenceAppService)
         {
             _occurrenceRegisterRepository = occurrenceRegisterRepository;
             _mapper = mapper;
@@ -45,6 +48,7 @@ namespace Api.Rnc.Controllers
             _getOccurrenceRegisterByIdFacade = getOccurrenceRegisterByIdFacade;
             _occurrenceClassificationRepository = occurrenceClassificationRepository;
             _occurrenceRegisterTypeRepository = occurrenceRegisterTypeRepository;
+            _occurrenceAppService = occurrenceAppService;
         }
 
         /// <summary>
@@ -108,8 +112,8 @@ namespace Api.Rnc.Controllers
 
             return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
                               .OrderBy(x => x.Id)
-                              .Where(x => x.SetorId == setor && 
-                                     x.RegisterDate.Year == date.Year && 
+                              .Where(x => x.SetorId == setor &&
+                                     x.RegisterDate.Year == date.Year &&
                                      x.RegisterDate.Month == date.Month &&
                                      x.RootCauseAnalysis != null))
                      );
@@ -125,7 +129,14 @@ namespace Api.Rnc.Controllers
         [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
+            try
+            {
+                return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         /// <summary>
         /// Endpoint responsável por trazer as classificações de registro de ocorrencia
@@ -146,6 +157,27 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetOccurrenceTypes()
         {
             return Ok(_mapper.ProjectTo<DtoOccurrenceType>(await _occurrenceRegisterTypeRepository.GetAll()));
+        }
+
+        /// <summary>
+        /// Endpoint responsável por deletar registros de ocorrencia
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteOccurrenceRegister(Guid id)
+        {
+            try
+            {
+                await _occurrenceAppService.DeleteOccurrenceRegister(id);
+                return Ok();
+            }
+
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

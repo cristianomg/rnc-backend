@@ -18,5 +18,6 @@ namespace _4Lab.Core.Data
         Task InsertMany(IEnumerable<TEntity> objs);
         Task<TEntity> Update(TEntity obj);
         Task<int> SaveChanges();
+        Task Delete(TEntity obj);
     }
 }

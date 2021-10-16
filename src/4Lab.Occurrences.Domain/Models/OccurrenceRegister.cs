@@ -55,7 +55,15 @@ namespace _4lab.Occurrences.Domain.Models
         {
             get
             {
-                return DateTime.Now.Subtract(this.CreatedOcurrenceRisk.Value).TotalDays > 31;
+                if (this.CreatedOcurrenceRisk.HasValue)
+                {
+                    return DateTime.Now.Subtract(this.CreatedOcurrenceRisk.Value).TotalDays > 31;
+
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

@@ -363,6 +363,19 @@ namespace _4lab.Occurrences.Application.Service
                 scoped.Dispose();
                 throw new Exception("Erro ao inserir analise.");
             }
+
+        }
+
+        public async Task DeleteOccurrenceRegister(Guid id)
+        {
+            var occurrenceRegister = await _occurrenceRegisterRepository.GetById(id);
+
+            if (occurrenceRegister is null)
+                throw new Exception("O Registro de Ocorrencia não foi encontrado");
+
+            await _occurrenceRegisterRepository.Delete(occurrenceRegister);
+
+            await _occurrenceRegisterRepository.SaveChanges();
         }
     }
 }
