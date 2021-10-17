@@ -31,7 +31,8 @@ namespace _4lab.Occurrences.Application.Mapper
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
                 .ForMember(dest => dest.OccurrencePendency, opt => opt.MapFrom(src => src.OccurrencePendency))
                 .ForMember(dest => dest.OccurrenceTypeId, opt => opt.MapFrom(src => src.OccurrenceTypeId))
-                .ForMember(dest => dest.OccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()));
+                .ForMember(dest => dest.OccurrenceType, opt => opt.MapFrom(src => src.OccurrenceTypeId.GetDescription()))
+                .ForMember(dest => dest.OccurrenceClassification, opt => opt.MapFrom(src => src.OccurrenceClassificationId.GetDescription()));
 
             CreateMap<ActionPlain, DtoActionPlainListResponse>();
 

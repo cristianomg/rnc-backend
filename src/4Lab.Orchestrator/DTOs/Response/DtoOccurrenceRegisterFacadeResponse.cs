@@ -60,5 +60,6 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// Flag para verificar se o registro de ocorrencia está em atraso
         /// </summary>
         public bool IsDelayed { get; set; }
+        public string OccurrenceClassification { get; set; }
     }
 }
