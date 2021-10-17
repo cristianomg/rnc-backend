@@ -1,5 +1,4 @@
-﻿using _4lab.Infrastructure.Storage;
-using _4lab.Occurrences.Application.DTOs;
+﻿using _4lab.Occurrences.Application.DTOs;
 using _4lab.Occurrences.Domain.Interfaces;
 using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
@@ -205,7 +204,7 @@ namespace _4lab.Occurrences.Application.Service
                 throw new Exception("O registro de não conformidade já foi analisado.");
 
             var actionPlain = await _actionPlainRepository.GetByIdWithIncludes(analyzeRootCause.ActionPlain.Id.Value);
-            
+
             if (actionPlain == null)
                 throw new Exception("O plano de ação não foi encontrado.");
 

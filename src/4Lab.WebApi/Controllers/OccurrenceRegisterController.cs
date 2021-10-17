@@ -33,6 +33,7 @@ namespace Api.Rnc.Controllers
         private readonly IOccurrenceRegisterClassificationRepository _occurrenceClassificationRepository;
         private readonly IOccurrenceRegisterTypeRepository _occurrenceRegisterTypeRepository;
         private readonly IOccurrenceAppService _occurrenceAppService;
+        private readonly IGetOccurrenceRegisterAll _getOccurrenceRegisterAll;
 
         public OccurrenceRegisterController(IOccurrenceRegisterRepository occurrenceRegisterRepository
                                            , IMapper mapper
@@ -40,7 +41,8 @@ namespace Api.Rnc.Controllers
                                            , IGetOccurrenceRegisterByIdFacade getOccurrenceRegisterByIdFacade
                                            , IOccurrenceRegisterClassificationRepository occurrenceClassificationRepository
                                            , IOccurrenceRegisterTypeRepository occurrenceRegisterTypeRepository
-                                           , IOccurrenceAppService occurrenceAppService)
+                                           , IOccurrenceAppService occurrenceAppService
+                                           , IGetOccurrenceRegisterAll getOccurrenceRegisterAll)
         {
             _occurrenceRegisterRepository = occurrenceRegisterRepository;
             _mapper = mapper;
@@ -49,6 +51,7 @@ namespace Api.Rnc.Controllers
             _occurrenceClassificationRepository = occurrenceClassificationRepository;
             _occurrenceRegisterTypeRepository = occurrenceRegisterTypeRepository;
             _occurrenceAppService = occurrenceAppService;
+            _getOccurrenceRegisterAll = getOccurrenceRegisterAll;
         }
 
         /// <summary>
@@ -81,19 +84,18 @@ namespace Api.Rnc.Controllers
         /// <returns></returns>
         [HttpGet("all")]
         [HttpGet("all/{analyseFilter}/{pendingFilter}")]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterFacadeResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAll(AnalyseFilter analyseFilter = AnalyseFilter.All
                                               , PendingFilter pendingFilter = PendingFilter.All)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
                 .GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
-
-            return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
+            return Ok(await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
                              .OccurenceFilterByAnalyse(analyseFilter)
                              .OccurrenceFilterByPending(pendingFilter)
                              .OrderBy(x => x.RootCauseAnalysis != null)
-                             .ThenBy(x => x.Id)));
+                             .ThenBy(x => x.Id))));
         }
 
         /// <summary>
@@ -103,20 +105,17 @@ namespace Api.Rnc.Controllers
         /// <param name="setor"></param>
         /// <returns></returns>
         [HttpGet("{date:DateTime}/{setor:required}")]
-        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterFacadeResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
         public async Task<IActionResult> GetAllByDateAndSetor(DateTime date, SetorType setor)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
                 .GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
-
-            return Ok(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
-                              .OrderBy(x => x.Id)
-                              .Where(x => x.SetorId == setor &&
-                                     x.RegisterDate.Year == date.Year &&
-                                     x.RegisterDate.Month == date.Month &&
-                                     x.RootCauseAnalysis != null))
-                     );
+            var registros = await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters));
+            return Ok(registros
+                .OrderBy(x => x.Id)
+                .Where(x => x.Setor == setor.ToString() &&
+                       x.Date.Date == date.Date));
         }
 
         /// <summary>
@@ -133,7 +132,7 @@ namespace Api.Rnc.Controllers
             {
                 return Ok(await _getOccurrenceRegisterByIdFacade.Execute(id));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -173,7 +172,7 @@ namespace Api.Rnc.Controllers
                 return Ok();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
