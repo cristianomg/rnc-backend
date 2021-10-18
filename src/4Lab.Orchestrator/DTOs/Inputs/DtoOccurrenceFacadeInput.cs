@@ -17,7 +17,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// <summary>
         /// Anexos
         /// </summary>
-        public List<DtoArchiveFacadeInput> Archives { get; set; }
+        public List<DtoArchiveFacadeInput> Archives { get; set; } = new List<DtoArchiveFacadeInput>();
         [JsonIgnore]
         public bool IsExisting { get; set; }
     }
