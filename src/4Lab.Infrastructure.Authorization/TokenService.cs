@@ -30,7 +30,7 @@ namespace _4Lab.Infrastructure.Authorization
                             new Claim("UserId", id),
 
                 }),
-                Expires = DateTime.UtcNow.AddHours(3),
+                Expires = DateTime.Now.AddHours(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
