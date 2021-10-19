@@ -29,17 +29,10 @@ namespace _4Lab.Orchestrator.Facades
 
             var user = await _userAppService.GetUserByIdWithInclude(analysis.UserId);
 
-            var setor = await _setorAppService.GetById(user.SetorId);
-
-            if (setor.SupervisorId is null)
-                throw new Exception("Nenhum supervisor encontrado, por favor entre em contato a administração.");
-
-            var supervisor = await _userAppService.GetUserByIdWithInclude(setor.SupervisorId.Value);
-
-            if (user.Id != occurrenceRegister.UserId && supervisor.Id != occurrenceRegister.UserId)
+            if (user.Id != occurrenceRegister.UserId)
                 throw new Exception("Usuário sem permissão para fazer a verificação de eficácia.");
 
-            return await _occurrenceAppService.VerifyEffectiveness(analysis);    
+            return await _occurrenceAppService.VerifyEffectiveness(analysis);
         }
     }
 }
