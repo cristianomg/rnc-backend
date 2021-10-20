@@ -83,19 +83,17 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("all")]
-        [HttpGet("all/{analyseFilter}/{pendingFilter}")]
         [ProducesResponseType(typeof(IQueryable<DtoOccurrenceRegisterFacadeResponse>), StatusCodes.Status200OK)]
         [Authorize(Roles = nameof(UserPermissionType.ResponsibleFS) + "," + nameof(UserPermissionType.QualityAnalist) + "," + nameof(UserPermissionType.ResponsibleT))]
-        public async Task<IActionResult> GetAll(AnalyseFilter analyseFilter = AnalyseFilter.All
-                                              , PendingFilter pendingFilter = PendingFilter.All)
+        public async Task<IActionResult> GetAll([FromQuery] DtoOccurrenceRegisterFilter filter)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
                 .GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
-            return Ok(await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
-                             .OccurenceFilterByAnalyse(analyseFilter)
-                             .OccurrenceFilterByPending(pendingFilter)
-                             .OrderBy(x => x.RootCauseAnalysis != null)
-                             .ThenBy(x => x.Id))));
+            var result = await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
+                             .OccurenceFilterByAnalyse(filter.AnalyseFilter)
+                             .OccurrenceFilterByPending(filter.PendingFilter)));
+                
+            return Ok(result.OccurrenceFilterByPendingDelayed(filter.IsDelayed));
         }
 
         /// <summary>
