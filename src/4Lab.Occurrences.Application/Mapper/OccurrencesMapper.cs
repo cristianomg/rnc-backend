@@ -26,7 +26,7 @@ namespace _4lab.Occurrences.Application.Mapper
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.RegisterDate))
                 .ForMember(dest => dest.Hour, opt => opt.MapFrom(src => src.RegisterHour))
-                .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.SetorId))
+                .ForMember(dest => dest.Setor, opt => opt.MapFrom(src => src.SetorId.GetDescription()))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.PeopleInvolved, opt => opt.MapFrom(src => src.PeopleInvolved))
                 .ForMember(dest => dest.OccurrencePendency, opt => opt.MapFrom(src => src.OccurrencePendency))
