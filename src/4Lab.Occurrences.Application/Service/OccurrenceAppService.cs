@@ -335,10 +335,13 @@ namespace _4lab.Occurrences.Application.Service
             if (occurrenceRegister is null)
                 throw new Exception("Registro de ocorrencia não encontrado.");
 
+            if (dto.UserId != occurrenceRegister.UserId)
+                throw new Exception("Usuário sem permissão para fazer a verificação de eficácia.");
+
             if (occurrenceRegister.OccurrencePendency != OccurrencePendency.VerificationOfEffectiveness)
                 throw new Exception("Registro de ocorrencia não está disponivel para verificação de eficacia.");
 
-            if (occurrenceRegister.CanVerifyEffectiveness)
+            if (!occurrenceRegister.CanVerifyEffectiveness)
                 throw new Exception("O periodo para verificação de eficacia ainda não está ativo.");
 
             using var scoped = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
