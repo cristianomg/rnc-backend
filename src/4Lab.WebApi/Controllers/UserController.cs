@@ -66,7 +66,7 @@ namespace Api.Rnc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{email}")]
-        [ProducesResponseType(typeof(DtoUser), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(DtoUserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetUser(string email)
         {
