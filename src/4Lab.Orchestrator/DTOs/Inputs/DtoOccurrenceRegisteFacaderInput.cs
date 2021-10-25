@@ -32,7 +32,7 @@ namespace _4Lab.Orchestrator.DTOs.Inputs
         /// <summary>
         /// Setor
         /// </summary>
-        public SetorType Setor { get; set; }
+        public SetorType? Setor { get; set; }
         /// <summary>
         /// Pessoas envolvidas
         /// </summary>

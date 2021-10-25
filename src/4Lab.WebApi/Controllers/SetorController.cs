@@ -56,10 +56,8 @@ namespace Api.Rnc.Controllers
             if (user == null)
                 return BadRequest("Usuário não encontrado.");
 
-            if (user.UserPermissionId != UserPermissionType.ResponsibleFS)
-                return BadRequest("Usuário não é um supervisor.");
-
-            if (user.UserPermissionId != UserPermissionType.ResponsibleT)
+            if (user.UserPermissionId != UserPermissionType.ResponsibleFS &&
+                user.UserPermissionId != UserPermissionType.ResponsibleT)
                 return BadRequest("Usuário não é um supervisor.");
 
             setor.SupervisorId = user.Id;

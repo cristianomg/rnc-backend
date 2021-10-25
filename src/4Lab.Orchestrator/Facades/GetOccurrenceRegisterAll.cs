@@ -47,8 +47,8 @@ namespace _4Lab.Orchestrator.Facades
                                     occurrence.Id.Value + "-" + occurrenceRegister.Id
                                 )
                         );
-                    occurrenceRegisters.Add(occurrenceRegister);
-                }            
+                }
+                occurrenceRegisters.Add(occurrenceRegister);
             }
 
             return occurrenceRegisters.AsQueryable();

@@ -3,7 +3,6 @@ using _4lab.Occurrences.Application.Service;
 using _4lab.Occurrences.Domain.Interfaces;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Occurrences.Application.DTOs;
-using _4Lab.Orchestrator.Interfaces;
 using Api.Rnc.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -21,17 +20,14 @@ namespace Api.Rnc.Controllers
         private readonly IRootCauseAnalysisRepository _analyzeRootCauseRepository;
         private readonly IMapper _mapper;
         private readonly IOccurrenceAppService _occurrenceAppService;
-        private readonly ICreateVerificationOfEffectivenessFacade _createVerificationOfEffectivenessFacade;
 
         public AssessOccurrenceRegisterController(IRootCauseAnalysisRepository analyzeRootCauseRepository
                                                 , IMapper mapper
-                                                , IOccurrenceAppService occurrenceAppService
-                                                , ICreateVerificationOfEffectivenessFacade createVerificationOfEffectivenessFacade)
+                                                , IOccurrenceAppService occurrenceAppService)
         {
             _analyzeRootCauseRepository = analyzeRootCauseRepository;
             _mapper = mapper;
             _occurrenceAppService = occurrenceAppService;
-            _createVerificationOfEffectivenessFacade = createVerificationOfEffectivenessFacade;
         }
 
         /// <summary>
@@ -87,7 +83,7 @@ namespace Api.Rnc.Controllers
                 analysis.UserId = User.GetUserId();
                 analysis.UserName = User.GetUserName();
 
-                var responseService = await _createVerificationOfEffectivenessFacade.Execute(analysis);
+                var responseService = await _occurrenceAppService.VerifyEffectiveness(analysis);
 
                 if (responseService)
                     return Ok();

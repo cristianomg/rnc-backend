@@ -18,7 +18,6 @@ namespace _4Lab.WebApi.Extensions
 
             services.AddScoped<ICreateOccurrenceRegisterFacade, CreateOccurrenceRegisterFacade>();
             services.AddScoped<IGetOccurrenceRegisterByIdFacade, GetOccurrenceRegisterByIdFacade>();
-            services.AddScoped<ICreateVerificationOfEffectivenessFacade, CreateVerificationOfEffectivenessFacade>();
             services.AddScoped<IGetOccurrenceRegisterAll, GetOccurrenceRegisterAll>();
             
 
