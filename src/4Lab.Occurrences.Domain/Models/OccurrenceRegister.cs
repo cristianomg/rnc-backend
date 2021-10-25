@@ -15,7 +15,7 @@ namespace _4lab.Occurrences.Domain.Models
         public OccurrenceType OccurrenceTypeId { get; set; }
         public DateTime RegisterDate { get; set; }
         public string RegisterHour { get; set; }
-        public SetorType SetorId { get; set; }
+        public SetorType? SetorId { get; set; }
         public string PeopleInvolved { get; set; }
         public string MoreInformation { get; set; }
         public string ImmediateAction { get; set; }
@@ -58,7 +58,6 @@ namespace _4lab.Occurrences.Domain.Models
                 if (this.CreatedOcurrenceRisk.HasValue)
                 {
                     return DateTime.Now.Subtract(this.CreatedOcurrenceRisk.Value).TotalDays > 31;
-
                 }
                 else
                 {

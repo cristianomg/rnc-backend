@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using _4lab.Occurrences.Data;
@@ -9,9 +10,10 @@ using _4lab.Occurrences.Data;
 namespace _4Lab.Occurrences.Data.Migrations
 {
     [DbContext(typeof(OccurrencesContext))]
-    partial class OccurrencesContextModelSnapshot : ModelSnapshot
+    [Migration("20211017151538_alter column setorId")]
+    partial class altercolumnsetorId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,6 +387,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("PeopleInvolved")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
@@ -569,7 +572,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         {
                             Id = 1,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 10, 17, 12, 27, 7, 561, DateTimeKind.Local).AddTicks(7746),
+                            CreatedAt = new DateTime(2021, 10, 17, 12, 15, 38, 15, DateTimeKind.Local).AddTicks(9691),
                             IsDeleted = false,
                             OccurrenceTypeName = "De Processo"
                         },
@@ -577,7 +580,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         {
                             Id = 2,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 10, 17, 12, 27, 7, 564, DateTimeKind.Local).AddTicks(9222),
+                            CreatedAt = new DateTime(2021, 10, 17, 12, 15, 38, 18, DateTimeKind.Local).AddTicks(5309),
                             IsDeleted = false,
                             OccurrenceTypeName = "De Auditoria"
                         },
@@ -585,7 +588,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         {
                             Id = 3,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 10, 17, 12, 27, 7, 565, DateTimeKind.Local).AddTicks(517),
+                            CreatedAt = new DateTime(2021, 10, 17, 12, 15, 38, 18, DateTimeKind.Local).AddTicks(5845),
                             IsDeleted = false,
                             OccurrenceTypeName = "Reclamação de cliente"
                         },
@@ -593,7 +596,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         {
                             Id = 4,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 10, 17, 12, 27, 7, 565, DateTimeKind.Local).AddTicks(1283),
+                            CreatedAt = new DateTime(2021, 10, 17, 12, 15, 38, 18, DateTimeKind.Local).AddTicks(6097),
                             IsDeleted = false,
                             OccurrenceTypeName = "De Indicador"
                         },
@@ -601,7 +604,7 @@ namespace _4Lab.Occurrences.Data.Migrations
                         {
                             Id = 5,
                             Active = true,
-                            CreatedAt = new DateTime(2021, 10, 17, 12, 27, 7, 565, DateTimeKind.Local).AddTicks(1930),
+                            CreatedAt = new DateTime(2021, 10, 17, 12, 15, 38, 18, DateTimeKind.Local).AddTicks(6328),
                             IsDeleted = false,
                             OccurrenceTypeName = "Análise de Risco"
                         });

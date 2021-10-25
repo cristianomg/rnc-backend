@@ -1,6 +1,8 @@
 ﻿using _4lab.Occurrences.Domain.Models;
 using _4Lab.Core.DomainObjects.Enums;
 using _4Lab.Core.Enums;
+using _4Lab.Orchestrator.DTOs.Response;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace _4Lab.Orchestrator.Filters
@@ -25,24 +27,22 @@ namespace _4Lab.Orchestrator.Filters
 
             return query;
         }
-        public static IQueryable<OccurrenceRegister> OccurrenceFilterByPending(this IQueryable<OccurrenceRegister> query, PendingFilter pendingfilter)
+        public static IQueryable<OccurrenceRegister> OccurrenceFilterByPending(this IQueryable<OccurrenceRegister> query, List<OccurrencePendency> pendingfilter)
         {
 
-            switch (pendingfilter)
+            if (pendingfilter != null && pendingfilter.Any())
             {
-                case PendingFilter.RootCauseAnalysis:
+                query = query.Where(x => pendingfilter.Contains(x.OccurrencePendency.Value));
+            }
 
-                    query = query.Where(x => x.OccurrencePendency.Value == OccurrencePendency.RootCauseAnalysisAndActionPlan);
-                    break;
-                case PendingFilter.RiskAnalysis:
-                    query = query.Where(x => x.OccurrencePendency.Value == OccurrencePendency.RiskRating);
-                    break;
-                case PendingFilter.EffectivenessPeriodicityAnalysis:
-                    query = query.Where(x => x.OccurrencePendency.Value == OccurrencePendency.VerificationOfEffectiveness);
-                    break;
-                case PendingFilter.All:
-                default:
-                    break;
+            return query;
+        }
+        public static IQueryable<DtoOccurrenceRegisterFacadeResponse> OccurrenceFilterByPendingDelayed(this IQueryable<DtoOccurrenceRegisterFacadeResponse> query, bool? delayedFilter)
+        {
+
+            if (delayedFilter.HasValue)
+            {
+                query = query.ToList().Where(x => x.IsDelayed == delayedFilter.Value).AsQueryable();
             }
 
             return query;

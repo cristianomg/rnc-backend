@@ -13,6 +13,7 @@ namespace _4Lab.Administration.Domain.Models
         {
             Email = email;
             Password = password;
+            Active = false;
         }
         protected UserAuth() { }
 

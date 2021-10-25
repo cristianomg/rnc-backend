@@ -75,15 +75,15 @@ namespace _4Lab.Core.Data
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("CreatedAt").CurrentValue = DateTime.UtcNow;
-                    entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                    entry.Property("CreatedAt").CurrentValue = DateTime.Now;
+                    entry.Property("UpdatedAt").CurrentValue = DateTime.Now;
                 }
 
                 if (entry.State == EntityState.Modified)
                 {
                     entry.Property("CreatedAt").IsModified = false;
                     entry.Property("CreatedBy").IsModified = false;
-                    entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                    entry.Property("UpdatedAt").CurrentValue = DateTime.Now;
                 }
 
                 var entity = entry.Entity;
