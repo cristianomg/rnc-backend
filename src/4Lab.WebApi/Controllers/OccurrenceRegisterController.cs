@@ -88,7 +88,7 @@ namespace Api.Rnc.Controllers
         public async Task<IActionResult> GetAll([FromQuery] DtoOccurrenceRegisterFilter filter)
         {
             var nonComplianceRegisters = await _occurrenceRegisterRepository
-                .GetAllWithIncludes(nameof(OccurrenceRegister.Setor));
+                .GetAllWithIncludes();
             var result = await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
                              .OccurenceFilterByAnalyse(filter.AnalyseFilter)
                              .OccurrenceFilterByPending(filter.PendingFilter)));

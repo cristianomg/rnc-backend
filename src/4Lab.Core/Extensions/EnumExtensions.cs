@@ -8,6 +8,9 @@ namespace _4Lab.Core.DomainObjects.Extensions
     {
         public static string GetDescription(this Enum GenericEnum)
         {
+            if (GenericEnum is null)
+                return null;
+
             Type genericEnumType = GenericEnum.GetType();
             MemberInfo[] memberInfo = genericEnumType.GetMember(GenericEnum.ToString());
             if ((memberInfo != null && memberInfo.Length > 0))
