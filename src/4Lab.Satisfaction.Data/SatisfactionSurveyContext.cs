@@ -6,9 +6,9 @@ using System.Reflection;
 
 namespace _4Lab.Satisfaction.Data
 {
-    public class SatisfactionContext : CoreContext
+    public class SatisfactionSurveyContext : CoreContext
     {
-        public SatisfactionContext(DbContextOptions<SatisfactionContext> options) : base(options)
+        public SatisfactionSurveyContext(DbContextOptions<SatisfactionSurveyContext> options) : base(options)
         {
             ChangeTracker.LazyLoadingEnabled = false;
         }
