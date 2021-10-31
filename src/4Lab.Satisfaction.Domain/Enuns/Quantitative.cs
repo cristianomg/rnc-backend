@@ -6,6 +6,9 @@
         Good,
         Regular,
         Bad,
-        TooBad
+        TooBad,
+        Yes,
+        Maybe,
+        No
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace _4Lab.Satisfaction.Domain.Entities
 {
-    public class Reception : Entity<Guid>
+    public class WhySearch : Entity<Guid>
     {
-        public Quantitative WaitingTime { get; set; }
-        public Quantitative AttendanceAgility { get; set; }
+        public Questions ResearchQuestions { get; set; }
+        public string? Description { get; set; }
     }
 }
