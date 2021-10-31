@@ -1,14 +1,13 @@
-﻿using _4Lab.Core.DomainObjects;
-using _4Lab.Satisfaction.Domain.Enuns;
+﻿using _4Lab.Satisfaction.Domain.Enuns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _4Lab.Satisfaction.Domain.Entities
+namespace _4Lab.Satisfaction.Application.DTOs
 {
-    public class Reception : Entity<Guid>
+    public class DtoReception
     {
         public Quantitative WaitingTime { get; set; }
         public Quantitative AttendanceAgility { get; set; }

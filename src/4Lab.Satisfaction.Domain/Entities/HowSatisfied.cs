@@ -1,9 +1,11 @@
-﻿using _4Lab.Satisfaction.Domain.Enuns;
+﻿using _4Lab.Core.DomainObjects;
+using _4Lab.Satisfaction.Domain.Enuns;
+using System;
 
 namespace _4Lab.Satisfaction.Domain.Entities
 {
-    public class HowSatisfied
+    public class HowSatisfied : Entity<Guid>
     {
-        public Quantitative MyProperty { get; set; }
+        public Quantitative HowSatisfiedUre { get; set; }
     }
 }
