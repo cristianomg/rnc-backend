@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\4Lab.Satisfaction.Application\4Lab.Satisfaction.Application.csproj" />
+    <ProjectReference Include="..\4Lab.Satisfaction.Application\4Lab.Satisfaction.Application.csproj" />
     <ProjectReference Include="..\4Lab.Administration.Application\4Lab.Administration.Application.csproj" />
     <ProjectReference Include="..\4Lab.Archives.Application\4Lab.Archives.Application.csproj" />
     <ProjectReference Include="..\4Lab.Occurrences.Application\4Lab.Occurrences.Application.csproj" />
