@@ -6,6 +6,8 @@ using _4Lab.Archives.Data.Repositories;
 using _4Lab.Archives.Domain.Interfaces;
 using _4Lab.Occurrences.Data.Repositories;
 using _4Lab.Occurrences.Domain.Interfaces;
+using _4Lab.Satisfaction.Data.Repository;
+using _4Lab.Satisfaction.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Rnc.Extensions
@@ -35,6 +37,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IVerificationOfEffectivenessRepository, VerificationOfEffectivenessRepository>();
             services.AddScoped<IOccurrenceRegisterClassificationRepository, OccurrenceRegisterClassificationRepository>();
             services.AddScoped<IOccurrenceRegisterTypeRepository, OccurrenceRegisterTypeRepository>();
+            services.AddScoped<ISatisfactionRepository, SatisfactionRepository>();
 
 
             return services;

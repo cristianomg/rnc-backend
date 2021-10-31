@@ -5,4 +5,8 @@
     <RootNamespace>_4Lab.Satisfaction.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\4Lab.Core\4Lab.Core.csproj" />
+  </ItemGroup>
+
 </Project>
