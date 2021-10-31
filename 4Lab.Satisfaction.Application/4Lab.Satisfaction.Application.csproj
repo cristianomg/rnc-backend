@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\4Lab.Core\4Lab.Core.csproj" />
+    <ProjectReference Include="..\src\4Lab.Satisfaction.Data\4Lab.Satisfaction.Data.csproj" />
     <ProjectReference Include="..\src\4Lab.Satisfaction.Domain\4Lab.Satisfaction.Domain.csproj" />
   </ItemGroup>
 

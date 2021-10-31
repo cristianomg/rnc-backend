@@ -37,7 +37,7 @@ namespace Api.Rnc.Extensions
             services.AddScoped<IVerificationOfEffectivenessRepository, VerificationOfEffectivenessRepository>();
             services.AddScoped<IOccurrenceRegisterClassificationRepository, OccurrenceRegisterClassificationRepository>();
             services.AddScoped<IOccurrenceRegisterTypeRepository, OccurrenceRegisterTypeRepository>();
-            services.AddScoped<ISatisfactionRepository, SatisfactionRepository>();
+            //services.AddScoped<ISatisfactionRepository, SatisfactionRepository>();
 
 
             return services;

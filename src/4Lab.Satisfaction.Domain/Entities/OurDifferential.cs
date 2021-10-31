@@ -10,7 +10,9 @@ namespace _4Lab.Satisfaction.Domain.Entities
 {
     public class OurDifferential : Entity<Guid>
     {
+        public Guid SatisfactionSurveyId { get; set; }
         public Differential Description { get; set; }
+        public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
 
     }
 }

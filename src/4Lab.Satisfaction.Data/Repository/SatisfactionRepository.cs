@@ -11,7 +11,7 @@ namespace _4Lab.Satisfaction.Data.Repository
     public class SatisfactionRepository : BaseRepository<SatisfactionSurvey, Guid>, ISatisfactionRepository
     {
         private readonly DbSet<SatisfactionSurvey> _dbSet;
-        public SatisfactionRepository(SatisfactionSurveyContext context) : base(context)
+        public SatisfactionRepository(SatisfactionContext context) : base(context)
         {
             _dbSet = context.Set<SatisfactionSurvey>();
         }
