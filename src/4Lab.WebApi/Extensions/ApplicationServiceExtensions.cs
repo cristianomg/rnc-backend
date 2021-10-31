@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace _4Lab.WebApi.Extensions
 {
     public static class ApplicationServiceExtensions
-    {
+    { 
         public static IServiceCollection AddApplicationServicesInjection(this IServiceCollection services)
         {
             services.AddScoped<IUserAppService, UserAppService>();

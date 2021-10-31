@@ -2,6 +2,7 @@
 using _4lab.Occurrences.Data;
 using _4Lab.Archives.Data;
 using _4Lab.Core.Data;
+using _4Lab.Satisfaction.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,8 @@ namespace Api.Rnc.Extensions
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(connection));
             services.AddDbContext<ArchiveContext>(options =>
+                options.UseNpgsql(connection));
+            services.AddDbContext<SatisfactionContext>(options =>
                 options.UseNpgsql(connection));
             services.AddDbContext<CoreContext>(options =>
                 options.UseNpgsql(connection));

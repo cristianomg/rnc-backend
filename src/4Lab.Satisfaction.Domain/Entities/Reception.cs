@@ -10,7 +10,9 @@ namespace _4Lab.Satisfaction.Domain.Entities
 {
     public class Reception : Entity<Guid>
     {
+        public Guid SatisfactionSurveyId { get; set; }
         public Quantitative WaitingTime { get; set; }
         public Quantitative AttendanceAgility { get; set; }
+        public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
     }
 }
