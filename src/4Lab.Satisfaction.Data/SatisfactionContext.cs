@@ -4,7 +4,6 @@ using _4Lab.Satisfaction.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
-
 namespace _4Lab.Satisfaction.Data
 {
     public class SatisfactionContext : CoreContext
