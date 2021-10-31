@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archives", "Archives", "{2E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestrator", "Orchestrator", "{63792A54-5BD2-4188-A777-92BE59E6C678}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Satisfaction", "Satisfaction", "{DDCDE2AA-B82D-4E9B-B14C-EA8674B1C7CA}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.WebApi", "src\4Lab.WebApi\4Lab.WebApi.csproj", "{FE6C59C4-1711-45CB-8E10-61E7BD4483E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Administration.Domain", "src\4Lab.Administration.Domain\4Lab.Administration.Domain.csproj", "{1B1D1259-D357-4C48-83CD-E78622FA3239}"
@@ -59,13 +61,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Occurrences.Data", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4Lab.Occurrences.Domain", "src\4Lab.Occurrences.Domain\4Lab.Occurrences.Domain.csproj", "{6431531F-9BED-479A-B044-E10F50A9900C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Satisfaction", "Satisfaction", "{DDCDE2AA-B82D-4E9B-B14C-EA8674B1C7CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Satisfaction.Domain", "src\4Lab.Satisfaction.Domain\4Lab.Satisfaction.Domain.csproj", "{6A277EC8-3BD5-4427-A88E-74946A76DB50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Satisfaction.Data", "src\4Lab.Satisfaction.Data\4Lab.Satisfaction.Data.csproj", "{DCFE906E-B0D9-47F6-945B-33AED5E80826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Satisfaction.Application", "4Lab.Satisfaction.Application\4Lab.Satisfaction.Application.csproj", "{F3BB6DA6-C650-4683-954F-DFA51D0BD620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4Lab.Satisfaction.Application", "src\4Lab.Satisfaction.Application\4Lab.Satisfaction.Application.csproj", "{F3BB6DA6-C650-4683-954F-DFA51D0BD620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

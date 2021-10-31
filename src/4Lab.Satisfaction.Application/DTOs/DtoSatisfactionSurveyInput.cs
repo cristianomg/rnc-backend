@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _4Lab.Satisfaction.Application.DTOs
+﻿namespace _4Lab.Satisfaction.Application.DTOs
 {
-    public class DtoSatisfactionSurvey
+    public class DtoSatisfactionSurveyInput
     {
         public DtoReception Reception { get; private set; }
         public DtoTecnicalArea TecnicalArea { get; private set; }

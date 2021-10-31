@@ -15,10 +15,34 @@ namespace _4Lab.Satisfaction.Data.Repository
         {
             _dbSet = context.Set<SatisfactionSurvey>();
         }
-        public Task<SatisfactionSurvey> GetSatisfactionSurvey(Guid guid)
+        public Task<SatisfactionSurvey> GetSatisfactionSurveyById(Guid guid)
         {
-            var result = _dbSet.Where(x => x.Id == guid).FirstOrDefaultAsync();
+            var result = _dbSet.Where(x => x.Id == guid)
+                                .Include(x => x.Reception)
+                                .Include(x => x.TecnicalArea)
+                                .Include(x => x.Sanitation)
+                                .Include(x => x.DeliveryResults)
+                                .Include(x => x.OverallImpression)
+                                .Include(x => x.HowSatisfied)
+                                .Include(x => x.OurDifferential)
+                                .Include(x => x.WhySearch)
+                                .Include(x => x.PersonalInformations)
+                                .FirstOrDefaultAsync();
             return result;
+        }
+        public Task<IQueryable<SatisfactionSurvey>> GetSatisfactionSurveyAll()
+        {
+            var result = _dbSet.Include(x => x.Reception)
+                                .Include(x => x.TecnicalArea)
+                                .Include(x => x.Sanitation)
+                                .Include(x => x.DeliveryResults)
+                                .Include(x => x.OverallImpression)
+                                .Include(x => x.HowSatisfied)
+                                .Include(x => x.OurDifferential)
+                                .Include(x => x.WhySearch)
+                                .Include(x => x.PersonalInformations)
+                                .AsQueryable();
+            return Task.FromResult(result);
         }
     }
 }
