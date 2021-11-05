@@ -10,6 +10,8 @@ namespace _4Lab.Satisfaction.Application.Service
     {
         Task<IQueryable<DtoSatisfactionSurveyResponse>> GetSatisfactionSurveyAll();
         Task<DtoSatisfactionSurveyResponse> GetSatisfactionSurveyById(Guid id);
-        Task<DtoSatisfactionSurveyInput> RegisterSatisfactionSurvey(SatisfactionSurvey satisfactionSurvey);
+        Task RegisterSatisfactionSurvey(DtoSatisfactionSurveyInput satisfactionSurvey);
+
+
     }
 }

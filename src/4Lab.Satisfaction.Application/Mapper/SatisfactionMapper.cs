@@ -15,37 +15,46 @@ namespace _4Lab.Satisfaction.Application.Mapper
         {
             CreateMap<DeliveryResults, DtoDeliveryResults>()
                 .ForMember(dest => dest.DeliveryPunctuality, opt => opt.MapFrom(src => src.DeliveryPunctuality))
-                .ForMember(dest => dest.DeliveryResultTime, opt => opt.MapFrom(src => src.DeliveryResultTime));
+                .ForMember(dest => dest.DeliveryResultTime, opt => opt.MapFrom(src => src.DeliveryResultTime))
+                .ReverseMap();
 
             CreateMap<HowSatisfied, DtoHowSatisfied>()
-                .ForMember(dest => dest.HowSatisfiedUre, opt => opt.MapFrom(src => src.HowSatisfiedUre));
+                .ForMember(dest => dest.HowSatisfiedUre, opt => opt.MapFrom(src => src.HowSatisfiedUre))
+                .ReverseMap();
 
             CreateMap<OurDifferential, DtoOurDifferential>()
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ReverseMap();
 
-            CreateMap<OverallImpression, OverallImpression>()
-                .ForMember(dest => dest.FriendsRecommendation, opt => opt.MapFrom(src => src.FriendsRecommendation));
+            CreateMap<OverallImpression, DtoOverallIpression>()
+                .ForMember(dest => dest.FriendsRecommendation, opt => opt.MapFrom(src => src.FriendsRecommendation))
+                .ReverseMap();
 
             CreateMap<PersonalInformations, DtoPersonalInformation>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ReverseMap();
 
             CreateMap<Reception, DtoReception>()
                 .ForMember(dest => dest.AttendanceAgility, opt => opt.MapFrom(src => src.AttendanceAgility))
-                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime));
+                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime))
+                .ReverseMap();
 
             CreateMap<Sanitation, DtoSanitation>()
-                .ForMember(dest => dest.LocalSanitation, opt => opt.MapFrom(src => src.LocalSanitation));
+                .ForMember(dest => dest.LocalSanitation, opt => opt.MapFrom(src => src.LocalSanitation))
+                .ReverseMap();
 
             CreateMap<TecnicalArea, DtoTecnicalArea>()
                 .ForMember(dest => dest.ExamOrientation, opt => opt.MapFrom(src => src.ExamOrientation))
                 .ForMember(dest => dest.ProfissionalHability, opt => opt.MapFrom(src => src.ProfissionalHability))
-                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime));
+                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime))
+                .ReverseMap();
 
             CreateMap<WhySearch, DtoWhySearch>()
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                .ForMember(dest => dest.ResearchQuestions, opt => opt.MapFrom(src => src.ResearchQuestions));
+                .ForMember(dest => dest.ResearchQuestions, opt => opt.MapFrom(src => src.ResearchQuestions))
+                .ReverseMap();
 
             CreateMap<SatisfactionSurvey, DtoSatisfactionSurveyInput>()
                 .ForMember(dest => dest.DeliveryResults, opt => opt.MapFrom(src => src.DeliveryResults))
@@ -56,7 +65,8 @@ namespace _4Lab.Satisfaction.Application.Mapper
                 .ForMember(dest => dest.Reception, opt => opt.MapFrom(src => src.Reception))
                 .ForMember(dest => dest.Sanitation, opt => opt.MapFrom(src => src.Sanitation))
                 .ForMember(dest => dest.TecnicalArea, opt => opt.MapFrom(src => src.TecnicalArea))
-                .ForMember(dest => dest.WhySearch, opt => opt.MapFrom(src => src.WhySearch));
+                .ForMember(dest => dest.WhySearch, opt => opt.MapFrom(src => src.WhySearch))
+                .ReverseMap();
 
         }
     }

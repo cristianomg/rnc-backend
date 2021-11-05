@@ -28,7 +28,7 @@ namespace _4Lab.WebApi.Controllers
         [ProducesResponseType(typeof(DtoSatisfactionSurveyInput), StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterSatisfactionSurvey([FromBody] DtoSatisfactionSurveyInput dtoSatisfactionSurvey)
         {
-            var result = await _satisfactionAppService.RegisterSatisfactionSurvey(_mapper.Map<SatisfactionSurvey>(dtoSatisfactionSurvey));
+            await _satisfactionAppService.RegisterSatisfactionSurvey(dtoSatisfactionSurvey);
             return Ok();
         }
         [HttpGet("all")]

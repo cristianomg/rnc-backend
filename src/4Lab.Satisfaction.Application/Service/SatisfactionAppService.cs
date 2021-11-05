@@ -18,10 +18,10 @@ namespace _4Lab.Satisfaction.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<DtoSatisfactionSurveyInput> RegisterSatisfactionSurvey(SatisfactionSurvey satisfactionSurvey)
+        public async Task RegisterSatisfactionSurvey(DtoSatisfactionSurveyInput satisfactionSurvey)
         {
-            var result = await _satisfactionRepository.Insert(satisfactionSurvey);
-            return _mapper.Map<DtoSatisfactionSurveyInput>(result);
+            var entity = _mapper.Map<SatisfactionSurvey>(satisfactionSurvey);
+            await _satisfactionRepository.Insert(entity);
         }
 
         public async Task<DtoSatisfactionSurveyResponse> GetSatisfactionSurveyById(Guid id)
