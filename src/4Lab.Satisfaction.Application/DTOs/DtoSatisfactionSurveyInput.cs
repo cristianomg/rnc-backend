@@ -1,4 +1,6 @@
-﻿namespace _4Lab.Satisfaction.Application.DTOs
+﻿using System.Collections.Generic;
+
+namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoSatisfactionSurveyInput
     {
@@ -8,8 +10,9 @@
         public DtoDeliveryResults DeliveryResults { get; set; }
         public DtoOverallIpression OverallImpression { get; set; }
         public DtoHowSatisfied HowSatisfied { get; private set; }
-        public DtoOurDifferential OurDifferential { get; set; }
-        public DtoWhySearch WhySearch { get; set; }
+        public List<DtoOurDifferential> OurDifferential { get; set; }
+        public List<DtoWhySearch> WhySearch { get; set; }
         public DtoPersonalInformation PersonalInformations { get; set; }
+
     }
 }

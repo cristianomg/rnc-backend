@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _4Lab.Satisfaction.Data.Migrations
 {
-    public partial class SatisfactionSurvey : Migration
+    public partial class Ajuste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,25 +44,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HowSatisfied", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OurDifferential",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SatisfactionSurveyId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Description = table.Column<int>(type: "integer", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OurDifferential", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,26 +148,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WhySearch",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SatisfactionSurveyId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResearchQuestions = table.Column<int>(type: "integer", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WhySearch", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SatisfactionSurveys",
                 columns: table => new
                 {
@@ -223,12 +184,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SatisfactionSurveys_OurDifferential_OurDifferentialId",
-                        column: x => x.OurDifferentialId,
-                        principalTable: "OurDifferential",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_SatisfactionSurveys_OverallImpression_OverallImpressionId",
                         column: x => x.OverallImpressionId,
                         principalTable: "OverallImpression",
@@ -258,13 +213,63 @@ namespace _4Lab.Satisfaction.Data.Migrations
                         principalTable: "TecnicalArea",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OurDifferential",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SatisfactionSurveyId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<int>(type: "integer", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OurDifferential", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SatisfactionSurveys_WhySearch_WhySearchId",
-                        column: x => x.WhySearchId,
-                        principalTable: "WhySearch",
+                        name: "FK_OurDifferential_SatisfactionSurveys_SatisfactionSurveyId",
+                        column: x => x.SatisfactionSurveyId,
+                        principalTable: "SatisfactionSurveys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "WhySearch",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SatisfactionSurveyId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResearchQuestions = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WhySearch", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WhySearch_SatisfactionSurveys_SatisfactionSurveyId",
+                        column: x => x.SatisfactionSurveyId,
+                        principalTable: "SatisfactionSurveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OurDifferential_SatisfactionSurveyId",
+                table: "OurDifferential",
+                column: "SatisfactionSurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SatisfactionSurveys_DeliveryResultsId",
@@ -276,12 +281,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                 name: "IX_SatisfactionSurveys_HowSatisfiedId",
                 table: "SatisfactionSurveys",
                 column: "HowSatisfiedId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SatisfactionSurveys_OurDifferentialId",
-                table: "SatisfactionSurveys",
-                column: "OurDifferentialId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -315,14 +314,19 @@ namespace _4Lab.Satisfaction.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SatisfactionSurveys_WhySearchId",
-                table: "SatisfactionSurveys",
-                column: "WhySearchId",
-                unique: true);
+                name: "IX_WhySearch_SatisfactionSurveyId",
+                table: "WhySearch",
+                column: "SatisfactionSurveyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "OurDifferential");
+
+            migrationBuilder.DropTable(
+                name: "WhySearch");
+
             migrationBuilder.DropTable(
                 name: "SatisfactionSurveys");
 
@@ -331,9 +335,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "HowSatisfied");
-
-            migrationBuilder.DropTable(
-                name: "OurDifferential");
 
             migrationBuilder.DropTable(
                 name: "OverallImpression");
@@ -349,9 +350,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "TecnicalArea");
-
-            migrationBuilder.DropTable(
-                name: "WhySearch");
         }
     }
 }

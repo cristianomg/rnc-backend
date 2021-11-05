@@ -1,5 +1,6 @@
 ﻿using _4Lab.Core.DomainObjects;
 using System;
+using System.Collections.Generic;
 
 namespace _4Lab.Satisfaction.Domain.Entities
 {
@@ -20,8 +21,8 @@ namespace _4Lab.Satisfaction.Domain.Entities
         public virtual DeliveryResults DeliveryResults { get; set; }
         public virtual OverallImpression OverallImpression { get; set; }
         public virtual HowSatisfied HowSatisfied { get; private set; }
-        public virtual OurDifferential OurDifferential { get; set; }
-        public virtual WhySearch WhySearch { get; set; }
+        public virtual ICollection<OurDifferential> OurDifferential { get; set; }
+        public virtual ICollection<WhySearch> WhySearch { get; set; }
         public virtual PersonalInformations PersonalInformations { get; set; }
     }
 }

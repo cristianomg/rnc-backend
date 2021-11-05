@@ -10,8 +10,8 @@ using _4Lab.Satisfaction.Data;
 namespace _4Lab.Satisfaction.Data.Migrations
 {
     [DbContext(typeof(SatisfactionContext))]
-    [Migration("20211031224501_SatisfactionSurvey")]
-    partial class SatisfactionSurvey
+    [Migration("20211103220412_Ajuste")]
+    partial class Ajuste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,6 +162,8 @@ namespace _4Lab.Satisfaction.Data.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SatisfactionSurveyId");
 
                     b.ToTable("OurDifferential");
                 });
@@ -384,9 +386,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                     b.HasIndex("HowSatisfiedId")
                         .IsUnique();
 
-                    b.HasIndex("OurDifferentialId")
-                        .IsUnique();
-
                     b.HasIndex("OverallImpressionId")
                         .IsUnique();
 
@@ -400,9 +399,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                         .IsUnique();
 
                     b.HasIndex("TecnicalAreaId")
-                        .IsUnique();
-
-                    b.HasIndex("WhySearchId")
                         .IsUnique();
 
                     b.ToTable("SatisfactionSurveys");
@@ -485,7 +481,20 @@ namespace _4Lab.Satisfaction.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SatisfactionSurveyId");
+
                     b.ToTable("WhySearch");
+                });
+
+            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.OurDifferential", b =>
+                {
+                    b.HasOne("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", "SatisfactionSurvey")
+                        .WithMany("OurDifferential")
+                        .HasForeignKey("SatisfactionSurveyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("SatisfactionSurvey");
                 });
 
             modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", b =>
@@ -499,12 +508,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                     b.HasOne("_4Lab.Satisfaction.Domain.Entities.HowSatisfied", "HowSatisfied")
                         .WithOne("SatisfactionSurvey")
                         .HasForeignKey("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", "HowSatisfiedId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("_4Lab.Satisfaction.Domain.Entities.OurDifferential", "OurDifferential")
-                        .WithOne("SatisfactionSurvey")
-                        .HasForeignKey("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", "OurDifferentialId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -538,17 +541,9 @@ namespace _4Lab.Satisfaction.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("_4Lab.Satisfaction.Domain.Entities.WhySearch", "WhySearch")
-                        .WithOne("SatisfactionSurvey")
-                        .HasForeignKey("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", "WhySearchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("DeliveryResults");
 
                     b.Navigation("HowSatisfied");
-
-                    b.Navigation("OurDifferential");
 
                     b.Navigation("OverallImpression");
 
@@ -559,8 +554,17 @@ namespace _4Lab.Satisfaction.Data.Migrations
                     b.Navigation("Sanitation");
 
                     b.Navigation("TecnicalArea");
+                });
 
-                    b.Navigation("WhySearch");
+            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.WhySearch", b =>
+                {
+                    b.HasOne("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", "SatisfactionSurvey")
+                        .WithMany("WhySearch")
+                        .HasForeignKey("SatisfactionSurveyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("SatisfactionSurvey");
                 });
 
             modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.DeliveryResults", b =>
@@ -569,11 +573,6 @@ namespace _4Lab.Satisfaction.Data.Migrations
                 });
 
             modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.HowSatisfied", b =>
-                {
-                    b.Navigation("SatisfactionSurvey");
-                });
-
-            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.OurDifferential", b =>
                 {
                     b.Navigation("SatisfactionSurvey");
                 });
@@ -598,12 +597,14 @@ namespace _4Lab.Satisfaction.Data.Migrations
                     b.Navigation("SatisfactionSurvey");
                 });
 
-            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.TecnicalArea", b =>
+            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.SatisfactionSurvey", b =>
                 {
-                    b.Navigation("SatisfactionSurvey");
+                    b.Navigation("OurDifferential");
+
+                    b.Navigation("WhySearch");
                 });
 
-            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.WhySearch", b =>
+            modelBuilder.Entity("_4Lab.Satisfaction.Domain.Entities.TecnicalArea", b =>
                 {
                     b.Navigation("SatisfactionSurvey");
                 });

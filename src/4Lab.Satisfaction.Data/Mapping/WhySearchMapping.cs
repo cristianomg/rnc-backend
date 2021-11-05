@@ -27,8 +27,8 @@ namespace _4Lab.Satisfaction.Data.Mapping
                 .IsRequired();
 
             builder.HasOne(x => x.SatisfactionSurvey)
-                .WithOne(x => x.WhySearch)
-                .HasForeignKey<SatisfactionSurvey>(x => x.WhySearchId);
+                .WithMany(x => x.WhySearch)
+                .HasForeignKey(x => x.SatisfactionSurveyId);
         }
     }
 }

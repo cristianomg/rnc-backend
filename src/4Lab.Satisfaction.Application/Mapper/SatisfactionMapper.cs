@@ -14,34 +14,49 @@ namespace _4Lab.Satisfaction.Application.Mapper
         public SatisfactionMapper() 
         {
             CreateMap<DeliveryResults, DtoDeliveryResults>()
-                .ReverseMap();
+                .ForMember(dest => dest.DeliveryPunctuality, opt => opt.MapFrom(src => src.DeliveryPunctuality))
+                .ForMember(dest => dest.DeliveryResultTime, opt => opt.MapFrom(src => src.DeliveryResultTime));
 
             CreateMap<HowSatisfied, DtoHowSatisfied>()
-                .ReverseMap();
+                .ForMember(dest => dest.HowSatisfiedUre, opt => opt.MapFrom(src => src.HowSatisfiedUre));
 
             CreateMap<OurDifferential, DtoOurDifferential>()
-                .ReverseMap();
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
             CreateMap<OverallImpression, OverallImpression>()
-                .ReverseMap();
+                .ForMember(dest => dest.FriendsRecommendation, opt => opt.MapFrom(src => src.FriendsRecommendation));
 
             CreateMap<PersonalInformations, DtoPersonalInformation>()
-                .ReverseMap();
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
             CreateMap<Reception, DtoReception>()
-                .ReverseMap();
+                .ForMember(dest => dest.AttendanceAgility, opt => opt.MapFrom(src => src.AttendanceAgility))
+                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime));
 
-            CreateMap<Sanitation, DtoPersonalInformation>()
-                .ReverseMap();
+            CreateMap<Sanitation, DtoSanitation>()
+                .ForMember(dest => dest.LocalSanitation, opt => opt.MapFrom(src => src.LocalSanitation));
 
             CreateMap<TecnicalArea, DtoTecnicalArea>()
-                .ReverseMap();
+                .ForMember(dest => dest.ExamOrientation, opt => opt.MapFrom(src => src.ExamOrientation))
+                .ForMember(dest => dest.ProfissionalHability, opt => opt.MapFrom(src => src.ProfissionalHability))
+                .ForMember(dest => dest.WaitingTime, opt => opt.MapFrom(src => src.WaitingTime));
 
             CreateMap<WhySearch, DtoWhySearch>()
-                .ReverseMap();
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.ResearchQuestions, opt => opt.MapFrom(src => src.ResearchQuestions));
 
-            CreateMap<SatisfactionSurvey, DtoSatisfactionSurvey>()
-                .ReverseMap();
+            CreateMap<SatisfactionSurvey, DtoSatisfactionSurveyInput>()
+                .ForMember(dest => dest.DeliveryResults, opt => opt.MapFrom(src => src.DeliveryResults))
+                .ForMember(dest => dest.HowSatisfied, opt => opt.MapFrom(src => src.HowSatisfied))
+                .ForMember(dest => dest.OurDifferential, opt => opt.MapFrom(src => src.OurDifferential))
+                .ForMember(dest => dest.OverallImpression, opt => opt.MapFrom(src => src.OverallImpression))
+                .ForMember(dest => dest.PersonalInformations, opt => opt.MapFrom(src => src.PersonalInformations))
+                .ForMember(dest => dest.Reception, opt => opt.MapFrom(src => src.Reception))
+                .ForMember(dest => dest.Sanitation, opt => opt.MapFrom(src => src.Sanitation))
+                .ForMember(dest => dest.TecnicalArea, opt => opt.MapFrom(src => src.TecnicalArea))
+                .ForMember(dest => dest.WhySearch, opt => opt.MapFrom(src => src.WhySearch));
 
         }
     }
