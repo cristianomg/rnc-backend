@@ -20,8 +20,16 @@ namespace _4Lab.Satisfaction.Application.Service
 
         public async Task RegisterSatisfactionSurvey(DtoSatisfactionSurveyInput satisfactionSurvey)
         {
-            var entity = _mapper.Map<SatisfactionSurvey>(satisfactionSurvey);
-            await _satisfactionRepository.Insert(entity);
+            try
+            {
+                var entity = _mapper.Map<SatisfactionSurvey>(satisfactionSurvey);
+                await _satisfactionRepository.Insert(entity);
+
+            }
+            catch
+            {
+                throw new ApplicationException("Erro ao cadastrar pesquisa de satisfação.");
+            }
         }
 
         public async Task<DtoSatisfactionSurveyResponse> GetSatisfactionSurveyById(Guid id)

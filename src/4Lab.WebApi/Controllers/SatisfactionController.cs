@@ -28,8 +28,15 @@ namespace _4Lab.WebApi.Controllers
         [ProducesResponseType(typeof(DtoSatisfactionSurveyInput), StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterSatisfactionSurvey([FromBody] DtoSatisfactionSurveyInput dtoSatisfactionSurvey)
         {
-            await _satisfactionAppService.RegisterSatisfactionSurvey(dtoSatisfactionSurvey);
-            return Ok();
+            try
+            {
+                await _satisfactionAppService.RegisterSatisfactionSurvey(dtoSatisfactionSurvey);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpGet("all")]
         [ProducesResponseType(typeof(IQueryable<DtoSatisfactionSurveyInput>), StatusCodes.Status200OK)]
