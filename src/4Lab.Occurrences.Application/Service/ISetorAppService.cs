@@ -11,4 +11,4 @@ namespace _4lab.Occurrences.Application.Service
         Task Update(DtoSetor setor);
         Task<IQueryable<DtoSetor>> GetAllSetor();
     }
-}
+} 

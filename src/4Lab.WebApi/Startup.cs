@@ -6,6 +6,8 @@ using _4Lab.Archives.Application.Mapper;
 using _4Lab.Archives.Data;
 using _4Lab.Core.Data;
 using _4Lab.Orchestrator.Mapper;
+using _4Lab.Satisfaction.Application.Mapper;
+using _4Lab.Satisfaction.Data;
 using _4Lab.WebApi.Extensions;
 using Api.Rnc.Extensions;
 using Data.Rnc.Context;
@@ -76,7 +78,7 @@ namespace Api.Rnc
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()
                     .AddApplicationServicesInjection()
-                    .AddAutoMapper(typeof(UserMapper), typeof(OccurrencesMapper), typeof(ArchiveMapper), typeof(OrchestratorMapper));
+                    .AddAutoMapper(typeof(UserMapper), typeof(OccurrencesMapper), typeof(ArchiveMapper), typeof(OrchestratorMapper), typeof(SatisfactionMapper));
 
         }
 
@@ -91,7 +93,7 @@ namespace Api.Rnc
                     .Migrate();
 
                 var occurrencesContext = serviceScope.ServiceProvider.GetRequiredService<OccurrencesContext>();
-                
+
                 occurrencesContext.Database
                     .Migrate();
 
@@ -99,12 +101,17 @@ namespace Api.Rnc
                     .Init();
 
                 var usersContext = serviceScope.ServiceProvider.GetRequiredService<UserContext>();
-                
+
                 usersContext.Database
                     .Migrate();
 
                 var archiveContext = serviceScope.ServiceProvider.GetRequiredService<ArchiveContext>();
-                
+
+                archiveContext.Database
+                    .Migrate();
+
+                var satisfactionContext = serviceScope.ServiceProvider.GetRequiredService<SatisfactionContext>();
+
                 archiveContext.Database
                     .Migrate();
 
