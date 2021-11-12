@@ -68,6 +68,18 @@ namespace _4Lab.Satisfaction.Application.Mapper
                 .ForMember(dest => dest.WhySearch, opt => opt.MapFrom(src => src.WhySearch))
                 .ReverseMap();
 
+            CreateMap<SatisfactionSurvey, DtoSatisfactionSurveyResponse>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.DeliveryResults, opt => opt.MapFrom(src => src.DeliveryResults))
+                .ForMember(dest => dest.HowSatisfied, opt => opt.MapFrom(src => src.HowSatisfied))
+                .ForMember(dest => dest.OurDifferential, opt => opt.MapFrom(src => src.OurDifferential))
+                .ForMember(dest => dest.OverallImpression, opt => opt.MapFrom(src => src.OverallImpression))
+                .ForMember(dest => dest.PersonalInformations, opt => opt.MapFrom(src => src.PersonalInformations))
+                .ForMember(dest => dest.Reception, opt => opt.MapFrom(src => src.Reception))
+                .ForMember(dest => dest.Sanitation, opt => opt.MapFrom(src => src.Sanitation))
+                .ForMember(dest => dest.TecnicalArea, opt => opt.MapFrom(src => src.TecnicalArea))
+                .ForMember(dest => dest.WhySearch, opt => opt.MapFrom(src => src.WhySearch))
+                .ReverseMap();
         }
     }
 }
