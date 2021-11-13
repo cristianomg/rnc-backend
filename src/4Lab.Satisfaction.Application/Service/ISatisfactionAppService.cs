@@ -13,5 +13,6 @@ namespace _4Lab.Satisfaction.Application.Service
         Task RegisterSatisfactionSurvey(DtoSatisfactionSurveyInput satisfactionSurvey);
 
 
+
     }
 }

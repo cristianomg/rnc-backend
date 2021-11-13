@@ -42,18 +42,18 @@ namespace _4Lab.WebApi.Controllers
         [ProducesResponseType(typeof(IQueryable<DtoSatisfactionSurveyInput>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetSatisfactionSurvey()
         {
-            return Ok(_mapper.ProjectTo<DtoSatisfactionSurveyResponse>(await _satisfactionAppService.GetSatisfactionSurveyAll()));
+            var result = await _satisfactionAppService.GetSatisfactionSurveyAll();
+            if (result.Any())
+            {
+                return Ok();
+            }
+            return NoContent();
         }
         [HttpGet("{id:Guid}")]
         [ProducesResponseType(typeof(IQueryable<DtoSatisfactionSurveyInput>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetSatisfactionSurvey(Guid id)
         {
-            var result = await _satisfactionAppService.GetSatisfactionSurveyById(id);
-            if (result != null)
-            {
-                return Ok();
-            }
-            return NoContent();
+            return Ok(await _satisfactionAppService.GetSatisfactionSurveyAll());
         }
     }
 }
