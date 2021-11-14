@@ -32,7 +32,8 @@ namespace _4Lab.Satisfaction.Data.Repository
         }
         public Task<IQueryable<SatisfactionSurvey>> GetSatisfactionSurveyAll()
         {
-            var result = _dbSet.Include(x => x.Reception)
+            var result = _dbSet.Include(x => x.Id)
+                                .Include(x => x.Reception)
                                 .Include(x => x.TecnicalArea)
                                 .Include(x => x.Sanitation)
                                 .Include(x => x.DeliveryResults)
