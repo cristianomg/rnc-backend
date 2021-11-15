@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoSatisfactionSurveyInput
     {
+        public Guid Id { get; set; }
         public DtoReception Reception { get; set; }
         public DtoTecnicalArea TecnicalArea { get; set; }
         public DtoSanitation Sanitation { get; set; }

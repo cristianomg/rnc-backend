@@ -11,5 +11,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
     {
         public Quantitative DeliveryPunctuality { get; set; }
         public Quantitative DeliveryResultTime { get; set; }
+        public string NomeEnum { get; set; }
     }
 }

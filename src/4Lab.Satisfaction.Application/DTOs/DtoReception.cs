@@ -11,5 +11,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
     {
         public Quantitative WaitingTime { get; set; }
         public Quantitative AttendanceAgility { get; set; }
+        public string NomeEnum { get; set; }
     }
 }

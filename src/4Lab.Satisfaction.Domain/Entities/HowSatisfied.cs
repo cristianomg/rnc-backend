@@ -8,6 +8,7 @@ namespace _4Lab.Satisfaction.Domain.Entities
     {
         public Guid SatisfactionSurveyId { get; set; }
         public Quantitative HowSatisfiedUre { get; set; }
+        public Quantitative NomeEnum { get; set; }
         public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
     }
 }

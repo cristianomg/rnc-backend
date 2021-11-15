@@ -12,5 +12,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
         public Quantitative WaitingTime { get; set; }
         public Quantitative ProfissionalHability { get; set; }
         public Quantitative ExamOrientation { get; set; }
+        public string NomeEnum { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace _4Lab.Satisfaction.Domain.Entities
         public Quantitative WaitingTime { get; set; }
         public Quantitative ProfissionalHability { get; set; }
         public Quantitative ExamOrientation { get; set; }
+        public Quantitative NomeEnum { get; set; }
         public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
     }
 }
