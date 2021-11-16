@@ -9,7 +9,7 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoReception
     {
-        public Quantitative WaitingTime { get; set; }
-        public Quantitative AttendanceAgility { get; set; }
+        public string WaitingTime { get; set; }
+        public string AttendanceAgility { get; set; }
     }
 }

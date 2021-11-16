@@ -9,6 +9,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoOurDifferential
     {
-        public Differential Description { get; set; }
+        public string Description { get; set; }
     }
 }

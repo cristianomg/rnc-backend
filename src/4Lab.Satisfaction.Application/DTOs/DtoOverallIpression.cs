@@ -9,6 +9,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoOverallIpression
     {
-        public Quantitative FriendsRecommendation { get; set; }
+        public string FriendsRecommendation { get; set; }
     }
 }

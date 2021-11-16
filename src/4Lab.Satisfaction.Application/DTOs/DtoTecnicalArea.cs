@@ -9,8 +9,8 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoTecnicalArea
     {
-        public Quantitative WaitingTime { get; set; }
-        public Quantitative ProfissionalHability { get; set; }
-        public Quantitative ExamOrientation { get; set; }
+        public string WaitingTime { get; set; }
+        public string ProfissionalHability { get; set; }
+        public string ExamOrientation { get; set; }
     }
 }

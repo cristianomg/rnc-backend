@@ -9,6 +9,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoSanitation
     {
-        public Quantitative LocalSanitation { get; set; }
+        public string LocalSanitation { get; set; }
     }
 }
