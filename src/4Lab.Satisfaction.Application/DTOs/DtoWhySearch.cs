@@ -11,6 +11,5 @@ namespace _4Lab.Satisfaction.Application.DTOs
     {
         public string ResearchQuestions { get; set; }
         public string? Description { get; set; }
-        public string NomeEnum { get; set; }
     }
 }

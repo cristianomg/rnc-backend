@@ -12,7 +12,6 @@ namespace _4Lab.Satisfaction.Domain.Entities
     {
         public Guid SatisfactionSurveyId { get; set; }
         public Questions ResearchQuestions { get; set; }
-        public Questions NomeEnum { get; set; }
         public string? Description { get; set; }
         public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
     }

@@ -12,7 +12,6 @@ namespace _4Lab.Satisfaction.Domain.Entities
     {
         public Guid SatisfactionSurveyId { get; set; }
         public Differential Description { get; set; }
-        public Differential NomeEnum { get; set; }
         public virtual SatisfactionSurvey SatisfactionSurvey { get; set; }
 
     }
