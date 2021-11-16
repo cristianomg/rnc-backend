@@ -112,7 +112,7 @@ namespace Api.Rnc
 
                 var satisfactionContext = serviceScope.ServiceProvider.GetRequiredService<SatisfactionContext>();
 
-                archiveContext.Database
+                satisfactionContext.Database
                     .Migrate();
 
             }

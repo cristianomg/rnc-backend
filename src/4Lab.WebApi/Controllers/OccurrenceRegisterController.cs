@@ -92,8 +92,13 @@ namespace Api.Rnc.Controllers
             var result = await _getOccurrenceRegisterAll.Execute(_mapper.ProjectTo<DtoOccurrenceRegisterResponse>(nonComplianceRegisters
                              .OccurenceFilterByAnalyse(filter.AnalyseFilter)
                              .OccurrenceFilterByPending(filter.PendingFilter)));
-                
-            return Ok(result.OccurrenceFilterByPendingDelayed(filter.IsDelayed));
+                            
+            result = result.OccurrenceFilterByPendingDelayed(filter.IsDelayed)
+                           .OrderByDescending(x=>x.IsDelayed)
+                           .ThenByDescending(x=>x.Date)
+                           .ThenByDescending(x=>x.CanVerifyEffectiveness);
+
+            return Ok(result);
         }
 
         /// <summary>

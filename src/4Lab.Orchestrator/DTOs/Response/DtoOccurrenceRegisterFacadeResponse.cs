@@ -61,5 +61,6 @@ namespace _4Lab.Orchestrator.DTOs.Response
         /// </summary>
         public bool IsDelayed { get; set; }
         public string OccurrenceClassification { get; set; }
+        public bool CanVerifyEffectiveness { get; set; }
     }
 }
