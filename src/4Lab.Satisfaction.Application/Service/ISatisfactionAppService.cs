@@ -1,4 +1,5 @@
-﻿using _4Lab.Satisfaction.Application.DTOs;
+﻿using _4Lab.Core.Data;
+using _4Lab.Satisfaction.Application.DTOs;
 using _4Lab.Satisfaction.Domain.Entities;
 using System;
 using System.Linq;
