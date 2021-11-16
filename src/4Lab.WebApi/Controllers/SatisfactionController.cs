@@ -49,7 +49,7 @@ namespace _4Lab.WebApi.Controllers
         [ProducesResponseType(typeof(IQueryable<DtoSatisfactionSurveyInput>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetSatisfactionSurvey(Guid id)
         {
-            return Ok(await _satisfactionAppService.GetSatisfactionSurveyAll());
+            return Ok(await _satisfactionAppService.GetSatisfactionSurveyById(id));
         }
     }
 }

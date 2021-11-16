@@ -12,7 +12,7 @@ namespace _4Lab.Satisfaction.Application.Mapper
 {
     public class SatisfactionMapper : Profile
     {
-        public SatisfactionMapper() 
+        public SatisfactionMapper()
         {
             CreateMap<DeliveryResults, DtoDeliveryResults>()
                 .ForMember(dest => dest.DeliveryPunctuality, opt => opt.MapFrom(src => src.DeliveryPunctuality.GetDescription()))
