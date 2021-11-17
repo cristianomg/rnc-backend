@@ -25,6 +25,8 @@ namespace _4Lab.Satisfaction.Application.Service
                 var entity = _mapper.Map<SatisfactionSurvey>(satisfactionSurvey);
                 await _satisfactionRepository.Insert(entity);
 
+                await _satisfactionRepository.SaveChanges();
+
             }
             catch
             {
@@ -40,7 +42,7 @@ namespace _4Lab.Satisfaction.Application.Service
         public async Task<IQueryable<DtoSatisfactionSurveyResponse>> GetSatisfactionSurveyAll()
         {
             var result = await _satisfactionRepository.GetSatisfactionSurveyAll();
-            return _mapper.Map<IQueryable<DtoSatisfactionSurveyResponse>>(result);
+            return _mapper.ProjectTo<DtoSatisfactionSurveyResponse>(result);
         }
     }
 }

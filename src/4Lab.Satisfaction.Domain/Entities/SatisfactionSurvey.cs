@@ -17,10 +17,10 @@ namespace _4Lab.Satisfaction.Domain.Entities
         public Guid PersonalInformationsId { get; set; }
         public virtual Reception Reception { get; private set; }
         public virtual TecnicalArea TecnicalArea { get; private set; }
-        public virtual Sanitation Sanitation { get; private set; }
+        public virtual Sanitation Sanitation { get; set; }
         public virtual DeliveryResults DeliveryResults { get; set; }
         public virtual OverallImpression OverallImpression { get; set; }
-        public virtual HowSatisfied HowSatisfied { get; private set; }
+        public virtual HowSatisfied HowSatisfied { get; set; }
         public virtual ICollection<OurDifferential> OurDifferential { get; set; }
         public virtual ICollection<WhySearch> WhySearch { get; set; }
         public virtual PersonalInformations PersonalInformations { get; set; }

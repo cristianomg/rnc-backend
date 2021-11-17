@@ -9,6 +9,6 @@ namespace _4Lab.Satisfaction.Application.DTOs
 {
     public class DtoHowSatisfied
     {
-        public Quantitative HowSatisfiedUre { get; set; }
+        public string HowSatisfiedUre { get; set; }
     }
 }
