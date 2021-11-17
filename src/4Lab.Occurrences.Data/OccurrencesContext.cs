@@ -48,12 +48,10 @@ namespace _4lab.Occurrences.Data
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());
+            modelBuilder.HasDefaultSchema("Occurrences");
 
 
             SeedTipoNaoConformidade(modelBuilder);
-
-            base.OnModelCreating(modelBuilder);
-
         }
         private void SeedTipoNaoConformidade(ModelBuilder modelBuilder)
         {

@@ -7,7 +7,7 @@ namespace _4Lab.Core.Audit
     {
         public void Configure(EntityTypeBuilder<Historic> builder)
         {
-            builder.ToTable(nameof(Historic), "Audit");
+            builder.ToTable(nameof(Historic));
 
             builder.HasKey(x => x.Id);
 

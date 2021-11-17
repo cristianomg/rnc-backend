@@ -9,7 +9,7 @@ namespace _4lab.Administration.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<UserAuth> builder)
         {
-            builder.ToTable(nameof(UserAuth), "Administration");
+            builder.ToTable(nameof(UserAuth));
 
             builder.HasKey(x => x.Id);
 

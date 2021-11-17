@@ -8,7 +8,7 @@ namespace _4lab.Administration.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<UserPermission> builder)
         {
-            builder.ToTable(nameof(UserPermission), "Administration");
+            builder.ToTable(nameof(UserPermission));
 
             builder.HasKey(x => x.Id);
 

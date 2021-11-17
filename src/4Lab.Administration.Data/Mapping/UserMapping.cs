@@ -9,7 +9,7 @@ namespace _4lab.Administration.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable(nameof(User), "Administration");
+            builder.ToTable(nameof(User));
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)

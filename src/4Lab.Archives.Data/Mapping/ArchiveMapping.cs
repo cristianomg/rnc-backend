@@ -8,7 +8,7 @@ namespace _4Lab.Archives.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Archive> builder)
         {
-            builder.ToTable(nameof(Archive), "Archive");
+            builder.ToTable(nameof(Archive));
 
             builder.HasKey(x => x.Id);
 

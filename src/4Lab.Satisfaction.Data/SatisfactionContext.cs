@@ -24,7 +24,7 @@ namespace _4Lab.Satisfaction.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("Satisfaction");
         }
     }
 }

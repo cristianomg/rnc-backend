@@ -30,6 +30,8 @@ namespace _4Lab.Orchestrator.Facades
         public async Task<DtoOccurrenceRegisterFacadeResponse> Execute(Guid id)
         {
             var ocurrence = await _occurrenceAppService.GetOccurrenceRegisterById(id);
+            if (ocurrence is null)
+                throw new ApplicationException("Registro de ocorrencia não encontrado.");
             ocurrence.UserName = _userAppService.GetUserByIdWithInclude(ocurrence.UserId).Result.Name;
             var occurrenceRegister = _mapper.Map<DtoOccurrenceRegisterFacadeResponse>(ocurrence);
 

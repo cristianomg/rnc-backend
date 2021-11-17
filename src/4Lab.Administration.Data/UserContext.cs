@@ -29,9 +29,8 @@ namespace _4lab.Administration.Data
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.Entity<Historic>().ToTable(nameof(Historic), "Audit", t => t.ExcludeFromMigrations());
-
+            modelBuilder.HasDefaultSchema("Administration");
             SeedUserPermission(modelBuilder);
-            base.OnModelCreating(modelBuilder);
         }
 
         private void SeedUserPermission(ModelBuilder modelBuilder)
